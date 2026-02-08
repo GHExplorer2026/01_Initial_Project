@@ -1,0 +1,4 @@
+interface:
+  display_name: "MVP Delivery Plan"
+  short_description: "Create an MVP roadmap and execution plan"
+  default_prompt: "Build an MVP delivery plan with milestones, backlog slices, dependencies, and risks."

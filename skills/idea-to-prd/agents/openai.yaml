@@ -1,0 +1,4 @@
+interface:
+  display_name: "Idea to PRD"
+  short_description: "Create a practical PRD from a rough idea"
+  default_prompt: "Turn this project idea into a scoped PRD with requirements, constraints, and acceptance criteria."

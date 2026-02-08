@@ -1,0 +1,4 @@
+interface:
+  display_name: "Architecture Baseline"
+  short_description: "Define a lightweight architecture baseline for a new project"
+  default_prompt: "Create an architecture baseline: context diagram, key components, ADRs, and risks for this project."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Repo Bootstrap"
+  short_description: "Bootstrap repository standards and automation"
+  default_prompt: "Set up repository structure, quality gates, and CI defaults for this new project."
