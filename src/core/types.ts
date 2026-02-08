@@ -100,6 +100,8 @@ export type WeeklyOutput = {
     generatedAtISO: string;
     weekStartBerlinISO: string;
     weekEndBerlinISO: string;
+    sourceMode: "fixtures" | "live";
+    sourcesUsed: string[];
   };
   icsPayload: string;
 };
