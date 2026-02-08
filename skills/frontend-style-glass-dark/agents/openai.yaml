@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Style Glass Dark"
+  short_description: "Apply mandatory dark glassmorphism UI style and accessibility"
+  default_prompt: "Define and enforce dark glassmorphism style tokens, interactions, and accessibility requirements for the UI."

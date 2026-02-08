@@ -1,0 +1,4 @@
+interface:
+  display_name: "Event Normalization Classification"
+  short_description: "Normalize times and classify events A-F deterministically"
+  default_prompt: "Normalize event data to Europe/Berlin, enforce exact-time rules, and classify events with deterministic A-F logic."

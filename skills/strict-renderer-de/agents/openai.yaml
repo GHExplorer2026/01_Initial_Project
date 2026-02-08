@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strict Renderer DE"
+  short_description: "Render strict German weekly output schema"
+  default_prompt: "Render weekly output in strict German schema with deterministic formatting and fallback notes."

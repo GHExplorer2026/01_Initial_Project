@@ -1,0 +1,4 @@
+interface:
+  display_name: "Weekly Outlook Orchestrator"
+  short_description: "Orchestrate weekly macro-event pipeline and outputs"
+  default_prompt: "Build the weekly macro-event output pipeline for selected countries with deterministic ordering and outputs."

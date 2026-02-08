@@ -1,0 +1,4 @@
+interface:
+  display_name: "Source Governance Fetch"
+  short_description: "Enforce source priority and approved tertiary policy"
+  default_prompt: "Define source governance: primary/secondary priority, tertiary trigger rules, and compliance constraints."

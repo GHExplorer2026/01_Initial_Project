@@ -1,0 +1,4 @@
+interface:
+  display_name: "Outlook ICS Generator"
+  short_description: "Generate Outlook-compatible ICS with strict category rules"
+  default_prompt: "Generate RFC5545-compatible ICS output with Europe/Berlin timezone and required Wirtschafts-Event category."

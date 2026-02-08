@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deterministic QA Harness"
+  short_description: "Design fixture-first deterministic QA and snapshot controls"
+  default_prompt: "Create deterministic QA strategy with fixtures, golden snapshots, parser version pinning, and contract validation."

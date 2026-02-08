@@ -1,0 +1,4 @@
+interface:
+  display_name: "Conflict Dedupe Grouping"
+  short_description: "Resolve conflicts, dedupe records, and group lines"
+  default_prompt: "Resolve cross-source conflicts, deduplicate events, and group same-country same-time titles deterministically."
