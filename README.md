@@ -86,3 +86,8 @@ Date: `2026-02-08`
   - Runtime must not run `npm install`.
 - Delivery model:
   - Build produces a standalone runtime image/artifact that can run without dependency-network access.
+
+## 11. Source Mode
+- Default and CI: `SOURCE_MODE=fixtures`
+- Local live mode:
+  - `TZ=Europe/Berlin NODE_OPTIONS=--dns-result-order=ipv4first SOURCE_MODE=live npm run dev`
