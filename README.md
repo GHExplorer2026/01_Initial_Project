@@ -1,61 +1,88 @@
-# Projektstatus und Fortschritt
+# Project Progress and Governance
 
-## 1. Projektuebersicht
-- Projektname: `01_Initial_Project`
-- Ziel: Aufbau eines klaren Projektstarts mit wiederverwendbaren Skills und verbindlichen Startregeln.
-- Single Source of Truth fuer Fortschritt: diese `README.md`.
+## 1. Project Context
+- Project: `01_Initial_Project`
+- Current objective: establish a domain-specific setup for the Macro Events Weekly Outlook app.
+- Single source of truth for implementation governance: this `README.md`.
 
-## 2. Aktueller Status (Snapshot)
-Stand: `2026-02-08`
+## 2. Current Snapshot
+Date: `2026-02-08`
 
-| Bereich | Status | Fertigstellung | Letzte Aenderung | Nachweis |
+| Area | Status | Completion | Last Updated | Evidence |
 |---|---|---:|---|---|
-| Projektstart-Regeln | Erledigt | 100% | 2026-02-08 | `RULES.md` |
-| Skill: idea-to-prd | Erledigt | 100% | 2026-02-08 | `skills/idea-to-prd/SKILL.md` |
-| Skill: architecture-baseline | Erledigt | 100% | 2026-02-08 | `skills/architecture-baseline/SKILL.md` |
-| Skill: repo-bootstrap | Erledigt | 100% | 2026-02-08 | `skills/repo-bootstrap/SKILL.md` |
-| Skill: mvp-delivery-plan | Erledigt | 100% | 2026-02-08 | `skills/mvp-delivery-plan/SKILL.md` |
-| Skill-Referenzen | Erledigt | 100% | 2026-02-08 | `skills/*/references/*.md` |
+| Domain rules baseline | Completed | 100% | 2026-02-08 | `RULES.md` |
+| Legacy startup skills archived | Completed | 100% | 2026-02-08 | `skills/_legacy-startup/*` |
+| New domain skill set | Completed | 100% | 2026-02-08 | `skills/*` (new folders listed below) |
+| Detailed implementation plan | Completed | 100% | 2026-02-08 | `docs/IMPLEMENTATION_PLAN.md` |
 
-## 3. Fortschrittsprotokoll (verbindliches Format)
-Jeder neue Eintrag muss dieses Format verwenden:
+## 3. Active Skill Landscape
 
-| ID | Datum (YYYY-MM-DD) | Bereich | Typ | Beschreibung | Ergebnis | Verifikation | Owner |
+### Legacy (archived)
+- `skills/_legacy-startup/idea-to-prd`
+- `skills/_legacy-startup/architecture-baseline`
+- `skills/_legacy-startup/repo-bootstrap`
+- `skills/_legacy-startup/mvp-delivery-plan`
+
+### Active domain skills
+- `skills/weekly-outlook-orchestrator`
+- `skills/source-governance-fetch`
+- `skills/event-normalization-classification`
+- `skills/conflict-dedupe-grouping`
+- `skills/strict-renderer-de`
+- `skills/outlook-ics-generator`
+- `skills/frontend-style-glass-dark`
+- `skills/deterministic-qa-harness`
+
+## 4. Progress Log
+| ID | Date | Area | Type | Description | Result | Verification | Owner |
 |---|---|---|---|---|---|---|---|
-| P-001 | 2026-02-08 | Skills | Erstellung | 4 Start-Skills initialisiert und ausformuliert | Abgeschlossen | `quick_validate.py` erfolgreich | Codex |
-| P-002 | 2026-02-08 | Regeln | Erstellung | Projektweite Startregeln in `RULES.md` erstellt | Abgeschlossen | Datei vorhanden und strukturiert | Codex |
-| P-003 | 2026-02-08 | Dokumentation | Erstellung | Praezise Fortschrittsdokumentation in `README.md` eingefuehrt | Abgeschlossen | Datei vorhanden und befuellt | Codex |
+| P-001 | 2026-02-08 | Skills | Migration | Moved generic startup skills to legacy archive | Completed | Folder structure verified | Codex |
+| P-002 | 2026-02-08 | Skills | Creation | Added 8 domain-specific skills with references | Completed | Skill folders and files created | Codex |
+| P-003 | 2026-02-08 | Rules | Rewrite | Replaced generic rules with 15 hard acceptance rules | Completed | `RULES.md` updated | Codex |
+| P-004 | 2026-02-08 | Planning | Creation | Added detailed implementation plan document | Completed | `docs/IMPLEMENTATION_PLAN.md` present | Codex |
+| P-005 | 2026-02-08 | Documentation | Rewrite | Updated project README for new setup and governance | Completed | This file | Codex |
+| P-006 | 2026-02-08 | Build Infra | Creation | Added multi-stage Docker build and CI image artifact workflow | Completed | `Dockerfile`, `.github/workflows/build-image.yml` | Codex |
 
-## 4. Offene Aufgaben
-| ID | Aufgabe | Prioritaet | Status | Blocker | Zieltermin | Owner |
+## 5. Open Items
+| ID | Task | Priority | Status | Blocker | Target Date | Owner |
 |---|---|---|---|---|---|---|
-| T-001 | Rules auf finalen Tech-Stack anpassen | Hoch | Offen | Stack-Entscheidung fehlt | offen | offen |
-| T-002 | Erstes reales Projektziel definieren (MVP) | Hoch | Offen | Produktkontext fehlt | offen | offen |
-| T-003 | CI-Pipeline konkretisieren | Mittel | Offen | Technologie-Setup fehlt | offen | offen |
+| T-001 | Initialize actual Next.js + TypeScript app scaffold | High | Open | None | TBD | TBD |
+| T-002 | Implement source adapters with fixtures | High | Open | Scaffold pending | TBD | TBD |
+| T-003 | Implement strict renderer + ICS generator | High | Open | Core models pending | TBD | TBD |
+| T-004 | Wire CI pipeline for lint/test/snapshot/build | Medium | Open | Repository toolchain pending | TBD | TBD |
 
-## 5. Risiko-Log
-| ID | Risiko | Auswirkung | Wahrscheinlichkeit | Massnahme | Status |
+## 6. Risks
+| ID | Risk | Impact | Likelihood | Mitigation | Status |
 |---|---|---|---|---|---|
-| R-001 | Kein finaler Tech-Stack definiert | Verzogerte technische Entscheidungen | Mittel | Stack-Entscheidung im Kickoff fixieren | Offen |
-| R-002 | Scope kann zu frueh wachsen | Zeitverlust, unklare Prioritaeten | Mittel | Strikte MVP-Abgrenzung gemaess `RULES.md` | Offen |
+| R-001 | Source markup drift breaks parsers | High | Medium | Fixture-first parser tests + snapshots | Open |
+| R-002 | Non-deterministic output regressions | High | Medium | Determinism gates + parserVersion pinning | Open |
+| R-003 | Legal constraints for premium sources | Medium | Medium | Approved source registry + compliance checks | Open |
 
-## 6. Entscheidungs-Log
-| ID | Datum | Entscheidung | Grund | Auswirkungen |
+## 7. Decision Log
+| ID | Date | Decision | Rationale | Impact |
 |---|---|---|---|---|
-| D-001 | 2026-02-08 | 4 Projektstart-Skills als Basis | Wiederverwendbare Standardisierung | Schnellere, konsistente Projektstarts |
-| D-002 | 2026-02-08 | Startregeln zentral in `RULES.md` | Einheitliche Qualitaets- und Arbeitsbasis | Bessere Nachvollziehbarkeit und Disziplin |
+| D-001 | 2026-02-08 | Replace generic startup skills with domain-specific skills | Align toolset with macro-events product workflow | Higher implementation precision |
+| D-002 | 2026-02-08 | Keep legacy skills in archive folder instead of deletion | Preserve history and fallback context | Lower migration risk |
+| D-003 | 2026-02-08 | Enforce hard rules for style, ICS, determinism, and governance | Prevent ambiguity in implementation and QA | Stronger consistency and testability |
 
-## 7. Dokumentationsregeln (Pflicht)
-1. Aktualisiere bei jeder relevanten Aenderung zuerst den Snapshot, dann Protokoll/Tasks/Risiken.
-2. Nutze immer ISO-Datum (`YYYY-MM-DD`) und eindeutige IDs (`P-`, `T-`, `R-`, `D-`).
-3. Jede abgeschlossene Aufgabe braucht ein Verifikationsfeld (Test, Validator, Dateipfad).
-4. Keine unscharfen Statuswerte verwenden; nur `Offen`, `In Arbeit`, `Abgeschlossen`, `Blockiert`.
-5. Keine stillen Aenderungen ohne Protokolleintrag.
+## 8. Documentation Rules
+1. Update snapshot and progress log on every structural change.
+2. Use ISO dates (`YYYY-MM-DD`) and stable IDs (`P-`, `T-`, `R-`, `D-`).
+3. For every completed item, include a concrete verification artifact.
+4. Keep statuses to `Open`, `In Progress`, `Completed`, or `Blocked`.
+5. Do not introduce undocumented structural changes.
 
-## 8. Relevante Dateien
-- Regeln: `RULES.md`
-- Skills:
-  - `skills/idea-to-prd/SKILL.md`
-  - `skills/architecture-baseline/SKILL.md`
-  - `skills/repo-bootstrap/SKILL.md`
-  - `skills/mvp-delivery-plan/SKILL.md`
+## 9. Key Documents
+- Rules: `RULES.md`
+- Plan: `docs/IMPLEMENTATION_PLAN.md`
+- Skills root: `skills/`
+
+## 10. Build vs Runtime Network Requirements
+- Build/Dependency path:
+  - Requires npm registry access to run dependency install (`npm ci`).
+  - Handled in CI or Docker build stage.
+- Runtime/Data path:
+  - Requires internet access for runtime source retrieval (Investing, TradingView, approved tertiary, optional Reuters with legal API access).
+  - Runtime must not run `npm install`.
+- Delivery model:
+  - Build produces a standalone runtime image/artifact that can run without dependency-network access.
