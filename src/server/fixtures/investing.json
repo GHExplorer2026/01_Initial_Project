@@ -1,0 +1,50 @@
+[
+  {
+    "source": "investing",
+    "region": "USA",
+    "title": "CPI (YoY)",
+    "date": "2026-02-09",
+    "time": "14:30",
+    "fetchedAtISO": "2026-02-08T08:00:00Z"
+  },
+  {
+    "source": "investing",
+    "region": "EZ",
+    "title": "GDP (QoQ)",
+    "date": "2026-02-10",
+    "time": "11:00",
+    "fetchedAtISO": "2026-02-08T08:00:00Z"
+  },
+  {
+    "source": "investing",
+    "region": "UK",
+    "title": "CPI (MoM)",
+    "date": "2026-02-11",
+    "time": "08:00",
+    "fetchedAtISO": "2026-02-08T08:00:00Z"
+  },
+  {
+    "source": "investing",
+    "region": "JP",
+    "title": "BoJ Rate Decision",
+    "date": "2026-02-12",
+    "time": "04:00",
+    "fetchedAtISO": "2026-02-08T08:00:00Z"
+  },
+  {
+    "source": "investing",
+    "region": "USA",
+    "title": "NFP",
+    "date": "2026-02-13",
+    "time": "14:30",
+    "fetchedAtISO": "2026-02-08T08:00:00Z"
+  },
+  {
+    "source": "investing",
+    "region": "USA",
+    "title": "ISM Manufacturing PMI",
+    "date": "2026-02-13",
+    "time": "14:30",
+    "fetchedAtISO": "2026-02-08T08:00:00Z"
+  }
+]

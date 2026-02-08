@@ -1,0 +1,26 @@
+[
+  {
+    "source": "tradingview",
+    "region": "USA",
+    "title": "CPI (YoY)",
+    "date": "2026-02-09",
+    "time": "14:00",
+    "fetchedAtISO": "2026-02-08T08:05:00Z"
+  },
+  {
+    "source": "tradingview",
+    "region": "CH",
+    "title": "Retail Sales",
+    "date": "2026-02-12",
+    "time": "09:15",
+    "fetchedAtISO": "2026-02-08T08:05:00Z"
+  },
+  {
+    "source": "tradingview",
+    "region": "CA",
+    "title": "Building Permits",
+    "date": "2026-02-11",
+    "time": "14:30",
+    "fetchedAtISO": "2026-02-08T08:05:00Z"
+  }
+]
