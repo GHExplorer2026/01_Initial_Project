@@ -7,6 +7,7 @@ import { normalizeEvents } from "@/core/normalize";
 import { renderStrictWeeklyText } from "@/core/rendererStrictDe";
 import type { EconomicEvent, RawSourceEvent, RegionCode, WeeklyOutput } from "@/core/types";
 import { resolveWeekInBerlin } from "@/core/weekResolver";
+import { resolveSourceMode } from "@/server/sourceMode";
 import { fetchInvestingEvents } from "@/server/sources/investing";
 import { fetchTradingViewEvents } from "@/server/sources/tradingview";
 import { fetchApprovedTertiaryEvents } from "@/server/sources/tertiary/approved";
@@ -41,6 +42,7 @@ export type GenerateParams = {
 
 export const generateWeeklyOutlook = async ({ regions, now }: GenerateParams): Promise<WeeklyOutput> => {
   const week = resolveWeekInBerlin(now ?? new Date());
+  const sourceMode = resolveSourceMode();
 
   const [investing, tradingview] = await Promise.all([
     fetchInvestingEvents(week.weekStart, week.weekEnd, regions),
@@ -73,6 +75,26 @@ export const generateWeeklyOutlook = async ({ regions, now }: GenerateParams): P
   const rendered = renderStrictWeeklyText(week, grouped, dayStatus, dataReliable);
   const icsPayload = generateIcs(filteredEvents, week.weekStart, PARSER_VERSION);
 
+  const sourcesUsed: string[] = [];
+  if (investing.ok || investing.events.length > 0) {
+    sourcesUsed.push("investing");
+  }
+  if (tradingview.ok || tradingview.events.length > 0) {
+    sourcesUsed.push("tradingview");
+  }
+  if (needTertiary) {
+    const tertiarySources = new Set(
+      tertiary.events
+        .map((event) => event.source)
+        .filter((source): source is `tertiary:${string}` => source.startsWith("tertiary:"))
+    );
+    if (tertiarySources.size === 0) {
+      sourcesUsed.push("tertiary");
+    } else {
+      sourcesUsed.push(...tertiarySources);
+    }
+  }
+
   return {
     renderedText: rendered.renderedText,
     events: filteredEvents,
@@ -81,7 +103,9 @@ export const generateWeeklyOutlook = async ({ regions, now }: GenerateParams): P
       parserVersion: PARSER_VERSION,
       generatedAtISO: new Date().toISOString(),
       weekStartBerlinISO: `${week.weekStart}T00:00:00+01:00`,
-      weekEndBerlinISO: `${week.weekEnd}T23:59:59+01:00`
+      weekEndBerlinISO: `${week.weekEnd}T23:59:59+01:00`,
+      sourceMode,
+      sourcesUsed
     },
     icsPayload
   };
