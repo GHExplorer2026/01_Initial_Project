@@ -26,13 +26,8 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install dependencies (ci if lockfile)
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci --registry="$NPM_CONFIG_REGISTRY"
-          else
-            npm install --registry="$NPM_CONFIG_REGISTRY"
-          fi
+      - name: Install dependencies
+        run: npm ci --registry="$NPM_CONFIG_REGISTRY"
 
       - name: Lint
         run: npm run lint
