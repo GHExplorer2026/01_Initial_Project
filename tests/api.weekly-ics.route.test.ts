@@ -60,6 +60,15 @@ describe("GET /api/weekly.ics", () => {
     expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({ regions: ["USA", "EZ"] });
   });
 
+  it("falls back to countries alias when regions contains only invalid values", async () => {
+    mockedGenerateWeeklyOutlook.mockResolvedValue(buildWeeklyOutput());
+
+    const response = await GET(new Request("http://localhost/api/weekly.ics?regions=foo&countries=USD,EUR"));
+
+    expect(response.status).toBe(200);
+    expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({ regions: ["USA", "EZ"] });
+  });
+
   it("returns 400 on regions/countries conflict", async () => {
     const response = await GET(new Request("http://localhost/api/weekly.ics?regions=USA&countries=EUR"));
     const body = await response.text();
