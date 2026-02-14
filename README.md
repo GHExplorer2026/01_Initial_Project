@@ -75,6 +75,7 @@ Date: `2026-02-14`
 | P-034 | 2026-02-14 | v0.1.1 | Marker reliability | Replaced marker auto-commit action with explicit git commit/push retries and added smoke log tail to marker JSON | Completed | `.github/workflows/release-gate.yml`, `docs/V0_1_1_EVIDENCE.md` | Codex |
 | P-035 | 2026-02-14 | v0.1.1 | Smoke runtime fix | Switched Release Gate startup from `next start` to `node .next/standalone/server.js` for standalone builds | Completed | `.github/workflows/release-gate.yml` | Codex |
 | P-036 | 2026-02-14 | v0.1.1 | Smoke diagnostics | Persisted smoke-script output (`/tmp/release-gate-smoke.log`) to artifacts and marker (`smoke_check_tail_b64`) | Completed | `.github/workflows/release-gate.yml`, `docs/V0_1_1_EVIDENCE.md` | Codex |
+| P-037 | 2026-02-14 | v0.1.1 | Marker race fix | Marker commit is now gated to current `origin/main` HEAD to prevent stale-run overwrites and commit conflicts | Completed | `.github/workflows/release-gate.yml` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |

@@ -167,10 +167,18 @@ jobs:
         if: always()
         env:
           REF_NAME: ${{ github.ref_name }}
+          RUN_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git fetch origin "${REF_NAME}"
+          remote_head="$(git rev-parse "origin/${REF_NAME}")"
+          if [ "${remote_head}" != "${RUN_SHA}" ]; then
+            echo "Skip marker commit: run sha ${RUN_SHA} is not current remote head ${remote_head}."
+            exit 0
+          fi
 
           if git diff --quiet -- docs/release-gate-last-success.json; then
             echo "No marker changes to commit."
@@ -180,15 +188,17 @@ jobs:
           git add docs/release-gate-last-success.json
           git commit -m "chore(ci): record release gate marker [skip release-gate]"
 
-          for attempt in 1 2 3; do
-            if git push origin "HEAD:${REF_NAME}"; then
-              echo "Marker push succeeded (attempt ${attempt})."
-              exit 0
-            fi
-            echo "Marker push failed (attempt ${attempt}), retrying with rebase..."
-            git fetch origin "${REF_NAME}"
-            git rebase "origin/${REF_NAME}"
-          done
+          if git push origin "HEAD:${REF_NAME}"; then
+            echo "Marker push succeeded."
+            exit 0
+          fi
 
-          echo "Failed to push release gate marker after retries."
+          git fetch origin "${REF_NAME}"
+          remote_head="$(git rev-parse "origin/${REF_NAME}")"
+          if [ "${remote_head}" != "${RUN_SHA}" ]; then
+            echo "Skip marker push after race: newer commit detected (${remote_head})."
+            exit 0
+          fi
+
+          echo "Failed to push marker although run sha is still HEAD."
           exit 1
