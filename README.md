@@ -88,6 +88,7 @@ Date: `2026-02-14`
 - PR Summary: `docs/PR_SUMMARY.md`
 - PR Body: `docs/PR_BODY.md`
 - Merge Steps: `docs/MERGE_STEPS.md`
+- Releases: `docs/RELEASES.md`
 - Troubleshooting: `docs/TROUBLESHOOTING.md`
 - Contributing: `CONTRIBUTING.md`
 - Skills root: `skills/`
