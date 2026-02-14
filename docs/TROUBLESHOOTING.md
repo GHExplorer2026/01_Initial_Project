@@ -34,6 +34,20 @@ Mitigation:
    - `NPM_CONFIG_FETCH_RETRY_MINTIMEOUT=20000`
    - `NPM_CONFIG_FETCH_RETRY_MAXTIMEOUT=120000`
 
+## 2.1) CI unit/snapshot failures
+
+Symptom:
+- CI fails in `unit` or `snapshot` step.
+
+Mitigation:
+1. Download CI artifact (`ci-test-reports` or `quality-gates-test-reports`).
+2. Inspect JUnit XML:
+   - `artifacts/vitest-unit.xml`
+   - `artifacts/vitest-snapshot.xml`
+3. Re-run locally on Node `>=20.9.0`:
+   - `npm run unit`
+   - `npm run snapshot`
+
 ## 3) Git push DNS failures
 
 Symptom:
