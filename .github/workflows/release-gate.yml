@@ -103,7 +103,7 @@ jobs:
             exit 1
           fi
           set +e
-          scripts/smoke_api.sh http://127.0.0.1:3000 USA,EZ > /tmp/release-gate-smoke.log 2>&1
+          bash scripts/smoke_api.sh http://127.0.0.1:3000 USA,EZ > /tmp/release-gate-smoke.log 2>&1
           smoke_exit=$?
           set -e
           cat /tmp/release-gate-smoke.log || true
