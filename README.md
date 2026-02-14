@@ -82,6 +82,7 @@ Date: `2026-02-14`
 - Plan: `docs/IMPLEMENTATION_PLAN.md`
 - Architecture: `ARCHITECTURE.md`
 - QA Status: `docs/QA_STATUS.md`
+- PR Summary: `docs/PR_SUMMARY.md`
 - Skills root: `skills/`
 
 ## 10. Build vs Runtime Network Requirements
