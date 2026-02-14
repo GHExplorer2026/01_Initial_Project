@@ -57,3 +57,14 @@ Mitigation:
 1. Retry push after DNS recovery:
    - `git push origin fix/source-mode-meta`
 2. If local DNS is unstable, run push from a terminal/session with working network.
+
+## 4) `next-env.d.ts` toggles between `.next/types` and `.next/dev/types`
+
+Symptom:
+- `next-env.d.ts` changes unexpectedly after local `next dev` / `next build`.
+
+Policy:
+1. Keep repository baseline aligned to:
+   - `import "./.next/types/routes.d.ts";`
+2. If local tooling flips to `.next/dev/types/...`, reset before commit:
+   - `git checkout -- next-env.d.ts`
