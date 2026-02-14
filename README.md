@@ -55,8 +55,8 @@ Date: `2026-02-14`
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
 |---|---|---|---|---|---|---|
-| T-001 | Open/update pull request to `main` for branch `fix/source-mode-meta` | High | In Progress | Review/merge pending | TBD | Codex/User |
-| T-002 | Run final CI check on GitHub after latest push | High | In Progress | CI run pending | TBD | Codex/User |
+| T-001 | Open/update pull request to `main` for branch `fix/source-mode-meta` | High | Completed | None | 2026-02-14 | Codex/User |
+| T-002 | Run final CI and local Node-20 verify after latest push | High | Completed | None | 2026-02-14 | Codex/User |
 | T-003 | Approve and merge after review | High | Open | Reviewer availability | TBD | User |
 
 ## 6. Risks
