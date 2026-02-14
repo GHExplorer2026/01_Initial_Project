@@ -85,7 +85,7 @@ jobs:
         continue-on-error: true
         run: |
           set -euo pipefail
-          npm run start -- --hostname 127.0.0.1 --port 3000 > /tmp/release-gate-app.log 2>&1 &
+          HOSTNAME=127.0.0.1 PORT=3000 node .next/standalone/server.js > /tmp/release-gate-app.log 2>&1 &
           APP_PID=$!
           cleanup() { kill "$APP_PID" >/dev/null 2>&1 || true; }
           trap cleanup EXIT
