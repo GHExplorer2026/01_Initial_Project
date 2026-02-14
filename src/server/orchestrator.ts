@@ -97,12 +97,14 @@ export const generateWeeklyOutlook = async ({ regions, now }: GenerateParams): P
     sourcesUsed.push("tradingview");
   }
   if (needTertiary) {
-    const tertiarySources = new Set(
-      tertiary.events
-        .map((event) => event.source)
-        .filter((source): source is `tertiary:${string}` => source.startsWith("tertiary:"))
-    );
-    if (tertiarySources.size === 0) {
+    const tertiarySources = Array.from(
+      new Set(
+        tertiary.events
+          .map((event) => event.source)
+          .filter((source): source is `tertiary:${string}` => source.startsWith("tertiary:"))
+      )
+    ).sort();
+    if (tertiarySources.length === 0) {
       sourcesUsed.push("tertiary");
     } else {
       sourcesUsed.push(...tertiarySources);
