@@ -10,6 +10,7 @@
   - `meta.sourceMode`
   - `meta.sourcesUsed`
 - Standardized `meta.sourcesUsed` semantics to always include primary adapters (`investing`, `tradingview`) and append tertiary entries when invoked.
+- Normalized tertiary fallback source id to `tertiary:approved` when tertiary runs without concrete provider events.
 - Enforced centralized source mode switching in orchestrator (`fixtures` default, `live` optional).
 - Kept strict output and ICS contracts unchanged while expanding verification depth.
 - Added dynamic Europe/Berlin offset handling for:

@@ -7,6 +7,7 @@
 - `meta.weekStartBerlinISO` / `meta.weekEndBerlinISO` now use dynamic Europe/Berlin offset (`+01:00` / `+02:00` by date).
 - Kept strict output and ICS contracts stable while adding deeper regression coverage.
 - Enforced and validated central `SOURCE_MODE` behavior with deterministic fixture default.
+- Normalized `meta.sourcesUsed` tertiary fallback id to `tertiary:approved` for consistent source naming.
 - Switched lint execution to a Next 16 compatible flat ESLint config (`eslint.config.mjs`).
 - Committed Next-generated TypeScript config updates from build (`tsconfig.json`, `next-env.d.ts`).
 
