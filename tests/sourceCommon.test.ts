@@ -26,4 +26,12 @@ describe("source common utilities", () => {
       time: "14:00"
     });
   });
+
+  it("returns deterministic error result when fixture file is missing", async () => {
+    const result = await readFixtureEvents("does-not-exist.json", "2026-02-09", "2026-02-13", ["USA"]);
+    expect(result.ok).toBe(false);
+    expect(result.events).toEqual([]);
+    expect(typeof result.error).toBe("string");
+    expect(result.error?.length).toBeGreaterThan(0);
+  });
 });

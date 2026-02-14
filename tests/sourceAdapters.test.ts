@@ -35,6 +35,19 @@ describe("source adapters", () => {
     expect(result.events[0].title).toBe("CPI (YoY)");
     expect(result.events[0].date).toBe("2026-02-09");
     expect(result.events[0].time).toBe("14:30");
+
+    const [url, options] = vi.mocked(globalThis.fetch).mock.calls[0];
+    expect(String(url)).toContain("investing.com/economic-calendar/Service/getCalendarFilteredData");
+    expect(options?.method).toBe("POST");
+    expect(options?.headers).toMatchObject({
+      "X-Requested-With": "XMLHttpRequest",
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+    });
+    const body = options?.body as URLSearchParams;
+    expect(body.get("dateFrom")).toBe("2026-02-09");
+    expect(body.get("dateTo")).toBe("2026-02-13");
+    expect(body.get("timeFilter")).toBe("timeOnly");
+    expect(body.getAll("country[]")).toEqual(["5"]);
   });
 
   it("returns investing error result for non-ok responses and thrown errors", async () => {
@@ -69,6 +82,10 @@ describe("source adapters", () => {
     expect(ok.events[0].currency).toBe("EUR");
     expect(ok.events[0].date).toBe("2026-02-10");
     expect(ok.events[0].time).toBe("11:00");
+    const [url] = vi.mocked(globalThis.fetch).mock.calls[0];
+    expect(String(url)).toContain("economic-calendar.tradingview.com/events?");
+    expect(String(url)).toContain("from=2026-02-09T00%3A00%3A00.000Z");
+    expect(String(url)).toContain("to=2026-02-13T23%3A59%3A59.999Z");
 
     vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
       new Response(JSON.stringify({ status: "error" }), {
