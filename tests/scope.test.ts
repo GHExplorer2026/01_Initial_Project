@@ -49,4 +49,18 @@ describe("parseScopeSelection", () => {
     expect(scope.regions).toEqual(["USA", "EZ", "UK"]);
     expect(scope.usedDeprecatedCountriesAlias).toBe(false);
   });
+
+  it("normalizes regions parameter with lowercase, spaces and duplicates", () => {
+    const params = new URLSearchParams("regions= usa, ez ,uk,USA ");
+    const scope = parseScopeSelection(params);
+    expect(scope.regions).toEqual(["USA", "EZ", "UK"]);
+    expect(scope.usedDeprecatedCountriesAlias).toBe(false);
+  });
+
+  it("normalizes deprecated countries alias with lowercase and spaces", () => {
+    const params = new URLSearchParams("countries= usd, eur , gbp ");
+    const scope = parseScopeSelection(params);
+    expect(scope.regions).toEqual(["USA", "EZ", "UK"]);
+    expect(scope.usedDeprecatedCountriesAlias).toBe(true);
+  });
 });
