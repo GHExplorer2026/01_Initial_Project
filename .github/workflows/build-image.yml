@@ -36,10 +36,17 @@ jobs:
         run: npm run typecheck
 
       - name: Unit tests
-        run: npm run unit
+        run: npm run unit:ci
 
       - name: Snapshot tests
-        run: npm run snapshot
+        run: npm run snapshot:ci
+
+      - name: Upload quality gate test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quality-gates-test-reports
+          path: artifacts/*.xml
 
       - name: Build
         run: npm run build

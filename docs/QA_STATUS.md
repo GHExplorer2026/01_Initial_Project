@@ -29,6 +29,7 @@
 
 ## Notes
 - CI workflows run explicit `unit` and `snapshot` gates.
+- CI uploads JUnit artifacts for `unit` and `snapshot` runs (`artifacts/vitest-*.xml`).
 - Local consolidated check is available via `npm run verify`.
 - Local verification requires Node `>=20.9.0`; CI remains source of truth when local runner is below baseline.
 - `next build` generated updates were committed (`tsconfig.json`, `next-env.d.ts`) to keep repository and build output aligned.

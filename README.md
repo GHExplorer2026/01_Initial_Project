@@ -54,6 +54,7 @@ Date: `2026-02-14`
 | P-013 | 2026-02-14 | Release | Finalization | Merged feature branch to `main`, published tag `v0.1.0`, and cleaned up remote feature branch | Completed | `main`, `docs/RELEASES.md`, tag `v0.1.0` | Codex |
 | P-014 | 2026-02-14 | v0.1.1 | Parser hardening | Hardened Investing live parser against HTML quoting/attribute-order/event-cell drift and added regression tests | Completed | `src/server/sources/investing.ts`, `tests/sourceAdapters.test.ts` | Codex |
 | P-015 | 2026-02-14 | v0.1.1 | QA hardening | Added TradingView normalization drift tests and orchestrator fallback assertions for live-empty weekday responses | Completed | `src/server/sources/tradingview.ts`, `tests/sourceAdapters.test.ts`, `tests/orchestrator.test.ts` | Codex |
+| P-016 | 2026-02-14 | v0.1.1 | CI diagnostics | Added JUnit test report artifacts for unit/snapshot jobs in CI workflows | Completed | `.github/workflows/ci.yml`, `.github/workflows/build-image.yml`, `package.json` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |

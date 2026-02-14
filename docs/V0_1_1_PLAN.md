@@ -50,6 +50,8 @@ Status: In Progress
 2. Metadata contract remains stable across fixture runs.
 
 ## W3 CI and Developer Reliability
+Status: In Progress
+
 1. Keep CI gate order strict: `lint`, `typecheck`, `unit`, `snapshot`, `build`.
 2. Add concise troubleshooting pointers for common deterministic failures:
    - snapshot mismatch
