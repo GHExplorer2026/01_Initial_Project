@@ -1,6 +1,8 @@
 name: Release Gate
 
 on:
+  push:
+    branches: ["main"]
   workflow_dispatch:
     inputs:
       target_ref:
@@ -21,10 +23,15 @@ jobs:
       NPM_CONFIG_FETCH_RETRY_MAXTIMEOUT: "120000"
 
     steps:
-      - name: Checkout
+      - name: Checkout target ref (manual)
+        if: github.event_name == 'workflow_dispatch'
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.target_ref }}
+
+      - name: Checkout current ref (push)
+        if: github.event_name != 'workflow_dispatch'
+        uses: actions/checkout@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4

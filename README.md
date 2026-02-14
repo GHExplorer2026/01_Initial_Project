@@ -60,6 +60,7 @@ Date: `2026-02-14`
 | P-019 | 2026-02-14 | v0.1.1 | Release prep | Added release draft/checklist and dedicated `verify:release` command for final gate execution | Completed | `docs/V0_1_1_RELEASE_DRAFT.md`, `package.json` | Codex |
 | P-020 | 2026-02-14 | v0.1.1 | CI release gate | Added manual GitHub workflow to run Node-20 release verification on target refs | Completed | `.github/workflows/release-gate.yml` | Codex |
 | P-021 | 2026-02-14 | v0.1.1 | Repo hygiene | Added troubleshooting policy for `next-env.d.ts` route-import drift and reset procedure | Completed | `docs/TROUBLESHOOTING.md` | Codex |
+| P-022 | 2026-02-14 | v0.1.1 | Release automation | Enabled release-gate workflow auto-run on pushes to `main` in addition to manual dispatch | Completed | `.github/workflows/release-gate.yml` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -67,7 +68,7 @@ Date: `2026-02-14`
 | T-101 | Start `v0.1.1` parser/fixture hardening stream | High | Completed | None | 2026-02-14 | Codex |
 | T-102 | Add deterministic metadata/error taxonomy tests for fallback behavior | High | Completed | None | 2026-02-14 | Codex |
 | T-103 | Final Node-20 verify for `v0.1.1` and release tag | High | In Progress | Awaiting final Node-20 run evidence | 2026-02-15 | Codex/User |
-| T-104 | Run GitHub `Release Gate` workflow on `main` and archive artifacts | High | Open | None | 2026-02-15 | Codex/User |
+| T-104 | Run GitHub `Release Gate` workflow on `main` and archive artifacts | High | In Progress | Awaiting latest workflow run evidence | 2026-02-15 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |
