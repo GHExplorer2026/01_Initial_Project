@@ -44,6 +44,8 @@ jobs:
           node-version: "20.20.0"
 
       - name: Install dependencies (retry + registry fallback)
+        id: install
+        continue-on-error: true
         run: |
           install_with_retry() {
             local registry="$1"
@@ -64,14 +66,19 @@ jobs:
           fi
 
       - name: Print tool versions
+        if: always()
         run: |
           node -v
           npm -v
 
       - name: Run release verification gate
+        id: verify
+        continue-on-error: true
         run: npm run verify:release
 
       - name: Start app and run API smoke gate
+        id: smoke
+        continue-on-error: true
         run: |
           set -euo pipefail
           npm run start -- --hostname 127.0.0.1 --port 3000 > /tmp/release-gate-app.log 2>&1 &
@@ -93,6 +100,16 @@ jobs:
           fi
           scripts/smoke_api.sh http://127.0.0.1:3000 USA,EZ
 
+      - name: Evaluate release gate status
+        if: always()
+        run: |
+          echo "install=${{ steps.install.outcome }}"
+          echo "verify=${{ steps.verify.outcome }}"
+          echo "smoke=${{ steps.smoke.outcome }}"
+          if [ "${{ steps.install.outcome }}" != "success" ] || [ "${{ steps.verify.outcome }}" != "success" ] || [ "${{ steps.smoke.outcome }}" != "success" ]; then
+            exit 1
+          fi
+
       - name: Upload release gate artifacts
         if: always()
         uses: actions/upload-artifact@v4
@@ -110,6 +127,11 @@ jobs:
           {
             "workflow": "Release Gate",
             "status": "${{ job.status }}",
+            "step_outcomes": {
+              "install": "${{ steps.install.outcome }}",
+              "verify": "${{ steps.verify.outcome }}",
+              "smoke": "${{ steps.smoke.outcome }}"
+            },
             "run_id": "${{ github.run_id }}",
             "run_attempt": "${{ github.run_attempt }}",
             "sha": "${{ github.sha }}",
