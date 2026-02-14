@@ -40,8 +40,11 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
-      - name: Unit and snapshot tests
+      - name: Unit tests
         run: npm run unit
+
+      - name: Snapshot tests
+        run: npm run snapshot
 
       - name: Build
         run: npm run build
