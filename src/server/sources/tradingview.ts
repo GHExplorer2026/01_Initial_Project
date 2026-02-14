@@ -51,6 +51,8 @@ export const fetchTradingViewLiveEvents = async (
   weekEnd: string,
   _regions: RegionCode[]
 ): Promise<SourceFetchResult> => {
+  void _regions;
+
   try {
     const response = await fetch(`${TRADINGVIEW_ECONOMIC_EVENTS}?${buildQuery(weekStart, weekEnd).toString()}`, {
       headers: {

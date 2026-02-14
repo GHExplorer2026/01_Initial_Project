@@ -12,8 +12,14 @@ export const fetchApprovedTertiaryLiveEvents = async (
   _weekStart: string,
   _weekEnd: string,
   _regions: RegionCode[]
-): Promise<SourceFetchResult> => ({
-  ok: false,
-  events: [],
-  error: "approved tertiary live adapters not configured"
-});
+): Promise<SourceFetchResult> => {
+  void _weekStart;
+  void _weekEnd;
+  void _regions;
+
+  return {
+    ok: false,
+    events: [],
+    error: "approved tertiary live adapters not configured"
+  };
+};
