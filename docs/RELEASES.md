@@ -32,3 +32,12 @@
 - `docs/PR_SUMMARY.md`
 - `docs/PR_BODY.md`
 - `docs/MERGE_STEPS.md`
+
+## Next Planned: v0.1.1
+
+### Focus
+- Parser/fixture hardening and deterministic reliability improvements only.
+- No product-scope expansion and no canonical output contract changes.
+
+### Planning Reference
+- `docs/V0_1_1_PLAN.md`
