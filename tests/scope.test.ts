@@ -63,4 +63,18 @@ describe("parseScopeSelection", () => {
     expect(scope.regions).toEqual(["USA", "EZ", "UK"]);
     expect(scope.usedDeprecatedCountriesAlias).toBe(true);
   });
+
+  it("falls back to all regions when primary regions contains only invalid values", () => {
+    const params = new URLSearchParams("regions=foo,bar");
+    const scope = parseScopeSelection(params);
+    expect(scope.regions).toEqual(REGION_ORDER);
+    expect(scope.usedDeprecatedCountriesAlias).toBe(false);
+  });
+
+  it("uses deprecated countries when regions are invalid but countries are valid", () => {
+    const params = new URLSearchParams("regions=foo&countries=USD,EUR");
+    const scope = parseScopeSelection(params);
+    expect(scope.regions).toEqual(["USA", "EZ"]);
+    expect(scope.usedDeprecatedCountriesAlias).toBe(true);
+  });
 });
