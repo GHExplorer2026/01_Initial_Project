@@ -11,5 +11,6 @@ describe("resolveSourceMode", () => {
   it("accepts live", () => {
     expect(resolveSourceMode("live")).toBe("live");
     expect(resolveSourceMode("LIVE")).toBe("live");
+    expect(resolveSourceMode("  LiVe  ")).toBe("live");
   });
 });

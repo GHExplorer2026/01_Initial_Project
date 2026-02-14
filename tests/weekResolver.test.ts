@@ -15,6 +15,12 @@ describe("resolveWeekInBerlin", () => {
     expect(result.weekEnd).toBe("2026-02-20");
   });
 
+  it("uses next week when date is Sunday", () => {
+    const result = resolveWeekInBerlin(new Date("2026-02-15T12:00:00Z"));
+    expect(result.weekStart).toBe("2026-02-16");
+    expect(result.weekEnd).toBe("2026-02-20");
+  });
+
   it("handles DST start weekend in Europe/Berlin and still selects next Monday-Friday", () => {
     const result = resolveWeekInBerlin(new Date("2026-03-29T01:30:00Z"));
     expect(result.weekStart).toBe("2026-03-30");
