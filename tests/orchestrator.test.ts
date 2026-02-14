@@ -93,6 +93,49 @@ describe("generateWeeklyOutlook", () => {
     expect(result.renderedText).toContain(NOTE_NO_VERIFIED);
   });
 
+  it("enforces investing priority on live time conflicts and flags tertiary usage", async () => {
+    process.env.SOURCE_MODE = "live";
+    const investingHtml = `
+      <tr id="eventRowId_1" data-event-datetime="2026/02/09 13:30:00">
+        <td class="left flagCur noWrap">flag USD</td>
+        <td class="left event"><a>CPI (YoY)</a></td>
+      </tr>
+    `;
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      if (url.includes("investing.com")) {
+        return new Response(JSON.stringify({ data: investingHtml }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+
+      if (url.includes("tradingview.com")) {
+        return new Response(
+          JSON.stringify({
+            status: "ok",
+            result: [{ title: "CPI (YoY)", currency: "USD", date: "2026-02-09T13:00:00.000Z" }]
+          }),
+          { status: 200, headers: { "Content-Type": "application/json" } }
+        );
+      }
+
+      throw new Error(`Unexpected live fetch URL: ${url}`);
+    });
+
+    const result = await generateWeeklyOutlook({
+      regions: ["USA"],
+      now: new Date("2026-02-10T10:00:00Z")
+    });
+
+    expect(fetchSpy).toHaveBeenCalledTimes(2);
+    expect(result.meta.sourceMode).toBe("live");
+    expect(result.meta.sourcesUsed).toEqual(["investing", "tradingview", "tertiary"]);
+    expect(result.events.some((event) => event.timeHHMM === "14:30")).toBe(true);
+    expect(result.events.some((event) => event.timeHHMM === "14:00")).toBe(false);
+    expect(result.renderedText).toContain("14:30 Uhr: USA CPI (YoY) - **TOP-EVENT**");
+  });
+
   it("renders holiday fallback note on holiday workdays when no events remain after filtering", async () => {
     delete process.env.SOURCE_MODE;
 
