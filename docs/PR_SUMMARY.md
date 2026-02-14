@@ -42,4 +42,6 @@
 ## Documentation Added/Updated
 - `ARCHITECTURE.md`
 - `docs/QA_STATUS.md`
+- `docs/TROUBLESHOOTING.md`
+- `CONTRIBUTING.md`
 - `README.md` (snapshot, docs references, verify command)
