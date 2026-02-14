@@ -41,3 +41,4 @@
 
 ### Planning Reference
 - `docs/V0_1_1_PLAN.md`
+- `docs/V0_1_1_RELEASE_DRAFT.md`
