@@ -1,12 +1,13 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { generateWeeklyOutlook } from "@/server/orchestrator";
 
 const originalSourceMode = process.env.SOURCE_MODE;
 
 afterEach(() => {
   process.env.SOURCE_MODE = originalSourceMode;
+  vi.restoreAllMocks();
 });
 
 describe("generateWeeklyOutlook", () => {
@@ -41,6 +42,24 @@ describe("generateWeeklyOutlook", () => {
 
   it("sets sourceMode live and reports used sources in live mode", async () => {
     process.env.SOURCE_MODE = "live";
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      if (url.includes("investing.com")) {
+        return new Response(JSON.stringify({ data: "" }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+
+      if (url.includes("tradingview.com")) {
+        return new Response(JSON.stringify({ status: "ok", result: [] }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+
+      throw new Error(`Unexpected live fetch URL: ${url}`);
+    });
 
     const result = await generateWeeklyOutlook({
       regions: ["USA", "EZ"],

@@ -8,9 +8,9 @@ import { renderStrictWeeklyText } from "@/core/rendererStrictDe";
 import type { EconomicEvent, RawSourceEvent, RegionCode, WeeklyOutput } from "@/core/types";
 import { resolveWeekInBerlin } from "@/core/weekResolver";
 import { resolveSourceMode } from "@/server/sourceMode";
-import { fetchInvestingEvents } from "@/server/sources/investing";
-import { fetchTradingViewEvents } from "@/server/sources/tradingview";
-import { fetchApprovedTertiaryEvents } from "@/server/sources/tertiary/approved";
+import { fetchInvestingFixtureEvents, fetchInvestingLiveEvents } from "@/server/sources/investing";
+import { fetchTradingViewFixtureEvents, fetchTradingViewLiveEvents } from "@/server/sources/tradingview";
+import { fetchApprovedTertiaryFixtureEvents, fetchApprovedTertiaryLiveEvents } from "@/server/sources/tertiary/approved";
 
 const conflictKey = (event: EconomicEvent): string => `${event.region}|${event.datetimeBerlinISO.slice(0, 10)}|${event.titleNormalized}`;
 
@@ -43,10 +43,13 @@ export type GenerateParams = {
 export const generateWeeklyOutlook = async ({ regions, now }: GenerateParams): Promise<WeeklyOutput> => {
   const week = resolveWeekInBerlin(now ?? new Date());
   const sourceMode = resolveSourceMode();
+  const fetchInvesting = sourceMode === "live" ? fetchInvestingLiveEvents : fetchInvestingFixtureEvents;
+  const fetchTradingView = sourceMode === "live" ? fetchTradingViewLiveEvents : fetchTradingViewFixtureEvents;
+  const fetchTertiary = sourceMode === "live" ? fetchApprovedTertiaryLiveEvents : fetchApprovedTertiaryFixtureEvents;
 
   const [investing, tradingview] = await Promise.all([
-    fetchInvestingEvents(week.weekStart, week.weekEnd, regions),
-    fetchTradingViewEvents(week.weekStart, week.weekEnd, regions)
+    fetchInvesting(week.weekStart, week.weekEnd, regions),
+    fetchTradingView(week.weekStart, week.weekEnd, regions)
   ]);
 
   const primaryNormalized = normalizeEvents(investing.events, PARSER_VERSION);
@@ -59,7 +62,7 @@ export const generateWeeklyOutlook = async ({ regions, now }: GenerateParams): P
     (!investing.ok && !tradingview.ok);
 
   const tertiary = needTertiary
-    ? await fetchApprovedTertiaryEvents(week.weekStart, week.weekEnd, regions)
+    ? await fetchTertiary(week.weekStart, week.weekEnd, regions)
     : { ok: true, events: [] as RawSourceEvent[] };
 
   const tertiaryNormalized = normalizeEvents(tertiary.events, PARSER_VERSION);
