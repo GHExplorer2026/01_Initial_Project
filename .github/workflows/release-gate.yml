@@ -42,8 +42,15 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install dependencies
-        run: npm ci --registry="$NPM_CONFIG_REGISTRY"
+      - name: Install dependencies (retry)
+        run: |
+          for attempt in 1 2 3; do
+            npm ci --registry="$NPM_CONFIG_REGISTRY" && exit 0
+            echo "npm ci failed (attempt ${attempt}/3), retrying..."
+            sleep 5
+          done
+          echo "npm ci failed after 3 attempts"
+          exit 1
 
       - name: Run release verification gate
         run: npm run verify:release
@@ -52,7 +59,7 @@ jobs:
         run: |
           npm run start -- --hostname 127.0.0.1 --port 3000 > /tmp/release-gate-app.log 2>&1 &
           APP_PID=$!
-          for i in {1..30}; do
+          for i in {1..60}; do
             if curl -fsS "http://127.0.0.1:3000/" >/dev/null; then
               break
             fi

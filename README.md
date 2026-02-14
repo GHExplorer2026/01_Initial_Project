@@ -67,6 +67,7 @@ Date: `2026-02-14`
 | P-026 | 2026-02-14 | v0.1.1 | Gate evidence | Recorded successful local Node-20 `verify:release` evidence (`92/92` tests) | Completed | `docs/V0_1_1_EVIDENCE.md` | Codex |
 | P-027 | 2026-02-14 | v0.1.1 | Gate traceability | Release Gate workflow now auto-commits a success marker JSON on pass | Completed | `.github/workflows/release-gate.yml`, `docs/release-gate-last-success.json` | Codex |
 | P-028 | 2026-02-14 | v0.1.1 | Gate validation | Added deterministic local validator for release-gate marker (`status=success` and `sha == HEAD`) | Completed | `scripts/check_release_gate.sh`, `package.json`, `docs/V0_1_1_EVIDENCE.md` | Codex |
+| P-029 | 2026-02-14 | v0.1.1 | CI hardening | Added retry logic for `npm ci` and extended app readiness wait in Release Gate workflow | Completed | `.github/workflows/release-gate.yml` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
