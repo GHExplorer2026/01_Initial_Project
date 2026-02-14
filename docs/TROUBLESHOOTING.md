@@ -1,0 +1,43 @@
+# TROUBLESHOOTING.md
+
+## 1) `vitest` startup error (`ERR_REQUIRE_ESM`) in local workspace
+
+Symptom:
+- `npm run unit` or `npm run verify` fails while loading `vitest.config.ts`
+- error mentions `require() of ES Module ... vite/dist/node/index.js`
+
+Observed environment:
+- Node `v18.19.0`
+- npm `9.2.0`
+
+Recommended paths:
+1. Prefer CI as source of truth (Node 20 runner).
+2. For local runs, use the known-good deterministic check flow in a clean environment:
+   - `TMPDIR=/tmp TMP=/tmp TEMP=/tmp npm run verify`
+3. If local npm cache/permissions are problematic, force writable cache:
+   - `NPM_CONFIG_CACHE=/tmp/npm-cache npm ci --registry=https://registry.npmjs.org/`
+
+## 2) npm process hangs / no output
+
+Symptom:
+- `npm ci` or `npm install` appears stuck without output.
+
+Mitigation:
+1. Ensure no previous npm process is still running.
+2. Use explicit cache and registry:
+   - `NPM_CONFIG_CACHE=/tmp/npm-cache NPM_CONFIG_REGISTRY=https://registry.npmjs.org/ npm ci`
+3. Use DNS and retry options when needed:
+   - `NODE_OPTIONS=--dns-result-order=ipv4first`
+   - `NPM_CONFIG_FETCH_RETRIES=5`
+   - `NPM_CONFIG_FETCH_RETRY_MINTIMEOUT=20000`
+   - `NPM_CONFIG_FETCH_RETRY_MAXTIMEOUT=120000`
+
+## 3) Git push DNS failures
+
+Symptom:
+- `Could not resolve hostname github.com`
+
+Mitigation:
+1. Retry push after DNS recovery:
+   - `git push origin fix/source-mode-meta`
+2. If local DNS is unstable, run push from a terminal/session with working network.
