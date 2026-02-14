@@ -42,6 +42,15 @@ describe("GET /api/weekly.ics", () => {
     expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({ regions: ["USA", "EZ"] });
   });
 
+  it("prioritizes regions over deprecated countries when both resolve equally", async () => {
+    mockedGenerateWeeklyOutlook.mockResolvedValue(buildWeeklyOutput());
+
+    const response = await GET(new Request("http://localhost/api/weekly.ics?regions=USA,EZ&countries=USD,EUR"));
+
+    expect(response.status).toBe(200);
+    expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({ regions: ["USA", "EZ"] });
+  });
+
   it("accepts deprecated countries alias when regions is absent", async () => {
     mockedGenerateWeeklyOutlook.mockResolvedValue(buildWeeklyOutput());
 
@@ -90,5 +99,18 @@ describe("GET /api/weekly.ics", () => {
     expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({
       regions: ["USA", "EZ", "UK", "JP", "CH", "CA", "AU", "NZ"]
     });
+  });
+
+  it("passes ICS bytes through unchanged", async () => {
+    const output = buildWeeklyOutput();
+    output.icsPayload = "BEGIN:VCALENDAR\r\nX-LONG:1234567890\r\n 1234567890\r\nEND:VCALENDAR\r\n";
+    mockedGenerateWeeklyOutlook.mockResolvedValue(output);
+
+    const response = await GET(new Request("http://localhost/api/weekly.ics?regions=USA"));
+    const body = await response.text();
+
+    expect(response.status).toBe(200);
+    expect(body).toBe("BEGIN:VCALENDAR\r\nX-LONG:1234567890\r\n 1234567890\r\nEND:VCALENDAR\r\n");
+    expect(body).toContain("\r\n");
   });
 });
