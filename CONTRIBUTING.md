@@ -10,6 +10,7 @@
   - `node >= 20.9.0` (see `.nvmrc` / `.node-version`)
 - Run:
   - `npm run verify`
+- `npm run verify` enforces the Node baseline and exits early if Node `<20.9.0`.
 - This must pass before pushing:
   - unit
   - snapshot

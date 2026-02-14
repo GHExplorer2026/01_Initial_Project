@@ -17,6 +17,7 @@ Recommended paths:
    - `TMPDIR=/tmp TMP=/tmp TEMP=/tmp npm run verify`
 4. If local npm cache/permissions are problematic, force writable cache:
    - `NPM_CONFIG_CACHE=/tmp/npm-cache npm ci --registry=https://registry.npmjs.org/`
+5. `npm run verify` now fails fast with a clear message when Node `<20.9.0`.
 
 ## 2) npm process hangs / no output
 

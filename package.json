@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit",
     "unit": "vitest run",
     "snapshot": "vitest run",
+    "preverify": "node -e \"const [maj,min]=process.versions.node.split('.').map(Number); if(maj<20||(maj===20&&min<9)){console.error('Node >=20.9.0 required for verify. Current: '+process.versions.node); process.exit(1);}\"",
     "verify": "npm run unit && npm run snapshot && npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
