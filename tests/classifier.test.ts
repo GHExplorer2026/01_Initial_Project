@@ -19,9 +19,14 @@ describe("classifier", () => {
     expect(classifyAF(normalizeTitle("CPI and GDP release"))).toBeNull();
   });
 
+  it("returns null when title matches no supported category", () => {
+    expect(classifyAF(normalizeTitle("Treasury Auction Results"))).toBeNull();
+  });
+
   it("detects top-event titles by configured patterns", () => {
     expect(isTopEvent(normalizeTitle("ECB Statement"))).toBe(true);
     expect(isTopEvent(normalizeTitle("ISM Manufacturing PMI"))).toBe(true);
     expect(isTopEvent(normalizeTitle("Retail Sales"))).toBe(false);
+    expect(isTopEvent(normalizeTitle("Housing Starts"))).toBe(false);
   });
 });
