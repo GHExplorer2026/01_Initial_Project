@@ -18,7 +18,7 @@
    - workflow conclusion must be `success`
    - artifact bundle must be present
    - status:
-     - `IN PROGRESS` (run trigger is active via push-on-main, final run URL pending)
+     - `BLOCKED FROM AGENT` (run URL/artifacts cannot be read via API DNS in current shell)
 3. Invariant checks:
    - strict output note strings unchanged
    - TOP suffix exact ` - **TOP-EVENT**`

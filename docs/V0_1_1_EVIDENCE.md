@@ -23,7 +23,8 @@ Track concrete evidence for closing `v0.1.1` release gates (`T-103`, `T-104`).
   - `main`
 - Result:
   - `TRIGGERED` (auto on push to `main`)
-  - `PENDING VERIFICATION` (agent environment cannot resolve `api.github.com`)
+  - `PENDING VERIFICATION`
+  - `BLOCKED FROM AGENT` (cannot resolve `api.github.com` to read run metadata)
 - Run URL:
   - `PENDING`
 - Artifacts:
@@ -33,6 +34,9 @@ Track concrete evidence for closing `v0.1.1` release gates (`T-103`, `T-104`).
   - This evidence update commit triggers a new `Release Gate` run automatically.
 - Success marker file (auto-committed by workflow on pass):
   - `docs/release-gate-last-success.json`
+ - Manual fallback:
+  - open `https://github.com/GHExplorer2026/01_Initial_Project/actions/workflows/release-gate.yml`
+  - copy latest successful run URL and paste it here
 
 ### 3) API Smoke Confirmation
 - Script:
