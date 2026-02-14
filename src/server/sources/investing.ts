@@ -40,17 +40,17 @@ const parseInvestingDateTime = (value: string): { date: string; time: string } |
 };
 
 const parseRows = (html: string): RawSourceEvent[] => {
-  const rows = [...html.matchAll(/<tr id=\"eventRowId_[^\"]+\"[\s\S]*?<\/tr>/g)];
+  const rows = [...html.matchAll(/<tr\b[^>]*\bid=(["'])eventRowId_[^"']+\1[^>]*>[\s\S]*?<\/tr>/gi)];
   const out: RawSourceEvent[] = [];
 
   for (const [row] of rows) {
-    const rawDateTime = row.match(/data-event-datetime=\"([^\"]+)\"/)?.[1];
-    const currency = row.match(/<td class=\"left flagCur noWrap\">[\s\S]*?\s([A-Z]{3})<\/td>/)?.[1];
-    const titleRaw =
-      row.match(/<td class=\"left event\"[^>]*>[\s\S]*?<a[^>]*>([\s\S]*?)<\/a>/)?.[1] ??
-      row.match(/<td class=\"left event\"[^>]*>([\s\S]*?)<\/td>/)?.[1];
+    const rawDateTime = row.match(/\bdata-event-datetime=(["'])([^"']+)\1/i)?.[2];
+    const currencyCell = row.match(/<td\b[^>]*class=(["'])[^"']*\bflagCur\b[^"']*\1[^>]*>([\s\S]*?)<\/td>/i)?.[2];
+    const currency = currencyCell ? stripHtml(currencyCell).toUpperCase().match(/\b([A-Z]{3})\b/)?.[1] : undefined;
+    const eventCell = row.match(/<td\b[^>]*class=(["'])[^"']*\bevent\b[^"']*\1[^>]*>([\s\S]*?)<\/td>/i)?.[2];
+    const titleRaw = eventCell?.match(/<a\b[^>]*>([\s\S]*?)<\/a>/i)?.[1] ?? eventCell;
 
-    if (!rawDateTime || !currency || !titleRaw || !ALLOWED_CURRENCIES.has(currency)) {
+    if (!rawDateTime || !currency || !titleRaw || !ALLOWED_CURRENCIES.has(currency as CurrencyCode)) {
       continue;
     }
 

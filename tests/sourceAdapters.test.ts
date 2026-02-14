@@ -54,6 +54,44 @@ describe("source adapters", () => {
     expect(body.getAll("country[]")).toEqual(["5", "72"]);
   });
 
+  it("parses investing rows with flexible quoting, attribute order and non-anchor event cells", async () => {
+    const html = `
+      <tr class='js-event-item' data-event-datetime='2026/02/10 10:00:00' id='eventRowId_10'>
+        <td class='left noWrap flagCur'>x usd</td>
+        <td class='left event'> <span> GDP (QoQ) </span> </td>
+      </tr>
+      <tr data-event-datetime='2026/02/10 11:30:00' id='eventRowId_11'>
+        <td class='left flagCur noWrap'>x EUR</td>
+        <td class='left event'><a><span>ISM Manufacturing PMI</span></a></td>
+      </tr>
+    `;
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({ data: html }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" }
+      })
+    );
+
+    const result = await fetchInvestingLiveEvents("2026-02-09", "2026-02-13", ["USA", "EZ"]);
+
+    expect(result.ok).toBe(true);
+    expect(result.events).toHaveLength(2);
+    expect(result.events[0]).toMatchObject({
+      source: "investing",
+      currency: "USD",
+      title: "GDP (QoQ)",
+      date: "2026-02-10",
+      time: "11:00"
+    });
+    expect(result.events[1]).toMatchObject({
+      source: "investing",
+      currency: "EUR",
+      title: "ISM Manufacturing PMI",
+      date: "2026-02-10",
+      time: "12:30"
+    });
+  });
+
   it("returns investing error result for non-ok responses and thrown errors", async () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(new Response("{}", { status: 503 }));
     const nonOk = await fetchInvestingLiveEvents("2026-02-09", "2026-02-13", ["USA"]);
