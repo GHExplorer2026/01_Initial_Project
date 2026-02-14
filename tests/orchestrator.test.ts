@@ -211,4 +211,20 @@ describe("generateWeeklyOutlook", () => {
     expect(result.renderedText).toContain("### Freitag, 03. Juli");
     expect(result.renderedText).toContain(NOTE_HOLIDAY);
   });
+
+  it("uses upcoming Monday-Friday window when now is weekend in Berlin", async () => {
+    delete process.env.SOURCE_MODE;
+
+    const result = await generateWeeklyOutlook({
+      regions: ["USA", "EZ"],
+      now: new Date("2026-02-14T10:00:00Z")
+    });
+
+    expect(result.meta.weekStartBerlinISO).toBe("2026-02-16T00:00:00+01:00");
+    expect(result.meta.weekEndBerlinISO).toBe("2026-02-20T23:59:59+01:00");
+    expect(result.days).toHaveLength(5);
+    expect(result.days[0].dayHeader).toBe("### Montag, 16. Februar");
+    expect(result.days[4].dayHeader).toBe("### Freitag, 20. Februar");
+    expect(result.renderedText.startsWith("📊 WOCHENAUSBLICK 16.02.2026 – 20.02.2026 Februar 2026")).toBe(true);
+  });
 });

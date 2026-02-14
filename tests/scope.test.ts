@@ -85,6 +85,13 @@ describe("parseScopeSelection", () => {
     expect(scope.usedDeprecatedCountriesAlias).toBe(true);
   });
 
+  it("uses deprecated countries when regions parameter is present but empty", () => {
+    const params = new URLSearchParams("regions=&countries=USD,EUR");
+    const scope = parseScopeSelection(params);
+    expect(scope.regions).toEqual(["USA", "EZ"]);
+    expect(scope.usedDeprecatedCountriesAlias).toBe(true);
+  });
+
   it("falls back to full region set when both regions and countries are invalid", () => {
     const params = new URLSearchParams("regions=foo,bar&countries=aaa,bbb");
     const scope = parseScopeSelection(params);
