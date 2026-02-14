@@ -81,6 +81,10 @@ describe("generateWeeklyOutlook", () => {
     expect(result.meta.sourceMode).toBe("live");
     expect(result.meta.sourcesUsed.length).toBeGreaterThan(0);
     expect(result.meta.sourcesUsed.some((source) => source === "investing" || source === "tradingview")).toBe(true);
+    expect(result.events).toHaveLength(0);
+    expect(result.days).toHaveLength(5);
+    expect(result.days.every((day) => day.note === NOTE_NO_VERIFIED)).toBe(true);
+    expect(result.renderedText).toContain(NOTE_NO_VERIFIED);
   });
 
   it("uses no fixture fallback in live mode and emits no-verified fallback notes on source failures", async () => {
