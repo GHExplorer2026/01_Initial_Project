@@ -15,8 +15,7 @@
 2. CI green on `main`:
    - `lint`, `typecheck`, `unit`, `snapshot`, `build`
 3. Manual API smoke:
-   - `GET /api/weekly?regions=USA,EZ`
-   - `GET /api/weekly.ics?regions=USA,EZ`
+   - `scripts/smoke_api.sh http://127.0.0.1:3000 USA,EZ`
 4. Invariant checks:
    - strict output note strings unchanged
    - TOP suffix exact ` - **TOP-EVENT**`

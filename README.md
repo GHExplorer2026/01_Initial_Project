@@ -61,6 +61,7 @@ Date: `2026-02-14`
 | P-020 | 2026-02-14 | v0.1.1 | CI release gate | Added manual GitHub workflow to run Node-20 release verification on target refs | Completed | `.github/workflows/release-gate.yml` | Codex |
 | P-021 | 2026-02-14 | v0.1.1 | Repo hygiene | Added troubleshooting policy for `next-env.d.ts` route-import drift and reset procedure | Completed | `docs/TROUBLESHOOTING.md` | Codex |
 | P-022 | 2026-02-14 | v0.1.1 | Release automation | Enabled release-gate workflow auto-run on pushes to `main` in addition to manual dispatch | Completed | `.github/workflows/release-gate.yml` | Codex |
+| P-023 | 2026-02-14 | v0.1.1 | Smoke automation | Added deterministic API smoke script for weekly/ICS endpoint gate checks | Completed | `scripts/smoke_api.sh`, `docs/V0_1_1_RELEASE_DRAFT.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
