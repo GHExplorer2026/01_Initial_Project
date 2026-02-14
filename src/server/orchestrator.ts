@@ -35,6 +35,17 @@ const parseableExactTime = (event: RawSourceEvent): boolean => /^([01]\d|2[0-3])
 
 const detectMissingTimeSignals = (events: RawSourceEvent[]): boolean => events.some((event) => !parseableExactTime(event));
 
+const berlinOffsetForDay = (ymd: string): string => {
+  const probe = new Date(`${ymd}T12:00:00Z`);
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Europe/Berlin",
+    timeZoneName: "longOffset"
+  }).formatToParts(probe);
+  const tzName = parts.find((part) => part.type === "timeZoneName")?.value ?? "GMT+00:00";
+  const match = tzName.match(/GMT([+-]\d{2}:\d{2})/);
+  return match?.[1] ?? "+00:00";
+};
+
 export type GenerateParams = {
   regions: RegionCode[];
   now?: Date;
@@ -105,8 +116,8 @@ export const generateWeeklyOutlook = async ({ regions, now }: GenerateParams): P
     meta: {
       parserVersion: PARSER_VERSION,
       generatedAtISO: new Date().toISOString(),
-      weekStartBerlinISO: `${week.weekStart}T00:00:00+01:00`,
-      weekEndBerlinISO: `${week.weekEnd}T23:59:59+01:00`,
+      weekStartBerlinISO: `${week.weekStart}T00:00:00${berlinOffsetForDay(week.weekStart)}`,
+      weekEndBerlinISO: `${week.weekEnd}T23:59:59${berlinOffsetForDay(week.weekEnd)}`,
       sourceMode,
       sourcesUsed
     },

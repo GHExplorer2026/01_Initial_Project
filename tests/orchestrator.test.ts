@@ -40,6 +40,8 @@ describe("generateWeeklyOutlook", () => {
     expect(result.icsPayload).toContain("DTSTAMP:20260208T230000Z");
     expect(result.meta.sourceMode).toBe("fixtures");
     expect(result.meta.sourcesUsed).toEqual(["investing", "tradingview", "tertiary:bls"]);
+    expect(result.meta.weekStartBerlinISO).toBe("2026-02-09T00:00:00+01:00");
+    expect(result.meta.weekEndBerlinISO).toBe("2026-02-13T23:59:59+01:00");
 
     const second = await generateWeeklyOutlook({
       regions: ["USA", "EZ", "UK", "JP", "CH", "CA", "AU", "NZ"],
@@ -201,6 +203,8 @@ describe("generateWeeklyOutlook", () => {
     expect(result.events).toHaveLength(0);
     expect(result.days).toHaveLength(5);
     expect(result.renderedText).toBe(expectedText);
+    expect(result.meta.weekStartBerlinISO).toBe("2026-06-29T00:00:00+02:00");
+    expect(result.meta.weekEndBerlinISO).toBe("2026-07-03T23:59:59+02:00");
 
     const friday = result.days.find((day) => day.dayHeader.includes("Freitag, 03. Juli"));
     expect(friday?.note).toBe(NOTE_HOLIDAY);
