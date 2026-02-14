@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { parseScopeSelection, ScopeConflictError } from "@/core/scope";
+import { REGION_ORDER } from "@/core/types";
 
 describe("parseScopeSelection", () => {
   it("parses regions as primary input", () => {
@@ -33,5 +34,19 @@ describe("parseScopeSelection", () => {
     const scope = parseScopeSelection(params);
     expect(scope.regions).toEqual(["USA", "EZ", "UK"]);
     expect(scope.usedDeprecatedCountriesAlias).toBe(true);
+  });
+
+  it("uses all regions by default when no query params are provided", () => {
+    const params = new URLSearchParams("");
+    const scope = parseScopeSelection(params);
+    expect(scope.regions).toEqual(REGION_ORDER);
+    expect(scope.usedDeprecatedCountriesAlias).toBe(false);
+  });
+
+  it("accepts same regions/countries sets even if order differs", () => {
+    const params = new URLSearchParams("regions=USA,EZ,UK&countries=GBP,USD,EUR");
+    const scope = parseScopeSelection(params);
+    expect(scope.regions).toEqual(["USA", "EZ", "UK"]);
+    expect(scope.usedDeprecatedCountriesAlias).toBe(false);
   });
 });

@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { NOTE_NO_VERIFIED } from "@/core/constants";
 import { generateWeeklyOutlook } from "@/server/orchestrator";
 
 const originalSourceMode = process.env.SOURCE_MODE;
@@ -69,5 +70,23 @@ describe("generateWeeklyOutlook", () => {
     expect(result.meta.sourceMode).toBe("live");
     expect(result.meta.sourcesUsed.length).toBeGreaterThan(0);
     expect(result.meta.sourcesUsed.some((source) => source === "investing" || source === "tradingview")).toBe(true);
+  });
+
+  it("uses no fixture fallback in live mode and emits no-verified fallback notes on source failures", async () => {
+    process.env.SOURCE_MODE = "live";
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockRejectedValue(new Error("network down"));
+
+    const result = await generateWeeklyOutlook({
+      regions: ["USA", "EZ"],
+      now: new Date("2026-02-10T10:00:00Z")
+    });
+
+    expect(fetchSpy).toHaveBeenCalledTimes(2);
+    expect(result.meta.sourceMode).toBe("live");
+    expect(result.meta.sourcesUsed).toContain("tertiary");
+    expect(result.events).toHaveLength(0);
+    expect(result.days).toHaveLength(5);
+    expect(result.days.every((day) => day.note === NOTE_NO_VERIFIED)).toBe(true);
+    expect(result.renderedText).toContain(NOTE_NO_VERIFIED);
   });
 });
