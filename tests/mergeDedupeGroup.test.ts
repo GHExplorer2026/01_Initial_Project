@@ -81,4 +81,38 @@ describe("groupForRendering", () => {
     expect(grouped[1].title).toBe("ISM Manufacturing PMI / NFP");
     expect(grouped[1].isTopEvent).toBe(true);
   });
+
+  it("uses REGION_ORDER as tie-breaker when datetime is identical", () => {
+    const grouped = groupForRendering([
+      event({
+        region: "JP",
+        currency: "JPY",
+        titleRaw: "BoJ Rate Decision",
+        titleNormalized: "boj rate decision",
+        categoryAF: "A",
+        datetimeBerlinISO: "2026-02-09T09:00:00",
+        timeHHMM: "09:00"
+      }),
+      event({
+        region: "EZ",
+        currency: "EUR",
+        titleRaw: "GDP (QoQ)",
+        titleNormalized: "gdp (qoq)",
+        categoryAF: "D",
+        datetimeBerlinISO: "2026-02-09T09:00:00",
+        timeHHMM: "09:00"
+      }),
+      event({
+        region: "USA",
+        currency: "USD",
+        titleRaw: "CPI (YoY)",
+        titleNormalized: "cpi (yoy)",
+        categoryAF: "B",
+        datetimeBerlinISO: "2026-02-09T09:00:00",
+        timeHHMM: "09:00"
+      })
+    ]);
+
+    expect(grouped.map((line) => line.region)).toEqual(["USA", "EZ", "JP"]);
+  });
 });
