@@ -7,14 +7,15 @@ Symptom:
 - error mentions `require() of ES Module ... vite/dist/node/index.js`
 
 Observed environment:
-- Node `v18.19.0`
+- Node `v18.19.x`
 - npm `9.2.0`
 
 Recommended paths:
-1. Prefer CI as source of truth (Node 20 runner).
-2. For local runs, use the known-good deterministic check flow in a clean environment:
+1. Use Node `>=20.9.0` (project baseline in `package.json`, `.nvmrc`, `.node-version`).
+2. Prefer CI as source of truth (Node 20 runner).
+3. For local runs, use the deterministic check flow in a clean environment:
    - `TMPDIR=/tmp TMP=/tmp TEMP=/tmp npm run verify`
-3. If local npm cache/permissions are problematic, force writable cache:
+4. If local npm cache/permissions are problematic, force writable cache:
    - `NPM_CONFIG_CACHE=/tmp/npm-cache npm ci --registry=https://registry.npmjs.org/`
 
 ## 2) npm process hangs / no output
