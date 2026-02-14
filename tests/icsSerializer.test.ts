@@ -26,6 +26,8 @@ const sampleEvents: EconomicEvent[] = [
 describe("icsSerializer", () => {
   it("derives deterministic dtstamp from week start berlin midnight", () => {
     expect(deterministicDtstampForWeek("2026-02-09")).toBe("20260208T230000Z");
+    expect(deterministicDtstampForWeek("2026-03-30")).toBe("20260329T220000Z");
+    expect(deterministicDtstampForWeek("2026-07-06")).toBe("20260705T220000Z");
   });
 
   it("creates RFC-like ICS with required category and CRLF", () => {
@@ -108,5 +110,17 @@ describe("icsSerializer", () => {
     expect(uidV101).toHaveLength(2);
     expect(uidV101).not.toEqual(uidV100);
     expect(withOtherParserVersion).toContain("DTSTAMP:20260208T230000Z");
+  });
+
+  it("rolls DTEND across midnight by 15 minutes in local Berlin time", () => {
+    const nearMidnight: EconomicEvent = {
+      ...sampleEvents[0],
+      datetimeBerlinISO: "2026-02-09T23:55:00",
+      timeHHMM: "23:55"
+    };
+
+    const ics = generateIcs([nearMidnight], "2026-02-09", "v1.0.0");
+    expect(ics).toContain("DTSTART;TZID=Europe/Berlin:20260209T235500");
+    expect(ics).toContain("DTEND;TZID=Europe/Berlin:20260210T001000");
   });
 });
