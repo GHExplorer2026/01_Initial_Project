@@ -104,5 +104,7 @@ Date: `2026-02-14`
   - `TZ=Europe/Berlin NODE_OPTIONS=--dns-result-order=ipv4first SOURCE_MODE=live npm run dev`
 
 ## 12. Local Verification
+- Required local runtime:
+  - `node >= 20.9.0` (see `.nvmrc`)
 - Full local quality gate:
   - `TMPDIR=/tmp TMP=/tmp TEMP=/tmp npm run verify`
