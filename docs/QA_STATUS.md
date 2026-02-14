@@ -35,3 +35,4 @@
 - Additional SPEC edge-case tests were added for:
   - weekend week-window resolution in orchestrator
   - empty `regions` parameter with deprecated `countries` alias fallback
+- Release finalized on `main` with tag `v0.1.0`; `origin/fix/source-mode-meta` was deleted after merge.
