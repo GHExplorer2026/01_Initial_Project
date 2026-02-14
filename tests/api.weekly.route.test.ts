@@ -39,6 +39,7 @@ describe("GET /api/weekly", () => {
     expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({ regions: ["USA", "EZ"] });
     expect(payload.meta.sourceMode).toBe("fixtures");
     expect(payload.meta.sourcesUsed).toEqual(["investing", "tradingview"]);
+    expect((payload as unknown as Record<string, unknown>).icsPayload).toBeUndefined();
   });
 
   it("accepts deprecated countries alias when regions is absent", async () => {

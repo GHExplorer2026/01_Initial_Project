@@ -18,6 +18,10 @@ describe("source adapters", () => {
         <td class="left flagCur noWrap">something XXX</td>
         <td class="left event"><a>Ignored Event</a></td>
       </tr>
+      <tr id="eventRowId_3" data-event-datetime="not-a-date">
+        <td class="left flagCur noWrap">something EUR</td>
+        <td class="left event"><a>Ignored Invalid Date</a></td>
+      </tr>
     `;
     vi.spyOn(globalThis, "fetch").mockResolvedValue(
       new Response(JSON.stringify({ data: html }), {
@@ -26,7 +30,7 @@ describe("source adapters", () => {
       })
     );
 
-    const result = await fetchInvestingLiveEvents("2026-02-09", "2026-02-13", ["USA"]);
+    const result = await fetchInvestingLiveEvents("2026-02-09", "2026-02-13", ["USA", "EZ"]);
 
     expect(result.ok).toBe(true);
     expect(result.events).toHaveLength(1);
@@ -47,7 +51,7 @@ describe("source adapters", () => {
     expect(body.get("dateFrom")).toBe("2026-02-09");
     expect(body.get("dateTo")).toBe("2026-02-13");
     expect(body.get("timeFilter")).toBe("timeOnly");
-    expect(body.getAll("country[]")).toEqual(["5"]);
+    expect(body.getAll("country[]")).toEqual(["5", "72"]);
   });
 
   it("returns investing error result for non-ok responses and thrown errors", async () => {
@@ -69,7 +73,8 @@ describe("source adapters", () => {
           status: "ok",
           result: [
             { title: "GDP (QoQ)", currency: "EUR", date: "2026-02-10T10:00:00.000Z" },
-            { title: "Ignored", currency: "XXX", date: "2026-02-10T10:00:00.000Z" }
+            { title: "Ignored", currency: "XXX", date: "2026-02-10T10:00:00.000Z" },
+            { title: "Ignored Missing Date", currency: "EUR" }
           ]
         }),
         { status: 200, headers: { "Content-Type": "application/json" } }
