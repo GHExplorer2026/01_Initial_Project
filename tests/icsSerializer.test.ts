@@ -43,4 +43,44 @@ describe("icsSerializer", () => {
       expect(event).toContain("CATEGORIES:Wirtschafts-Event");
     }
   });
+
+  it("keeps VEVENT mandatory field order and CRLF-only encoding for multi-event output", () => {
+    const ics = generateIcs(
+      [
+        ...sampleEvents,
+        {
+          ...sampleEvents[0],
+          region: "EZ",
+          currency: "EUR",
+          titleRaw:
+            "Gross Domestic Product Final Reading with Extended Description for Folding Validation in Output",
+          titleNormalized:
+            "gross domestic product final reading with extended description for folding validation in output",
+          categoryAF: "D",
+          datetimeBerlinISO: "2026-02-09T15:00:00",
+          timeHHMM: "15:00"
+        }
+      ],
+      "2026-02-09",
+      "v1.0.0"
+    );
+
+    expect(ics.endsWith("\r\n")).toBe(true);
+    expect(ics).not.toMatch(/(^|[^\r])\n/);
+
+    const lines = ics.split("\r\n").filter((line) => line.length > 0);
+    for (const line of lines) {
+      expect(Buffer.byteLength(line, "utf8")).toBeLessThanOrEqual(75);
+    }
+
+    const vevents = ics.split("BEGIN:VEVENT\r\n").slice(1).map((chunk) => `BEGIN:VEVENT\r\n${chunk}`);
+    expect(vevents).toHaveLength(2);
+    for (const event of vevents) {
+      expect(event).toContain("\r\nCATEGORIES:Wirtschafts-Event\r\n");
+      expect(event).toContain("\r\nDTSTAMP:20260208T230000Z\r\n");
+      expect(event).toMatch(
+        /BEGIN:VEVENT\r\nUID:[^\r\n]+\r\nDTSTAMP:[^\r\n]+\r\nDTSTART;TZID=Europe\/Berlin:[^\r\n]+\r\nDTEND;TZID=Europe\/Berlin:[^\r\n]+\r\nSUMMARY:/
+      );
+    }
+  });
 });
