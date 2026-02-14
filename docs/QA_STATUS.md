@@ -13,7 +13,7 @@
   - `lint`: pass
   - `typecheck`: pass
   - `build`: pass
-  - Current passing tests: `82`
+  - Current passing tests: `85`
 
 ## Test Coverage Focus (SPEC-critical)
 - Strict DE output formatting (headers, notes, TOP suffix)

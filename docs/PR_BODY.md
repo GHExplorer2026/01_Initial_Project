@@ -11,7 +11,7 @@
 ## Validation
 - `npm run verify` passes.
 - CI workflows include explicit `unit` + `snapshot` + `lint` + `typecheck` + `build`.
-- Current passing tests: `82`.
+- Current passing tests: `85`.
 
 ## Compare
 - https://github.com/GHExplorer2026/01_Initial_Project/compare/main...fix/source-mode-meta
