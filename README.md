@@ -85,6 +85,7 @@ Date: `2026-02-14`
 - PR Summary: `docs/PR_SUMMARY.md`
 - PR Body: `docs/PR_BODY.md`
 - Troubleshooting: `docs/TROUBLESHOOTING.md`
+- Contributing: `CONTRIBUTING.md`
 - Skills root: `skills/`
 
 ## 10. Build vs Runtime Network Requirements
