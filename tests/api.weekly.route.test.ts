@@ -42,6 +42,15 @@ describe("GET /api/weekly", () => {
     expect((payload as unknown as Record<string, unknown>).icsPayload).toBeUndefined();
   });
 
+  it("does not conflict when countries has invalid extras and regions are valid", async () => {
+    mockedGenerateWeeklyOutlook.mockResolvedValue(buildWeeklyOutput());
+
+    const response = await GET(new Request("http://localhost/api/weekly?regions=USA,EZ&countries=USD,EUR,XXX"));
+
+    expect(response.status).toBe(200);
+    expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({ regions: ["USA", "EZ"] });
+  });
+
   it("accepts deprecated countries alias when regions is absent", async () => {
     mockedGenerateWeeklyOutlook.mockResolvedValue(buildWeeklyOutput());
 

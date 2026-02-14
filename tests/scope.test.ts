@@ -29,6 +29,13 @@ describe("parseScopeSelection", () => {
     expect(scope.usedDeprecatedCountriesAlias).toBe(false);
   });
 
+  it("keeps primary regions when deprecated countries contain invalid extras", () => {
+    const params = new URLSearchParams("regions=USA,EZ&countries=USD,EUR,XXX");
+    const scope = parseScopeSelection(params);
+    expect(scope.regions).toEqual(["USA", "EZ"]);
+    expect(scope.usedDeprecatedCountriesAlias).toBe(false);
+  });
+
   it("drops invalid and duplicate deprecated countries values", () => {
     const params = new URLSearchParams("countries=USD,USD,EUR,XXX,GBP");
     const scope = parseScopeSelection(params);
