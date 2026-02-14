@@ -4,8 +4,9 @@ FROM node:20-alpine AS deps
 WORKDIR /app
 ARG NPM_CONFIG_REGISTRY=https://registry.npmjs.org/
 ENV NPM_CONFIG_REGISTRY=${NPM_CONFIG_REGISTRY}
+ENV NPM_CONFIG_LEGACY_PEER_DEPS=true
 COPY package.json package-lock.json* ./
-RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
+RUN if [ -f package-lock.json ]; then npm ci --legacy-peer-deps; else npm install; fi
 
 FROM node:20-alpine AS builder
 WORKDIR /app

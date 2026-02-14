@@ -25,6 +25,7 @@ jobs:
       NPM_CONFIG_FETCH_RETRIES: "5"
       NPM_CONFIG_FETCH_RETRY_MINTIMEOUT: "20000"
       NPM_CONFIG_FETCH_RETRY_MAXTIMEOUT: "120000"
+      NPM_CONFIG_LEGACY_PEER_DEPS: "true"
 
     steps:
       - name: Checkout target ref (manual)
@@ -45,7 +46,7 @@ jobs:
       - name: Install dependencies (retry)
         run: |
           for attempt in 1 2 3; do
-            npm ci --registry="$NPM_CONFIG_REGISTRY" && exit 0
+            npm ci --legacy-peer-deps --registry="$NPM_CONFIG_REGISTRY" && exit 0
             echo "npm ci failed (attempt ${attempt}/3), retrying..."
             sleep 5
           done
