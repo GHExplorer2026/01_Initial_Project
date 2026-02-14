@@ -105,6 +105,6 @@ Date: `2026-02-14`
 
 ## 12. Local Verification
 - Required local runtime:
-  - `node >= 20.9.0` (see `.nvmrc`)
+  - `node >= 20.9.0` (see `.nvmrc` / `.node-version`)
 - Full local quality gate:
   - `TMPDIR=/tmp TMP=/tmp TEMP=/tmp npm run verify`
