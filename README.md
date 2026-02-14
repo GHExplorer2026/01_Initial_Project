@@ -65,6 +65,7 @@ Date: `2026-02-14`
 | P-024 | 2026-02-14 | v0.1.1 | CI smoke gate | Extended `Release Gate` workflow to start app and execute smoke API checks with log artifacts | Completed | `.github/workflows/release-gate.yml`, `scripts/smoke_api.sh` | Codex |
 | P-025 | 2026-02-14 | v0.1.1 | Release evidence | Added structured evidence template for final gate closure and tag readiness | Completed | `docs/V0_1_1_EVIDENCE.md` | Codex |
 | P-026 | 2026-02-14 | v0.1.1 | Gate evidence | Recorded successful local Node-20 `verify:release` evidence (`92/92` tests) | Completed | `docs/V0_1_1_EVIDENCE.md` | Codex |
+| P-027 | 2026-02-14 | v0.1.1 | Gate traceability | Release Gate workflow now auto-commits a success marker JSON on pass | Completed | `.github/workflows/release-gate.yml`, `docs/release-gate-last-success.json` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -101,6 +102,7 @@ Date: `2026-02-14`
 - Next Plan: `docs/V0_1_1_PLAN.md`
 - Next Release Draft: `docs/V0_1_1_RELEASE_DRAFT.md`
 - Next Release Evidence: `docs/V0_1_1_EVIDENCE.md`
+- Release Gate Marker: `docs/release-gate-last-success.json`
 - Architecture: `ARCHITECTURE.md`
 - QA Status: `docs/QA_STATUS.md`
 - PR Summary: `docs/PR_SUMMARY.md`

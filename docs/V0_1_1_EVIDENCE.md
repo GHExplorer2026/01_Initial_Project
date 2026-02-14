@@ -29,8 +29,10 @@ Track concrete evidence for closing `v0.1.1` release gates (`T-103`, `T-104`).
 - Artifacts:
   - `release-gate-test-reports`
   - `release-gate-app.log`
- - Trigger note:
+- Trigger note:
   - This evidence update commit triggers a new `Release Gate` run automatically.
+- Success marker file (auto-committed by workflow on pass):
+  - `docs/release-gate-last-success.json`
 
 ### 3) API Smoke Confirmation
 - Script:

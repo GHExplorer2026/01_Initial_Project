@@ -3,6 +3,8 @@ name: Release Gate
 on:
   push:
     branches: ["main"]
+    paths-ignore:
+      - "docs/release-gate-last-success.json"
   workflow_dispatch:
     inputs:
       target_ref:
@@ -13,6 +15,8 @@ on:
 jobs:
   verify-release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       NPM_CONFIG_REGISTRY: https://registry.npmjs.org/
       NODE_OPTIONS: --dns-result-order=ipv4first
@@ -65,3 +69,27 @@ jobs:
           path: |
             artifacts/*.xml
             /tmp/release-gate-app.log
+
+      - name: Record release gate success marker
+        if: success()
+        run: |
+          mkdir -p docs
+          cat > docs/release-gate-last-success.json <<EOF
+          {
+            "workflow": "Release Gate",
+            "status": "success",
+            "run_id": "${{ github.run_id }}",
+            "run_attempt": "${{ github.run_attempt }}",
+            "sha": "${{ github.sha }}",
+            "ref": "${{ github.ref_name }}",
+            "recorded_at_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "run_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          }
+          EOF
+
+      - name: Commit release gate marker
+        if: success()
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(ci): record release gate success marker [skip release-gate]"
+          file_pattern: docs/release-gate-last-success.json
