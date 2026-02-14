@@ -39,6 +39,8 @@ Status: In Progress
 3. No snapshot drift in strict text or ICS.
 
 ## W2 Deterministic Metadata and Error Taxonomy
+Status: In Progress
+
 1. Standardize structured server-side error categories (fetch, parse, timezone, governance).
 2. Verify fallback note behavior remains canonical for each day case.
 3. Ensure `meta.sourceMode`/`meta.sourcesUsed` remain always present and deterministic.
