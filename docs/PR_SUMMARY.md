@@ -42,6 +42,9 @@
   - source priority behavior, tertiary trigger/non-trigger, fallback note behavior, strict line formatting.
 - ICS:
   - CRLF/folding, mandatory VEVENT fields, deterministic UID/DTSTAMP, midnight boundary.
+- Additional edge cases:
+  - orchestrator weekend run resolves to upcoming Monday-Friday window
+  - API/scope fallback when `regions` is present but empty and `countries` alias is valid
 
 ## Documentation Added/Updated
 - `ARCHITECTURE.md`

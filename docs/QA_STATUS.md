@@ -32,3 +32,6 @@
 - Local consolidated check is available via `npm run verify`.
 - Local verification requires Node `>=20.9.0`; CI remains source of truth when local runner is below baseline.
 - `next build` generated updates were committed (`tsconfig.json`, `next-env.d.ts`) to keep repository and build output aligned.
+- Additional SPEC edge-case tests were added for:
+  - weekend week-window resolution in orchestrator
+  - empty `regions` parameter with deprecated `countries` alias fallback
