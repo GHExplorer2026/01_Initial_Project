@@ -22,15 +22,18 @@ describe("generateWeeklyOutlook", () => {
     const expectedText = readFileSync(path.join(process.cwd(), "tests/fixtures/golden/orchestrator_weekly.txt"), "utf8");
 
     expect(result.renderedText).toBe(expectedText);
-    expect(result.renderedText).toContain(" - **TOP-EVENT**");
+    const topLines = result.renderedText
+      .split("\n")
+      .filter((line) => line.includes("TOP-EVENT"));
+    expect(topLines.length).toBeGreaterThan(0);
+    expect(topLines.every((line) => line.endsWith(" - **TOP-EVENT**"))).toBe(true);
     expect(result.renderedText).not.toContain("http://");
     expect(result.renderedText).not.toContain("https://");
 
     expect(result.icsPayload).toContain("CATEGORIES:Wirtschafts-Event");
     expect(result.icsPayload).toContain("DTSTAMP:20260208T230000Z");
     expect(result.meta.sourceMode).toBe("fixtures");
-    expect(result.meta.sourcesUsed).toContain("investing");
-    expect(result.meta.sourcesUsed).toContain("tradingview");
+    expect(result.meta.sourcesUsed).toEqual(["investing", "tradingview", "tertiary:bls"]);
 
     const second = await generateWeeklyOutlook({
       regions: ["USA", "EZ", "UK", "JP", "CH", "CA", "AU", "NZ"],
@@ -83,7 +86,7 @@ describe("generateWeeklyOutlook", () => {
 
     expect(fetchSpy).toHaveBeenCalledTimes(2);
     expect(result.meta.sourceMode).toBe("live");
-    expect(result.meta.sourcesUsed).toContain("tertiary");
+    expect(result.meta.sourcesUsed).toEqual(["tertiary"]);
     expect(result.events).toHaveLength(0);
     expect(result.days).toHaveLength(5);
     expect(result.days.every((day) => day.note === NOTE_NO_VERIFIED)).toBe(true);
@@ -97,10 +100,15 @@ describe("generateWeeklyOutlook", () => {
       regions: ["USA"],
       now: new Date("2026-07-01T10:00:00Z")
     });
+    const expectedText = readFileSync(
+      path.join(process.cwd(), "tests/fixtures/golden/orchestrator_weekly_holiday_fallback.txt"),
+      "utf8"
+    );
 
     expect(result.meta.sourceMode).toBe("fixtures");
     expect(result.events).toHaveLength(0);
     expect(result.days).toHaveLength(5);
+    expect(result.renderedText).toBe(expectedText);
 
     const friday = result.days.find((day) => day.dayHeader.includes("Freitag, 03. Juli"));
     expect(friday?.note).toBe(NOTE_HOLIDAY);

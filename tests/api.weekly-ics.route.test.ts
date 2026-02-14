@@ -42,6 +42,15 @@ describe("GET /api/weekly.ics", () => {
     expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({ regions: ["USA", "EZ"] });
   });
 
+  it("accepts deprecated countries alias when regions is absent", async () => {
+    mockedGenerateWeeklyOutlook.mockResolvedValue(buildWeeklyOutput());
+
+    const response = await GET(new Request("http://localhost/api/weekly.ics?countries=USD,EUR"));
+
+    expect(response.status).toBe(200);
+    expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({ regions: ["USA", "EZ"] });
+  });
+
   it("returns 400 on regions/countries conflict", async () => {
     const response = await GET(new Request("http://localhost/api/weekly.ics?regions=USA&countries=EUR"));
     const body = await response.text();
@@ -70,5 +79,16 @@ describe("GET /api/weekly.ics", () => {
 
     expect(response.status).toBe(200);
     expect(response.headers.get("Content-Disposition")).toBe('attachment; filename="Wochenausblick_2026-03-16.ics"');
+  });
+
+  it("uses full region scope when no query parameter is provided", async () => {
+    mockedGenerateWeeklyOutlook.mockResolvedValue(buildWeeklyOutput());
+
+    const response = await GET(new Request("http://localhost/api/weekly.ics"));
+
+    expect(response.status).toBe(200);
+    expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({
+      regions: ["USA", "EZ", "UK", "JP", "CH", "CA", "AU", "NZ"]
+    });
   });
 });
