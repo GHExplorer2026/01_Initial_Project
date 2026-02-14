@@ -9,12 +9,15 @@
 - Added guaranteed API meta fields:
   - `meta.sourceMode`
   - `meta.sourcesUsed`
+- Standardized `meta.sourcesUsed` semantics to always include primary adapters (`investing`, `tradingview`) and append tertiary entries when invoked.
 - Enforced centralized source mode switching in orchestrator (`fixtures` default, `live` optional).
 - Kept strict output and ICS contracts unchanged while expanding verification depth.
 - Added dynamic Europe/Berlin offset handling for:
   - `meta.weekStartBerlinISO`
   - `meta.weekEndBerlinISO`
 - Extended CI with explicit snapshot gate.
+- Enforced deterministic dependency install path in CI (`npm ci` only).
+- Declared Node 20 project baseline (`.nvmrc`, `.node-version`, `engines.node`).
 
 ## Quality Gates
 - Local deterministic gate:
