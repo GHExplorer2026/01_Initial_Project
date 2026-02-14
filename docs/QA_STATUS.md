@@ -1,8 +1,8 @@
 # QA_STATUS.md
 
 ## Current Branch
-- Branch: `fix/source-mode-meta`
-- Baseline: rebased on `origin/main`
+- Branch: `main` (post-merge from `fix/source-mode-meta`)
+- Baseline: synced with `origin/main`
 
 ## Latest Deterministic Gate Run
 - Command:
