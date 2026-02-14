@@ -8,7 +8,7 @@
 
 ## Required Final Gates (Before Tag)
 1. Node-20 local verify:
-   - `npm run verify`
+   - `npm run verify:release`
 2. CI green on `main`:
    - `lint`, `typecheck`, `unit`, `snapshot`, `build`
 3. Manual API smoke:
