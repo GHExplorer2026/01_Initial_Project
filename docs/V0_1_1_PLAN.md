@@ -24,6 +24,8 @@ Deliver a SPEC-safe hardening increment (`v0.1.1`) on top of `v0.1.0` without ch
 ## Workstreams
 
 ## W1 Parser and Fixture Hardening
+Status: In Progress
+
 1. Add fixture variants for Investing and TradingView parser edge markup:
    - missing/shifted columns
    - mixed whitespace/title variants
