@@ -6,11 +6,12 @@
     "verify": "success",
     "smoke": "failure"
   },
-  "run_id": "22022057578",
+  "run_id": "22022090798",
   "run_attempt": "1",
-  "sha": "101662b386d79827d9d55de1ba8d59e3732952e7",
+  "sha": "f2882049f99efb569ec275eaf138a5eaf63e920e",
   "ref": "main",
-  "recorded_at_utc": "2026-02-14T18:17:08Z",
-  "run_url": "https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22022057578",
-  "smoke_log_tail_b64": "4payIE5leHQuanMgMTYuMS42Ci0gTG9jYWw6ICAgICAgICAgaHR0cDovLzEyNy4wLjAuMTozMDAwCi0gTmV0d29yazogICAgICAgaHR0cDovLzEyNy4wLjAuMTozMDAwCgrinJMgU3RhcnRpbmcuLi4K4pyTIFJlYWR5IGluIDY3bXMK"
+  "recorded_at_utc": "2026-02-14T18:19:47Z",
+  "run_url": "https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22022090798",
+  "smoke_log_tail_b64": "4payIE5leHQuanMgMTYuMS42Ci0gTG9jYWw6ICAgICAgICAgaHR0cDovLzEyNy4wLjAuMTozMDAwCi0gTmV0d29yazogICAgICAgaHR0cDovLzEyNy4wLjAuMTozMDAwCgrinJMgU3RhcnRpbmcuLi4K4pyTIFJlYWR5IGluIDY3bXMK",
+  "smoke_check_tail_b64": "L2hvbWUvcnVubmVyL3dvcmsvX3RlbXAvYTEyZWM2M2UtMjM3ZS00ZGQ3LWI2ODAtZTU4MGRiYTY5MTgzLnNoOiBsaW5lIDIwOiBzY3JpcHRzL3Ntb2tlX2FwaS5zaDogUGVybWlzc2lvbiBkZW5pZWQK"
 }
