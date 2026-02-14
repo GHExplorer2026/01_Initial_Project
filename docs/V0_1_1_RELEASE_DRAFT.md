@@ -17,6 +17,9 @@
 2. Release Gate workflow evidence on `main`:
    - workflow conclusion must be `success`
    - artifact bundle must be present
+   - local deterministic marker check:
+     - `npm run check:release-gate`
+     - pass requires `status=success` and marker `sha == HEAD`
    - status:
      - `BLOCKED FROM AGENT` (run URL/artifacts cannot be read via API DNS in current shell)
 3. Invariant checks:

@@ -34,6 +34,9 @@ Track concrete evidence for closing `v0.1.1` release gates (`T-103`, `T-104`).
   - This evidence update commit triggers a new `Release Gate` run automatically.
 - Success marker file (auto-committed by workflow on pass):
   - `docs/release-gate-last-success.json`
+- Deterministic local validator:
+  - `npm run check:release-gate`
+  - Pass criterion: marker has `status=success` and `sha` equals current `HEAD`.
  - Manual fallback:
   - open `https://github.com/GHExplorer2026/01_Initial_Project/actions/workflows/release-gate.yml`
   - copy latest successful run URL and paste it here
