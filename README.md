@@ -72,6 +72,7 @@ Date: `2026-02-14`
 | P-031 | 2026-02-14 | v0.1.1 | CI robustness | Added dual-registry install fallback and pinned Node `20.20.0` in all workflows; improved release-gate smoke startup diagnostics | Completed | `.github/workflows/*.yml` | Codex |
 | P-032 | 2026-02-14 | v0.1.1 | Gate observability | Added per-step outcomes (`install`/`verify`/`smoke`) to release-gate marker for deterministic failure diagnosis | Completed | `.github/workflows/release-gate.yml`, `docs/release-gate-last-success.json` | Codex |
 | P-033 | 2026-02-14 | v0.1.1 | Smoke stability | Hardened `scripts/smoke_api.sh` content-type validation and added response diagnostics for faster gate-failure triage | Completed | `scripts/smoke_api.sh` | Codex |
+| P-034 | 2026-02-14 | v0.1.1 | Marker reliability | Replaced marker auto-commit action with explicit git commit/push retries and added smoke log tail to marker JSON | Completed | `.github/workflows/release-gate.yml`, `docs/V0_1_1_EVIDENCE.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |

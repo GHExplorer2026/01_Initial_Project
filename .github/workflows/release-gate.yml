@@ -12,6 +12,10 @@ on:
         required: false
         default: "main"
 
+concurrency:
+  group: release-gate-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   verify-release:
     runs-on: ubuntu-latest
@@ -123,6 +127,10 @@ jobs:
         if: always()
         run: |
           mkdir -p docs
+          smoke_log_tail_b64=""
+          if [ -f /tmp/release-gate-app.log ]; then
+            smoke_log_tail_b64="$(tail -n 120 /tmp/release-gate-app.log | base64 -w 0)"
+          fi
           cat > docs/release-gate-last-success.json <<EOF
           {
             "workflow": "Release Gate",
@@ -137,13 +145,37 @@ jobs:
             "sha": "${{ github.sha }}",
             "ref": "${{ github.ref_name }}",
             "recorded_at_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-            "run_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            "run_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+            "smoke_log_tail_b64": "${smoke_log_tail_b64}"
           }
           EOF
 
       - name: Commit release gate marker
         if: always()
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore(ci): record release gate marker [skip release-gate]"
-          file_pattern: docs/release-gate-last-success.json
+        env:
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet -- docs/release-gate-last-success.json; then
+            echo "No marker changes to commit."
+            exit 0
+          fi
+
+          git add docs/release-gate-last-success.json
+          git commit -m "chore(ci): record release gate marker [skip release-gate]"
+
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:${REF_NAME}"; then
+              echo "Marker push succeeded (attempt ${attempt})."
+              exit 0
+            fi
+            echo "Marker push failed (attempt ${attempt}), retrying with rebase..."
+            git fetch origin "${REF_NAME}"
+            git rebase "origin/${REF_NAME}"
+          done
+
+          echo "Failed to push release gate marker after retries."
+          exit 1
