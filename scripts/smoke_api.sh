@@ -19,10 +19,32 @@ echo "[smoke] ics: ${ics_url}"
 headers_file="$(mktemp)"
 body_file="$(mktemp)"
 curl -fsS -D "${headers_file}" "${ics_url}" -o "${body_file}"
-grep -qi '^content-type: text/calendar; charset=utf-8' "${headers_file}" || { echo "invalid ICS content-type"; exit 1; }
-grep -q $'\r' "${body_file}" || { echo "ICS is missing CRLF bytes"; exit 1; }
-grep -q 'BEGIN:VCALENDAR' "${body_file}" || { echo "missing VCALENDAR"; exit 1; }
-grep -q 'CATEGORIES:Wirtschafts-Event' "${body_file}" || { echo "missing required category"; exit 1; }
+content_type_line="$(
+  awk 'BEGIN{IGNORECASE=1} /^content-type:/ { sub(/\r$/, "", $0); print tolower($0) }' "${headers_file}" | tail -n1
+)"
+if [[ -z "${content_type_line}" ]] || [[ "${content_type_line}" != content-type:*text/calendar* ]] || [[ "${content_type_line}" != *charset=utf-8* ]]; then
+  echo "invalid ICS content-type: ${content_type_line:-<missing>}"
+  echo "--- response headers ---"
+  cat "${headers_file}"
+  exit 1
+fi
+
+grep -q $'\r' "${body_file}" || {
+  echo "ICS is missing CRLF bytes"
+  echo "--- ICS preview ---"
+  sed -n '1,40p' "${body_file}"
+  exit 1
+}
+grep -q 'BEGIN:VCALENDAR' "${body_file}" || {
+  echo "missing VCALENDAR"
+  sed -n '1,40p' "${body_file}"
+  exit 1
+}
+grep -q 'CATEGORIES:Wirtschafts-Event' "${body_file}" || {
+  echo "missing required category"
+  sed -n '1,80p' "${body_file}"
+  exit 1
+}
 echo "[smoke] ics ok"
 
 rm -f "${headers_file}" "${body_file}"
