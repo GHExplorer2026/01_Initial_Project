@@ -60,4 +60,15 @@ describe("GET /api/weekly.ics", () => {
     expect(response.status).toBe(500);
     expect(body).toBe("failed to generate ics");
   });
+
+  it("derives attachment filename from meta.weekStartBerlinISO", async () => {
+    const output = buildWeeklyOutput();
+    output.meta.weekStartBerlinISO = "2026-03-16T00:00:00+01:00";
+    mockedGenerateWeeklyOutlook.mockResolvedValue(output);
+
+    const response = await GET(new Request("http://localhost/api/weekly.ics?regions=USA"));
+
+    expect(response.status).toBe(200);
+    expect(response.headers.get("Content-Disposition")).toBe('attachment; filename="Wochenausblick_2026-03-16.ics"');
+  });
 });

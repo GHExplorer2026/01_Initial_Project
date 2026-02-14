@@ -33,11 +33,12 @@ describe("GET /api/weekly", () => {
     mockedGenerateWeeklyOutlook.mockResolvedValue(buildWeeklyOutput());
 
     const response = await GET(new Request("http://localhost/api/weekly?regions=USA,EZ&countries=USD,EUR"));
-    const payload = (await response.json()) as Record<string, unknown>;
+    const payload = (await response.json()) as WeeklyOutput;
 
     expect(response.status).toBe(200);
     expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({ regions: ["USA", "EZ"] });
-    expect(payload.meta).toBeDefined();
+    expect(payload.meta.sourceMode).toBe("fixtures");
+    expect(payload.meta.sourcesUsed).toEqual(["investing", "tradingview"]);
   });
 
   it("accepts deprecated countries alias when regions is absent", async () => {
@@ -66,5 +67,16 @@ describe("GET /api/weekly", () => {
 
     expect(response.status).toBe(500);
     expect(payload.error).toBe("failed to generate weekly outlook");
+  });
+
+  it("uses full region scope when no query parameter is provided", async () => {
+    mockedGenerateWeeklyOutlook.mockResolvedValue(buildWeeklyOutput());
+
+    const response = await GET(new Request("http://localhost/api/weekly"));
+
+    expect(response.status).toBe(200);
+    expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({
+      regions: ["USA", "EZ", "UK", "JP", "CH", "CA", "AU", "NZ"]
+    });
   });
 });
