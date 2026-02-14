@@ -19,7 +19,10 @@ const buildQuery = (weekStart: string, weekEnd: string): URLSearchParams => {
 };
 
 const parseTradingViewEvent = (event: TradingViewEvent): RawSourceEvent | null => {
-  if (!event.title || !event.currency || !event.date || !ALLOWED_CURRENCIES.has(event.currency)) {
+  const title = event.title?.trim();
+  const currency = event.currency?.trim().toUpperCase();
+
+  if (!title || !currency || !event.date || !ALLOWED_CURRENCIES.has(currency)) {
     return null;
   }
 
@@ -32,8 +35,8 @@ const parseTradingViewEvent = (event: TradingViewEvent): RawSourceEvent | null =
 
   return {
     source: "tradingview",
-    currency: event.currency as CurrencyCode,
-    title: event.title.trim(),
+    currency: currency as CurrencyCode,
+    title,
     date: berlin.date,
     time: berlin.time,
     fetchedAtISO: new Date().toISOString()

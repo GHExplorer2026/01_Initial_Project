@@ -141,6 +141,33 @@ describe("source adapters", () => {
     expect(badStatus.error).toBe("tradingview live response status is not ok");
   });
 
+  it("normalizes tradingview currency/title and excludes invalid or empty values", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response(
+        JSON.stringify({
+          status: "ok",
+          result: [
+            { title: "  Retail Sales  ", currency: " usd ", date: "2026-02-11T13:30:00.000Z" },
+            { title: "   ", currency: "EUR", date: "2026-02-11T10:00:00.000Z" },
+            { title: "GDP", currency: " eur ", date: "invalid-date" }
+          ]
+        }),
+        { status: 200, headers: { "Content-Type": "application/json" } }
+      )
+    );
+
+    const result = await fetchTradingViewLiveEvents("2026-02-09", "2026-02-13", ["USA", "EZ"]);
+    expect(result.ok).toBe(true);
+    expect(result.events).toHaveLength(1);
+    expect(result.events[0]).toMatchObject({
+      source: "tradingview",
+      currency: "USD",
+      title: "Retail Sales",
+      date: "2026-02-11",
+      time: "14:30"
+    });
+  });
+
   it("returns tradingview errors for non-ok responses and thrown errors", async () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(new Response("{}", { status: 500 }));
     const nonOk = await fetchTradingViewLiveEvents("2026-02-09", "2026-02-13", ["USA"]);
