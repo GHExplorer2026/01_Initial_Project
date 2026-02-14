@@ -1,7 +1,12 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { fetchInvestingLiveEvents } from "@/server/sources/investing";
 import { fetchApprovedTertiaryFixtureEvents, fetchApprovedTertiaryLiveEvents } from "@/server/sources/tertiary/approved";
 import { fetchTradingViewLiveEvents } from "@/server/sources/tradingview";
+
+const sourceFixture = (name: string): string =>
+  readFileSync(path.join(process.cwd(), "tests", "fixtures", "sources", name), "utf8");
 
 afterEach(() => {
   vi.restoreAllMocks();
@@ -55,16 +60,7 @@ describe("source adapters", () => {
   });
 
   it("parses investing rows with flexible quoting, attribute order and non-anchor event cells", async () => {
-    const html = `
-      <tr class='js-event-item' data-event-datetime='2026/02/10 10:00:00' id='eventRowId_10'>
-        <td class='left noWrap flagCur'>x usd</td>
-        <td class='left event'> <span> GDP (QoQ) </span> </td>
-      </tr>
-      <tr data-event-datetime='2026/02/10 11:30:00' id='eventRowId_11'>
-        <td class='left flagCur noWrap'>x EUR</td>
-        <td class='left event'><a><span>ISM Manufacturing PMI</span></a></td>
-      </tr>
-    `;
+    const html = sourceFixture("investing_drift_rows.html");
     vi.spyOn(globalThis, "fetch").mockResolvedValue(
       new Response(JSON.stringify({ data: html }), {
         status: 200,
@@ -142,18 +138,9 @@ describe("source adapters", () => {
   });
 
   it("normalizes tradingview currency/title and excludes invalid or empty values", async () => {
+    const payload = sourceFixture("tradingview_drift_payload.json");
     vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
-      new Response(
-        JSON.stringify({
-          status: "ok",
-          result: [
-            { title: "  Retail Sales  ", currency: " usd ", date: "2026-02-11T13:30:00.000Z" },
-            { title: "   ", currency: "EUR", date: "2026-02-11T10:00:00.000Z" },
-            { title: "GDP", currency: " eur ", date: "invalid-date" }
-          ]
-        }),
-        { status: 200, headers: { "Content-Type": "application/json" } }
-      )
+      new Response(payload, { status: 200, headers: { "Content-Type": "application/json" } })
     );
 
     const result = await fetchTradingViewLiveEvents("2026-02-09", "2026-02-13", ["USA", "EZ"]);

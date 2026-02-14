@@ -30,6 +30,10 @@ Status: In Progress
    - missing/shifted columns
    - mixed whitespace/title variants
    - malformed timestamps
+   Progress:
+   - Added fixture-based parser drift cases:
+     - `tests/fixtures/sources/investing_drift_rows.html`
+     - `tests/fixtures/sources/tradingview_drift_payload.json`
 2. Add explicit tests that malformed events are excluded (not guessed).
 3. Keep `uncertain => exclude` behavior unchanged and fully covered.
 
