@@ -60,4 +60,21 @@ describe("normalizeEvents", () => {
     expect(normalized[0].provenance.parserVersion).toBe("v1.0.0");
     expect(normalized[0].provenance.sourceUrlHash).toBe("abc123");
   });
+
+  it("excludes raw events when neither region nor currency can be resolved", () => {
+    const normalized = normalizeEvents(
+      [
+        {
+          source: "investing",
+          title: "CPI (YoY)",
+          date: "2026-02-09",
+          time: "14:30",
+          fetchedAtISO: "2026-02-08T08:00:00Z"
+        }
+      ],
+      "v1.0.0"
+    );
+
+    expect(normalized).toEqual([]);
+  });
 });
