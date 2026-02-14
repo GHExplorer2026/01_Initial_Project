@@ -18,3 +18,6 @@
 
 ## Compare
 - https://github.com/GHExplorer2026/01_Initial_Project/compare/main...fix/source-mode-meta
+
+## Merge Runbook
+- `docs/MERGE_STEPS.md`
