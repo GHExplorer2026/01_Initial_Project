@@ -29,6 +29,12 @@ describe("generateWeeklyOutlook", () => {
     expect(topLines.every((line) => line.endsWith(" - **TOP-EVENT**"))).toBe(true);
     expect(result.renderedText).not.toContain("http://");
     expect(result.renderedText).not.toContain("https://");
+    const eventLines = result.renderedText
+      .split("\n")
+      .filter((line) => /^\d{2}:\d{2} Uhr: /.test(line));
+    expect(eventLines.length).toBeGreaterThan(0);
+    expect(eventLines.every((line) => /^\d{2}:\d{2} Uhr: .+/.test(line))).toBe(true);
+    expect(eventLines.every((line) => !line.endsWith(" "))).toBe(true);
 
     expect(result.icsPayload).toContain("CATEGORIES:Wirtschafts-Event");
     expect(result.icsPayload).toContain("DTSTAMP:20260208T230000Z");
