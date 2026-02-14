@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { NOTE_NO_VERIFIED } from "@/core/constants";
+import { NOTE_HOLIDAY, NOTE_NO_VERIFIED } from "@/core/constants";
 import { generateWeeklyOutlook } from "@/server/orchestrator";
 
 const originalSourceMode = process.env.SOURCE_MODE;
@@ -88,5 +88,23 @@ describe("generateWeeklyOutlook", () => {
     expect(result.days).toHaveLength(5);
     expect(result.days.every((day) => day.note === NOTE_NO_VERIFIED)).toBe(true);
     expect(result.renderedText).toContain(NOTE_NO_VERIFIED);
+  });
+
+  it("renders holiday fallback note on holiday workdays when no events remain after filtering", async () => {
+    delete process.env.SOURCE_MODE;
+
+    const result = await generateWeeklyOutlook({
+      regions: ["USA"],
+      now: new Date("2026-07-01T10:00:00Z")
+    });
+
+    expect(result.meta.sourceMode).toBe("fixtures");
+    expect(result.events).toHaveLength(0);
+    expect(result.days).toHaveLength(5);
+
+    const friday = result.days.find((day) => day.dayHeader.includes("Freitag, 03. Juli"));
+    expect(friday?.note).toBe(NOTE_HOLIDAY);
+    expect(result.renderedText).toContain("### Freitag, 03. Juli");
+    expect(result.renderedText).toContain(NOTE_HOLIDAY);
   });
 });
