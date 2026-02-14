@@ -1,10 +1,15 @@
 {
   "workflow": "Release Gate",
   "status": "failure",
-  "run_id": "22021926137",
+  "step_outcomes": {
+    "install": "success",
+    "verify": "success",
+    "smoke": "failure"
+  },
+  "run_id": "22021945426",
   "run_attempt": "1",
-  "sha": "83745e7ddd86de951e4081920d865e01fc887fe9",
+  "sha": "b1229381620915ecd18f9b6dbf578d3ba594855d",
   "ref": "main",
-  "recorded_at_utc": "2026-02-14T18:07:31Z",
-  "run_url": "https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22021926137"
+  "recorded_at_utc": "2026-02-14T18:08:56Z",
+  "run_url": "https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22021945426"
 }
