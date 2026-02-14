@@ -47,4 +47,12 @@ describe("applyHolidayFilter", () => {
     expect(filteredEvents).toHaveLength(0);
     expect(dayStatus["2026-02-14"].isWeekend).toBe(true);
   });
+
+  it("does not trigger holiday flag when holiday region is not selected", () => {
+    const { dayStatus } = applyHolidayFilter([], ["2026-07-03"], ["UK"]);
+    expect(dayStatus["2026-07-03"].holidayTriggered).toBe(false);
+
+    const withUsa = applyHolidayFilter([], ["2026-07-03"], ["USA"]);
+    expect(withUsa.dayStatus["2026-07-03"].holidayTriggered).toBe(true);
+  });
 });

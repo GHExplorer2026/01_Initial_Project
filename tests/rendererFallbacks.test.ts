@@ -40,4 +40,14 @@ describe("renderStrictWeeklyText fallback notes", () => {
     );
     expect(out).toContain(NOTE_NO_VERIFIED);
   });
+
+  it("prioritizes weekend/holiday note when both flags are true", () => {
+    const out = renderSingleDay(
+      "2026-12-26",
+      { holidayTriggered: true, isWeekend: true, verificationFailed: false },
+      true
+    );
+    expect(out).toContain(NOTE_WEEKEND_OR_HOLIDAY);
+    expect(out).not.toContain(NOTE_HOLIDAY);
+  });
 });
