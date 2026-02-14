@@ -77,4 +77,11 @@ describe("parseScopeSelection", () => {
     expect(scope.regions).toEqual(["USA", "EZ"]);
     expect(scope.usedDeprecatedCountriesAlias).toBe(true);
   });
+
+  it("falls back to full region set when both regions and countries are invalid", () => {
+    const params = new URLSearchParams("regions=foo,bar&countries=aaa,bbb");
+    const scope = parseScopeSelection(params);
+    expect(scope.regions).toEqual(REGION_ORDER);
+    expect(scope.usedDeprecatedCountriesAlias).toBe(false);
+  });
 });
