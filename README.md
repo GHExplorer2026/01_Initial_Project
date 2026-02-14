@@ -6,7 +6,7 @@
 - Single source of truth for implementation governance: this `README.md`.
 
 ## 2. Current Snapshot
-Date: `2026-02-08`
+Date: `2026-02-14`
 
 | Area | Status | Completion | Last Updated | Evidence |
 |---|---|---:|---|---|
@@ -14,6 +14,9 @@ Date: `2026-02-08`
 | Legacy startup skills archived | Completed | 100% | 2026-02-08 | `skills/_legacy-startup/*` |
 | New domain skill set | Completed | 100% | 2026-02-08 | `skills/*` (new folders listed below) |
 | Detailed implementation plan | Completed | 100% | 2026-02-08 | `docs/IMPLEMENTATION_PLAN.md` |
+| Core/API baseline implementation | Completed | 100% | 2026-02-14 | `src/core/*`, `src/server/*`, `src/app/api/*` |
+| Deterministic test harness | Completed | 100% | 2026-02-14 | `tests/*`, `tests/fixtures/golden/*` |
+| CI quality gates incl. snapshot | Completed | 100% | 2026-02-14 | `.github/workflows/*.yml`, `package.json` |
 
 ## 3. Active Skill Landscape
 
@@ -42,14 +45,16 @@ Date: `2026-02-08`
 | P-004 | 2026-02-08 | Planning | Creation | Added detailed implementation plan document | Completed | `docs/IMPLEMENTATION_PLAN.md` present | Codex |
 | P-005 | 2026-02-08 | Documentation | Rewrite | Updated project README for new setup and governance | Completed | This file | Codex |
 | P-006 | 2026-02-08 | Build Infra | Creation | Added multi-stage Docker build and CI image artifact workflow | Completed | `Dockerfile`, `.github/workflows/build-image.yml` | Codex |
+| P-007 | 2026-02-14 | Core/API | Implementation | Implemented orchestrator, source adapters, strict renderer integration, and weekly/ICS API routes | Completed | `src/server/orchestrator.ts`, `src/app/api/weekly/route.ts`, `src/app/api/weekly.ics/route.ts` | Codex |
+| P-008 | 2026-02-14 | QA | Hardening | Expanded deterministic tests (core, adapters, API contracts, snapshots, fallback behavior) | Completed | `tests/*` (81 tests passing) | Codex |
+| P-009 | 2026-02-14 | CI | Hardening | Added explicit snapshot gate in CI workflows and consolidated local verify command | Completed | `.github/workflows/ci.yml`, `.github/workflows/build-image.yml`, `package.json` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
 |---|---|---|---|---|---|---|
-| T-001 | Initialize actual Next.js + TypeScript app scaffold | High | Open | None | TBD | TBD |
-| T-002 | Implement source adapters with fixtures | High | Open | Scaffold pending | TBD | TBD |
-| T-003 | Implement strict renderer + ICS generator | High | Open | Core models pending | TBD | TBD |
-| T-004 | Wire CI pipeline for lint/test/snapshot/build | Medium | Open | Repository toolchain pending | TBD | TBD |
+| T-001 | Open/update pull request to `main` for branch `fix/source-mode-meta` | High | In Progress | Review/merge pending | TBD | Codex/User |
+| T-002 | Run final CI check on GitHub after latest push | High | In Progress | CI run pending | TBD | Codex/User |
+| T-003 | Approve and merge after review | High | Open | Reviewer availability | TBD | User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |
@@ -91,3 +96,7 @@ Date: `2026-02-08`
 - Default and CI: `SOURCE_MODE=fixtures`
 - Local live mode:
   - `TZ=Europe/Berlin NODE_OPTIONS=--dns-result-order=ipv4first SOURCE_MODE=live npm run dev`
+
+## 12. Local Verification
+- Full local quality gate:
+  - `TMPDIR=/tmp TMP=/tmp TEMP=/tmp npm run verify`
