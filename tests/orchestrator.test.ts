@@ -94,7 +94,7 @@ describe("generateWeeklyOutlook", () => {
 
     expect(fetchSpy).toHaveBeenCalledTimes(2);
     expect(result.meta.sourceMode).toBe("live");
-    expect(result.meta.sourcesUsed).toEqual(["investing", "tradingview", "tertiary"]);
+    expect(result.meta.sourcesUsed).toEqual(["investing", "tradingview", "tertiary:approved"]);
     expect(result.events).toHaveLength(0);
     expect(result.days).toHaveLength(5);
     expect(result.days.every((day) => day.note === NOTE_NO_VERIFIED)).toBe(true);
@@ -138,7 +138,7 @@ describe("generateWeeklyOutlook", () => {
 
     expect(fetchSpy).toHaveBeenCalledTimes(2);
     expect(result.meta.sourceMode).toBe("live");
-    expect(result.meta.sourcesUsed).toEqual(["investing", "tradingview", "tertiary"]);
+    expect(result.meta.sourcesUsed).toEqual(["investing", "tradingview", "tertiary:approved"]);
     expect(result.events.some((event) => event.timeHHMM === "14:30")).toBe(true);
     expect(result.events.some((event) => event.timeHHMM === "14:00")).toBe(false);
     expect(result.renderedText).toContain("14:30 Uhr: USA CPI (YoY) - **TOP-EVENT**");
@@ -182,7 +182,7 @@ describe("generateWeeklyOutlook", () => {
     expect(fetchSpy).toHaveBeenCalledTimes(2);
     expect(result.meta.sourceMode).toBe("live");
     expect(result.meta.sourcesUsed).toEqual(["investing", "tradingview"]);
-    expect(result.meta.sourcesUsed).not.toContain("tertiary");
+    expect(result.meta.sourcesUsed).not.toContain("tertiary:approved");
     expect(result.events.some((event) => event.region === "USA" && event.timeHHMM === "14:30")).toBe(true);
     expect(result.events.some((event) => event.region === "EZ" && event.timeHHMM === "11:00")).toBe(true);
   });

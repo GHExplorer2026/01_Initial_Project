@@ -99,7 +99,7 @@ export const generateWeeklyOutlook = async ({ regions, now }: GenerateParams): P
       )
     ).sort();
     if (tertiarySources.length === 0) {
-      sourcesUsed.push("tertiary");
+      sourcesUsed.push("tertiary:approved");
     } else {
       sourcesUsed.push(...tertiarySources);
     }
