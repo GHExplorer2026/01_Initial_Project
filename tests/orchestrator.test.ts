@@ -94,7 +94,7 @@ describe("generateWeeklyOutlook", () => {
 
     expect(fetchSpy).toHaveBeenCalledTimes(2);
     expect(result.meta.sourceMode).toBe("live");
-    expect(result.meta.sourcesUsed).toEqual(["tertiary"]);
+    expect(result.meta.sourcesUsed).toEqual(["investing", "tradingview", "tertiary"]);
     expect(result.events).toHaveLength(0);
     expect(result.days).toHaveLength(5);
     expect(result.days.every((day) => day.note === NOTE_NO_VERIFIED)).toBe(true);

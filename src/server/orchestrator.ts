@@ -89,13 +89,7 @@ export const generateWeeklyOutlook = async ({ regions, now }: GenerateParams): P
   const rendered = renderStrictWeeklyText(week, grouped, dayStatus, dataReliable);
   const icsPayload = generateIcs(filteredEvents, week.weekStart, PARSER_VERSION);
 
-  const sourcesUsed: string[] = [];
-  if (investing.ok || investing.events.length > 0) {
-    sourcesUsed.push("investing");
-  }
-  if (tradingview.ok || tradingview.events.length > 0) {
-    sourcesUsed.push("tradingview");
-  }
+  const sourcesUsed: string[] = ["investing", "tradingview"];
   if (needTertiary) {
     const tertiarySources = Array.from(
       new Set(
