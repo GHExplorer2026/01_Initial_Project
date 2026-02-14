@@ -79,4 +79,19 @@ describe("GET /api/weekly", () => {
       regions: ["USA", "EZ", "UK", "JP", "CH", "CA", "AU", "NZ"]
     });
   });
+
+  it("passes through live mode meta fields without changing strict payload contract", async () => {
+    const output = buildWeeklyOutput();
+    output.meta.sourceMode = "live";
+    output.meta.sourcesUsed = ["investing", "tradingview", "tertiary:bls"];
+    mockedGenerateWeeklyOutlook.mockResolvedValue(output);
+
+    const response = await GET(new Request("http://localhost/api/weekly?regions=USA,EZ"));
+    const payload = (await response.json()) as WeeklyOutput;
+
+    expect(response.status).toBe(200);
+    expect(payload.meta.sourceMode).toBe("live");
+    expect(payload.meta.sourcesUsed).toEqual(["investing", "tradingview", "tertiary:bls"]);
+    expect(payload.renderedText).toBe("STRICT");
+  });
 });
