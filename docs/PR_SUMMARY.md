@@ -2,6 +2,8 @@
 
 ## Scope
 - Deterministic Macro Events Weekly Outlook app hardening per `RULES.md` and `docs/IMPLEMENTATION_PLAN.md`.
+- Compare URL:
+  - `https://github.com/GHExplorer2026/01_Initial_Project/compare/main...fix/source-mode-meta`
 
 ## Main Outcomes
 - Added guaranteed API meta fields:
