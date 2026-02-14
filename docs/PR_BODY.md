@@ -7,9 +7,11 @@
 - `meta.weekStartBerlinISO` / `meta.weekEndBerlinISO` now use dynamic Europe/Berlin offset (`+01:00` / `+02:00` by date).
 - Kept strict output and ICS contracts stable while adding deeper regression coverage.
 - Enforced and validated central `SOURCE_MODE` behavior with deterministic fixture default.
+- Switched lint execution to a Next 16 compatible flat ESLint config (`eslint.config.mjs`).
+- Committed Next-generated TypeScript config updates from build (`tsconfig.json`, `next-env.d.ts`).
 
 ## Validation
-- `npm run verify` passes.
+- `npm run verify` passes on Node `v20.20.0` / npm `10.8.2`.
 - CI workflows include explicit `unit` + `snapshot` + `lint` + `typecheck` + `build`.
 - Current passing tests: `85`.
 

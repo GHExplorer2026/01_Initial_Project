@@ -6,7 +6,7 @@
 
 ## Latest Deterministic Gate Run
 - Command:
-  - `TMPDIR=/tmp TMP=/tmp TEMP=/tmp npm run verify`
+  - `npm run verify`
 - Result:
   - `unit`: pass
   - `snapshot`: pass
@@ -14,6 +14,9 @@
   - `typecheck`: pass
   - `build`: pass
   - Current passing tests: `85`
+- Environment:
+  - Node `v20.20.0`
+  - npm `10.8.2`
 
 ## Test Coverage Focus (SPEC-critical)
 - Strict DE output formatting (headers, notes, TOP suffix)
@@ -28,3 +31,4 @@
 - CI workflows run explicit `unit` and `snapshot` gates.
 - Local consolidated check is available via `npm run verify`.
 - Local verification requires Node `>=20.9.0`; CI remains source of truth when local runner is below baseline.
+- `next build` generated updates were committed (`tsconfig.json`, `next-env.d.ts`) to keep repository and build output aligned.
