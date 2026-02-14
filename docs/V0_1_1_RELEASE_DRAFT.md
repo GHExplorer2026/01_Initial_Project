@@ -20,6 +20,9 @@
    - strict output note strings unchanged
    - TOP suffix exact ` - **TOP-EVENT**`
    - every VEVENT has `CATEGORIES:Wirtschafts-Event`
+5. Release Gate workflow smoke check:
+   - starts app on `127.0.0.1:3000`
+   - runs `scripts/smoke_api.sh`
 
 ## Planned Release Notes Snippet
 `v0.1.1` hardens deterministic parsing and CI diagnostics without changing product output contracts.
