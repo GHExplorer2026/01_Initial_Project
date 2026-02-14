@@ -83,4 +83,30 @@ describe("icsSerializer", () => {
       );
     }
   });
+
+  it("is byte-deterministic across input order and ties UID to parserVersion", () => {
+    const secondEvent: EconomicEvent = {
+      ...sampleEvents[0],
+      region: "EZ",
+      currency: "EUR",
+      titleRaw: "GDP (QoQ)",
+      titleNormalized: "gdp (qoq)",
+      categoryAF: "D",
+      datetimeBerlinISO: "2026-02-10T11:00:00",
+      timeHHMM: "11:00"
+    };
+
+    const ordered = generateIcs([sampleEvents[0], secondEvent], "2026-02-09", "v1.0.0");
+    const reversed = generateIcs([secondEvent, sampleEvents[0]], "2026-02-09", "v1.0.0");
+    expect(ordered).toBe(reversed);
+
+    const withOtherParserVersion = generateIcs([sampleEvents[0], secondEvent], "2026-02-09", "v1.0.1");
+    const uidV100 = [...ordered.matchAll(/UID:([^\r\n]+)/g)].map((m) => m[1]);
+    const uidV101 = [...withOtherParserVersion.matchAll(/UID:([^\r\n]+)/g)].map((m) => m[1]);
+
+    expect(uidV100).toHaveLength(2);
+    expect(uidV101).toHaveLength(2);
+    expect(uidV101).not.toEqual(uidV100);
+    expect(withOtherParserVersion).toContain("DTSTAMP:20260208T230000Z");
+  });
 });
