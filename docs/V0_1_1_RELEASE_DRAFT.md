@@ -34,3 +34,6 @@
 3. Push tag:
    - `git push origin v0.1.1`
 4. Append final release entry in `docs/RELEASES.md`.
+
+## Evidence Template
+- `docs/V0_1_1_EVIDENCE.md`
