@@ -6,14 +6,14 @@
 
 ## Latest Deterministic Gate Run
 - Command:
-  - `npm run verify`
+  - `npm run verify:release`
 - Result:
   - `unit`: pass
   - `snapshot`: pass
   - `lint`: pass
   - `typecheck`: pass
   - `build`: pass
-  - Current passing tests: `89`
+  - Current passing tests: `92`
 - Environment:
   - Node `v20.20.0`
   - npm `10.8.2`

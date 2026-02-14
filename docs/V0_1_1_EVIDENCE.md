@@ -9,11 +9,12 @@ Track concrete evidence for closing `v0.1.1` release gates (`T-103`, `T-104`).
 - Command:
   - `npm run verify:release`
 - Result:
-  - `PENDING`
+  - `PASS` (`unit`, `snapshot`, `lint`, `typecheck`, `build`)
+  - `92 / 92 tests passed`
 - Operator:
-  - `PENDING`
+  - `User (maloe)`
 - Timestamp:
-  - `PENDING`
+  - `2026-02-14 18:23 (local shell output)`
 
 ### 2) GitHub Release Gate Workflow
 - Workflow:
@@ -38,4 +39,4 @@ Track concrete evidence for closing `v0.1.1` release gates (`T-103`, `T-104`).
 - Planned tag:
   - `v0.1.1`
 - Status:
-  - `PENDING`
+  - `PENDING` (blocked by gate evidence item 2)

@@ -29,7 +29,7 @@
   - `unit`
   - `snapshot`
   - `build`
-- Current passing tests: `89`
+- Current passing tests: `92`
 
 ## Test Expansion Highlights
 - Core:

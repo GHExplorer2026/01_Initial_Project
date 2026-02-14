@@ -53,6 +53,6 @@
 - CI diagnostics improved with JUnit artifacts and troubleshooting guidance.
 
 ### Pending Final Gates
-- Node-20 run of `npm run verify:release`.
-- Green CI check on current `main`.
-- Manual API smoke checks on `/api/weekly` and `/api/weekly.ics`.
+- Green `Release Gate` workflow run evidence on current `main`.
+- Archived workflow artifacts (`release-gate-test-reports`, `release-gate-app.log`).
+- Tag + final release entry publication (`v0.1.1`).

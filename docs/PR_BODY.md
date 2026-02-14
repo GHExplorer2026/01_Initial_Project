@@ -14,7 +14,7 @@
 ## Validation
 - `npm run verify` passes on Node `v20.20.0` / npm `10.8.2`.
 - CI workflows include explicit `unit` + `snapshot` + `lint` + `typecheck` + `build`.
-- Current passing tests: `89`.
+- Current passing tests: `92`.
 
 ## Compare
 - https://github.com/GHExplorer2026/01_Initial_Project/compare/main...fix/source-mode-meta

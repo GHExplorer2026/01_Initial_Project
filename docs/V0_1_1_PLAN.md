@@ -59,7 +59,7 @@ Status: Completed
 2. Metadata contract remains stable across fixture runs.
 
 ## W3 CI and Developer Reliability
-Status: In Progress
+Status: Completed
 
 1. Keep CI gate order strict: `lint`, `typecheck`, `unit`, `snapshot`, `build`.
 2. Add concise troubleshooting pointers for common deterministic failures:
@@ -67,6 +67,10 @@ Status: In Progress
    - parser fixture drift
    - Node baseline mismatch
 3. Keep install deterministic with `npm ci` and Node 20 baseline.
+   Progress:
+   - Added JUnit artifact upload in CI quality gates.
+   - Added `Release Gate` workflow (manual + auto on `main` pushes).
+   - Added deterministic API smoke script integration and troubleshooting notes.
 
 ### Acceptance
 1. CI config and docs stay aligned.

@@ -12,15 +12,16 @@
    - CI equivalent:
      - automatic on push to `main`
      - manual via workflow `Release Gate` (`.github/workflows/release-gate.yml`)
-2. CI green on `main`:
-   - `lint`, `typecheck`, `unit`, `snapshot`, `build`
-3. Manual API smoke:
-   - `scripts/smoke_api.sh http://127.0.0.1:3000 USA,EZ`
-4. Invariant checks:
+   - Status:
+     - `DONE` (see `docs/V0_1_1_EVIDENCE.md`)
+2. Release Gate workflow evidence on `main`:
+   - workflow conclusion must be `success`
+   - artifact bundle must be present
+3. Invariant checks:
    - strict output note strings unchanged
    - TOP suffix exact ` - **TOP-EVENT**`
    - every VEVENT has `CATEGORIES:Wirtschafts-Event`
-5. Release Gate workflow smoke check:
+4. Release Gate workflow smoke check:
    - starts app on `127.0.0.1:3000`
    - runs `scripts/smoke_api.sh`
 
