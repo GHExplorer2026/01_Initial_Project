@@ -80,6 +80,7 @@ Date: `2026-02-14`
 ## 9. Key Documents
 - Rules: `RULES.md`
 - Plan: `docs/IMPLEMENTATION_PLAN.md`
+- Architecture: `ARCHITECTURE.md`
 - Skills root: `skills/`
 
 ## 10. Build vs Runtime Network Requirements
