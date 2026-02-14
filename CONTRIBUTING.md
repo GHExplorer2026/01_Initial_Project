@@ -6,8 +6,10 @@
 3. Open PR against `main`.
 
 ## Required Local Validation
+- Runtime baseline:
+  - `node >= 20.9.0` (see `.nvmrc` / `.node-version`)
 - Run:
-  - `TMPDIR=/tmp TMP=/tmp TEMP=/tmp npm run verify`
+  - `npm run verify`
 - This must pass before pushing:
   - unit
   - snapshot
