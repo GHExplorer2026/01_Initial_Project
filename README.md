@@ -58,6 +58,7 @@ Date: `2026-02-14`
 | P-017 | 2026-02-14 | v0.1.1 | Fixture-first QA | Migrated parser drift checks to dedicated fixture files for Investing and TradingView adapters | Completed | `tests/fixtures/sources/*`, `tests/sourceAdapters.test.ts` | Codex |
 | P-018 | 2026-02-14 | v0.1.1 | Error-path QA | Added deterministic orchestrator test for partial live-source failure with continued valid rendering from healthy source | Completed | `tests/orchestrator.test.ts` | Codex |
 | P-019 | 2026-02-14 | v0.1.1 | Release prep | Added release draft/checklist and dedicated `verify:release` command for final gate execution | Completed | `docs/V0_1_1_RELEASE_DRAFT.md`, `package.json` | Codex |
+| P-020 | 2026-02-14 | v0.1.1 | CI release gate | Added manual GitHub workflow to run Node-20 release verification on target refs | Completed | `.github/workflows/release-gate.yml` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
