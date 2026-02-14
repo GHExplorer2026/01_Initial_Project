@@ -22,12 +22,15 @@ Track concrete evidence for closing `v0.1.1` release gates (`T-103`, `T-104`).
 - Ref:
   - `main`
 - Result:
-  - `PENDING`
+  - `TRIGGERED` (auto on push to `main`)
+  - `PENDING VERIFICATION` (agent environment cannot resolve `api.github.com`)
 - Run URL:
   - `PENDING`
 - Artifacts:
   - `release-gate-test-reports`
   - `release-gate-app.log`
+ - Trigger note:
+  - This evidence update commit triggers a new `Release Gate` run automatically.
 
 ### 3) API Smoke Confirmation
 - Script:
