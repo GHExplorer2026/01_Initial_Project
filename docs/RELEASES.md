@@ -42,3 +42,17 @@
 ### Planning Reference
 - `docs/V0_1_1_PLAN.md`
 - `docs/V0_1_1_RELEASE_DRAFT.md`
+
+## v0.1.1 (draft)
+
+### Completed in Draft
+- Parser hardening for Investing row-shape drift.
+- Parser hardening for TradingView normalization drift.
+- Fixture-first parser drift files committed under `tests/fixtures/sources/`.
+- Deterministic orchestrator coverage for partial live-source failures.
+- CI diagnostics improved with JUnit artifacts and troubleshooting guidance.
+
+### Pending Final Gates
+- Node-20 run of `npm run verify:release`.
+- Green CI check on current `main`.
+- Manual API smoke checks on `/api/weekly` and `/api/weekly.ics`.
