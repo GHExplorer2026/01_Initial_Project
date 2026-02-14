@@ -37,6 +37,7 @@ Track concrete evidence for closing `v0.1.1` release gates (`T-103`, `T-104`).
 - Marker diagnostics:
   - includes `step_outcomes.install|verify|smoke` for deterministic failure isolation.
   - includes `smoke_log_tail_b64` with app log tail for smoke-stage debugging without Actions API access.
+  - includes `smoke_check_tail_b64` with `scripts/smoke_api.sh` output tail.
 - Deterministic local validator:
   - `npm run check:release-gate`
   - Pass criterion: marker has `status=success` and `sha` equals current `HEAD`.
