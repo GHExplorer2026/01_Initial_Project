@@ -70,14 +70,14 @@ jobs:
             artifacts/*.xml
             /tmp/release-gate-app.log
 
-      - name: Record release gate success marker
-        if: success()
+      - name: Record release gate marker
+        if: always()
         run: |
           mkdir -p docs
           cat > docs/release-gate-last-success.json <<EOF
           {
             "workflow": "Release Gate",
-            "status": "success",
+            "status": "${{ job.status }}",
             "run_id": "${{ github.run_id }}",
             "run_attempt": "${{ github.run_attempt }}",
             "sha": "${{ github.sha }}",
@@ -88,8 +88,8 @@ jobs:
           EOF
 
       - name: Commit release gate marker
-        if: success()
+        if: always()
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore(ci): record release gate success marker [skip release-gate]"
+          commit_message: "chore(ci): record release gate marker [skip release-gate]"
           file_pattern: docs/release-gate-last-success.json
