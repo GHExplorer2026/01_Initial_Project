@@ -136,6 +136,49 @@ describe("generateWeeklyOutlook", () => {
     expect(result.renderedText).toContain("14:30 Uhr: USA CPI (YoY) - **TOP-EVENT**");
   });
 
+  it("does not call tertiary path in live mode when no trigger condition is met", async () => {
+    process.env.SOURCE_MODE = "live";
+    const investingHtml = `
+      <tr id="eventRowId_1" data-event-datetime="2026/02/09 13:30:00">
+        <td class="left flagCur noWrap">flag USD</td>
+        <td class="left event"><a>CPI (YoY)</a></td>
+      </tr>
+    `;
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      if (url.includes("investing.com")) {
+        return new Response(JSON.stringify({ data: investingHtml }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+
+      if (url.includes("tradingview.com")) {
+        return new Response(
+          JSON.stringify({
+            status: "ok",
+            result: [{ title: "GDP (QoQ)", currency: "EUR", date: "2026-02-10T10:00:00.000Z" }]
+          }),
+          { status: 200, headers: { "Content-Type": "application/json" } }
+        );
+      }
+
+      throw new Error(`Unexpected live fetch URL: ${url}`);
+    });
+
+    const result = await generateWeeklyOutlook({
+      regions: ["USA", "EZ"],
+      now: new Date("2026-02-10T10:00:00Z")
+    });
+
+    expect(fetchSpy).toHaveBeenCalledTimes(2);
+    expect(result.meta.sourceMode).toBe("live");
+    expect(result.meta.sourcesUsed).toEqual(["investing", "tradingview"]);
+    expect(result.meta.sourcesUsed).not.toContain("tertiary");
+    expect(result.events.some((event) => event.region === "USA" && event.timeHHMM === "14:30")).toBe(true);
+    expect(result.events.some((event) => event.region === "EZ" && event.timeHHMM === "11:00")).toBe(true);
+  });
+
   it("renders holiday fallback note on holiday workdays when no events remain after filtering", async () => {
     delete process.env.SOURCE_MODE;
 
