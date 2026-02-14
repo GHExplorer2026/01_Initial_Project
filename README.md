@@ -56,12 +56,13 @@ Date: `2026-02-14`
 | P-015 | 2026-02-14 | v0.1.1 | QA hardening | Added TradingView normalization drift tests and orchestrator fallback assertions for live-empty weekday responses | Completed | `src/server/sources/tradingview.ts`, `tests/sourceAdapters.test.ts`, `tests/orchestrator.test.ts` | Codex |
 | P-016 | 2026-02-14 | v0.1.1 | CI diagnostics | Added JUnit test report artifacts for unit/snapshot jobs in CI workflows | Completed | `.github/workflows/ci.yml`, `.github/workflows/build-image.yml`, `package.json` | Codex |
 | P-017 | 2026-02-14 | v0.1.1 | Fixture-first QA | Migrated parser drift checks to dedicated fixture files for Investing and TradingView adapters | Completed | `tests/fixtures/sources/*`, `tests/sourceAdapters.test.ts` | Codex |
+| P-018 | 2026-02-14 | v0.1.1 | Error-path QA | Added deterministic orchestrator test for partial live-source failure with continued valid rendering from healthy source | Completed | `tests/orchestrator.test.ts` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
 |---|---|---|---|---|---|---|
-| T-101 | Start `v0.1.1` parser/fixture hardening stream | High | In Progress | None | 2026-02-15 | Codex |
-| T-102 | Add deterministic metadata/error taxonomy tests for fallback behavior | High | Open | None | 2026-02-15 | Codex |
+| T-101 | Start `v0.1.1` parser/fixture hardening stream | High | Completed | None | 2026-02-14 | Codex |
+| T-102 | Add deterministic metadata/error taxonomy tests for fallback behavior | High | Completed | None | 2026-02-14 | Codex |
 | T-103 | Final Node-20 verify for `v0.1.1` and release tag | High | Open | None | 2026-02-15 | Codex/User |
 
 ## 6. Risks

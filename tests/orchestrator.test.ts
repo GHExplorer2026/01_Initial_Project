@@ -105,6 +105,41 @@ describe("generateWeeklyOutlook", () => {
     expect(result.renderedText).toContain(NOTE_NO_VERIFIED);
   });
 
+  it("keeps processing when one live source fails but the other returns valid events", async () => {
+    process.env.SOURCE_MODE = "live";
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      if (url.includes("investing.com")) {
+        return new Response("{}", { status: 503 });
+      }
+
+      if (url.includes("tradingview.com")) {
+        return new Response(
+          JSON.stringify({
+            status: "ok",
+            result: [{ title: "GDP (QoQ)", currency: "EUR", date: "2026-02-10T10:00:00.000Z" }]
+          }),
+          { status: 200, headers: { "Content-Type": "application/json" } }
+        );
+      }
+
+      throw new Error(`Unexpected live fetch URL: ${url}`);
+    });
+
+    const result = await generateWeeklyOutlook({
+      regions: ["EZ"],
+      now: new Date("2026-02-10T10:00:00Z")
+    });
+
+    expect(fetchSpy).toHaveBeenCalledTimes(2);
+    expect(result.meta.sourceMode).toBe("live");
+    expect(result.meta.sourcesUsed).toEqual(["investing", "tradingview"]);
+    expect(result.meta.sourcesUsed).not.toContain("tertiary:approved");
+    expect(result.events).toHaveLength(1);
+    expect(result.events[0]).toMatchObject({ source: "tradingview", region: "EZ", timeHHMM: "11:00" });
+    expect(result.renderedText).toContain("11:00 Uhr: Euro Zone GDP (QoQ) - **TOP-EVENT**");
+  });
+
   it("enforces investing priority on live time conflicts and flags tertiary usage", async () => {
     process.env.SOURCE_MODE = "live";
     const investingHtml = `

@@ -24,7 +24,7 @@ Deliver a SPEC-safe hardening increment (`v0.1.1`) on top of `v0.1.0` without ch
 ## Workstreams
 
 ## W1 Parser and Fixture Hardening
-Status: In Progress
+Status: Completed
 
 1. Add fixture variants for Investing and TradingView parser edge markup:
    - missing/shifted columns
@@ -43,11 +43,16 @@ Status: In Progress
 3. No snapshot drift in strict text or ICS.
 
 ## W2 Deterministic Metadata and Error Taxonomy
-Status: In Progress
+Status: Completed
 
 1. Standardize structured server-side error categories (fetch, parse, timezone, governance).
 2. Verify fallback note behavior remains canonical for each day case.
 3. Ensure `meta.sourceMode`/`meta.sourcesUsed` remain always present and deterministic.
+   Progress:
+   - Added deterministic orchestration coverage for partial live-source failure:
+     - healthy source events still render
+     - no fixture fallback
+     - tertiary remains off when trigger conditions are not met
 
 ### Acceptance
 1. Tests validate error-to-fallback behavior without changing strict strings.
