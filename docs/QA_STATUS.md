@@ -1,7 +1,7 @@
 # QA_STATUS.md
 
 ## Current Branch
-- Branch: `main` (post `v0.1.6` release, `v0.1.7` planning baseline started)
+- Branch: `main` (post `v0.1.7` release)
 - Baseline: synced with `origin/main`
 
 ## Latest Deterministic Gate Run
@@ -95,7 +95,10 @@
   - deterministic verify gate remains green (`130/130` tests)
 - `v0.1.7` gate rerun completed:
   - `V-704` completed (`verify:release` green and release-gate marker valid)
-  - `run_id=22038517413`
+  - `run_id=22038553850`
+- `v0.1.7` release finalized:
+  - `V-705` completed (release evidence finalized + tag published)
+  - published tag: `v0.1.7` on `f2010a0`
 - `v0.1.2` UI implementation baseline added:
   - deterministic scope-state helpers in `src/app/scopeState.ts`
   - UI state/strict-output isolation refactor in `src/app/page.tsx`

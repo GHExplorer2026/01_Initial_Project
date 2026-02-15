@@ -12,7 +12,7 @@
 2. Release Gate workflow on `main`:
    - `status=success`
    - `install=success`, `verify=success`, `smoke=success`
-   - status: `DONE` (`run_id=22038517413`, `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22038517413`)
+   - status: `DONE` (`run_id=22038553850`, `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22038553850`)
 3. Invariant checks:
    - strict output strings unchanged
    - TOP suffix unchanged (` - **TOP-EVENT**`)
@@ -35,9 +35,9 @@
 4. Append final release entry in `docs/RELEASES.md`.
 
 ## Current Status
-- `READY_FOR_TAG`
-- Publish target:
-  - `v0.1.7` on `main` (all pre-tag gates are green).
+- `RELEASED`
+- Published tag:
+  - `v0.1.7` on commit `f2010a0`
 
 ## Evidence Template
 - `docs/V0_1_7_EVIDENCE.md`

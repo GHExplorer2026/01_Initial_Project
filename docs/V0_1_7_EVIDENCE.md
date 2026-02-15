@@ -25,9 +25,9 @@ Track concrete evidence for closing `v0.1.7` release gates.
 - Result:
   - `PASS`
 - Run URL:
-  - `https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22038517413`
+  - `https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22038553850`
 - Run ID:
-  - `22038517413`
+  - `22038553850`
 - Success marker file:
   - `docs/release-gate-last-success.json`
 - Validation command:
@@ -45,8 +45,8 @@ Track concrete evidence for closing `v0.1.7` release gates.
 - Planned tag:
   - `v0.1.7`
 - Status:
-  - `NOT_PUBLISHED`
+  - `PUBLISHED`
 - Tag details:
   - `tag`: `v0.1.7`
-  - `target`: `TBD`
+  - `target`: `f2010a0`
   - `push`: `origin/v0.1.7`

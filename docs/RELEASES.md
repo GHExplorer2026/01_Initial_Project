@@ -1,17 +1,29 @@
 # RELEASES.md
 
-## Upcoming (planned): v0.1.7
+## v0.1.7 (2026-02-15)
 
-### Status
-- Planning baseline initialized.
-- Baseline gate validated (`run_id=22038326822`).
-- Hardened gate rerun validated (`run_id=22038517413`).
-- Release not published.
+### Scope
+- Completed SPEC-safe UI execution hardening with deterministic metadata ordering and error normalization.
+- Completed deterministic release-evidence alignment and gate rerun closure.
+- Preserved strict output and ICS product contracts without schema/string drift.
 
-### Planning Artifacts
+### Quality Evidence
+- Local Node-20 verify gate:
+  - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
+  - result: `130/130` tests passed + lint/typecheck/build pass
+- Release Gate:
+  - `run_id=22038553850`
+  - `status=success`
+  - `install=success`, `verify=success`, `smoke=success`
+  - `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22038553850`
+- Published tag:
+  - `v0.1.7` (annotated tag on commit `f2010a0`)
+
+### References
 - `docs/V0_1_7_PLAN.md`
 - `docs/V0_1_7_RELEASE_DRAFT.md`
 - `docs/V0_1_7_EVIDENCE.md`
+- `docs/release-gate-last-success.json`
 
 ## v0.1.0 (2026-02-14)
 
