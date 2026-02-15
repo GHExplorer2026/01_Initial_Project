@@ -42,33 +42,45 @@ Status: Completed
 2. No build-time package installation in runtime stage.
 
 ## W2 Release Gate Stability and Diagnostics
-Status: Planned
+Status: Completed
 
 1. Harden release marker update and validation flow to avoid stale SHA confusion.
 2. Keep release-gate failure artifacts concise and actionable.
 3. Ensure smoke checks continue enforcing:
    - weekly endpoint availability
    - ICS category requirement behavior without false negatives
+   Progress:
+   - Validated release-gate marker contract via local check:
+     - `npm run check:release-gate`
+   - Current validated success marker:
+     - `run_id=22034330056`
+     - `status=success`
+     - `install=success`, `verify=success`, `smoke=success`
 
 ### Acceptance
 1. `npm run check:release-gate` deterministic behavior is documented and stable.
 2. Release-gate marker validation is unambiguous for `main` and marker commits.
 
 ## W3 Live-Mode Verification Runbook
-Status: Planned
+Status: Completed
 
 1. Provide explicit local commands for:
    - fixture mode verification
    - live mode verification
 2. Add a compact troubleshooting path for DNS/registry resolution failures.
 3. Keep live verification non-blocking for CI and snapshots.
+   Progress:
+   - Added DNS/network troubleshooting and recovery steps in:
+     - `docs/TROUBLESHOOTING.md`
+   - Kept explicit source-mode run commands in:
+     - `README.md` (`SOURCE_MODE=fixtures` default, `SOURCE_MODE=live` local run)
 
 ### Acceptance
 1. Operator can run live verification manually with two endpoint curls.
 2. CI remains fully offline and deterministic.
 
 ## W4 Test Coverage Expansion (SPEC-safe)
-Status: In Progress
+Status: Completed
 
 1. Expand fixture-based tests for fallback/empty-day behavior (weekend/holiday/error).
 2. Expand API contract tests around `regions` vs deprecated `countries`.
@@ -77,6 +89,13 @@ Status: In Progress
    - Added normalized query-contract route tests for both endpoints:
      - matching normalized sets are accepted
      - conflicting normalized sets return `400`
+   - Added strict fallback rendering assertions for live source-failure path:
+     - exactly 5 day headers (Mo-Fr)
+     - exactly 5 fallback note lines
+     - no event lines in fallback output
+   - Re-ran deterministic quality gate:
+     - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
+     - `109/109` tests passing
 
 ### Acceptance
 1. Added tests do not alter existing golden outputs.

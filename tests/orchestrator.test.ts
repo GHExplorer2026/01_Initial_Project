@@ -103,6 +103,15 @@ describe("generateWeeklyOutlook", () => {
     expect(result.days).toHaveLength(5);
     expect(result.days.every((day) => day.note === NOTE_NO_VERIFIED)).toBe(true);
     expect(result.renderedText).toContain(NOTE_NO_VERIFIED);
+    const lines = result.renderedText.split("\n");
+    const dayHeaders = lines.filter((line) => line.startsWith("### "));
+    const eventLines = lines.filter((line) => /^\d{2}:\d{2} Uhr: /.test(line));
+    const noteLines = lines.filter((line) => line === NOTE_NO_VERIFIED);
+    expect(dayHeaders).toHaveLength(5);
+    expect(eventLines).toHaveLength(0);
+    expect(noteLines).toHaveLength(5);
+    expect(dayHeaders[0]).toMatch(/^### Montag,/);
+    expect(dayHeaders[4]).toMatch(/^### Freitag,/);
   });
 
   it("keeps processing when one live source fails but the other returns valid events", async () => {

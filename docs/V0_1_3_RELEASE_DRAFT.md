@@ -13,7 +13,7 @@
 2. Release Gate workflow on `main`:
    - `status=success`
    - `install=success`, `verify=success`, `smoke=success`
-   - status: `TODO`
+   - status: `DONE` (`run_id=22034330056`, `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22034330056`)
 3. Invariant checks:
    - strict output strings unchanged
    - TOP suffix unchanged (` - **TOP-EVENT**`)
@@ -22,7 +22,7 @@
 4. Scope contract checks:
    - `regions` remains primary
    - `countries` deprecated alias behavior unchanged
-   - status: `TODO`
+   - status: `DONE`
 
 ## Planned Release Notes Snippet
 `v0.1.3` hardens operational reliability (build/runtime split, release-gate diagnostics, and deterministic test coverage) without changing strict output or ICS product contracts.
@@ -36,7 +36,7 @@
 4. Append final release entry in `docs/RELEASES.md`.
 
 ## Current Status
-- `PLANNED`
+- `READY FOR TAG` (pending final post-commit gate refresh)
 
 ## Evidence Template
 - `docs/V0_1_3_EVIDENCE.md`
