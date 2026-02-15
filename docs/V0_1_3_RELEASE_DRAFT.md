@@ -36,7 +36,9 @@
 4. Append final release entry in `docs/RELEASES.md`.
 
 ## Current Status
-- `READY FOR TAG`
+- `RELEASED`
+- Published tag:
+  - `v0.1.3` on commit `1e15616`
 
 ## Evidence Template
 - `docs/V0_1_3_EVIDENCE.md`

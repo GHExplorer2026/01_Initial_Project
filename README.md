@@ -2,7 +2,7 @@
 
 ## 1. Project Context
 - Project: `01_Initial_Project`
-- Current objective: execute `v0.1.3` operational hardening phase on top of released `v0.1.2`.
+- Current objective: maintain released `v0.1.3` baseline and prepare next planning increment.
 - Single source of truth for implementation governance: this `README.md`.
 
 ## 2. Current Snapshot
@@ -21,6 +21,7 @@ Date: `2026-02-15`
 | `v0.1.2` planning baseline | Completed | 100% | 2026-02-15 | `docs/V0_1_2_PLAN.md` |
 | Release `v0.1.2` | Completed | 100% | 2026-02-15 | tag `v0.1.2`, `docs/RELEASES.md`, `docs/V0_1_2_EVIDENCE.md` |
 | `v0.1.3` planning baseline | Completed | 100% | 2026-02-15 | `docs/V0_1_3_PLAN.md`, `docs/V0_1_3_EVIDENCE.md` |
+| Release `v0.1.3` | Completed | 100% | 2026-02-15 | tag `v0.1.3`, `docs/RELEASES.md`, `docs/V0_1_3_EVIDENCE.md` |
 
 ## 3. Active Skill Landscape
 
@@ -99,6 +100,7 @@ Date: `2026-02-15`
 | P-054 | 2026-02-15 | v0.1.3 | Contract tests | Expanded route-level `regions`/`countries` normalization conflict tests for weekly and ICS APIs | Completed | `tests/api.weekly.route.test.ts`, `tests/api.weekly-ics.route.test.ts` | Codex |
 | P-055 | 2026-02-15 | v0.1.3 | Fallback contract tests | Added strict live-failure fallback rendering assertions (Mo-Fr headers, note-only lines, no events) and re-verified gates | Completed | `tests/orchestrator.test.ts`, `npm run verify:release` | Codex |
 | P-056 | 2026-02-15 | v0.1.3 | Gate closure | Refreshed release-gate marker and closed `V-303` evidence for current HEAD | Completed | `docs/release-gate-last-success.json`, `docs/V0_1_3_EVIDENCE.md` | Codex |
+| P-057 | 2026-02-15 | v0.1.3 | Release publish | Published `v0.1.3` tag and finalized release records | Completed | tag `v0.1.3`, `docs/RELEASES.md`, `docs/V0_1_3_RELEASE_DRAFT.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |

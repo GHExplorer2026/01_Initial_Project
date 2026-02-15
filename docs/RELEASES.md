@@ -85,15 +85,27 @@
 - `docs/V0_1_2_EVIDENCE.md`
 - `docs/release-gate-last-success.json`
 
-## Next Planned: v0.1.3
+## v0.1.3 (2026-02-15)
 
-### Focus
-- Operational hardening and release-gate stability improvements only.
-- Build/runtime split validation and runbook consolidation.
-- Additional SPEC-safe fixture coverage for fallback and query-contract paths.
-- Current gate status: `READY FOR TAG` (Release Gate `run_id=22034624406`).
+### Scope
+- Completed operational hardening for runtime alignment and gate stability.
+- Expanded SPEC-safe fallback/query-contract coverage without rule drift.
+- Closed release evidence with green verify and release-gate markers.
 
-### Planning Reference
+### Quality Evidence
+- Local Node-20 verify gate:
+  - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
+  - result: `109/109` tests passed + lint/typecheck/build pass
+- Release Gate:
+  - `run_id=22034682380`
+  - `status=success`
+  - `install=success`, `verify=success`, `smoke=success`
+  - `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22034682380`
+- Published tag:
+  - `v0.1.3` (annotated tag on commit `1e15616`)
+
+### References
 - `docs/V0_1_3_PLAN.md`
 - `docs/V0_1_3_RELEASE_DRAFT.md`
 - `docs/V0_1_3_EVIDENCE.md`
+- `docs/release-gate-last-success.json`
