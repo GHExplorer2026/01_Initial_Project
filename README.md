@@ -134,6 +134,7 @@ Date: `2026-02-15`
 | P-082 | 2026-02-15 | UI Execution | Evidence | Executed fixtures-mode runtime checks and full Node-20 deterministic verify; documented EACCES temp-path workaround (`TMPDIR=/tmp`) | Completed | `docs/UI_EXECUTION_REPORT.md`, `npm run verify` | Codex |
 | P-083 | 2026-02-15 | UI QA | Contract hardening | Added UI contract assertion that meta/debug state stays outside strict `<pre>` before generation | Completed | `tests/page.ui.contract.test.ts` | Codex |
 | P-084 | 2026-02-15 | UI QA | Generate-flow hardening | Added pure weekly-response normalizer and UI tests for malformed/missing meta handling without strict-output drift | Completed | `src/app/weeklyResponse.ts`, `tests/weeklyResponse.ui.test.ts`, `src/app/page.tsx` | Codex |
+| P-085 | 2026-02-15 | UI QA | Persistence hardening | Extracted deterministic `regions` query builder preserving unrelated params and covered empty/non-empty serialization paths | Completed | `src/app/scopeState.ts`, `tests/scopeState.ui.test.ts`, `src/app/page.tsx` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |

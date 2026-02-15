@@ -6,8 +6,8 @@ import {
   REGION_OPTIONS,
   STORAGE_KEY,
   allRegionsSelection,
+  buildSearchWithRegions,
   resolveInitialRegionSelection,
-  serializeRegionsParam,
   toggleRegionSelection
 } from "@/app/scopeState";
 import { buildIcsEndpoint, buildWeeklyEndpoint } from "@/app/uiRequests";
@@ -35,9 +35,7 @@ export default function Page() {
       return;
     }
     const values = [...selected];
-    const params = new URLSearchParams(window.location.search);
-    params.set("regions", serializeRegionsParam(values));
-    const nextSearch = params.toString();
+    const nextSearch = buildSearchWithRegions(window.location.search, values);
     const nextUrl = nextSearch ? `${window.location.pathname}?${nextSearch}` : window.location.pathname;
     window.history.replaceState(null, "", nextUrl);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(values));

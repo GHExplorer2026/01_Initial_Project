@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   allRegionsSelection,
+  buildSearchWithRegions,
   parseRegionsFromStorageValue,
   parseRegionsParamFromSearch,
   resolveInitialRegionSelection,
@@ -32,6 +33,16 @@ describe("ui scope state helpers", () => {
 
   it("normalizes and serializes in deterministic region order", () => {
     expect(serializeRegionsParam(["UK", "USA", "EZ"])).toBe("USA,EZ,UK");
+  });
+
+  it("builds regions query while preserving unrelated params", () => {
+    const next = buildSearchWithRegions("?foo=1&countries=USD", ["UK", "USA", "EZ"]);
+    expect(next).toBe("foo=1&countries=USD&regions=USA%2CEZ%2CUK");
+  });
+
+  it("builds explicit empty regions query deterministically", () => {
+    const next = buildSearchWithRegions("?foo=1", []);
+    expect(next).toBe("foo=1&regions=");
   });
 
   it("toggles region selection while preserving canonical order", () => {

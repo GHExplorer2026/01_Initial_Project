@@ -85,6 +85,12 @@ export const resolveInitialRegionSelection = (search: string, storageRaw: string
 export const serializeRegionsParam = (regions: readonly RegionCode[]): string =>
   normalizeRegionCodes(regions).join(",");
 
+export const buildSearchWithRegions = (search: string, regions: readonly RegionCode[]): string => {
+  const params = new URLSearchParams(search);
+  params.set("regions", serializeRegionsParam(regions));
+  return params.toString();
+};
+
 export const toggleRegionSelection = (current: readonly RegionCode[], region: RegionCode): RegionCode[] => {
   const next = new Set<RegionCode>(current);
   if (next.has(region)) {
