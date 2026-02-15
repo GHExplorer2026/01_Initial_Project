@@ -3,6 +3,7 @@ set -euo pipefail
 
 BASE_URL="${1:-http://127.0.0.1:3000}"
 REGIONS="${2:-USA,EZ}"
+EXPECTED_SOURCE_MODE="${3:-fixtures}"
 
 weekly_url="${BASE_URL}/api/weekly?regions=${REGIONS}"
 ics_url="${BASE_URL}/api/weekly.ics?regions=${REGIONS}"
@@ -22,6 +23,46 @@ echo "${weekly_json}" | grep -q '"renderedText"' || { echo "missing renderedText
 echo "${weekly_json}" | grep -q '"meta"' || { echo "missing meta"; exit 1; }
 echo "${weekly_json}" | grep -q '"sourceMode"' || { echo "missing meta.sourceMode"; exit 1; }
 echo "${weekly_json}" | grep -q '"sourcesUsed"' || { echo "missing meta.sourcesUsed"; exit 1; }
+echo "${weekly_json}" | node -e '
+const fs = require("fs");
+const payload = JSON.parse(fs.readFileSync(0, "utf8"));
+const expectedMode = process.argv[1];
+if (!payload || typeof payload !== "object") {
+  console.error("weekly payload is not an object");
+  process.exit(1);
+}
+if (typeof payload.renderedText !== "string") {
+  console.error("renderedText is not a string");
+  process.exit(1);
+}
+const firstLine = payload.renderedText.split("\n")[0] || "";
+if (!firstLine.startsWith("📊 WOCHENAUSBLICK ")) {
+  console.error("strict header missing or malformed");
+  process.exit(1);
+}
+const meta = payload.meta;
+if (!meta || typeof meta !== "object") {
+  console.error("meta missing or invalid");
+  process.exit(1);
+}
+if (meta.sourceMode !== expectedMode) {
+  console.error(`unexpected sourceMode: ${meta.sourceMode} (expected ${expectedMode})`);
+  process.exit(1);
+}
+if (!Array.isArray(meta.sourcesUsed)) {
+  console.error("sourcesUsed is not an array");
+  process.exit(1);
+}
+if (meta.sourcesUsed.length === 0) {
+  console.error("sourcesUsed is empty");
+  process.exit(1);
+}
+const hasPrimaryOrSecondary = meta.sourcesUsed.some((item) => item === "investing" || item === "tradingview");
+if (!hasPrimaryOrSecondary) {
+  console.error("sourcesUsed missing investing/tradingview");
+  process.exit(1);
+}
+' "${EXPECTED_SOURCE_MODE}"
 echo "[smoke] weekly ok"
 
 echo "[smoke] ics: ${ics_url}"
