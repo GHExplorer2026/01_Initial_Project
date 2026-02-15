@@ -45,4 +45,9 @@
   - `install=success`, `verify=success`, `smoke=success`
 - Next phase planned:
   - `v0.1.2` UX/UI implementation planning documented in `docs/V0_1_2_PLAN.md`.
+- `v0.1.2` UI implementation baseline added:
+  - deterministic scope-state helpers in `src/app/scopeState.ts`
+  - UI state/strict-output isolation refactor in `src/app/page.tsx`
+  - helper tests in `tests/scopeState.ui.test.ts`
+- Local unit execution for the new test file is blocked in this shell by Node 18 + Vitest ESM startup (`ERR_REQUIRE_ESM`); run full unit suite in Node `>=20.9.0` / CI.
 - `next-env.d.ts` drift handling is documented in `docs/TROUBLESHOOTING.md`.

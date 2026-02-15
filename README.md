@@ -83,6 +83,8 @@ Date: `2026-02-15`
 | P-040 | 2026-02-15 | v0.1.1 | Gate check fix | `check:release-gate` now accepts successful run SHA on `HEAD^` when `HEAD` is the marker commit | Completed | `scripts/check_release_gate.sh`, `docs/V0_1_1_EVIDENCE.md` | Codex |
 | P-041 | 2026-02-15 | v0.1.1 | Release publish | Finalized release documentation and published tag `v0.1.1` on `origin` | Completed | `docs/RELEASES.md`, `docs/V0_1_1_EVIDENCE.md`, tag `v0.1.1` | Codex |
 | P-042 | 2026-02-15 | v0.1.2 | Planning | Created `v0.1.2` planning doc with scope, risks, workstreams, backlog, and DoD | Completed | `docs/V0_1_2_PLAN.md` | Codex |
+| P-043 | 2026-02-15 | v0.1.2 | UI foundation | Refactored `src/app/page.tsx` into deterministic UI state model with strict-output isolation and scope-bound actions | Completed | `src/app/page.tsx`, `src/app/globals.css` | Codex |
+| P-044 | 2026-02-15 | v0.1.2 | Scope-state determinism | Added pure scope-state helpers and dedicated unit tests for query/storage precedence and canonical region ordering | Completed | `src/app/scopeState.ts`, `tests/scopeState.ui.test.ts` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -91,12 +93,12 @@ Date: `2026-02-15`
 | T-102 | Add deterministic metadata/error taxonomy tests for fallback behavior | High | Completed | None | 2026-02-14 | Codex |
 | T-103 | Final Node-20 verify for `v0.1.1` and release tag | High | Completed | None | 2026-02-14 | Codex/User |
 | T-104 | Run GitHub `Release Gate` workflow on `main` and archive artifacts | High | Completed | None | 2026-02-15 | Codex/User |
-| U-201 | Implement v0.1.2 UI page shell and state model | High | Open | None | 2026-02-16 | Codex |
-| U-202 | Implement region checkbox UX (`Alle`/`Keine`) with stable serialization | High | Open | U-201 | 2026-02-16 | Codex |
-| U-203 | Implement URL + localStorage scope persistence | High | Open | U-202 | 2026-02-16 | Codex |
-| U-204 | Implement weekly generate flow + strict `<pre>` output isolation | High | Open | U-203 | 2026-02-16 | Codex |
-| U-205 | Implement ICS download UX flow | Medium | Open | U-204 | 2026-02-16 | Codex |
-| U-206 | Add UI interaction/a11y tests (fixture-first) | High | Open | U-205 | 2026-02-16 | Codex |
+| U-201 | Implement v0.1.2 UI page shell and state model | High | Completed | None | 2026-02-15 | Codex |
+| U-202 | Implement region checkbox UX (`Alle`/`Keine`) with stable serialization | High | Completed | None | 2026-02-15 | Codex |
+| U-203 | Implement URL + localStorage scope persistence | High | Completed | None | 2026-02-15 | Codex |
+| U-204 | Implement weekly generate flow + strict `<pre>` output isolation | High | Completed | None | 2026-02-15 | Codex |
+| U-205 | Implement ICS download UX flow | Medium | Completed | None | 2026-02-15 | Codex |
+| U-206 | Add UI interaction/a11y tests (fixture-first) | High | In Progress | Local unit runtime uses Node 18 (Vitest ESM startup issue); execute full suite in Node 20 CI/runtime | 2026-02-16 | Codex |
 | U-207 | Run release gates + finalize `v0.1.2` evidence docs | High | Open | U-206 | 2026-02-16 | Codex/User |
 
 ## 6. Risks

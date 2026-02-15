@@ -26,7 +26,7 @@ Deliver the UX/UI implementation phase (`v0.1.2`) on top of `v0.1.1` without cha
 ## Workstreams
 
 ## W1 UI Composition and State Model
-Status: Planned
+Status: Completed
 
 1. Implement page structure in `src/app/page.tsx` with clear separation:
    - controls section
@@ -38,6 +38,9 @@ Status: Planned
    - loading flags
    - API error surface (outside strict output)
    - last successful payload for ICS context
+   Progress:
+   - `src/app/page.tsx` refactored to explicit UI state (`selected`, `loading`, `error`, `sourceMode`, `sourcesUsed`, `hasGenerated`, `hydrated`).
+   - Strict output remains isolated in dedicated `<pre>` without injected status/debug text.
 
 ### Acceptance
 1. UI renders on desktop and mobile.
@@ -45,7 +48,7 @@ Status: Planned
 3. No change to strict text content semantics.
 
 ## W2 Region Scope UX
-Status: Planned
+Status: Completed
 
 1. Build checkbox grid for 8 regions (USA, EZ, UK, JP, CH, CA, AU, NZ).
 2. Implement `Alle` and `Keine` actions.
@@ -53,6 +56,9 @@ Status: Planned
    - URL query: `regions=...`
    - `localStorage` persistence
 4. Ensure deterministic normalization order for query serialization.
+   Progress:
+   - Added `src/app/scopeState.ts` with deterministic region normalization/serialization based on canonical region order.
+   - `Alle`/`Keine` and checkbox toggles now use canonical ordering.
 
 ### Acceptance
 1. Region selection survives refresh and deep links.
@@ -60,12 +66,15 @@ Status: Planned
 3. `regions` is always primary in generated requests.
 
 ## W3 Generate Flow and Strict Output Rendering
-Status: Planned
+Status: Completed
 
 1. Implement generate action calling `GET /api/weekly?regions=...`.
 2. Render strict block in `<pre>` exactly as provided by API `renderedText`.
 3. Surface non-blocking meta/status UI outside strict block only.
 4. Handle empty/error states without mutating strict output content.
+   Progress:
+   - Generate action keeps strict output payload untouched and surfaces status/meta outside strict block.
+   - Initial non-generated hint moved outside `<pre>`.
 
 ### Acceptance
 1. Strict block displays API text 1:1.
@@ -73,12 +82,15 @@ Status: Planned
 3. Canonical hint lines remain unchanged in strict text.
 
 ## W4 ICS Download UX
-Status: Planned
+Status: Completed
 
 1. Implement download action for `GET /api/weekly.ics?regions=...`.
 2. Support browser-native download behavior.
 3. Optional enhanced path selection (where supported) without changing API behavior.
 4. Preserve deterministic filename handling from API response.
+   Progress:
+   - Download action remains scope-bound and disabled when no regions selected.
+   - No changes to API/ICS contract behavior.
 
 ### Acceptance
 1. ICS download works for current scope.
@@ -86,7 +98,7 @@ Status: Planned
 3. No ICS contract changes.
 
 ## W5 UI Tests and A11y Baseline
-Status: Planned
+Status: In Progress
 
 1. Add interaction tests for:
    - checkbox toggles
@@ -99,6 +111,9 @@ Status: Planned
    - keyboard navigation for controls/buttons
    - focus visibility
    - label-to-control linkage
+   Progress:
+   - Added deterministic unit tests for UI scope-state logic in `tests/scopeState.ui.test.ts`.
+   - Full DOM interaction/a11y checks pending Node-20 test runtime in local shell.
 
 ### Acceptance
 1. UI tests pass deterministically in CI.

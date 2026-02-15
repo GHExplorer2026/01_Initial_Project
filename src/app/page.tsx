@@ -1,93 +1,68 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-
-type RegionOption = {
-  code: "USA" | "EZ" | "UK" | "JP" | "CH" | "CA" | "AU" | "NZ";
-  label: string;
-};
-
-const REGION_OPTIONS: RegionOption[] = [
-  { code: "USA", label: "USA (USD)" },
-  { code: "EZ", label: "Euro Zone (EUR)" },
-  { code: "UK", label: "United Kingdom (GBP)" },
-  { code: "JP", label: "Japan (JPY)" },
-  { code: "CH", label: "Switzerland (CHF)" },
-  { code: "CA", label: "Canada (CAD)" },
-  { code: "AU", label: "Australia (AUD)" },
-  { code: "NZ", label: "New Zealand (NZD)" }
-];
-
-const STORAGE_KEY = "macro_regions_v1";
+import type { RegionCode } from "@/core/types";
+import {
+  REGION_OPTIONS,
+  STORAGE_KEY,
+  allRegionsSelection,
+  resolveInitialRegionSelection,
+  serializeRegionsParam,
+  toggleRegionSelection
+} from "@/app/scopeState";
 
 type WeeklyResponse = {
   renderedText: string;
-};
-
-const parseRegionSetFromQuery = (): Set<string> => {
-  const params = new URLSearchParams(window.location.search);
-  const raw = params.get("regions");
-  if (!raw) {
-    return new Set(REGION_OPTIONS.map((r) => r.code));
-  }
-  return new Set(
-    raw
-      .split(",")
-      .map((v) => v.trim().toUpperCase())
-      .filter(Boolean)
-  );
+  meta?: {
+    sourceMode?: "fixtures" | "live";
+    sourcesUsed?: string[];
+  };
 };
 
 export default function Page() {
-  const [selected, setSelected] = useState<Set<string>>(new Set(REGION_OPTIONS.map((r) => r.code)));
+  const [selected, setSelected] = useState<RegionCode[]>(allRegionsSelection);
   const [renderedText, setRenderedText] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>("");
+  const [sourceMode, setSourceMode] = useState<"fixtures" | "live" | null>(null);
+  const [sourcesUsed, setSourcesUsed] = useState<string[]>([]);
+  const [hasGenerated, setHasGenerated] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    const querySet = parseRegionSetFromQuery();
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      try {
-        const arr = JSON.parse(stored) as string[];
-        if (arr.length > 0) {
-          setSelected(new Set(arr));
-          return;
-        }
-      } catch {
-        // ignore invalid local storage payload
-      }
-    }
-    setSelected(querySet);
+    const fromStorage = localStorage.getItem(STORAGE_KEY);
+    const initial = resolveInitialRegionSelection(window.location.search, fromStorage);
+    setSelected(initial);
+    setHydrated(true);
   }, []);
 
   useEffect(() => {
-    const values = [...selected].filter((value) => REGION_OPTIONS.some((r) => r.code === value));
+    if (!hydrated) {
+      return;
+    }
+    const values = [...selected];
     const params = new URLSearchParams(window.location.search);
-    params.set("regions", values.join(","));
-    const nextUrl = `${window.location.pathname}?${params.toString()}`;
+    params.set("regions", serializeRegionsParam(values));
+    const nextSearch = params.toString();
+    const nextUrl = nextSearch ? `${window.location.pathname}?${nextSearch}` : window.location.pathname;
     window.history.replaceState(null, "", nextUrl);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(values));
-  }, [selected]);
+  }, [hydrated, selected]);
 
-  const regionsParam = useMemo(() => [...selected].join(","), [selected]);
+  const regionsParam = useMemo(() => serializeRegionsParam(selected), [selected]);
+  const selectedSet = useMemo(() => new Set(selected), [selected]);
 
-  const onToggle = (code: string) => {
-    setSelected((prev) => {
-      const next = new Set(prev);
-      if (next.has(code)) {
-        next.delete(code);
-      } else {
-        next.add(code);
-      }
-      return next;
-    });
+  const onToggle = (code: RegionCode) => {
+    setSelected((prev) => toggleRegionSelection(prev, code));
   };
 
-  const onAll = () => setSelected(new Set(REGION_OPTIONS.map((r) => r.code)));
-  const onNone = () => setSelected(new Set());
+  const onAll = () => setSelected(allRegionsSelection());
+  const onNone = () => setSelected([]);
 
   const onGenerate = async () => {
+    if (selected.length === 0) {
+      return;
+    }
     setLoading(true);
     setError("");
     try {
@@ -97,6 +72,9 @@ export default function Page() {
       }
       const data = (await response.json()) as WeeklyResponse;
       setRenderedText(data.renderedText ?? "");
+      setSourceMode(data.meta?.sourceMode ?? null);
+      setSourcesUsed(Array.isArray(data.meta?.sourcesUsed) ? data.meta?.sourcesUsed : []);
+      setHasGenerated(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unknown error");
     } finally {
@@ -105,6 +83,9 @@ export default function Page() {
   };
 
   const onDownloadIcs = () => {
+    if (selected.length === 0) {
+      return;
+    }
     window.location.href = `/api/weekly.ics?regions=${encodeURIComponent(regionsParam)}`;
   };
 
@@ -130,7 +111,7 @@ export default function Page() {
             <label key={option.code} className="check-item">
               <input
                 type="checkbox"
-                checked={selected.has(option.code)}
+                checked={selectedSet.has(option.code)}
                 onChange={() => onToggle(option.code)}
                 aria-label={option.label}
               />
@@ -143,19 +124,27 @@ export default function Page() {
       <section className="panel">
         <h2>Aktionen</h2>
         <div className="actions-inline">
-          <button onClick={onGenerate} type="button" disabled={loading || selected.size === 0}>
+          <button onClick={onGenerate} type="button" disabled={loading || selected.length === 0}>
             {loading ? "Generiere..." : "Wochenausblick generieren"}
           </button>
-          <button onClick={onDownloadIcs} type="button" disabled={selected.size === 0}>
+          <button onClick={onDownloadIcs} type="button" disabled={selected.length === 0}>
             .ICS herunterladen
           </button>
         </div>
+        {hasGenerated ? (
+          <p className="meta-line">
+            <strong>Mode:</strong> {sourceMode ?? "unknown"}{" "}
+            <span className="meta-sep">|</span> <strong>Quellen:</strong>{" "}
+            {sourcesUsed.length > 0 ? sourcesUsed.join(", ") : "none"}
+          </p>
+        ) : null}
         {error ? <p className="error">Fehler: {error}</p> : null}
       </section>
 
       <section className="panel">
-        <h2>Output</h2>
-        <pre className="strict-output">{renderedText || "Noch kein Output generiert."}</pre>
+        <h2>Strict Output</h2>
+        {!hasGenerated ? <p className="sub">Noch kein Output generiert.</p> : null}
+        <pre className="strict-output">{renderedText}</pre>
       </section>
     </main>
   );
