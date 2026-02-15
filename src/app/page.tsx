@@ -12,6 +12,7 @@ import {
 } from "@/app/scopeState";
 import { buildIcsEndpoint, buildWeeklyEndpoint } from "@/app/uiRequests";
 import { normalizeWeeklyResponse, type WeeklyResponse } from "@/app/weeklyResponse";
+import { deriveUiActionState, toUiErrorMessage } from "@/app/uiState";
 
 export default function Page() {
   const [selected, setSelected] = useState<RegionCode[]>(allRegionsSelection);
@@ -42,6 +43,7 @@ export default function Page() {
   }, [hydrated, selected]);
 
   const selectedSet = useMemo(() => new Set(selected), [selected]);
+  const uiActions = deriveUiActionState(selected.length, loading);
 
   const onToggle = (code: RegionCode) => {
     setSelected((prev) => toggleRegionSelection(prev, code));
@@ -68,7 +70,7 @@ export default function Page() {
       setSourcesUsed(normalized.sourcesUsed);
       setHasGenerated(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Unknown error");
+      setError(toUiErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -123,10 +125,10 @@ export default function Page() {
       <section className="panel">
         <h2>Aktionen</h2>
         <div className="actions-inline">
-          <button onClick={onGenerate} type="button" disabled={loading || selected.length === 0}>
-            {loading ? "Generiere..." : "Wochenausblick generieren"}
+          <button onClick={onGenerate} type="button" disabled={!uiActions.canGenerate}>
+            {uiActions.generateLabel}
           </button>
-          <button onClick={onDownloadIcs} type="button" disabled={selected.length === 0}>
+          <button onClick={onDownloadIcs} type="button" disabled={!uiActions.canDownloadIcs}>
             .ICS herunterladen
           </button>
         </div>
