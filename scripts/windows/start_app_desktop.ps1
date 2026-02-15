@@ -21,6 +21,31 @@ function Test-AppReady {
   }
 }
 
+function Convert-WindowsPathToWsl {
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]$WindowsPath
+  )
+
+  $normalized = $WindowsPath -replace "\\", "/"
+
+  try {
+    $converted = (& wsl.exe wslpath -a "$normalized" 2>$null)
+    if ($LASTEXITCODE -eq 0 -and -not [string]::IsNullOrWhiteSpace($converted)) {
+      return $converted.Trim()
+    }
+  } catch {
+  }
+
+  if ($normalized -match "^([A-Za-z]):/(.+)$") {
+    $drive = $Matches[1].ToLowerInvariant()
+    $rest = $Matches[2]
+    return "/mnt/$drive/$rest"
+  }
+
+  throw "Could not convert Windows path to WSL path: $WindowsPath"
+}
+
 function Open-DefaultBrowser {
   param(
     [string]$Url
@@ -53,11 +78,7 @@ if (-not (Get-Command wsl.exe -ErrorAction SilentlyContinue)) {
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $repoWinPath = (Resolve-Path (Join-Path $scriptDir "..\..")).Path
-$repoWslPath = (wsl.exe wslpath -a "$repoWinPath").Trim()
-
-if ([string]::IsNullOrWhiteSpace($repoWslPath)) {
-  throw "Could not resolve repository path for WSL."
-}
+$repoWslPath = Convert-WindowsPathToWsl -WindowsPath $repoWinPath
 
 $appUrl = "http://$AppHost`:$Port/"
 if (Test-AppReady -Url $appUrl) {
