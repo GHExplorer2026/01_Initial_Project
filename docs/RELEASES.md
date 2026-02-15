@@ -91,6 +91,7 @@
 - Operational hardening and release-gate stability improvements only.
 - Build/runtime split validation and runbook consolidation.
 - Additional SPEC-safe fixture coverage for fallback and query-contract paths.
+- Current gate status: `READY FOR TAG` (Release Gate `run_id=22034624406`).
 
 ### Planning Reference
 - `docs/V0_1_3_PLAN.md`

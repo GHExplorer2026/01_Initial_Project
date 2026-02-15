@@ -13,7 +13,7 @@
 2. Release Gate workflow on `main`:
    - `status=success`
    - `install=success`, `verify=success`, `smoke=success`
-   - status: `DONE` (`run_id=22034330056`, `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22034330056`)
+   - status: `DONE` (`run_id=22034624406`, `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22034624406`)
 3. Invariant checks:
    - strict output strings unchanged
    - TOP suffix unchanged (` - **TOP-EVENT**`)
@@ -36,7 +36,7 @@
 4. Append final release entry in `docs/RELEASES.md`.
 
 ## Current Status
-- `READY FOR TAG` (pending final post-commit gate refresh)
+- `READY FOR TAG`
 
 ## Evidence Template
 - `docs/V0_1_3_EVIDENCE.md`

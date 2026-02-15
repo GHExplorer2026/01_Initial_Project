@@ -40,7 +40,7 @@
 - Release finalized on `main` with tag `v0.1.0`; `origin/fix/source-mode-meta` was deleted after merge.
 - Release finalized on `main` with tag `v0.1.1`.
 - Final release-gate evidence:
-  - `run_id=22034330056`
+  - `run_id=22034624406`
   - `status=success`
   - `install=success`, `verify=success`, `smoke=success`
 - Next phase planned:
@@ -60,7 +60,7 @@
   - result: pass (`109/109` tests, lint/typecheck/build green)
 - Default shell (`node 18`) still hits Vitest ESM startup issues; use Node `>=20.9.0` path override (plus `TMPDIR=/tmp`) or CI for full suite runs.
 - Latest release-gate marker is green and synced for current release-doc commit:
-  - `run_id=22034330056`
+  - `run_id=22034624406`
   - `status=success`
   - `install=success`, `verify=success`, `smoke=success`
 - `next-env.d.ts` drift handling is documented in `docs/TROUBLESHOOTING.md`.

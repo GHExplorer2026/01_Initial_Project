@@ -122,6 +122,11 @@ Status: Completed
 2. `V-302` Expand SPEC-safe fallback and query-contract tests.
 3. `V-303` Run final release gates and archive v0.1.3 evidence.
 
+## Current Task Status
+1. `V-301`: Completed.
+2. `V-302`: Completed.
+3. `V-303`: Completed (`run_id=22034624406`, marker valid for HEAD).
+
 ## Execution Order
 1. W1 build/runtime hardening alignment.
 2. W2 release gate stability improvements.
