@@ -1,130 +1,61 @@
 # QA_STATUS.md
 
-## Current Branch
-- Branch: `main` (post `v0.1.7` release)
-- Baseline: synced with `origin/main`
+## Consolidated Baseline (2026-02-15)
+- Branch: `main`
+- Repository state target: clean + synced with `origin/main`
+- Product baseline: released `v0.1.7` plus post-release hardening fixes
+- Current test baseline: `131` passing tests in Node `v20.20.0` environment
 
-## Latest Deterministic Gate Run
-- Command:
-  - `npm run verify:release`
-- Result:
+## Current Quality Gate Profile
+- Deterministic local gate command:
+  - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
+- Required result:
   - `unit`: pass
   - `snapshot`: pass
   - `lint`: pass
   - `typecheck`: pass
   - `build`: pass
-  - Current passing tests: `131`
-- Environment:
-  - Node `v20.20.0`
-  - npm `10.8.2`
+- Release gate command:
+  - `PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run check:release-gate`
 
-## Test Coverage Focus (SPEC-critical)
-- Strict DE output formatting (headers, notes, TOP suffix)
-- Source priority and tertiary trigger behavior
-- Scope contract (`regions` primary, `countries` deprecated alias)
-- Exact-time-only normalization and A-F classification
-- Merge/dedupe/grouping determinism
-- ICS RFC profile (CRLF, folding, VTIMEZONE, deterministic UID/DTSTAMP, category in every VEVENT)
-- API contract behavior for `/api/weekly` and `/api/weekly.ics`
+## SPEC-Critical Coverage (active)
+1. Strict DE output formatting (header/day/event line, canonical Hinweiszeilen, exact TOP suffix).
+2. Source governance and priority (`Investing > TradingView > Tertiary`).
+3. Scope contract (`regions` primary, `countries` deprecated alias).
+4. Exact-time-only filtering and A-F category safety (`uncertain => exclude`).
+5. Deterministic merge/dedupe/grouping behavior.
+6. ICS contract invariants (CRLF/folding/VTIMEZONE/deterministic UID+DTSTAMP/category per VEVENT).
+7. API route contracts for `/api/weekly` and `/api/weekly.ics`.
 
-## Notes
-- CI workflows run explicit `unit` and `snapshot` gates.
-- CI uploads JUnit artifacts for `unit` and `snapshot` runs (`artifacts/vitest-*.xml`).
-- Troubleshooting for CI test artifacts is documented in `docs/TROUBLESHOOTING.md`.
-- Local consolidated check is available via `npm run verify`.
-- Local verification requires Node `>=20.9.0`; CI remains source of truth when local runner is below baseline.
-- `next build` generated updates were committed (`tsconfig.json`, `next-env.d.ts`) to keep repository and build output aligned.
-- Additional SPEC edge-case tests were added for:
-  - weekend week-window resolution in orchestrator
-  - empty `regions` parameter with deprecated `countries` alias fallback
-- Release finalized on `main` with tag `v0.1.0`; `origin/fix/source-mode-meta` was deleted after merge.
-- Release finalized on `main` with tag `v0.1.1`.
-- Final release-gate evidence:
-  - `run_id=22035048334`
-  - `status=success`
-  - `install=success`, `verify=success`, `smoke=success`
-- Next phase started:
-  - `v0.1.5` planning initialized with scope/risk/task baseline.
-  - `docs/V0_1_5_PLAN.md`
-  - `docs/V0_1_5_RELEASE_DRAFT.md`
-  - `docs/V0_1_5_EVIDENCE.md`
-- `v0.1.5` baseline and adapter hardening progress:
-  - `V-501` completed (`verify:release` + marker validation)
-  - `V-502` completed (live fetch timeout handling + TradingView epoch timestamp parsing tests)
-  - `V-503` completed (source timeout utility and adapter regression coverage expansion)
-  - `V-504` completed (release-gate marker diagnostics now include run/step/smoke-tail details)
-  - `V-505` completed (release marker validated + release docs finalized + tag published)
-- Final release-gate evidence for `v0.1.5`:
-  - `run_id=22035467485`
-  - `status=success`
-  - `install=success`, `verify=success`, `smoke=success`
-- Release finalized on `main` with tag `v0.1.5`.
-- Next phase started:
-  - `v0.1.6` planning initialized with scope/risk/task baseline.
-  - `docs/V0_1_6_PLAN.md`
-  - `docs/V0_1_6_RELEASE_DRAFT.md`
-  - `docs/V0_1_6_EVIDENCE.md`
-- `v0.1.6` progress:
-  - `V-601` completed (`verify:release` + marker validation, `run_id=22035703265`)
-  - `V-602` completed (canonical fallback note-line contract hardening in tests)
-  - `V-603` completed (release-gate marker mismatch runbook hardening)
-  - `V-604` completed (full deterministic gate rerun, `115/115` tests)
-  - `V-605` completed (release marker validated + release docs finalized + tag published)
-- Post-release tooling hardening:
-  - `next-env.d.ts` drift guard added (`npm run check:next-env`, `npm run fix:next-env`)
-  - optional git hook setup via `npm run setup:hooks`
-  - CI gates now enforce canonical `next-env.d.ts` import path
-- Final release-gate evidence for `v0.1.6`:
-  - `run_id=22035813418`
-  - `status=success`
-  - `install=success`, `verify=success`, `smoke=success`
-- Release finalized on `main` with tag `v0.1.6`.
-- Next phase started:
-  - `v0.1.7` planning initialized with scope/risk/task baseline.
-  - `docs/V0_1_7_PLAN.md`
-  - `docs/V0_1_7_RELEASE_DRAFT.md`
-  - `docs/V0_1_7_EVIDENCE.md`
-- `v0.1.7` baseline gate completed:
-  - `V-701` completed (`verify:release` pass, `129/129` tests)
-  - release-gate marker validated (`run_id=22038326822`)
-- `v0.1.7` UI execution hardening slice completed:
-  - `V-702` completed (stable sorted `meta.sourcesUsed` rendering order in UI normalizer)
-  - follow-up deterministic verify pass (`130/130` tests)
-- `v0.1.7` UI edge coverage completed:
-  - `V-703` completed (stable non-API UI error normalization + regression tests)
-  - deterministic verify gate remains green (`130/130` tests)
-- `v0.1.7` gate rerun completed:
-  - `V-704` completed (`verify:release` green and release-gate marker valid)
-  - `run_id=22038553850`
-- `v0.1.7` release finalized:
-  - `V-705` completed (release evidence finalized + tag published)
-  - published tag: `v0.1.7` on `f2010a0`
-- `v0.1.2` UI implementation baseline added:
-  - deterministic scope-state helpers in `src/app/scopeState.ts`
-  - UI state/strict-output isolation refactor in `src/app/page.tsx`
-  - helper tests in `tests/scopeState.ui.test.ts`
-  - markup contract tests in `tests/page.ui.contract.test.ts`
-  - deterministic endpoint helper tests in `tests/uiRequests.test.ts`
-- `v0.1.2` release preparation docs initialized:
-  - `docs/V0_1_2_RELEASE_DRAFT.md`
-  - `docs/V0_1_2_EVIDENCE.md`
-- Node-20 verify proof for current UI scope:
-  - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
-  - result: pass (`111/111` tests, lint/typecheck/build green)
-- Default shell (`node 18`) still hits Vitest ESM startup issues; use Node `>=20.9.0` path override (plus `TMPDIR=/tmp`) or CI for full suite runs.
-- Latest release-gate marker is green and synced for current release-doc commit:
-  - `run_id=22035048334`
-  - `status=success`
-  - `install=success`, `verify=success`, `smoke=success`
-- Release finalized on `main` with tag `v0.1.3`.
-- Release finalized on `main` with tag `v0.1.4`.
-- Post `v0.1.7` live-validation fixes completed:
-  - ICS `SUMMARY` includes fixed region label (Outlook subject parity with strict output region context).
-  - Orchestrator enforces selected region scope before strict render and ICS generation.
-  - Release-gate smoke now validates selected-region scope in weekly event lines and ICS summaries.
-  - Dev wrappers auto-normalize `next-env.d.ts` on `dev` exit to avoid local drift commits.
-- Latest release-gate marker (current repository state):
-  - `run_id=22039323266`
-  - `status=success`
-  - `install=success`, `verify=success`, `smoke=success`
-- `next-env.d.ts` drift handling is documented in `docs/TROUBLESHOOTING.md`.
+## Post-Release Hardening Included
+1. Outlook ICS subject parity:
+   - ICS `SUMMARY` includes fixed region label.
+2. End-to-end scope enforcement:
+   - orchestrator applies selected `regions` before strict render and ICS generation.
+3. Smoke hardening:
+   - scope checks enforced in both strict weekly lines and ICS summaries.
+4. Drift resilience:
+   - dev wrappers normalize `next-env.d.ts` on exit.
+5. Windows operator path:
+   - desktop one-click launcher for live mode validated in user run.
+
+## Environment and Ops Constraints
+- Local full verification must run on Node `>=20.9.0`.
+- CI remains source of truth if local runtime/network differs.
+- `SOURCE_MODE=fixtures` remains default for deterministic CI/tests.
+- `SOURCE_MODE=live` is for runtime/manual validation only.
+
+## Next Sprint Readiness
+- Ready: `YES`
+- Preconditions satisfied:
+  1. Rules and governance are current (`RULES.md` + skills mitigation updates).
+  2. Runtime startup paths are stable (CLI and Windows desktop launcher).
+  3. Deterministic gates and release-gate workflow are operational.
+  4. Current evidence docs are updated (`docs/UI_EXECUTION_REPORT.md`, `docs/release-gate-last-success.json`).
+
+## References
+- `README.md`
+- `docs/RELEASES.md`
+- `docs/UI_EXECUTION_REPORT.md`
+- `docs/TROUBLESHOOTING.md`
+- `docs/release-gate-last-success.json`

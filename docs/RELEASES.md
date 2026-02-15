@@ -1,5 +1,29 @@
 # RELEASES.md
 
+## post-v0.1.7 maintenance (2026-02-15, no new tag)
+
+### Scope
+- Closed documentation and QA baseline on a consolidated handoff state.
+- Added sprint mitigation governance (DoR/DoD/security/cycle) to rules and skills.
+- Added and stabilized Windows desktop one-click launcher for live runtime.
+
+### Quality Evidence
+- UI/Desktop runtime validation:
+  - successful launcher run in live mode from Windows PowerShell
+  - WSL dev server startup confirmed
+  - browser open and scoped weekly/ICS API calls confirmed
+- Release Gate marker (latest successful run before this maintenance closure):
+  - `run_id=22040211283`
+  - `status=success`
+  - `install=success`, `verify=success`, `smoke=success`
+  - `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22040211283`
+
+### References
+- `docs/QA_STATUS.md`
+- `docs/UI_EXECUTION_REPORT.md`
+- `docs/NEXT_SPRINT_HANDOFF.md`
+- `docs/release-gate-last-success.json`
+
 ## v0.1.7 (2026-02-15)
 
 ### Scope

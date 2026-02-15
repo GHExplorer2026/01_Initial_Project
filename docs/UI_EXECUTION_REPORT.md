@@ -36,6 +36,14 @@
 5. Smoke script (`bash scripts/smoke_api.sh http://127.0.0.1:3000 USA,EZ fixtures`):
    - Result: PASS
    - Weekly + ICS contract checks completed (`[smoke] weekly ok`, `[smoke] ics ok`, `[smoke] done`).
+6. Windows Desktop launcher (`live`) end-to-end:
+   - Result: PASS
+   - Successful command:
+     - `powershell -ExecutionPolicy Bypass -File .\scripts\windows\start_app_desktop.ps1 -SourceMode live`
+   - Observed outcome:
+     - WSL terminal opened and started `npm run dev:live`
+     - Browser opened automatically on `http://127.0.0.1:3000/`
+     - Live API calls returned `200` for scoped `/api/weekly` and `/api/weekly.ics`
 
 ## Deterministic Gates
 1. `npm run verify:release`
@@ -54,9 +62,15 @@
    - Fix: hard scope filter added before strict render and ICS generation in orchestrator.
 3. Regression hardening:
    - Smoke script now validates selected-region scope for strict weekly event lines and ICS `SUMMARY`.
+4. Windows launcher stability:
+   - Fixes added for:
+     - PowerShell reserved variable collision (`Host` -> `AppHost`)
+     - robust Windows-to-WSL path conversion fallback
+     - browser open fallback chain (`Start-Process` -> `cmd /c start` -> `explorer.exe`)
 
 ## Final Status
 - PASS / FAIL: `PASS`
 - Notes:
   - Strict output and ICS mandatory contracts remain intact.
   - No RULES/spec drift introduced.
+  - Windows desktop start path is operational and validated by live user run.

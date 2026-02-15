@@ -2,7 +2,7 @@
 
 ## 1. Project Context
 - Project: `01_Initial_Project`
-- Current objective: maintain released `v0.1.7` baseline and continue SPEC-safe execution hardening.
+- Current objective: keep a consolidated, release-stable baseline and start the next scope from a clean Sprint entry point.
 - Single source of truth for implementation governance: this `README.md`.
 
 ## 2. Current Snapshot
@@ -30,6 +30,7 @@ Date: `2026-02-15`
 | Release `v0.1.6` | Completed | 100% | 2026-02-15 | tag `v0.1.6`, `docs/RELEASES.md`, `docs/V0_1_6_EVIDENCE.md` |
 | `v0.1.7` planning baseline | Completed | 100% | 2026-02-15 | `docs/V0_1_7_PLAN.md`, `docs/V0_1_7_RELEASE_DRAFT.md`, `docs/V0_1_7_EVIDENCE.md` |
 | Release `v0.1.7` | Completed | 100% | 2026-02-15 | tag `v0.1.7`, `docs/RELEASES.md`, `docs/V0_1_7_EVIDENCE.md` |
+| Post-`v0.1.7` maintenance closure | Completed | 100% | 2026-02-15 | `docs/QA_STATUS.md`, `docs/UI_EXECUTION_REPORT.md`, `docs/NEXT_SPRINT_HANDOFF.md` |
 
 ## 3. Active Skill Landscape
 
@@ -162,6 +163,12 @@ Date: `2026-02-15`
 | P-107 | 2026-02-15 | Scope | Bug fix | Enforced selected `regions` scope in orchestrator before strict rendering and ICS generation | Completed | `src/server/orchestrator.ts`, `tests/orchestrator.test.ts` | Codex |
 | P-108 | 2026-02-15 | Release Gate | Smoke hardening | Extended smoke checks to enforce selected-region scope in strict output lines and ICS summaries | Completed | `scripts/smoke_api.sh`, `docs/UI_EXECUTION_CHECKLIST.md` | Codex |
 | P-109 | 2026-02-15 | Dev tooling | Drift hardening | Wrapped `dev:live`/`dev:fixtures` with auto-normalization of `next-env.d.ts` on process exit | Completed | `scripts/dev_live.sh`, `scripts/dev_fixtures.sh`, `README.md`, `docs/TROUBLESHOOTING.md` | Codex |
+| P-110 | 2026-02-15 | Governance | Process hardening | Added sprint mitigation gates (DoR/DoD/security/cycle efficiency) in rules and skills | Completed | `RULES.md`, `skills/spec-safe-direct-delivery/*`, `skills/deterministic-qa-harness/SKILL.md` | Codex |
+| P-111 | 2026-02-15 | Windows Ops | Launcher feature | Added one-click desktop launcher flow (PowerShell + BAT + shortcut installer) | Completed | `scripts/windows/start_app_desktop.ps1`, `scripts/windows/start_app_desktop.bat`, `scripts/windows/install_desktop_shortcut.ps1` | Codex |
+| P-112 | 2026-02-15 | Windows Ops | Launcher hardening | Added browser-open fallback chain and robust readiness handling | Completed | `scripts/windows/start_app_desktop.ps1`, `README.md` | Codex |
+| P-113 | 2026-02-15 | Windows Ops | Bug fix | Fixed PowerShell variable collision (`Host` -> `AppHost`) in launcher | Completed | `scripts/windows/start_app_desktop.ps1` | Codex |
+| P-114 | 2026-02-15 | Windows Ops | Bug fix | Fixed WSL path conversion with resilient fallback mapping (`/mnt/<drive>/...`) | Completed | `scripts/windows/start_app_desktop.ps1` | Codex |
+| P-115 | 2026-02-15 | Documentation | Consolidation | Closed docs to a clean sprint handoff baseline for next scope | Completed | `docs/QA_STATUS.md`, `docs/UI_EXECUTION_REPORT.md`, `docs/NEXT_SPRINT_HANDOFF.md`, `README.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -199,6 +206,9 @@ Date: `2026-02-15`
 | V-703 | Expand deterministic UI execution edge coverage | High | Completed | None | 2026-02-16 | Codex |
 | V-704 | Re-run full deterministic gates after hardening | High | Completed | None | 2026-02-16 | Codex/User |
 | V-705 | Finalize `v0.1.7` release evidence and publish tag | High | Completed | None | 2026-02-16 | Codex/User |
+| N-801 | Kick off next active scope with explicit Sprint Goal + bounded backlog (<=1-week slice set) | High | Open | None | 2026-02-16 | Codex/User |
+| N-802 | Define first execution slice and regression tests before coding (DoR gate) | High | Open | None | 2026-02-16 | Codex/User |
+| N-803 | Close first next-scope slice with full verify + release-gate marker + evidence update (DoD gate) | High | Open | None | 2026-02-16 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |
@@ -238,6 +248,7 @@ Date: `2026-02-15`
 - QA Status: `docs/QA_STATUS.md`
 - UI Execution Checklist: `docs/UI_EXECUTION_CHECKLIST.md`
 - UI Execution Report: `docs/UI_EXECUTION_REPORT.md`
+- Next Sprint Handoff: `docs/NEXT_SPRINT_HANDOFF.md`
 - PR Summary: `docs/PR_SUMMARY.md`
 - PR Body: `docs/PR_BODY.md`
 - Merge Steps: `docs/MERGE_STEPS.md`
@@ -289,3 +300,15 @@ Date: `2026-02-15`
   - Startet `npm run dev:live` (SOURCE_MODE=live) im separaten WSL-Fenster.
   - Öffnet Browser erst nach erfolgreichem Readiness-Check.
   - Fallback-Reihenfolge für Browserstart: `Start-Process URL` -> `cmd /c start` -> `explorer.exe`.
+
+## 14. Next Sprint Kickoff
+- Status:
+  - `Ready`
+- Required start checks:
+  - `git status -sb` is clean.
+  - `npm run check:next-env` is green.
+  - `npm run check:release-gate` is green (or marker catches up within bounded retry).
+- Execution policy:
+  - one active slice at a time (WIP=1),
+  - targeted tests during development,
+  - one full deterministic gate at slice end.
