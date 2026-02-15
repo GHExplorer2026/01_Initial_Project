@@ -106,7 +106,7 @@ Status: Completed
 1. `V-401`: Completed.
 2. `V-402`: Completed.
 3. `V-403`: Completed.
-4. `V-404`: Completed (`run_id=22034861927`, marker valid for release candidate SHA `41f05b8`).
+4. `V-404`: Completed (`run_id=22035048334`, marker valid for release candidate SHA `617cf21`).
 
 ## Execution Order
 1. W1 Baseline verification refresh.

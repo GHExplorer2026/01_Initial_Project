@@ -1,7 +1,7 @@
 # QA_STATUS.md
 
 ## Current Branch
-- Branch: `main` (post `v0.1.3` release)
+- Branch: `main` (post `v0.1.4` release)
 - Baseline: synced with `origin/main`
 
 ## Latest Deterministic Gate Run
@@ -40,12 +40,11 @@
 - Release finalized on `main` with tag `v0.1.0`; `origin/fix/source-mode-meta` was deleted after merge.
 - Release finalized on `main` with tag `v0.1.1`.
 - Final release-gate evidence:
-  - `run_id=22034861927`
+  - `run_id=22035048334`
   - `status=success`
   - `install=success`, `verify=success`, `smoke=success`
 - Next phase planned:
-  - `v0.1.4` planning initialized in `docs/V0_1_4_PLAN.md`.
-  - release scaffolding initialized in `docs/V0_1_4_RELEASE_DRAFT.md` and `docs/V0_1_4_EVIDENCE.md`.
+  - `v0.1.5` planning pending.
 - `v0.1.2` UI implementation baseline added:
   - deterministic scope-state helpers in `src/app/scopeState.ts`
   - UI state/strict-output isolation refactor in `src/app/page.tsx`
@@ -57,11 +56,12 @@
   - `docs/V0_1_2_EVIDENCE.md`
 - Node-20 verify proof for current UI scope:
   - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
-  - result: pass (`109/109` tests, lint/typecheck/build green)
+  - result: pass (`111/111` tests, lint/typecheck/build green)
 - Default shell (`node 18`) still hits Vitest ESM startup issues; use Node `>=20.9.0` path override (plus `TMPDIR=/tmp`) or CI for full suite runs.
 - Latest release-gate marker is green and synced for current release-doc commit:
-  - `run_id=22034861927`
+  - `run_id=22035048334`
   - `status=success`
   - `install=success`, `verify=success`, `smoke=success`
 - Release finalized on `main` with tag `v0.1.3`.
+- Release finalized on `main` with tag `v0.1.4`.
 - `next-env.d.ts` drift handling is documented in `docs/TROUBLESHOOTING.md`.

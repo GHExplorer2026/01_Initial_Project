@@ -2,7 +2,7 @@
 
 ## 1. Project Context
 - Project: `01_Initial_Project`
-- Current objective: execute `v0.1.4` reliability/release-readiness planning increment.
+- Current objective: maintain released `v0.1.4` baseline and prepare the next planning increment.
 - Single source of truth for implementation governance: this `README.md`.
 
 ## 2. Current Snapshot
@@ -23,6 +23,7 @@ Date: `2026-02-15`
 | `v0.1.3` planning baseline | Completed | 100% | 2026-02-15 | `docs/V0_1_3_PLAN.md`, `docs/V0_1_3_EVIDENCE.md` |
 | Release `v0.1.3` | Completed | 100% | 2026-02-15 | tag `v0.1.3`, `docs/RELEASES.md`, `docs/V0_1_3_EVIDENCE.md` |
 | `v0.1.4` planning baseline | Completed | 100% | 2026-02-15 | `docs/V0_1_4_PLAN.md`, `docs/V0_1_4_EVIDENCE.md` |
+| Release `v0.1.4` | Completed | 100% | 2026-02-15 | tag `v0.1.4`, `docs/RELEASES.md`, `docs/V0_1_4_EVIDENCE.md` |
 
 ## 3. Active Skill Landscape
 
@@ -106,7 +107,8 @@ Date: `2026-02-15`
 | P-059 | 2026-02-15 | v0.1.4 | Release scaffold | Added `v0.1.4` release draft and evidence templates | Completed | `docs/V0_1_4_RELEASE_DRAFT.md`, `docs/V0_1_4_EVIDENCE.md` | Codex |
 | P-060 | 2026-02-15 | v0.1.4 | Baseline gate refresh | Re-ran Node-20 verify and validated release-gate marker for current baseline | Completed | `npm run verify:release`, `npm run check:release-gate` | Codex |
 | P-061 | 2026-02-15 | v0.1.4 | Contract coverage | Added additional deprecated-alias normalization route tests and re-verified full suite | Completed | `tests/api.weekly.route.test.ts`, `tests/api.weekly-ics.route.test.ts` | Codex |
-| P-062 | 2026-02-15 | v0.1.4 | Gate closure | Validated release-candidate marker (`run_id=22034861927`) and closed `V-404` | Completed | `docs/release-gate-last-success.json`, `docs/V0_1_4_EVIDENCE.md` | Codex |
+| P-062 | 2026-02-15 | v0.1.4 | Gate closure | Validated release-candidate marker (`run_id=22035048334`) and closed `V-404` | Completed | `docs/release-gate-last-success.json`, `docs/V0_1_4_EVIDENCE.md` | Codex |
+| P-063 | 2026-02-15 | v0.1.4 | Release publish | Published `v0.1.4` tag and finalized release records | Completed | tag `v0.1.4`, `docs/RELEASES.md`, `docs/V0_1_4_RELEASE_DRAFT.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |

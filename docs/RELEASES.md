@@ -110,15 +110,27 @@
 - `docs/V0_1_3_EVIDENCE.md`
 - `docs/release-gate-last-success.json`
 
-## Next Planned: v0.1.4
+## v0.1.4 (2026-02-15)
 
-### Focus
-- Baseline verification and release-gate refresh after `v0.1.3` release.
-- Runbook hardening for deterministic operations under intermittent DNS/network issues.
+### Scope
+- Baseline verification and release-gate refresh after `v0.1.3`.
+- Runbook hardening for deterministic operations under intermittent DNS/network behavior.
 - Additional SPEC-safe fallback/contract coverage with fixture-first tests.
-- Current gate status: `READY FOR TAG` (release-candidate marker `run_id=22034861927`).
 
-### Planning Reference
+### Quality Evidence
+- Local Node-20 verify gate:
+  - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
+  - result: `111/111` tests passed + lint/typecheck/build pass
+- Release Gate:
+  - `run_id=22035048334`
+  - `status=success`
+  - `install=success`, `verify=success`, `smoke=success`
+  - `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22035048334`
+- Published tag:
+  - `v0.1.4` (annotated tag on commit `617cf21`)
+
+### References
 - `docs/V0_1_4_PLAN.md`
 - `docs/V0_1_4_RELEASE_DRAFT.md`
 - `docs/V0_1_4_EVIDENCE.md`
+- `docs/release-gate-last-success.json`
