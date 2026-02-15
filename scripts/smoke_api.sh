@@ -35,9 +35,18 @@ if (typeof payload.renderedText !== "string") {
   console.error("renderedText is not a string");
   process.exit(1);
 }
+if (payload.renderedText.includes("http://") || payload.renderedText.includes("https://")) {
+  console.error("strict output contains links");
+  process.exit(1);
+}
 const firstLine = payload.renderedText.split("\n")[0] || "";
 if (!firstLine.startsWith("📊 WOCHENAUSBLICK ")) {
   console.error("strict header missing or malformed");
+  process.exit(1);
+}
+const dayHeaders = payload.renderedText.split("\n").filter((line) => line.startsWith("### "));
+if (dayHeaders.length !== 5) {
+  console.error(`unexpected number of day headers: ${dayHeaders.length}`);
   process.exit(1);
 }
 const meta = payload.meta;
