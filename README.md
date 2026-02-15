@@ -2,7 +2,7 @@
 
 ## 1. Project Context
 - Project: `01_Initial_Project`
-- Current objective: execute `v0.1.5` hardening plan on top of released `v0.1.4`.
+- Current objective: maintain released `v0.1.5` baseline and prepare the next planning increment.
 - Single source of truth for implementation governance: this `README.md`.
 
 ## 2. Current Snapshot
@@ -25,6 +25,7 @@ Date: `2026-02-15`
 | `v0.1.4` planning baseline | Completed | 100% | 2026-02-15 | `docs/V0_1_4_PLAN.md`, `docs/V0_1_4_EVIDENCE.md` |
 | Release `v0.1.4` | Completed | 100% | 2026-02-15 | tag `v0.1.4`, `docs/RELEASES.md`, `docs/V0_1_4_EVIDENCE.md` |
 | `v0.1.5` planning baseline | Completed | 100% | 2026-02-15 | `docs/V0_1_5_PLAN.md`, `docs/V0_1_5_RELEASE_DRAFT.md`, `docs/V0_1_5_EVIDENCE.md` |
+| Release `v0.1.5` | Completed | 100% | 2026-02-15 | tag `v0.1.5`, `docs/RELEASES.md`, `docs/V0_1_5_EVIDENCE.md` |
 
 ## 3. Active Skill Landscape
 
@@ -116,6 +117,8 @@ Date: `2026-02-15`
 | P-067 | 2026-02-15 | v0.1.5 | Adapter resilience | Completed `V-502` with deterministic live-fetch timeout handling and TradingView epoch timestamp parsing + tests | Completed | `src/server/sources/common.ts`, `src/server/sources/investing.ts`, `src/server/sources/tradingview.ts`, `tests/sourceAdapters.test.ts` | Codex |
 | P-068 | 2026-02-15 | v0.1.5 | Coverage expansion | Completed `V-503` with deterministic timeout utility tests and source-adapter regression matrix expansion (`115/115`) | Completed | `tests/sourceCommon.test.ts`, `tests/sourceAdapters.test.ts`, `docs/V0_1_5_PLAN.md` | Codex |
 | P-069 | 2026-02-15 | v0.1.5 | Gate diagnostics | Completed `V-504` by hardening release-gate diagnostics (run_id, step outcomes, decoded smoke tails) in marker checks | Completed | `scripts/check_release_gate.sh`, `docs/V0_1_5_PLAN.md` | Codex |
+| P-070 | 2026-02-15 | v0.1.5 | Gate closure | Validated release-candidate marker (`run_id=22035467485`) and closed `V-505` | Completed | `docs/release-gate-last-success.json`, `docs/V0_1_5_EVIDENCE.md` | Codex |
+| P-071 | 2026-02-15 | v0.1.5 | Release publish | Published `v0.1.5` tag and finalized release records | Completed | tag `v0.1.5`, `docs/RELEASES.md`, `docs/V0_1_5_RELEASE_DRAFT.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -142,7 +145,7 @@ Date: `2026-02-15`
 | V-502 | Implement SPEC-safe live adapter resilience hardening | High | Completed | None | 2026-02-16 | Codex |
 | V-503 | Expand deterministic fixture and API contract coverage for `v0.1.5` | High | Completed | None | 2026-02-16 | Codex |
 | V-504 | Harden release-gate diagnostics and marker traceability | High | Completed | None | 2026-02-16 | Codex |
-| V-505 | Finalize `v0.1.5` release evidence and publish tag | High | Open | None | 2026-02-16 | Codex/User |
+| V-505 | Finalize `v0.1.5` release evidence and publish tag | High | Completed | None | 2026-02-16 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |

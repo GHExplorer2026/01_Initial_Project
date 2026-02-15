@@ -53,6 +53,12 @@
   - `V-502` completed (live fetch timeout handling + TradingView epoch timestamp parsing tests)
   - `V-503` completed (source timeout utility and adapter regression coverage expansion)
   - `V-504` completed (release-gate marker diagnostics now include run/step/smoke-tail details)
+  - `V-505` completed (release marker validated + release docs finalized + tag published)
+- Final release-gate evidence for `v0.1.5`:
+  - `run_id=22035467485`
+  - `status=success`
+  - `install=success`, `verify=success`, `smoke=success`
+- Release finalized on `main` with tag `v0.1.5`.
 - `v0.1.2` UI implementation baseline added:
   - deterministic scope-state helpers in `src/app/scopeState.ts`
   - UI state/strict-output isolation refactor in `src/app/page.tsx`

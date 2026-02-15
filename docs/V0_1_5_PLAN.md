@@ -4,8 +4,8 @@
 Deliver the `v0.1.5` hardening increment on top of released `v0.1.4`, focused on live-mode reliability, deterministic observability, and release-gate robustness without any SPEC drift.
 
 ## Release Status
-1. `v0.1.5` is in planning.
-2. Baseline release remains `v0.1.4`.
+1. `v0.1.5` is released.
+2. Release tag: `v0.1.5` on commit `9beb641`.
 3. Entry criteria:
    - `main` synced with latest release-gate marker.
    - `npm run check:release-gate` valid for current `HEAD`.
@@ -102,11 +102,18 @@ Status: Completed
 2. No regressions to marker write/validation behavior.
 
 ## W5 Release Scaffolding and Closure (`v0.1.5`)
-Status: Planned
+Status: Completed
 
 1. Create/update `docs/V0_1_5_RELEASE_DRAFT.md`.
 2. Create/update `docs/V0_1_5_EVIDENCE.md`.
 3. Close release with green verify + release-gate and publish tag.
+   Progress:
+   - Release gate marker validated on release-candidate SHA:
+     - `run_id=22035467485`
+     - `status=success` (`install/verify/smoke`)
+   - Published release tag:
+     - `v0.1.5` on `9beb641`
+   - Finalized release records in governance docs.
 
 ### Acceptance
 1. Release docs are complete and evidence-backed.
@@ -135,7 +142,7 @@ Status: Planned
 2. `V-502`: Completed.
 3. `V-503`: Completed.
 4. `V-504`: Completed.
-5. `V-505`: Open.
+5. `V-505`: Completed.
 
 ## Execution Order
 1. W1 baseline sync and validation.
