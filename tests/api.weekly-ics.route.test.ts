@@ -60,6 +60,15 @@ describe("GET /api/weekly.ics", () => {
     expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({ regions: ["USA", "EZ"] });
   });
 
+  it("accepts normalized equivalent regions/countries sets without conflict", async () => {
+    mockedGenerateWeeklyOutlook.mockResolvedValue(buildWeeklyOutput());
+
+    const response = await GET(new Request("http://localhost/api/weekly.ics?regions=usa, ez,USA&countries=eur,usd"));
+
+    expect(response.status).toBe(200);
+    expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({ regions: ["USA", "EZ"] });
+  });
+
   it("accepts deprecated countries alias when regions is absent", async () => {
     mockedGenerateWeeklyOutlook.mockResolvedValue(buildWeeklyOutput());
 
@@ -100,6 +109,15 @@ describe("GET /api/weekly.ics", () => {
 
   it("returns 400 on regions/countries conflict", async () => {
     const response = await GET(new Request("http://localhost/api/weekly.ics?regions=USA&countries=EUR"));
+    const body = await response.text();
+
+    expect(response.status).toBe(400);
+    expect(body).toBe("regions and countries parameters conflict");
+    expect(mockedGenerateWeeklyOutlook).not.toHaveBeenCalled();
+  });
+
+  it("returns 400 when normalized regions/countries sets still conflict", async () => {
+    const response = await GET(new Request("http://localhost/api/weekly.ics?regions=usa,ez&countries=usd"));
     const body = await response.text();
 
     expect(response.status).toBe(400);

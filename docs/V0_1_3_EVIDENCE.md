@@ -7,9 +7,15 @@ Track concrete evidence for closing `v0.1.3` release gates.
 
 ### 1) Local/CI Verify Gate
 - Command:
-  - `npm run verify:release`
+  - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
 - Result:
-  - `PENDING`
+  - `PASS`
+  - `unit`: pass
+  - `snapshot`: pass
+  - `lint`: pass
+  - `typecheck`: pass
+  - `build`: pass
+  - tests: `109 / 109` passed
 
 ### 2) GitHub Release Gate Workflow
 - Workflow:
@@ -27,11 +33,14 @@ Track concrete evidence for closing `v0.1.3` release gates.
 
 ### 3) SPEC Invariant Evidence
 - Strict output snapshots:
-  - `PENDING`
+  - `PASS` (covered by snapshot gate)
 - ICS snapshots (CRLF/folding/mandatory category):
-  - `PENDING`
+  - `PASS` (covered by snapshot gate)
 - Scope contract tests (`regions` primary):
-  - `PENDING`
+  - `IN PROGRESS`
+  - Added normalized route contract cases:
+    - `tests/api.weekly.route.test.ts`
+    - `tests/api.weekly-ics.route.test.ts`
 
 ### 4) Release Action
 - Planned tag:

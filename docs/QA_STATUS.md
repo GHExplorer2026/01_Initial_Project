@@ -13,7 +13,7 @@
   - `lint`: pass
   - `typecheck`: pass
   - `build`: pass
-  - Current passing tests: `105`
+  - Current passing tests: `109`
 - Environment:
   - Node `v20.20.0`
   - npm `10.8.2`
@@ -57,7 +57,7 @@
   - `docs/V0_1_2_EVIDENCE.md`
 - Node-20 verify proof for current UI scope:
   - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
-  - result: pass (`105/105` tests, lint/typecheck/build green)
+  - result: pass (`109/109` tests, lint/typecheck/build green)
 - Default shell (`node 18`) still hits Vitest ESM startup issues; use Node `>=20.9.0` path override (plus `TMPDIR=/tmp`) or CI for full suite runs.
 - Latest release-gate marker is green and synced for current release-doc commit:
   - `run_id=22034113407`

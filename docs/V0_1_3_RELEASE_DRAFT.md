@@ -9,7 +9,7 @@
 ## Required Final Gates (Before Tag)
 1. Local/CI quality gate:
    - `npm run verify:release`
-   - status: `TODO`
+   - status: `DONE` (`109/109` tests passed in Node-20 run)
 2. Release Gate workflow on `main`:
    - `status=success`
    - `install=success`, `verify=success`, `smoke=success`

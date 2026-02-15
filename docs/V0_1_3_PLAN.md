@@ -68,11 +68,15 @@ Status: Planned
 2. CI remains fully offline and deterministic.
 
 ## W4 Test Coverage Expansion (SPEC-safe)
-Status: Planned
+Status: In Progress
 
 1. Expand fixture-based tests for fallback/empty-day behavior (weekend/holiday/error).
 2. Expand API contract tests around `regions` vs deprecated `countries`.
 3. Keep strict text and ICS golden snapshots byte-stable.
+   Progress:
+   - Added normalized query-contract route tests for both endpoints:
+     - matching normalized sets are accepted
+     - conflicting normalized sets return `400`
 
 ### Acceptance
 1. Added tests do not alter existing golden outputs.

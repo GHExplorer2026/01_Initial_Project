@@ -96,6 +96,7 @@ Date: `2026-02-15`
 | P-051 | 2026-02-15 | v0.1.3 | Planning | Started `v0.1.3` operational hardening plan (scope, risks, workstreams, DoD) | Completed | `docs/V0_1_3_PLAN.md` | Codex |
 | P-052 | 2026-02-15 | v0.1.3 | Release scaffold | Added release draft/evidence templates and next-release references | Completed | `docs/V0_1_3_RELEASE_DRAFT.md`, `docs/V0_1_3_EVIDENCE.md`, `docs/RELEASES.md` | Codex |
 | P-053 | 2026-02-15 | v0.1.3 | Runtime alignment | Aligned `npm start` with standalone Next runtime to match CI smoke startup path | Completed | `package.json`, `docs/V0_1_3_PLAN.md` | Codex |
+| P-054 | 2026-02-15 | v0.1.3 | Contract tests | Expanded route-level `regions`/`countries` normalization conflict tests for weekly and ICS APIs | Completed | `tests/api.weekly.route.test.ts`, `tests/api.weekly-ics.route.test.ts` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -112,7 +113,7 @@ Date: `2026-02-15`
 | U-206 | Add UI interaction/a11y tests (fixture-first) | High | Completed | None | 2026-02-15 | Codex |
 | U-207 | Run release gates + finalize `v0.1.2` evidence docs | High | Completed | None | 2026-02-15 | Codex/User |
 | V-301 | Align build/runtime execution docs and scripts for `v0.1.3` | High | Completed | None | 2026-02-16 | Codex |
-| V-302 | Expand SPEC-safe fallback and query-contract test coverage for `v0.1.3` | High | Open | None | 2026-02-16 | Codex |
+| V-302 | Expand SPEC-safe fallback and query-contract test coverage for `v0.1.3` | High | In Progress | None | 2026-02-16 | Codex |
 | V-303 | Finalize `v0.1.3` release evidence and gate pass | High | Open | None | 2026-02-16 | Codex/User |
 
 ## 6. Risks
