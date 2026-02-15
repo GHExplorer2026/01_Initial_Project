@@ -38,6 +38,7 @@ describe("icsSerializer", () => {
     expect(ics.includes("\r\n")).toBe(true);
     expect(ics).toContain("DTSTAMP:20260208T230000Z");
     expect(ics).toContain("BEGIN:VTIMEZONE");
+    expect(ics).toContain("SUMMARY:USA CPI (YoY)");
 
     const vevents = ics.split("BEGIN:VEVENT").slice(1).map((chunk) => `BEGIN:VEVENT${chunk}`);
     expect(vevents.length).toBeGreaterThan(0);
@@ -80,6 +81,7 @@ describe("icsSerializer", () => {
     for (const event of vevents) {
       expect(event).toContain("\r\nCATEGORIES:Wirtschafts-Event\r\n");
       expect(event).toContain("\r\nDTSTAMP:20260208T230000Z\r\n");
+      expect(event).toMatch(/\r\nSUMMARY:(USA|Euro Zone) /);
       expect(event).toMatch(
         /BEGIN:VEVENT\r\nUID:[^\r\n]+\r\nDTSTAMP:[^\r\n]+\r\nDTSTART;TZID=Europe\/Berlin:[^\r\n]+\r\nDTEND;TZID=Europe\/Berlin:[^\r\n]+\r\nSUMMARY:/
       );

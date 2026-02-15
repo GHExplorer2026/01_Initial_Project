@@ -1,5 +1,5 @@
 import crypto from "node:crypto";
-import type { EconomicEvent } from "@/core/types";
+import { REGION_LABELS, type EconomicEvent } from "@/core/types";
 
 const VTIMEZONE_BERLIN = [
   "BEGIN:VTIMEZONE",
@@ -158,7 +158,7 @@ export const generateIcs = (events: EconomicEvent[], weekStart: string, parserVe
       `DTSTAMP:${dtstamp}`,
       `DTSTART;TZID=Europe/Berlin:${start}`,
       `DTEND;TZID=Europe/Berlin:${end}`,
-      `SUMMARY:${event.titleRaw}`,
+      `SUMMARY:${REGION_LABELS[event.region]} ${event.titleRaw}`,
       "CATEGORIES:Wirtschafts-Event",
       "END:VEVENT"
     ];
