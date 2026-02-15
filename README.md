@@ -2,7 +2,7 @@
 
 ## 1. Project Context
 - Project: `01_Initial_Project`
-- Current objective: maintain released `v0.1.6` baseline and prepare the next planning increment.
+- Current objective: maintain released `v0.1.6` baseline and execute the `v0.1.7` planning-to-closure cycle.
 - Single source of truth for implementation governance: this `README.md`.
 
 ## 2. Current Snapshot
@@ -28,6 +28,7 @@ Date: `2026-02-15`
 | Release `v0.1.5` | Completed | 100% | 2026-02-15 | tag `v0.1.5`, `docs/RELEASES.md`, `docs/V0_1_5_EVIDENCE.md` |
 | `v0.1.6` planning baseline | Completed | 100% | 2026-02-15 | `docs/V0_1_6_PLAN.md`, `docs/V0_1_6_RELEASE_DRAFT.md`, `docs/V0_1_6_EVIDENCE.md` |
 | Release `v0.1.6` | Completed | 100% | 2026-02-15 | tag `v0.1.6`, `docs/RELEASES.md`, `docs/V0_1_6_EVIDENCE.md` |
+| `v0.1.7` planning baseline | Completed | 100% | 2026-02-15 | `docs/V0_1_7_PLAN.md`, `docs/V0_1_7_RELEASE_DRAFT.md`, `docs/V0_1_7_EVIDENCE.md` |
 
 ## 3. Active Skill Landscape
 
@@ -148,6 +149,9 @@ Date: `2026-02-15`
 | P-095 | 2026-02-15 | Release Gate | ICS header invariants | Hardened smoke ICS validation with required attachment filename pattern `Wochenausblick_YYYY-MM-DD.ics` | Completed | `scripts/smoke_api.sh`, `docs/UI_EXECUTION_CHECKLIST.md` | Codex |
 | P-096 | 2026-02-15 | Release Gate | Strict format invariants | Hardened smoke weekly validation with header-date regex and event-line pattern checks | Completed | `scripts/smoke_api.sh`, `docs/UI_EXECUTION_CHECKLIST.md` | Codex |
 | P-097 | 2026-02-15 | UI Resilience | Storage safety | Added safe localStorage wrappers with deterministic fallback semantics and integrated them into UI state boot/persist flow (`129/129`) | Completed | `src/app/storageSafe.ts`, `src/app/page.tsx`, `tests/storageSafe.ui.test.ts`, `npm run verify` | Codex |
+| P-098 | 2026-02-15 | v0.1.7 | Planning | Created `v0.1.7` plan with guardrails, scope, workstreams, risks, and execution backlog (`V-701`..`V-705`) | Completed | `docs/V0_1_7_PLAN.md` | Codex |
+| P-099 | 2026-02-15 | v0.1.7 | Release scaffold | Added `v0.1.7` release draft and evidence scaffold for deterministic gate closure | Completed | `docs/V0_1_7_RELEASE_DRAFT.md`, `docs/V0_1_7_EVIDENCE.md` | Codex |
+| P-100 | 2026-02-15 | Release Docs | Planning traceability | Registered `v0.1.7` as planned upcoming release in release ledger | Completed | `docs/RELEASES.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -180,6 +184,11 @@ Date: `2026-02-15`
 | V-603 | Harden release-operability diagnostics and runbook references | High | Completed | None | 2026-02-16 | Codex |
 | V-604 | Re-run full deterministic gates after hardening | High | Completed | None | 2026-02-16 | Codex/User |
 | V-605 | Finalize `v0.1.6` release evidence and publish tag | High | Completed | None | 2026-02-16 | Codex/User |
+| V-701 | Re-run baseline verify and release-gate checks for `v0.1.7` start | High | Open | None | 2026-02-16 | Codex/User |
+| V-702 | Implement SPEC-safe UI execution hardening slice | High | Open | None | 2026-02-16 | Codex |
+| V-703 | Expand deterministic UI execution edge coverage | High | Open | None | 2026-02-16 | Codex |
+| V-704 | Re-run full deterministic gates after hardening | High | Open | None | 2026-02-16 | Codex/User |
+| V-705 | Finalize `v0.1.7` release evidence and publish tag | High | Open | None | 2026-02-16 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |
@@ -205,15 +214,15 @@ Date: `2026-02-15`
 ## 9. Key Documents
 - Rules: `RULES.md`
 - Plan: `docs/IMPLEMENTATION_PLAN.md`
-- Current Plan: `docs/V0_1_6_PLAN.md`
-- Current Release Draft: `docs/V0_1_6_RELEASE_DRAFT.md`
-- Current Release Evidence: `docs/V0_1_6_EVIDENCE.md`
-- Previous Plan: `docs/V0_1_5_PLAN.md`
-- Previous Release Draft: `docs/V0_1_5_RELEASE_DRAFT.md`
-- Previous Release Evidence: `docs/V0_1_5_EVIDENCE.md`
-- Older Plan: `docs/V0_1_4_PLAN.md`
-- Older Release Draft: `docs/V0_1_4_RELEASE_DRAFT.md`
-- Older Release Evidence: `docs/V0_1_4_EVIDENCE.md`
+- Current Plan: `docs/V0_1_7_PLAN.md`
+- Current Release Draft: `docs/V0_1_7_RELEASE_DRAFT.md`
+- Current Release Evidence: `docs/V0_1_7_EVIDENCE.md`
+- Previous Plan: `docs/V0_1_6_PLAN.md`
+- Previous Release Draft: `docs/V0_1_6_RELEASE_DRAFT.md`
+- Previous Release Evidence: `docs/V0_1_6_EVIDENCE.md`
+- Older Plan: `docs/V0_1_5_PLAN.md`
+- Older Release Draft: `docs/V0_1_5_RELEASE_DRAFT.md`
+- Older Release Evidence: `docs/V0_1_5_EVIDENCE.md`
 - Release Gate Marker: `docs/release-gate-last-success.json`
 - Architecture: `ARCHITECTURE.md`
 - QA Status: `docs/QA_STATUS.md`

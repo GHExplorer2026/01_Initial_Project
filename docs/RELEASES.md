@@ -1,5 +1,16 @@
 # RELEASES.md
 
+## Upcoming (planned): v0.1.7
+
+### Status
+- Planning baseline initialized.
+- Release not published.
+
+### Planning Artifacts
+- `docs/V0_1_7_PLAN.md`
+- `docs/V0_1_7_RELEASE_DRAFT.md`
+- `docs/V0_1_7_EVIDENCE.md`
+
 ## v0.1.0 (2026-02-14)
 
 ### Scope
