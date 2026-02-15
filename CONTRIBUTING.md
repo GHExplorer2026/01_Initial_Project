@@ -27,3 +27,13 @@
 - Default: `SOURCE_MODE=fixtures`
 - Optional local live mode:
   - `TZ=Europe/Berlin NODE_OPTIONS=--dns-result-order=ipv4first SOURCE_MODE=live npm run dev`
+
+## Direct Path Delivery Rule
+Use this cadence to accelerate delivery without reducing quality:
+1. Work in narrow, SPEC-safe batches (no feature drift).
+2. Run targeted tests during implementation.
+3. Run one full deterministic gate at batch end:
+   - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify`
+4. Push immediately after green verify.
+5. Validate release marker:
+   - `PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run check:release-gate`

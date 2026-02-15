@@ -1,0 +1,4 @@
+interface:
+  display_name: "SPEC-Safe Direct Delivery"
+  short_description: "Accelerate delivery with deterministic batch verify and zero drift"
+  default_prompt: "Execute the next SPEC-safe implementation slice with targeted tests, one full verify, push, and release-gate closure."
