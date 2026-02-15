@@ -44,6 +44,10 @@ if (!firstLine.startsWith("📊 WOCHENAUSBLICK ")) {
   console.error("strict header missing or malformed");
   process.exit(1);
 }
+if (!/^📊 WOCHENAUSBLICK \d{2}\.\d{2}\.\d{4} – \d{2}\.\d{2}\.\d{4} .+ \d{4}$/.test(firstLine)) {
+  console.error(`strict header date format invalid: ${firstLine}`);
+  process.exit(1);
+}
 const dayHeaders = payload.renderedText.split("\n").filter((line) => line.startsWith("### "));
 if (dayHeaders.length !== 5) {
   console.error(`unexpected number of day headers: ${dayHeaders.length}`);
@@ -56,6 +60,17 @@ const allowedNotes = new Set([
 ]);
 const lines = payload.renderedText.split("\n");
 for (const line of lines) {
+  if (
+    line.length > 0 &&
+    !line.startsWith("📊 ") &&
+    !line.startsWith("### ") &&
+    !line.startsWith("Hinweis: ")
+  ) {
+    if (!/^\d{2}:\d{2} Uhr: .+$/.test(line)) {
+      console.error(`invalid event line format: ${line}`);
+      process.exit(1);
+    }
+  }
   if (line.startsWith("Hinweis: ") && !allowedNotes.has(line)) {
     console.error(`unexpected Hinweis line: ${line}`);
     process.exit(1);

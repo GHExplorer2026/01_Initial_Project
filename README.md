@@ -146,6 +146,7 @@ Date: `2026-02-15`
 | P-093 | 2026-02-15 | Release Gate | Mode explicitness | Set release-gate smoke invocation to pass `fixtures` expected source mode explicitly (no implicit default reliance) | Completed | `.github/workflows/release-gate.yml` | Codex |
 | P-094 | 2026-02-15 | Release Gate | Canonical line invariants | Hardened smoke weekly validation with allowed Hinweis whitelist and exact ` - **TOP-EVENT**` suffix enforcement | Completed | `scripts/smoke_api.sh`, `docs/UI_EXECUTION_CHECKLIST.md` | Codex |
 | P-095 | 2026-02-15 | Release Gate | ICS header invariants | Hardened smoke ICS validation with required attachment filename pattern `Wochenausblick_YYYY-MM-DD.ics` | Completed | `scripts/smoke_api.sh`, `docs/UI_EXECUTION_CHECKLIST.md` | Codex |
+| P-096 | 2026-02-15 | Release Gate | Strict format invariants | Hardened smoke weekly validation with header-date regex and event-line pattern checks | Completed | `scripts/smoke_api.sh`, `docs/UI_EXECUTION_CHECKLIST.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
