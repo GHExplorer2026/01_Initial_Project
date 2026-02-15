@@ -130,6 +130,7 @@ Date: `2026-02-15`
 | P-078 | 2026-02-15 | v0.1.6 | Gate closure | Validated release-candidate marker (`run_id=22035813418`) and closed `V-605` | Completed | `docs/release-gate-last-success.json`, `docs/V0_1_6_EVIDENCE.md` | Codex |
 | P-079 | 2026-02-15 | v0.1.6 | Release publish | Published `v0.1.6` tag and finalized release records | Completed | tag `v0.1.6`, `docs/RELEASES.md`, `docs/V0_1_6_RELEASE_DRAFT.md` | Codex |
 | P-080 | 2026-02-15 | Tooling | Hardening | Added deterministic `next-env.d.ts` drift guard (`check/fix` scripts, CI check, optional pre-commit hook) without runtime logic changes | Completed | `scripts/check_next_env.sh`, `scripts/normalize_next_env.sh`, `.github/workflows/*.yml`, `npm run verify:release` | Codex |
+| P-081 | 2026-02-15 | UI Execution | Documentation | Added deterministic UI execution checklist/report artifacts for repeatable runtime validation and evidence capture | Completed | `docs/UI_EXECUTION_CHECKLIST.md`, `docs/UI_EXECUTION_REPORT.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -199,6 +200,8 @@ Date: `2026-02-15`
 - Release Gate Marker: `docs/release-gate-last-success.json`
 - Architecture: `ARCHITECTURE.md`
 - QA Status: `docs/QA_STATUS.md`
+- UI Execution Checklist: `docs/UI_EXECUTION_CHECKLIST.md`
+- UI Execution Report: `docs/UI_EXECUTION_REPORT.md`
 - PR Summary: `docs/PR_SUMMARY.md`
 - PR Body: `docs/PR_BODY.md`
 - Merge Steps: `docs/MERGE_STEPS.md`
