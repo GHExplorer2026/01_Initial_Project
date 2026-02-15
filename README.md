@@ -77,6 +77,7 @@ Date: `2026-02-14`
 | P-036 | 2026-02-14 | v0.1.1 | Smoke diagnostics | Persisted smoke-script output (`/tmp/release-gate-smoke.log`) to artifacts and marker (`smoke_check_tail_b64`) | Completed | `.github/workflows/release-gate.yml`, `docs/V0_1_1_EVIDENCE.md` | Codex |
 | P-037 | 2026-02-14 | v0.1.1 | Marker race fix | Marker commit is now gated to current `origin/main` HEAD to prevent stale-run overwrites and commit conflicts | Completed | `.github/workflows/release-gate.yml` | Codex |
 | P-038 | 2026-02-14 | v0.1.1 | Smoke permission fix | Execute smoke script via `bash` in Release Gate to avoid executable-bit drift across environments | Completed | `.github/workflows/release-gate.yml` | Codex |
+| P-039 | 2026-02-14 | v0.1.1 | Smoke ICS rule fix | Smoke check now validates `CATEGORIES:Wirtschafts-Event` per existing VEVENT instead of failing on event-empty calendars | Completed | `scripts/smoke_api.sh` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |

@@ -40,11 +40,18 @@ grep -q 'BEGIN:VCALENDAR' "${body_file}" || {
   sed -n '1,40p' "${body_file}"
   exit 1
 }
-grep -q 'CATEGORIES:Wirtschafts-Event' "${body_file}" || {
-  echo "missing required category"
-  sed -n '1,80p' "${body_file}"
+normalized_ics_file="$(mktemp)"
+tr -d '\r' < "${body_file}" > "${normalized_ics_file}"
+
+vevent_count="$(grep -c '^BEGIN:VEVENT$' "${normalized_ics_file}" || true)"
+category_count="$(grep -c '^CATEGORIES:Wirtschafts-Event$' "${normalized_ics_file}" || true)"
+if [[ "${vevent_count}" -gt 0 ]] && [[ "${category_count}" -ne "${vevent_count}" ]]; then
+  echo "missing required category in one or more VEVENTs (vevents=${vevent_count}, categories=${category_count})"
+  sed -n '1,120p' "${normalized_ics_file}"
+  rm -f "${normalized_ics_file}"
   exit 1
-}
+fi
+rm -f "${normalized_ics_file}"
 echo "[smoke] ics ok"
 
 rm -f "${headers_file}" "${body_file}"
