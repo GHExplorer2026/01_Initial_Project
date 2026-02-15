@@ -49,6 +49,22 @@ if (dayHeaders.length !== 5) {
   console.error(`unexpected number of day headers: ${dayHeaders.length}`);
   process.exit(1);
 }
+const allowedNotes = new Set([
+  "Hinweis: Keine Handelstermine – Wochenende oder Feiertag.",
+  "Hinweis: Keine Handelstermine – Feiertag.",
+  "Hinweis: Keine verifizierten Events gefunden."
+]);
+const lines = payload.renderedText.split("\n");
+for (const line of lines) {
+  if (line.startsWith("Hinweis: ") && !allowedNotes.has(line)) {
+    console.error(`unexpected Hinweis line: ${line}`);
+    process.exit(1);
+  }
+  if (line.includes("TOP-EVENT") && !line.endsWith(" - **TOP-EVENT**")) {
+    console.error(`invalid TOP-EVENT suffix format: ${line}`);
+    process.exit(1);
+  }
+}
 const meta = payload.meta;
 if (!meta || typeof meta !== "object") {
   console.error("meta missing or invalid");
