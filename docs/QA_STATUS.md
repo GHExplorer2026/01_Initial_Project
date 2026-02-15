@@ -43,8 +43,11 @@
   - `run_id=22035048334`
   - `status=success`
   - `install=success`, `verify=success`, `smoke=success`
-- Next phase planned:
-  - `v0.1.5` planning pending.
+- Next phase started:
+  - `v0.1.5` planning initialized with scope/risk/task baseline.
+  - `docs/V0_1_5_PLAN.md`
+  - `docs/V0_1_5_RELEASE_DRAFT.md`
+  - `docs/V0_1_5_EVIDENCE.md`
 - `v0.1.2` UI implementation baseline added:
   - deterministic scope-state helpers in `src/app/scopeState.ts`
   - UI state/strict-output isolation refactor in `src/app/page.tsx`

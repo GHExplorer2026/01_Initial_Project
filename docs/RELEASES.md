@@ -134,3 +134,21 @@
 - `docs/V0_1_4_RELEASE_DRAFT.md`
 - `docs/V0_1_4_EVIDENCE.md`
 - `docs/release-gate-last-success.json`
+
+## Next Planned: v0.1.5
+
+### Planned Scope
+- SPEC-safe live-mode adapter resilience hardening.
+- Deterministic fixture/contract coverage expansion.
+- Release-gate diagnostics hardening for faster failure attribution.
+
+### Guardrails
+- No drift in strict output canonical strings.
+- No drift in ICS mandatory profile (`CATEGORIES:Wirtschafts-Event`, deterministic UID/DTSTAMP, CRLF/folding, VTIMEZONE).
+- No change to source priority/governance contracts.
+- `regions` remains primary API contract.
+
+### Planning References
+- `docs/V0_1_5_PLAN.md`
+- `docs/V0_1_5_RELEASE_DRAFT.md`
+- `docs/V0_1_5_EVIDENCE.md`

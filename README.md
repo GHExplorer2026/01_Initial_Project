@@ -2,7 +2,7 @@
 
 ## 1. Project Context
 - Project: `01_Initial_Project`
-- Current objective: maintain released `v0.1.4` baseline and prepare the next planning increment.
+- Current objective: execute `v0.1.5` hardening plan on top of released `v0.1.4`.
 - Single source of truth for implementation governance: this `README.md`.
 
 ## 2. Current Snapshot
@@ -24,6 +24,7 @@ Date: `2026-02-15`
 | Release `v0.1.3` | Completed | 100% | 2026-02-15 | tag `v0.1.3`, `docs/RELEASES.md`, `docs/V0_1_3_EVIDENCE.md` |
 | `v0.1.4` planning baseline | Completed | 100% | 2026-02-15 | `docs/V0_1_4_PLAN.md`, `docs/V0_1_4_EVIDENCE.md` |
 | Release `v0.1.4` | Completed | 100% | 2026-02-15 | tag `v0.1.4`, `docs/RELEASES.md`, `docs/V0_1_4_EVIDENCE.md` |
+| `v0.1.5` planning baseline | Completed | 100% | 2026-02-15 | `docs/V0_1_5_PLAN.md`, `docs/V0_1_5_RELEASE_DRAFT.md`, `docs/V0_1_5_EVIDENCE.md` |
 
 ## 3. Active Skill Landscape
 
@@ -109,6 +110,8 @@ Date: `2026-02-15`
 | P-061 | 2026-02-15 | v0.1.4 | Contract coverage | Added additional deprecated-alias normalization route tests and re-verified full suite | Completed | `tests/api.weekly.route.test.ts`, `tests/api.weekly-ics.route.test.ts` | Codex |
 | P-062 | 2026-02-15 | v0.1.4 | Gate closure | Validated release-candidate marker (`run_id=22035048334`) and closed `V-404` | Completed | `docs/release-gate-last-success.json`, `docs/V0_1_4_EVIDENCE.md` | Codex |
 | P-063 | 2026-02-15 | v0.1.4 | Release publish | Published `v0.1.4` tag and finalized release records | Completed | tag `v0.1.4`, `docs/RELEASES.md`, `docs/V0_1_4_RELEASE_DRAFT.md` | Codex |
+| P-064 | 2026-02-15 | v0.1.5 | Planning | Created `v0.1.5` plan with scope, guardrails, workstreams, risks, and backlog (`V-501`..`V-505`) | Completed | `docs/V0_1_5_PLAN.md` | Codex |
+| P-065 | 2026-02-15 | v0.1.5 | Release scaffold | Added `v0.1.5` release draft and evidence templates for deterministic gate closure | Completed | `docs/V0_1_5_RELEASE_DRAFT.md`, `docs/V0_1_5_EVIDENCE.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -131,6 +134,11 @@ Date: `2026-02-15`
 | V-402 | Publish and link `v0.1.4` planning/release scaffolding docs | High | Completed | None | 2026-02-16 | Codex |
 | V-403 | Expand SPEC-safe fallback/contract coverage for `v0.1.4` | High | Completed | None | 2026-02-16 | Codex |
 | V-404 | Finalize `v0.1.4` release evidence and gate pass | High | Completed | None | 2026-02-16 | Codex/User |
+| V-501 | Re-run baseline verify and release-gate checks for `v0.1.5` start | High | Open | None | 2026-02-16 | Codex/User |
+| V-502 | Implement SPEC-safe live adapter resilience hardening | High | Open | None | 2026-02-16 | Codex |
+| V-503 | Expand deterministic fixture and API contract coverage for `v0.1.5` | High | Open | None | 2026-02-16 | Codex |
+| V-504 | Harden release-gate diagnostics and marker traceability | High | Open | None | 2026-02-16 | Codex |
+| V-505 | Finalize `v0.1.5` release evidence and publish tag | High | Open | None | 2026-02-16 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |
@@ -156,15 +164,15 @@ Date: `2026-02-15`
 ## 9. Key Documents
 - Rules: `RULES.md`
 - Plan: `docs/IMPLEMENTATION_PLAN.md`
-- Current Plan: `docs/V0_1_4_PLAN.md`
-- Current Release Draft: `docs/V0_1_4_RELEASE_DRAFT.md`
-- Current Release Evidence: `docs/V0_1_4_EVIDENCE.md`
-- Previous Plan: `docs/V0_1_3_PLAN.md`
-- Previous Release Draft: `docs/V0_1_3_RELEASE_DRAFT.md`
-- Previous Release Evidence: `docs/V0_1_3_EVIDENCE.md`
-- Older Plan: `docs/V0_1_2_PLAN.md`
-- Older Release Draft: `docs/V0_1_2_RELEASE_DRAFT.md`
-- Older Release Evidence: `docs/V0_1_2_EVIDENCE.md`
+- Current Plan: `docs/V0_1_5_PLAN.md`
+- Current Release Draft: `docs/V0_1_5_RELEASE_DRAFT.md`
+- Current Release Evidence: `docs/V0_1_5_EVIDENCE.md`
+- Previous Plan: `docs/V0_1_4_PLAN.md`
+- Previous Release Draft: `docs/V0_1_4_RELEASE_DRAFT.md`
+- Previous Release Evidence: `docs/V0_1_4_EVIDENCE.md`
+- Older Plan: `docs/V0_1_3_PLAN.md`
+- Older Release Draft: `docs/V0_1_3_RELEASE_DRAFT.md`
+- Older Release Evidence: `docs/V0_1_3_EVIDENCE.md`
 - Release Gate Marker: `docs/release-gate-last-success.json`
 - Architecture: `ARCHITECTURE.md`
 - QA Status: `docs/QA_STATUS.md`
