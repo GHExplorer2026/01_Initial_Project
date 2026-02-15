@@ -76,9 +76,15 @@ Policy:
    - `npm run check:next-env`
 3. Normalize automatically when drift appears:
    - `npm run fix:next-env`
-4. Optional hardening for local commits:
+4. Preferred local start commands (auto-normalize on exit):
+   - `npm run dev:fixtures`
+   - `npm run dev:live`
+5. Optional hardening for local commits:
    - `npm run setup:hooks` (enables `.githooks/pre-commit` auto-normalization)
-5. If needed, manual reset remains valid:
+6. Optional local-only suppression (advanced):
+   - `git update-index --skip-worktree next-env.d.ts`
+   - revert with: `git update-index --no-skip-worktree next-env.d.ts`
+7. If needed, manual reset remains valid:
    - `git checkout -- next-env.d.ts`
 
 ## 5) Production startup mismatch with standalone builds

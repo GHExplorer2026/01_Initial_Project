@@ -14,7 +14,7 @@ if [[ ! -d ".githooks" ]]; then
   exit 1
 fi
 
-chmod +x .githooks/pre-commit scripts/normalize_next_env.sh scripts/check_next_env.sh
+chmod +x .githooks/pre-commit scripts/normalize_next_env.sh scripts/check_next_env.sh scripts/dev_live.sh scripts/dev_fixtures.sh
 git config core.hooksPath .githooks
 
 echo "setup_git_hooks: core.hooksPath set to .githooks"

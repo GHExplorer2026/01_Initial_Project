@@ -258,6 +258,8 @@ Date: `2026-02-15`
   - `npm run dev:fixtures`
 - Local live mode:
   - `npm run dev:live`
+- `next-env.d.ts` drift handling in dev scripts:
+  - `dev:fixtures` / `dev:live` normalize `next-env.d.ts` on process exit.
 
 ## 12. Local Verification
 - Required local runtime:
