@@ -158,6 +158,10 @@ Date: `2026-02-15`
 | P-103 | 2026-02-15 | v0.1.7 | UI edge coverage | Completed `V-703` by normalizing non-API UI error messages to stable deterministic values with regression tests | Completed | `src/app/uiState.ts`, `tests/uiState.ui.test.ts`, `docs/V0_1_7_PLAN.md` | Codex |
 | P-104 | 2026-02-15 | v0.1.7 | Gate rerun | Completed `V-704` by re-running deterministic verify and validating release-gate marker on hardened commit (`run_id=22038553850`) | Completed | `docs/V0_1_7_PLAN.md`, `docs/V0_1_7_EVIDENCE.md` | Codex |
 | P-105 | 2026-02-15 | v0.1.7 | Release publish | Completed `V-705` by finalizing release evidence and publishing tag `v0.1.7` on `f2010a0` | Completed | `docs/V0_1_7_EVIDENCE.md`, `docs/RELEASES.md`, tag `v0.1.7` | Codex |
+| P-106 | 2026-02-15 | ICS | Bug fix | Fixed Outlook subject context by prepending fixed region label to ICS `SUMMARY` | Completed | `src/core/icsSerializer.ts`, `tests/icsSerializer.test.ts`, `tests/fixtures/golden/ics_single_event.ics` | Codex |
+| P-107 | 2026-02-15 | Scope | Bug fix | Enforced selected `regions` scope in orchestrator before strict rendering and ICS generation | Completed | `src/server/orchestrator.ts`, `tests/orchestrator.test.ts` | Codex |
+| P-108 | 2026-02-15 | Release Gate | Smoke hardening | Extended smoke checks to enforce selected-region scope in strict output lines and ICS summaries | Completed | `scripts/smoke_api.sh`, `docs/UI_EXECUTION_CHECKLIST.md` | Codex |
+| P-109 | 2026-02-15 | Dev tooling | Drift hardening | Wrapped `dev:live`/`dev:fixtures` with auto-normalization of `next-env.d.ts` on process exit | Completed | `scripts/dev_live.sh`, `scripts/dev_fixtures.sh`, `README.md`, `docs/TROUBLESHOOTING.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |

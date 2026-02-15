@@ -13,7 +13,7 @@
   - `lint`: pass
   - `typecheck`: pass
   - `build`: pass
-  - Current passing tests: `130`
+  - Current passing tests: `131`
 - Environment:
   - Node `v20.20.0`
   - npm `10.8.2`
@@ -118,4 +118,13 @@
   - `install=success`, `verify=success`, `smoke=success`
 - Release finalized on `main` with tag `v0.1.3`.
 - Release finalized on `main` with tag `v0.1.4`.
+- Post `v0.1.7` live-validation fixes completed:
+  - ICS `SUMMARY` includes fixed region label (Outlook subject parity with strict output region context).
+  - Orchestrator enforces selected region scope before strict render and ICS generation.
+  - Release-gate smoke now validates selected-region scope in weekly event lines and ICS summaries.
+  - Dev wrappers auto-normalize `next-env.d.ts` on `dev` exit to avoid local drift commits.
+- Latest release-gate marker (current repository state):
+  - `run_id=22039323266`
+  - `status=success`
+  - `install=success`, `verify=success`, `smoke=success`
 - `next-env.d.ts` drift handling is documented in `docs/TROUBLESHOOTING.md`.

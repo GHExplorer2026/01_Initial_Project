@@ -2,50 +2,61 @@
 
 ## Run Metadata
 - Date: `2026-02-15`
-- Operator: `Codex`
-- Commit SHA: `d5dd0656829ee57aa72ce6f00a41da440d87b919`
-- Node version:
-  - Agent default: `v18.19.1`
-  - Verification path: `v20.20.0` (`PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH"`)
-- SOURCE_MODE: `fixtures`
+- Operators: `Codex` + live browser validation by user
+- Runtime:
+  - Node `v20.20.0`
+  - `SOURCE_MODE=live` for browser validation
+  - `SOURCE_MODE=fixtures` for deterministic smoke/gate checks
 
 ## Runtime Checks
-1. App startup (`npm run dev -- --hostname 127.0.0.1 --port 3000`)
-   - Result: PASS (`http://127.0.0.1:3000`, Next.js ready)
-2. UI controls rendered (`Country Scope`, `Alle`, `Keine`, Generate, ICS, Strict Output)
-   - Result: PASS (`curl` content check returned all required controls)
-3. Weekly API (`/api/weekly?regions=USA,EZ`) returns JSON with:
-   - `meta.sourceMode`
-   - `meta.sourcesUsed`
-   - Result: PASS (`"sourceMode":"fixtures"`, `"sourcesUsed":["investing","tradingview"]`)
-4. ICS API (`/api/weekly.ics?regions=USA,EZ`) headers:
-   - `text/calendar; charset=utf-8`
-   - `Content-Disposition: attachment`
-   - Result: PASS (`200 OK`, `content-type: text/calendar; charset=utf-8`, attachment filename present)
-5. Smoke script (`bash scripts/smoke_api.sh http://127.0.0.1:3000 USA,EZ`)
-   - Result: PASS (`[smoke] weekly ok`, `[smoke] ics ok`, `[smoke] done`)
+1. UI shell and controls:
+   - Result: PASS
+   - Confirmed controls: `Country Scope`, `Alle`, `Keine`, generate button, ICS button, strict output block.
+2. Live Country Scope filtering in browser:
+   - Result: PASS
+   - User-verified region-only outputs in strict text (including `CH` selection case).
+3. Live API traces from browser flow:
+   - Result: PASS
+   - Observed successful scoped calls:
+     - `/api/weekly?regions=CA`
+     - `/api/weekly?regions=AU`
+     - `/api/weekly?regions=USA`
+     - `/api/weekly?regions=EZ`
+     - `/api/weekly?regions=EZ,UK`
+     - `/api/weekly?regions=UK`
+     - `/api/weekly?regions=JP`
+     - `/api/weekly?regions=JP,NZ`
+     - `/api/weekly?regions=JP,AU,NZ`
+     - `/api/weekly?regions=JP,CH,AU,NZ`
+     - `/api/weekly?regions=CH`
+     - `/api/weekly.ics?regions=CH`
+4. Live ICS import in Outlook:
+   - Result: PASS
+   - Region label retained in event subject (`SUMMARY` includes region label).
+5. Smoke script (`bash scripts/smoke_api.sh http://127.0.0.1:3000 USA,EZ fixtures`):
+   - Result: PASS
+   - Weekly + ICS contract checks completed (`[smoke] weekly ok`, `[smoke] ics ok`, `[smoke] done`).
 
 ## Deterministic Gates
-1. `npm run unit`
-   - Result: PASS (via `npm run verify`, `18/18` files, `115/115` tests)
-2. `npm run snapshot`
-   - Result: PASS (via `npm run verify`, `18/18` files, `115/115` tests)
-3. `npm run lint`
-   - Result: PASS (via `npm run verify`)
-4. `npm run typecheck`
-   - Result: PASS (via `npm run verify`)
-5. `npm run build`
-   - Result: PASS (via `npm run verify`, routes `/`, `/api/weekly`, `/api/weekly.ics`)
+1. `npm run verify:release`
+   - Result: PASS
+   - `unit`: pass
+   - `snapshot`: pass
+   - `lint`: pass
+   - `typecheck`: pass
+   - `build`: pass
+   - tests: `131 / 131` passed
 
-## Issues and Fixes
-- Issue: Initial `npm run verify` failed before tests executed with `EACCES: permission denied, mkdir '/mnt/c/Users/maloe/AppData/Local/Temp/.../ssr'`.
-- Root cause: Environment temp directory permission issue in WSL/Windows temp path handoff.
-- Fix: Re-run verification with `TMPDIR=/tmp` and Node 20 path.
-- Verification: `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify` completed successfully.
+## Issues and Fixes Covered by This Report
+1. ICS subject missing region label in Outlook:
+   - Fix: `SUMMARY` now prepends fixed region label in ICS serializer.
+2. Country Scope not enforced end-to-end:
+   - Fix: hard scope filter added before strict render and ICS generation in orchestrator.
+3. Regression hardening:
+   - Smoke script now validates selected-region scope for strict weekly event lines and ICS `SUMMARY`.
 
 ## Final Status
 - PASS / FAIL: `PASS`
 - Notes:
-  - No strict-output string changes.
-  - No ICS serialization rule changes.
-  - No RULES/spec drift introduced in this run.
+  - Strict output and ICS mandatory contracts remain intact.
+  - No RULES/spec drift introduced.
