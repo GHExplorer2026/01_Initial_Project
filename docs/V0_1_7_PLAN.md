@@ -32,22 +32,37 @@ Deliver the `v0.1.7` execution-readiness increment on top of released `v0.1.6`, 
 ## Workstreams
 
 ## W1 Baseline Synchronization and Gate Validation
-Status: Planned
+Status: Completed
 
 1. Sync `main` and validate release marker alignment.
 2. Re-run full deterministic verify gate in Node 20 baseline.
 3. Record baseline evidence for `v0.1.7` start.
+   Progress:
+   - Synced `main` and validated marker:
+     - `npm run check:release-gate` -> pass
+     - `run_id=22038326822`
+   - Re-ran deterministic verify gate in Node 20:
+     - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
+     - `129/129` tests pass
 
 ### Acceptance
 1. `npm run verify:release` is green.
 2. `npm run check:release-gate` is green for current baseline.
 
 ## W2 SPEC-safe UI Execution Hardening
-Status: Planned
+Status: Completed
 
 1. Review UI execution path for deterministic failure behavior (no strict-block contamination).
 2. Add minimal, high-value tests for UI runtime edge safety where missing.
 3. Preserve strict-output and ICS contract snapshots byte-stable.
+   Progress:
+   - Hardened UI metadata rendering determinism by normalizing and sorting `meta.sourcesUsed` for stable display order:
+     - `src/app/weeklyResponse.ts`
+   - Added targeted regression test for sorted source ordering:
+     - `tests/weeklyResponse.ui.test.ts`
+   - Re-ran full deterministic gate:
+     - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
+     - `130/130` tests pass
 
 ### Acceptance
 1. No strict-output drift.
@@ -95,8 +110,8 @@ Status: Planned
 5. `V-705` Finalize `v0.1.7` evidence and release publish.
 
 ## Current Task Status
-1. `V-701`: Planned.
-2. `V-702`: Planned.
+1. `V-701`: Completed.
+2. `V-702`: Completed.
 3. `V-703`: Planned.
 4. `V-704`: Planned.
 5. `V-705`: Planned.

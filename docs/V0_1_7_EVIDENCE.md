@@ -9,13 +9,13 @@ Track concrete evidence for closing `v0.1.7` release gates.
 - Command:
   - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
 - Result:
-  - `PENDING`
-  - tests: `TBD`
-  - `unit`: `TBD`
-  - `snapshot`: `TBD`
-  - `lint`: `TBD`
-  - `typecheck`: `TBD`
-  - `build`: `TBD`
+  - `PASS`
+  - tests: `130 / 130` passed
+  - `unit`: pass
+  - `snapshot`: pass
+  - `lint`: pass
+  - `typecheck`: pass
+  - `build`: pass
 
 ### 2) GitHub Release Gate Workflow
 - Workflow:
@@ -23,11 +23,11 @@ Track concrete evidence for closing `v0.1.7` release gates.
 - Ref:
   - `main`
 - Result:
-  - `PENDING`
+  - `PASS`
 - Run URL:
-  - `TBD`
+  - `https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22038326822`
 - Run ID:
-  - `TBD`
+  - `22038326822`
 - Success marker file:
   - `docs/release-gate-last-success.json`
 - Validation command:
@@ -35,11 +35,11 @@ Track concrete evidence for closing `v0.1.7` release gates.
 
 ### 3) SPEC Invariant Evidence
 - Strict output snapshots:
-  - `PENDING`
+  - `PASS` (covered by snapshot gate)
 - ICS snapshots (CRLF/folding/mandatory category):
-  - `PENDING`
+  - `PASS` (covered by snapshot gate)
 - Scope contract tests (`regions` primary):
-  - `PENDING`
+  - `PASS`
 
 ### 4) Release Action
 - Planned tag:

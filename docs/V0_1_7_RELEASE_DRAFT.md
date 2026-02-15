@@ -8,11 +8,11 @@
 ## Required Final Gates (Before Tag)
 1. Local/CI quality gate:
    - `npm run verify:release`
-   - status: `TODO`
+   - status: `DONE` (`129/129` tests passed in Node-20 run)
 2. Release Gate workflow on `main`:
    - `status=success`
    - `install=success`, `verify=success`, `smoke=success`
-   - status: `TODO`
+   - status: `DONE` (`run_id=22038326822`, `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22038326822`)
 3. Invariant checks:
    - strict output strings unchanged
    - TOP suffix unchanged (` - **TOP-EVENT**`)

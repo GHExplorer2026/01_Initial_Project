@@ -13,7 +13,7 @@
   - `lint`: pass
   - `typecheck`: pass
   - `build`: pass
-  - Current passing tests: `129`
+  - Current passing tests: `130`
 - Environment:
   - Node `v20.20.0`
   - npm `10.8.2`
@@ -84,6 +84,12 @@
   - `docs/V0_1_7_PLAN.md`
   - `docs/V0_1_7_RELEASE_DRAFT.md`
   - `docs/V0_1_7_EVIDENCE.md`
+- `v0.1.7` baseline gate completed:
+  - `V-701` completed (`verify:release` pass, `129/129` tests)
+  - release-gate marker validated (`run_id=22038326822`)
+- `v0.1.7` UI execution hardening slice completed:
+  - `V-702` completed (stable sorted `meta.sourcesUsed` rendering order in UI normalizer)
+  - follow-up deterministic verify pass (`130/130` tests)
 - `v0.1.2` UI implementation baseline added:
   - deterministic scope-state helpers in `src/app/scopeState.ts`
   - UI state/strict-output isolation refactor in `src/app/page.tsx`

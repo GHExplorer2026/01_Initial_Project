@@ -46,4 +46,16 @@ describe("weekly response normalizer", () => {
       sourcesUsed: ["investing", "tradingview"]
     });
   });
+
+  it("sorts normalized source names for deterministic UI rendering", () => {
+    const normalized = normalizeWeeklyResponse({
+      renderedText: "strict",
+      meta: {
+        sourceMode: "live",
+        sourcesUsed: ["tradingview", "investing", "tertiary:bls", "investing"]
+      }
+    });
+
+    expect(normalized.sourcesUsed).toEqual(["investing", "tertiary:bls", "tradingview"]);
+  });
 });

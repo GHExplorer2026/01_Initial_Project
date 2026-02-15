@@ -152,6 +152,8 @@ Date: `2026-02-15`
 | P-098 | 2026-02-15 | v0.1.7 | Planning | Created `v0.1.7` plan with guardrails, scope, workstreams, risks, and execution backlog (`V-701`..`V-705`) | Completed | `docs/V0_1_7_PLAN.md` | Codex |
 | P-099 | 2026-02-15 | v0.1.7 | Release scaffold | Added `v0.1.7` release draft and evidence scaffold for deterministic gate closure | Completed | `docs/V0_1_7_RELEASE_DRAFT.md`, `docs/V0_1_7_EVIDENCE.md` | Codex |
 | P-100 | 2026-02-15 | Release Docs | Planning traceability | Registered `v0.1.7` as planned upcoming release in release ledger | Completed | `docs/RELEASES.md` | Codex |
+| P-101 | 2026-02-15 | v0.1.7 | Baseline gate | Completed `V-701` baseline sync + Node-20 verify + release-gate marker validation (`run_id=22038326822`) | Completed | `docs/V0_1_7_PLAN.md`, `docs/V0_1_7_EVIDENCE.md` | Codex |
+| P-102 | 2026-02-15 | v0.1.7 | UI hardening | Completed `V-702` by enforcing deterministic sorted `meta.sourcesUsed` rendering order and adding regression coverage (`130/130`) | Completed | `src/app/weeklyResponse.ts`, `tests/weeklyResponse.ui.test.ts`, `docs/V0_1_7_PLAN.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -184,8 +186,8 @@ Date: `2026-02-15`
 | V-603 | Harden release-operability diagnostics and runbook references | High | Completed | None | 2026-02-16 | Codex |
 | V-604 | Re-run full deterministic gates after hardening | High | Completed | None | 2026-02-16 | Codex/User |
 | V-605 | Finalize `v0.1.6` release evidence and publish tag | High | Completed | None | 2026-02-16 | Codex/User |
-| V-701 | Re-run baseline verify and release-gate checks for `v0.1.7` start | High | Open | None | 2026-02-16 | Codex/User |
-| V-702 | Implement SPEC-safe UI execution hardening slice | High | Open | None | 2026-02-16 | Codex |
+| V-701 | Re-run baseline verify and release-gate checks for `v0.1.7` start | High | Completed | None | 2026-02-16 | Codex/User |
+| V-702 | Implement SPEC-safe UI execution hardening slice | High | Completed | None | 2026-02-16 | Codex |
 | V-703 | Expand deterministic UI execution edge coverage | High | Open | None | 2026-02-16 | Codex |
 | V-704 | Re-run full deterministic gates after hardening | High | Open | None | 2026-02-16 | Codex/User |
 | V-705 | Finalize `v0.1.7` release evidence and publish tag | High | Open | None | 2026-02-16 | Codex/User |

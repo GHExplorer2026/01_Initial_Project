@@ -31,7 +31,7 @@ const normalizeSourcesUsed = (value: unknown): string[] => {
   for (const item of cleaned) {
     unique.add(item);
   }
-  return [...unique];
+  return [...unique].sort((a, b) => a.localeCompare(b));
 };
 
 export const normalizeWeeklyResponse = (input: WeeklyResponse): NormalizedWeeklyResponse => {
