@@ -106,19 +106,26 @@ export default function Page() {
             Keine
           </button>
         </div>
-        <div className="grid">
-          {REGION_OPTIONS.map((option) => (
-            <label key={option.code} className="check-item">
-              <input
-                type="checkbox"
-                checked={selectedSet.has(option.code)}
-                onChange={() => onToggle(option.code)}
-                aria-label={option.label}
-              />
-              <span>{option.label}</span>
-            </label>
-          ))}
-        </div>
+        <fieldset>
+          <legend className="sr-only">Region selection</legend>
+          <div className="grid">
+            {REGION_OPTIONS.map((option) => {
+              const inputId = `region-${option.code.toLowerCase()}`;
+              return (
+                <label key={option.code} className="check-item" htmlFor={inputId}>
+                  <input
+                    id={inputId}
+                    type="checkbox"
+                    checked={selectedSet.has(option.code)}
+                    onChange={() => onToggle(option.code)}
+                    aria-label={option.label}
+                  />
+                  <span>{option.label}</span>
+                </label>
+              );
+            })}
+          </div>
+        </fieldset>
       </section>
 
       <section className="panel">
@@ -132,19 +139,25 @@ export default function Page() {
           </button>
         </div>
         {hasGenerated ? (
-          <p className="meta-line">
+          <p className="meta-line" aria-live="polite">
             <strong>Mode:</strong> {sourceMode ?? "unknown"}{" "}
             <span className="meta-sep">|</span> <strong>Quellen:</strong>{" "}
             {sourcesUsed.length > 0 ? sourcesUsed.join(", ") : "none"}
           </p>
         ) : null}
-        {error ? <p className="error">Fehler: {error}</p> : null}
+        {error ? (
+          <p className="error" role="alert">
+            Fehler: {error}
+          </p>
+        ) : null}
       </section>
 
       <section className="panel">
         <h2>Strict Output</h2>
         {!hasGenerated ? <p className="sub">Noch kein Output generiert.</p> : null}
-        <pre className="strict-output">{renderedText}</pre>
+        <pre className="strict-output" aria-label="Strict output block">
+          {renderedText}
+        </pre>
       </section>
     </main>
   );

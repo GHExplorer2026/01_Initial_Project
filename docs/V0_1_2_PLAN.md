@@ -113,6 +113,8 @@ Status: In Progress
    - label-to-control linkage
    Progress:
    - Added deterministic unit tests for UI scope-state logic in `tests/scopeState.ui.test.ts`.
+   - Added UI contract markup tests in `tests/page.ui.contract.test.ts` (strict-output isolation, fieldset/legend, stable region ids).
+   - Updated page semantics (`fieldset/legend`, label `htmlFor`, `role=alert`, `aria-live`) in `src/app/page.tsx`.
    - Full DOM interaction/a11y checks pending Node-20 test runtime in local shell.
 
 ### Acceptance

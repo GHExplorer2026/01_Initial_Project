@@ -85,6 +85,7 @@ Date: `2026-02-15`
 | P-042 | 2026-02-15 | v0.1.2 | Planning | Created `v0.1.2` planning doc with scope, risks, workstreams, backlog, and DoD | Completed | `docs/V0_1_2_PLAN.md` | Codex |
 | P-043 | 2026-02-15 | v0.1.2 | UI foundation | Refactored `src/app/page.tsx` into deterministic UI state model with strict-output isolation and scope-bound actions | Completed | `src/app/page.tsx`, `src/app/globals.css` | Codex |
 | P-044 | 2026-02-15 | v0.1.2 | Scope-state determinism | Added pure scope-state helpers and dedicated unit tests for query/storage precedence and canonical region ordering | Completed | `src/app/scopeState.ts`, `tests/scopeState.ui.test.ts` | Codex |
+| P-045 | 2026-02-15 | v0.1.2 | UI contract tests | Added markup-level UI/a11y contract tests and strengthened form semantics (`fieldset/legend`, stable ids, alert/live regions) | Completed | `tests/page.ui.contract.test.ts`, `src/app/page.tsx` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -98,7 +99,7 @@ Date: `2026-02-15`
 | U-203 | Implement URL + localStorage scope persistence | High | Completed | None | 2026-02-15 | Codex |
 | U-204 | Implement weekly generate flow + strict `<pre>` output isolation | High | Completed | None | 2026-02-15 | Codex |
 | U-205 | Implement ICS download UX flow | Medium | Completed | None | 2026-02-15 | Codex |
-| U-206 | Add UI interaction/a11y tests (fixture-first) | High | In Progress | Local unit runtime uses Node 18 (Vitest ESM startup issue); execute full suite in Node 20 CI/runtime | 2026-02-16 | Codex |
+| U-206 | Add UI interaction/a11y tests (fixture-first) | High | In Progress | DOM interaction checks still pending; local unit runtime uses Node 18 (Vitest ESM startup issue), run full suite in Node 20 CI/runtime | 2026-02-16 | Codex |
 | U-207 | Run release gates + finalize `v0.1.2` evidence docs | High | Open | U-206 | 2026-02-16 | Codex/User |
 
 ## 6. Risks
