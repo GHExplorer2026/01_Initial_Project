@@ -22,7 +22,7 @@ Date: `2026-02-15`
 | Release `v0.1.2` | Completed | 100% | 2026-02-15 | tag `v0.1.2`, `docs/RELEASES.md`, `docs/V0_1_2_EVIDENCE.md` |
 | `v0.1.3` planning baseline | Completed | 100% | 2026-02-15 | `docs/V0_1_3_PLAN.md`, `docs/V0_1_3_EVIDENCE.md` |
 | Release `v0.1.3` | Completed | 100% | 2026-02-15 | tag `v0.1.3`, `docs/RELEASES.md`, `docs/V0_1_3_EVIDENCE.md` |
-| `v0.1.4` planning baseline | In Progress | 80% | 2026-02-15 | `docs/V0_1_4_PLAN.md`, `docs/V0_1_4_EVIDENCE.md` |
+| `v0.1.4` planning baseline | Completed | 100% | 2026-02-15 | `docs/V0_1_4_PLAN.md`, `docs/V0_1_4_EVIDENCE.md` |
 
 ## 3. Active Skill Landscape
 
@@ -106,6 +106,7 @@ Date: `2026-02-15`
 | P-059 | 2026-02-15 | v0.1.4 | Release scaffold | Added `v0.1.4` release draft and evidence templates | Completed | `docs/V0_1_4_RELEASE_DRAFT.md`, `docs/V0_1_4_EVIDENCE.md` | Codex |
 | P-060 | 2026-02-15 | v0.1.4 | Baseline gate refresh | Re-ran Node-20 verify and validated release-gate marker for current baseline | Completed | `npm run verify:release`, `npm run check:release-gate` | Codex |
 | P-061 | 2026-02-15 | v0.1.4 | Contract coverage | Added additional deprecated-alias normalization route tests and re-verified full suite | Completed | `tests/api.weekly.route.test.ts`, `tests/api.weekly-ics.route.test.ts` | Codex |
+| P-062 | 2026-02-15 | v0.1.4 | Gate closure | Validated release-candidate marker (`run_id=22034861927`) and closed `V-404` | Completed | `docs/release-gate-last-success.json`, `docs/V0_1_4_EVIDENCE.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -127,7 +128,7 @@ Date: `2026-02-15`
 | V-401 | Re-run baseline verify and release-gate checks for `v0.1.4` | High | Completed | None | 2026-02-16 | Codex |
 | V-402 | Publish and link `v0.1.4` planning/release scaffolding docs | High | Completed | None | 2026-02-16 | Codex |
 | V-403 | Expand SPEC-safe fallback/contract coverage for `v0.1.4` | High | Completed | None | 2026-02-16 | Codex |
-| V-404 | Finalize `v0.1.4` release evidence and gate pass | High | In Progress | Awaiting post-commit marker refresh on release-doc commit | 2026-02-16 | Codex/User |
+| V-404 | Finalize `v0.1.4` release evidence and gate pass | High | Completed | None | 2026-02-16 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |

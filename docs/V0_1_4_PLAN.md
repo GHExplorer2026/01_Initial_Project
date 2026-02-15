@@ -47,11 +47,15 @@ Status: Completed
 2. Task backlog is explicit and executable.
 
 ## W3 Network/DNS Runbook Hardening
-Status: In Progress
+Status: Completed
 
 1. Keep deterministic DNS recovery steps documented for intermittent resolver failures.
 2. Keep fallback Git transport approach documented for emergency sync.
 3. Ensure operator commands are concise and repeatable.
+   Progress:
+   - Existing troubleshooting runbook verified against current incident pattern:
+     - DNS flaps and registry/git recovery paths remain valid in `docs/TROUBLESHOOTING.md`.
+   - Manual operator validation completed and documented via `V-404` evidence update.
 
 ### Acceptance
 1. Runbook includes concrete recovery commands.
@@ -102,7 +106,7 @@ Status: Completed
 1. `V-401`: Completed.
 2. `V-402`: Completed.
 3. `V-403`: Completed.
-4. `V-404`: In Progress.
+4. `V-404`: Completed (`run_id=22034861927`, marker valid for release candidate SHA `41f05b8`).
 
 ## Execution Order
 1. W1 Baseline verification refresh.

@@ -23,9 +23,9 @@ Track concrete evidence for closing `v0.1.4` release gates.
 - Ref:
   - `main`
 - Result:
-  - `PASS` (baseline marker validation)
+  - `PASS` (release-candidate marker validation)
 - Run URL:
-  - `https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22034716811`
+  - `https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22034861927`
 - Success marker file:
   - `docs/release-gate-last-success.json`
 - Validation command:
@@ -46,4 +46,4 @@ Track concrete evidence for closing `v0.1.4` release gates.
 - Planned tag:
   - `v0.1.4`
 - Status:
-  - `IN PROGRESS`
+  - `READY FOR TAG`

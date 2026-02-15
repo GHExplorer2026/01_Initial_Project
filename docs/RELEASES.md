@@ -116,7 +116,7 @@
 - Baseline verification and release-gate refresh after `v0.1.3` release.
 - Runbook hardening for deterministic operations under intermittent DNS/network issues.
 - Additional SPEC-safe fallback/contract coverage with fixture-first tests.
- - Current gate status: `READY FOR TAG` (baseline marker `run_id=22034716811`).
+- Current gate status: `READY FOR TAG` (release-candidate marker `run_id=22034861927`).
 
 ### Planning Reference
 - `docs/V0_1_4_PLAN.md`
