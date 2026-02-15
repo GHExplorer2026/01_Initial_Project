@@ -1,7 +1,7 @@
 # QA_STATUS.md
 
 ## Current Branch
-- Branch: `main` (post `v0.1.4` release)
+- Branch: `main` (post `v0.1.5` release)
 - Baseline: synced with `origin/main`
 
 ## Latest Deterministic Gate Run
@@ -59,6 +59,11 @@
   - `status=success`
   - `install=success`, `verify=success`, `smoke=success`
 - Release finalized on `main` with tag `v0.1.5`.
+- Next phase started:
+  - `v0.1.6` planning initialized with scope/risk/task baseline.
+  - `docs/V0_1_6_PLAN.md`
+  - `docs/V0_1_6_RELEASE_DRAFT.md`
+  - `docs/V0_1_6_EVIDENCE.md`
 - `v0.1.2` UI implementation baseline added:
   - deterministic scope-state helpers in `src/app/scopeState.ts`
   - UI state/strict-output isolation refactor in `src/app/page.tsx`

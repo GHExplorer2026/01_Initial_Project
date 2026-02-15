@@ -159,3 +159,21 @@
 - `docs/V0_1_5_RELEASE_DRAFT.md`
 - `docs/V0_1_5_EVIDENCE.md`
 - `docs/release-gate-last-success.json`
+
+## Next Planned: v0.1.6
+
+### Planned Scope
+- SPEC-safe contract-proofing hardening on top of `v0.1.5`.
+- Deterministic release-operability and gate-diagnostics hardening.
+- No drift in strict output or ICS contracts.
+
+### Guardrails
+- No drift in strict output canonical strings.
+- No drift in ICS mandatory profile (`CATEGORIES:Wirtschafts-Event`, deterministic UID/DTSTAMP, CRLF/folding, VTIMEZONE).
+- No change to source priority/governance contracts.
+- `regions` remains primary API contract.
+
+### Planning References
+- `docs/V0_1_6_PLAN.md`
+- `docs/V0_1_6_RELEASE_DRAFT.md`
+- `docs/V0_1_6_EVIDENCE.md`
