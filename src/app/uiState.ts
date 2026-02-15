@@ -10,5 +10,16 @@ export const deriveUiActionState = (selectedCount: number, loading: boolean): Ui
   generateLabel: loading ? "Generiere..." : "Wochenausblick generieren"
 });
 
-export const toUiErrorMessage = (error: unknown): string =>
-  error instanceof Error ? error.message : "Unknown error";
+export const toUiErrorMessage = (error: unknown): string => {
+  if (!(error instanceof Error)) {
+    return "Unknown error";
+  }
+  const message = error.message.trim();
+  if (message.startsWith("API ")) {
+    return message;
+  }
+  if (message.length === 0) {
+    return "Unknown error";
+  }
+  return "Request failed";
+};

@@ -32,6 +32,9 @@ describe("ui state helpers", () => {
 
   it("normalizes ui error messages deterministically", () => {
     expect(toUiErrorMessage(new Error("API 500"))).toBe("API 500");
+    expect(toUiErrorMessage(new Error("Failed to fetch"))).toBe("Request failed");
+    expect(toUiErrorMessage(new Error("  timeout  "))).toBe("Request failed");
+    expect(toUiErrorMessage(new Error("   "))).toBe("Unknown error");
     expect(toUiErrorMessage("boom")).toBe("Unknown error");
     expect(toUiErrorMessage(null)).toBe("Unknown error");
   });

@@ -60,6 +60,9 @@ Status: Completed
      - `src/app/weeklyResponse.ts`
    - Added targeted regression test for sorted source ordering:
      - `tests/weeklyResponse.ui.test.ts`
+   - Hardened UI error rendering determinism with stable non-API fallback messages and added regression coverage:
+     - `src/app/uiState.ts`
+     - `tests/uiState.ui.test.ts`
    - Re-ran full deterministic gate:
      - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
      - `130/130` tests pass
@@ -112,7 +115,7 @@ Status: Planned
 ## Current Task Status
 1. `V-701`: Completed.
 2. `V-702`: Completed.
-3. `V-703`: Planned.
+3. `V-703`: Completed.
 4. `V-704`: Planned.
 5. `V-705`: Planned.
 

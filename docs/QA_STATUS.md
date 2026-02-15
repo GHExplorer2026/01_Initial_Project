@@ -90,6 +90,9 @@
 - `v0.1.7` UI execution hardening slice completed:
   - `V-702` completed (stable sorted `meta.sourcesUsed` rendering order in UI normalizer)
   - follow-up deterministic verify pass (`130/130` tests)
+- `v0.1.7` UI edge coverage completed:
+  - `V-703` completed (stable non-API UI error normalization + regression tests)
+  - deterministic verify gate remains green (`130/130` tests)
 - `v0.1.2` UI implementation baseline added:
   - deterministic scope-state helpers in `src/app/scopeState.ts`
   - UI state/strict-output isolation refactor in `src/app/page.tsx`
