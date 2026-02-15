@@ -254,8 +254,10 @@ Date: `2026-02-15`
 
 ## 11. Source Mode
 - Default and CI: `SOURCE_MODE=fixtures`
+- One-step fixtures start:
+  - `npm run dev:fixtures`
 - Local live mode:
-  - `TZ=Europe/Berlin NODE_OPTIONS=--dns-result-order=ipv4first SOURCE_MODE=live npm run dev`
+  - `npm run dev:live`
 
 ## 12. Local Verification
 - Required local runtime:
