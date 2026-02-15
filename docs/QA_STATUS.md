@@ -43,4 +43,6 @@
   - `run_id=22033462131`
   - `status=success`
   - `install=success`, `verify=success`, `smoke=success`
+- Next phase planned:
+  - `v0.1.2` UX/UI implementation planning documented in `docs/V0_1_2_PLAN.md`.
 - `next-env.d.ts` drift handling is documented in `docs/TROUBLESHOOTING.md`.

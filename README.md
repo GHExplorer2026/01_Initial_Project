@@ -2,7 +2,7 @@
 
 ## 1. Project Context
 - Project: `01_Initial_Project`
-- Current objective: establish a domain-specific setup for the Macro Events Weekly Outlook app.
+- Current objective: execute `v0.1.2` UX/UI implementation phase on top of released deterministic backend baseline.
 - Single source of truth for implementation governance: this `README.md`.
 
 ## 2. Current Snapshot
@@ -18,6 +18,7 @@ Date: `2026-02-15`
 | Deterministic test harness | Completed | 100% | 2026-02-14 | `tests/*`, `tests/fixtures/golden/*` |
 | CI quality gates incl. snapshot | Completed | 100% | 2026-02-14 | `.github/workflows/*.yml`, `package.json` |
 | Release `v0.1.1` | Completed | 100% | 2026-02-15 | tag `v0.1.1`, `docs/RELEASES.md`, `docs/V0_1_1_EVIDENCE.md` |
+| `v0.1.2` planning baseline | Completed | 100% | 2026-02-15 | `docs/V0_1_2_PLAN.md` |
 
 ## 3. Active Skill Landscape
 
@@ -81,6 +82,7 @@ Date: `2026-02-15`
 | P-039 | 2026-02-14 | v0.1.1 | Smoke ICS rule fix | Smoke check now validates `CATEGORIES:Wirtschafts-Event` per existing VEVENT instead of failing on event-empty calendars | Completed | `scripts/smoke_api.sh` | Codex |
 | P-040 | 2026-02-15 | v0.1.1 | Gate check fix | `check:release-gate` now accepts successful run SHA on `HEAD^` when `HEAD` is the marker commit | Completed | `scripts/check_release_gate.sh`, `docs/V0_1_1_EVIDENCE.md` | Codex |
 | P-041 | 2026-02-15 | v0.1.1 | Release publish | Finalized release documentation and published tag `v0.1.1` on `origin` | Completed | `docs/RELEASES.md`, `docs/V0_1_1_EVIDENCE.md`, tag `v0.1.1` | Codex |
+| P-042 | 2026-02-15 | v0.1.2 | Planning | Created `v0.1.2` planning doc with scope, risks, workstreams, backlog, and DoD | Completed | `docs/V0_1_2_PLAN.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -89,6 +91,13 @@ Date: `2026-02-15`
 | T-102 | Add deterministic metadata/error taxonomy tests for fallback behavior | High | Completed | None | 2026-02-14 | Codex |
 | T-103 | Final Node-20 verify for `v0.1.1` and release tag | High | Completed | None | 2026-02-14 | Codex/User |
 | T-104 | Run GitHub `Release Gate` workflow on `main` and archive artifacts | High | Completed | None | 2026-02-15 | Codex/User |
+| U-201 | Implement v0.1.2 UI page shell and state model | High | Open | None | 2026-02-16 | Codex |
+| U-202 | Implement region checkbox UX (`Alle`/`Keine`) with stable serialization | High | Open | U-201 | 2026-02-16 | Codex |
+| U-203 | Implement URL + localStorage scope persistence | High | Open | U-202 | 2026-02-16 | Codex |
+| U-204 | Implement weekly generate flow + strict `<pre>` output isolation | High | Open | U-203 | 2026-02-16 | Codex |
+| U-205 | Implement ICS download UX flow | Medium | Open | U-204 | 2026-02-16 | Codex |
+| U-206 | Add UI interaction/a11y tests (fixture-first) | High | Open | U-205 | 2026-02-16 | Codex |
+| U-207 | Run release gates + finalize `v0.1.2` evidence docs | High | Open | U-206 | 2026-02-16 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |
@@ -114,9 +123,10 @@ Date: `2026-02-15`
 ## 9. Key Documents
 - Rules: `RULES.md`
 - Plan: `docs/IMPLEMENTATION_PLAN.md`
-- Next Plan: `docs/V0_1_1_PLAN.md`
-- Next Release Draft: `docs/V0_1_1_RELEASE_DRAFT.md`
-- Next Release Evidence: `docs/V0_1_1_EVIDENCE.md`
+- Current Plan: `docs/V0_1_2_PLAN.md`
+- Previous Plan: `docs/V0_1_1_PLAN.md`
+- Previous Release Draft: `docs/V0_1_1_RELEASE_DRAFT.md`
+- Previous Release Evidence: `docs/V0_1_1_EVIDENCE.md`
 - Release Gate Marker: `docs/release-gate-last-success.json`
 - Architecture: `ARCHITECTURE.md`
 - QA Status: `docs/QA_STATUS.md`

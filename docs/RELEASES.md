@@ -58,3 +58,13 @@
 - `docs/V0_1_1_RELEASE_DRAFT.md`
 - `docs/V0_1_1_EVIDENCE.md`
 - `docs/release-gate-last-success.json`
+
+## Next Planned: v0.1.2
+
+### Focus
+- UX/UI implementation phase (scope selector, strict output rendering flow, ICS download flow).
+- Preserve strict output and ICS invariants exactly as defined in `RULES.md`.
+- Keep deterministic fixture-first testing and CI gate behavior.
+
+### Planning Reference
+- `docs/V0_1_2_PLAN.md`
