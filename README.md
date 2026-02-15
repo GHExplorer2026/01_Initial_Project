@@ -274,3 +274,17 @@ Date: `2026-02-15`
   - `npm run check:next-env`
   - `npm run fix:next-env`
   - optional local auto-fix hook: `npm run setup:hooks`
+
+## 13. Windows Desktop One-Click Start (Live)
+- Ziel:
+  - Desktop-Icon anklicken -> App startet in WSL live mode -> Standardbrowser öffnet `http://127.0.0.1:3000`.
+- Einmalige Einrichtung in PowerShell (Windows):
+  - `powershell -ExecutionPolicy Bypass -File .\scripts\windows\install_desktop_shortcut.ps1`
+- Danach Start per Desktop-Verknüpfung:
+  - `Macro Events Weekly Outlook`
+- Manuell ohne Shortcut:
+  - `.\scripts\windows\start_app_desktop.bat`
+- Technische Hinweise:
+  - Nutzt WSL + Repo-Root-Pfadkonvertierung (`wslpath`).
+  - Startet `npm run dev:live` (SOURCE_MODE=live) im separaten WSL-Fenster.
+  - Öffnet Browser erst nach erfolgreichem Readiness-Check.
