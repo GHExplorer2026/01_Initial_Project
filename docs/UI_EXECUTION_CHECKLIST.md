@@ -36,6 +36,7 @@ Provide a deterministic, repeatable checklist to validate UI execution without t
      - `Content-Disposition: attachment; filename="Wochenausblick_YYYY-MM-DD.ics"`
 5. Run API smoke script:
    - `bash scripts/smoke_api.sh http://127.0.0.1:3000 USA,EZ`
+   - Script now validates UI shell contract + weekly API + ICS contract in one pass.
 
 ## Deterministic Quality Gates
 1. `npm run unit`

@@ -6,6 +6,15 @@ REGIONS="${2:-USA,EZ}"
 
 weekly_url="${BASE_URL}/api/weekly?regions=${REGIONS}"
 ics_url="${BASE_URL}/api/weekly.ics?regions=${REGIONS}"
+root_url="${BASE_URL}/"
+
+echo "[smoke] ui: ${root_url}"
+root_html="$(curl -fsS "${root_url}")"
+echo "${root_html}" | grep -q 'Country Scope' || { echo "missing ui heading: Country Scope"; exit 1; }
+echo "${root_html}" | grep -q 'Wochenausblick generieren' || { echo "missing generate button label"; exit 1; }
+echo "${root_html}" | grep -q '\.ICS herunterladen' || { echo "missing ics button label"; exit 1; }
+echo "${root_html}" | grep -q 'aria-label="Strict output block"' || { echo "missing strict output block aria label"; exit 1; }
+echo "[smoke] ui ok"
 
 echo "[smoke] weekly: ${weekly_url}"
 weekly_json="$(curl -fsS "${weekly_url}")"
