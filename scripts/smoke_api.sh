@@ -27,6 +27,21 @@ echo "${weekly_json}" | node -e '
 const fs = require("fs");
 const payload = JSON.parse(fs.readFileSync(0, "utf8"));
 const expectedMode = process.argv[1];
+const requestedRegions = process.argv[2].split(",").map((v) => v.trim().toUpperCase()).filter(Boolean);
+const regionLabels = {
+  USA: "USA",
+  EZ: "Euro Zone",
+  UK: "United Kingdom",
+  JP: "Japan",
+  CH: "Switzerland",
+  CA: "Canada",
+  AU: "Australia",
+  NZ: "New Zealand"
+};
+const allowedLabels = requestedRegions
+  .map((code) => regionLabels[code])
+  .filter((label) => typeof label === "string")
+  .sort((a, b) => b.length - a.length);
 if (!payload || typeof payload !== "object") {
   console.error("weekly payload is not an object");
   process.exit(1);
@@ -70,6 +85,12 @@ for (const line of lines) {
       console.error(`invalid event line format: ${line}`);
       process.exit(1);
     }
+    const afterPrefix = line.replace(/^\d{2}:\d{2} Uhr: /, "");
+    const hasAllowedLabel = allowedLabels.some((label) => afterPrefix.startsWith(`${label} `));
+    if (!hasAllowedLabel) {
+      console.error(`event line violates selected regions scope: ${line}`);
+      process.exit(1);
+    }
   }
   if (line.startsWith("Hinweis: ") && !allowedNotes.has(line)) {
     console.error(`unexpected Hinweis line: ${line}`);
@@ -102,7 +123,7 @@ if (!hasPrimaryOrSecondary) {
   console.error("sourcesUsed missing investing/tradingview");
   process.exit(1);
 }
-' "${EXPECTED_SOURCE_MODE}"
+' "${EXPECTED_SOURCE_MODE}" "${REGIONS}"
 echo "[smoke] weekly ok"
 
 echo "[smoke] ics: ${ics_url}"
@@ -149,6 +170,42 @@ if [[ "${vevent_count}" -gt 0 ]] && [[ "${category_count}" -ne "${vevent_count}"
   sed -n '1,120p' "${normalized_ics_file}"
   rm -f "${normalized_ics_file}"
   exit 1
+fi
+
+if [[ "${vevent_count}" -gt 0 ]]; then
+  REGIONS="${REGIONS}" node -e '
+const fs = require("fs");
+const content = fs.readFileSync(process.argv[1], "utf8");
+const requestedRegions = (process.env.REGIONS || "")
+  .split(",")
+  .map((v) => v.trim().toUpperCase())
+  .filter(Boolean);
+const regionLabels = {
+  USA: "USA",
+  EZ: "Euro Zone",
+  UK: "United Kingdom",
+  JP: "Japan",
+  CH: "Switzerland",
+  CA: "Canada",
+  AU: "Australia",
+  NZ: "New Zealand"
+};
+const allowedLabels = requestedRegions
+  .map((code) => regionLabels[code])
+  .filter((label) => typeof label === "string")
+  .sort((a, b) => b.length - a.length);
+const summaries = content
+  .split("\n")
+  .filter((line) => line.startsWith("SUMMARY:"))
+  .map((line) => line.slice("SUMMARY:".length));
+for (const summary of summaries) {
+  const hasAllowedLabel = allowedLabels.some((label) => summary.startsWith(`${label} `));
+  if (!hasAllowedLabel) {
+    console.error(`ics summary violates selected regions scope: ${summary}`);
+    process.exit(1);
+  }
+}
+' "${normalized_ics_file}"
 fi
 rm -f "${normalized_ics_file}"
 echo "[smoke] ics ok"
