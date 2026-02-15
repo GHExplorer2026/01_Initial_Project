@@ -68,3 +68,5 @@
 
 ### Planning Reference
 - `docs/V0_1_2_PLAN.md`
+- `docs/V0_1_2_RELEASE_DRAFT.md`
+- `docs/V0_1_2_EVIDENCE.md`

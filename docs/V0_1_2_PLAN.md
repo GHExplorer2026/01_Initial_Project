@@ -123,13 +123,17 @@ Status: In Progress
 3. No regressions in strict output/ICS tests.
 
 ## W6 Release Preparation (`v0.1.2`)
-Status: Planned
+Status: In Progress
 
 1. Update docs (`README.md`, `docs/QA_STATUS.md`, `docs/RELEASES.md`) with UI phase evidence.
 2. Run release gates:
    - `npm run verify:release`
    - GitHub `Release Gate` workflow success marker
 3. Prepare release note focused on UX/UI completion without rule drift.
+   Progress:
+   - Added release prep templates:
+     - `docs/V0_1_2_RELEASE_DRAFT.md`
+     - `docs/V0_1_2_EVIDENCE.md`
 
 ### Acceptance
 1. All CI gates green.

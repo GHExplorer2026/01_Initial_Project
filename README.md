@@ -86,6 +86,7 @@ Date: `2026-02-15`
 | P-043 | 2026-02-15 | v0.1.2 | UI foundation | Refactored `src/app/page.tsx` into deterministic UI state model with strict-output isolation and scope-bound actions | Completed | `src/app/page.tsx`, `src/app/globals.css` | Codex |
 | P-044 | 2026-02-15 | v0.1.2 | Scope-state determinism | Added pure scope-state helpers and dedicated unit tests for query/storage precedence and canonical region ordering | Completed | `src/app/scopeState.ts`, `tests/scopeState.ui.test.ts` | Codex |
 | P-045 | 2026-02-15 | v0.1.2 | UI contract tests | Added markup-level UI/a11y contract tests and strengthened form semantics (`fieldset/legend`, stable ids, alert/live regions) | Completed | `tests/page.ui.contract.test.ts`, `src/app/page.tsx` | Codex |
+| P-046 | 2026-02-15 | v0.1.2 | Release prep | Created `v0.1.2` release draft and evidence templates for gate closure and publish flow | Completed | `docs/V0_1_2_RELEASE_DRAFT.md`, `docs/V0_1_2_EVIDENCE.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -127,6 +128,8 @@ Date: `2026-02-15`
 - Rules: `RULES.md`
 - Plan: `docs/IMPLEMENTATION_PLAN.md`
 - Current Plan: `docs/V0_1_2_PLAN.md`
+- Current Release Draft: `docs/V0_1_2_RELEASE_DRAFT.md`
+- Current Release Evidence: `docs/V0_1_2_EVIDENCE.md`
 - Previous Plan: `docs/V0_1_1_PLAN.md`
 - Previous Release Draft: `docs/V0_1_1_RELEASE_DRAFT.md`
 - Previous Release Evidence: `docs/V0_1_1_EVIDENCE.md`

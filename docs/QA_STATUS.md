@@ -50,5 +50,8 @@
   - UI state/strict-output isolation refactor in `src/app/page.tsx`
   - helper tests in `tests/scopeState.ui.test.ts`
   - markup contract tests in `tests/page.ui.contract.test.ts`
+- `v0.1.2` release preparation docs initialized:
+  - `docs/V0_1_2_RELEASE_DRAFT.md`
+  - `docs/V0_1_2_EVIDENCE.md`
 - Local unit execution for the new test file is blocked in this shell by Node 18 + Vitest ESM startup (`ERR_REQUIRE_ESM`); run full unit suite in Node `>=20.9.0` / CI.
 - `next-env.d.ts` drift handling is documented in `docs/TROUBLESHOOTING.md`.
