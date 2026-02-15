@@ -54,5 +54,8 @@
 - `v0.1.2` release preparation docs initialized:
   - `docs/V0_1_2_RELEASE_DRAFT.md`
   - `docs/V0_1_2_EVIDENCE.md`
-- Local unit execution for the new test file is blocked in this shell by Node 18 + Vitest ESM startup (`ERR_REQUIRE_ESM`); run full unit suite in Node `>=20.9.0` / CI.
+- Node-20 verify proof for current UI scope:
+  - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
+  - result: pass (`105/105` tests, lint/typecheck/build green)
+- Default shell (`node 18`) still hits Vitest ESM startup issues; use Node `>=20.9.0` path override (plus `TMPDIR=/tmp`) or CI for full suite runs.
 - `next-env.d.ts` drift handling is documented in `docs/TROUBLESHOOTING.md`.

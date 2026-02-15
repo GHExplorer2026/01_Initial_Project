@@ -98,7 +98,7 @@ Status: Completed
 3. No ICS contract changes.
 
 ## W5 UI Tests and A11y Baseline
-Status: In Progress
+Status: Completed
 
 1. Add interaction tests for:
    - checkbox toggles
@@ -116,7 +116,7 @@ Status: In Progress
    - Added UI contract markup tests in `tests/page.ui.contract.test.ts` (strict-output isolation, fieldset/legend, stable region ids).
    - Added deterministic request helper tests in `tests/uiRequests.test.ts` for `regions`-primary endpoint generation.
    - Updated page semantics (`fieldset/legend`, label `htmlFor`, `role=alert`, `aria-live`) in `src/app/page.tsx`.
-   - Full DOM interaction/a11y checks pending Node-20 test runtime in local shell.
+   - Node-20 verify run completed locally (`TMPDIR=/tmp npm run verify:release`) with `105/105` tests passing.
 
 ### Acceptance
 1. UI tests pass deterministically in CI.

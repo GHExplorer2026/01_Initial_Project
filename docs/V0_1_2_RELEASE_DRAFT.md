@@ -9,7 +9,7 @@
 ## Required Final Gates (Before Tag)
 1. Local/CI quality gate:
    - `npm run verify:release`
-   - status: `PENDING`
+   - status: `DONE` (`105/105` tests passed in Node-20 run)
 2. Release Gate workflow on `main`:
    - `status=success`
    - `install=success`, `verify=success`, `smoke=success`
@@ -21,7 +21,7 @@
 4. UI contract checks:
    - scope controls rendered and deterministic
    - strict output remains isolated from status/debug text
-   - status: `IN PROGRESS`
+   - status: `DONE`
 
 ## Planned Release Notes Snippet
 `v0.1.2` introduces deterministic UX/UI flow completion (scope controls, strict-output isolation, and ICS action flow) without changing output or ICS product contracts.
@@ -35,7 +35,7 @@
 4. Append final release entry in `docs/RELEASES.md`.
 
 ## Current Status
-- `IN PROGRESS`
+- `IN PROGRESS` (awaiting latest release-gate marker sync for current `main` head)
 
 ## Evidence Template
 - `docs/V0_1_2_EVIDENCE.md`

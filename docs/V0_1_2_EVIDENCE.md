@@ -7,11 +7,18 @@ Track concrete evidence for closing `v0.1.2` release gates.
 
 ### 1) Local/CI Verify Gate
 - Command:
-  - `npm run verify:release`
+  - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
 - Result:
-  - `PENDING`
+  - `PASS`
+  - `unit`: pass
+  - `snapshot`: pass
+  - `lint`: pass
+  - `typecheck`: pass
+  - `build`: pass
+  - tests: `105 / 105` passed
 - Notes:
-  - Local shell currently Node 18; run full verify on Node `>=20.9.0` / CI.
+  - Default shell Node is `18.19.1`; Node 20 binary from `~/.nvm/versions/node/v20.20.0/bin` was used.
+  - `TMPDIR=/tmp` avoids Windows temp directory permission issues in Vitest.
 
 ### 2) GitHub Release Gate Workflow
 - Workflow:
@@ -19,23 +26,26 @@ Track concrete evidence for closing `v0.1.2` release gates.
 - Ref:
   - `main`
 - Result:
-  - `PENDING` for latest `v0.1.2` commit chain
+  - `IN PROGRESS`
 - Run URL:
-  - `PENDING`
+  - latest confirmed success marker currently points to previous `v0.1.2` step:
+    - `https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22033965912`
 - Success marker file:
   - `docs/release-gate-last-success.json`
 - Validation command:
   - `npm run check:release-gate`
+- Current local state:
+  - branch is behind `origin/main` by 1 marker commit, but pull/fetch is intermittently blocked by DNS flaps.
 
 ### 3) UI Contract Evidence
 - Added tests:
   - `tests/scopeState.ui.test.ts`
   - `tests/page.ui.contract.test.ts`
 - Result:
-  - `PENDING NODE20 RUN`
+  - `PASS` (covered within Node-20 verify run)
 
 ### 4) Release Action
 - Planned tag:
   - `v0.1.2`
 - Status:
-  - `PENDING`
+  - `IN PROGRESS`
