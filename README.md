@@ -143,6 +143,7 @@ Date: `2026-02-15`
 | P-090 | 2026-02-15 | Process | Automation reuse | Extended direct-delivery skill with cross-project adoption guidance and an executable cycle script for deterministic batch verify/push/gate closure | Completed | `skills/spec-safe-direct-delivery/SKILL.md`, `skills/spec-safe-direct-delivery/references/direct-path-cycle.md`, `skills/spec-safe-direct-delivery/scripts/run_direct_cycle.sh`, `CONTRIBUTING.md` | Codex |
 | P-091 | 2026-02-15 | Release Gate | Weekly payload hardening | Hardened smoke weekly validation with strict header check plus `meta.sourceMode` and `meta.sourcesUsed` semantic assertions | Completed | `scripts/smoke_api.sh`, `docs/UI_EXECUTION_CHECKLIST.md` | Codex |
 | P-092 | 2026-02-15 | Release Gate | Strict-output invariants | Hardened smoke weekly validation to enforce no links in strict text and exactly five day headers (`###`) | Completed | `scripts/smoke_api.sh`, `docs/UI_EXECUTION_CHECKLIST.md` | Codex |
+| P-093 | 2026-02-15 | Release Gate | Mode explicitness | Set release-gate smoke invocation to pass `fixtures` expected source mode explicitly (no implicit default reliance) | Completed | `.github/workflows/release-gate.yml` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
