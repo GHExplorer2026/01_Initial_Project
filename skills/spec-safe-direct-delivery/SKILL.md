@@ -18,6 +18,7 @@ Use this skill when the user asks for a faster path to completion while preservi
    - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify`
 5. Push immediately after green verification.
 6. Ensure release-gate marker catches up to `HEAD` before declaring closure.
+7. Default to this cadence across projects unless a repository defines stricter release rules.
 
 ## Execution Cycle
 
@@ -43,6 +44,22 @@ Use this skill when the user asks for a faster path to completion while preservi
 1. If full verify fails due environment temp-path issues, retry with `TMPDIR=/tmp`.
 2. If push is rejected, `fetch` + `rebase origin/main` + push.
 3. If release marker lags, poll with bounded retries until marker is valid for `HEAD`.
+
+## Cross-Project Adoption
+
+1. Add this skill folder to the target repo unchanged.
+2. Keep project-specific contracts in that repo's own `RULES.md`.
+3. Keep deterministic full-gate command centralized in the skill reference.
+4. If the repo has Node version constraints, set command PATH explicitly in the cycle script.
+5. Reuse the same marker-closure loop pattern for CI marker lag.
+
+## Optional Automation
+
+- Use `scripts/run_direct_cycle.sh` to execute one full slice end-to-end:
+  - targeted unit tests (optional)
+  - full verify
+  - commit + push
+  - release-gate closure check loop
 
 ## Reference
 

@@ -37,3 +37,4 @@ Use this cadence to accelerate delivery without reducing quality:
 4. Push immediately after green verify.
 5. Validate release marker:
    - `PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run check:release-gate`
+6. Reuse `skills/spec-safe-direct-delivery` in other repos as the default delivery cadence unless stricter repo policy exists.

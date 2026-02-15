@@ -140,6 +140,7 @@ Date: `2026-02-15`
 | P-087 | 2026-02-15 | UI QA | Action-state hardening | Extracted pure UI action/error state helpers and expanded UI helper tests; re-verified full deterministic gate suite (`125/125`) | Completed | `src/app/uiState.ts`, `tests/uiState.ui.test.ts`, `src/app/page.tsx`, `npm run verify` | Codex |
 | P-088 | 2026-02-15 | Process | Reuse hardening | Added reusable `spec-safe-direct-delivery` skill and direct-path rule in contributing guide for project-overarching accelerated delivery | Completed | `skills/spec-safe-direct-delivery/*`, `CONTRIBUTING.md` | Codex |
 | P-089 | 2026-02-15 | Release Gate | Smoke hardening | Extended smoke script to validate UI shell contract in addition to weekly/ICS API checks for tighter end-to-end gate coverage | Completed | `scripts/smoke_api.sh`, `docs/UI_EXECUTION_CHECKLIST.md` | Codex |
+| P-090 | 2026-02-15 | Process | Automation reuse | Extended direct-delivery skill with cross-project adoption guidance and an executable cycle script for deterministic batch verify/push/gate closure | Completed | `skills/spec-safe-direct-delivery/SKILL.md`, `skills/spec-safe-direct-delivery/references/direct-path-cycle.md`, `skills/spec-safe-direct-delivery/scripts/run_direct_cycle.sh`, `CONTRIBUTING.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
