@@ -87,6 +87,7 @@ Date: `2026-02-15`
 | P-044 | 2026-02-15 | v0.1.2 | Scope-state determinism | Added pure scope-state helpers and dedicated unit tests for query/storage precedence and canonical region ordering | Completed | `src/app/scopeState.ts`, `tests/scopeState.ui.test.ts` | Codex |
 | P-045 | 2026-02-15 | v0.1.2 | UI contract tests | Added markup-level UI/a11y contract tests and strengthened form semantics (`fieldset/legend`, stable ids, alert/live regions) | Completed | `tests/page.ui.contract.test.ts`, `src/app/page.tsx` | Codex |
 | P-046 | 2026-02-15 | v0.1.2 | Release prep | Created `v0.1.2` release draft and evidence templates for gate closure and publish flow | Completed | `docs/V0_1_2_RELEASE_DRAFT.md`, `docs/V0_1_2_EVIDENCE.md` | Codex |
+| P-047 | 2026-02-15 | v0.1.2 | Request helpers | Extracted UI request endpoint builders and added deterministic tests for `regions`-primary query contract | Completed | `src/app/uiRequests.ts`, `tests/uiRequests.test.ts`, `src/app/page.tsx` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |

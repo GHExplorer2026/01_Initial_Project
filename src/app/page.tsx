@@ -10,6 +10,7 @@ import {
   serializeRegionsParam,
   toggleRegionSelection
 } from "@/app/scopeState";
+import { buildIcsEndpoint, buildWeeklyEndpoint } from "@/app/uiRequests";
 
 type WeeklyResponse = {
   renderedText: string;
@@ -49,7 +50,6 @@ export default function Page() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(values));
   }, [hydrated, selected]);
 
-  const regionsParam = useMemo(() => serializeRegionsParam(selected), [selected]);
   const selectedSet = useMemo(() => new Set(selected), [selected]);
 
   const onToggle = (code: RegionCode) => {
@@ -66,7 +66,7 @@ export default function Page() {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch(`/api/weekly?regions=${encodeURIComponent(regionsParam)}`);
+      const response = await fetch(buildWeeklyEndpoint(selected));
       if (!response.ok) {
         throw new Error(`API ${response.status}`);
       }
@@ -86,7 +86,7 @@ export default function Page() {
     if (selected.length === 0) {
       return;
     }
-    window.location.href = `/api/weekly.ics?regions=${encodeURIComponent(regionsParam)}`;
+    window.location.href = buildIcsEndpoint(selected);
   };
 
   return (

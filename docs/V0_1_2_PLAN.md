@@ -114,6 +114,7 @@ Status: In Progress
    Progress:
    - Added deterministic unit tests for UI scope-state logic in `tests/scopeState.ui.test.ts`.
    - Added UI contract markup tests in `tests/page.ui.contract.test.ts` (strict-output isolation, fieldset/legend, stable region ids).
+   - Added deterministic request helper tests in `tests/uiRequests.test.ts` for `regions`-primary endpoint generation.
    - Updated page semantics (`fieldset/legend`, label `htmlFor`, `role=alert`, `aria-live`) in `src/app/page.tsx`.
    - Full DOM interaction/a11y checks pending Node-20 test runtime in local shell.
 

@@ -50,6 +50,7 @@
   - UI state/strict-output isolation refactor in `src/app/page.tsx`
   - helper tests in `tests/scopeState.ui.test.ts`
   - markup contract tests in `tests/page.ui.contract.test.ts`
+  - deterministic endpoint helper tests in `tests/uiRequests.test.ts`
 - `v0.1.2` release preparation docs initialized:
   - `docs/V0_1_2_RELEASE_DRAFT.md`
   - `docs/V0_1_2_EVIDENCE.md`
