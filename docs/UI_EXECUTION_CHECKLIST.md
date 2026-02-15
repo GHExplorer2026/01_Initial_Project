@@ -38,6 +38,7 @@ Provide a deterministic, repeatable checklist to validate UI execution without t
    - `bash scripts/smoke_api.sh http://127.0.0.1:3000 USA,EZ fixtures`
    - Script now validates UI shell contract + weekly API + ICS contract in one pass.
    - Weekly checks include strict-header format, 5 day headers, no links, allowed Hinweis lines, exact TOP suffix format, and semantic `meta` invariants.
+   - ICS checks include content type, attachment filename pattern `Wochenausblick_YYYY-MM-DD.ics`, CRLF bytes, and category invariants.
 
 ## Deterministic Quality Gates
 1. `npm run unit`

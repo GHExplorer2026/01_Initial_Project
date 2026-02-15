@@ -103,6 +103,15 @@ if [[ -z "${content_type_line}" ]] || [[ "${content_type_line}" != content-type:
   cat "${headers_file}"
   exit 1
 fi
+content_disposition_line="$(
+  awk 'BEGIN{IGNORECASE=1} /^content-disposition:/ { sub(/\r$/, "", $0); print $0 }' "${headers_file}" | tail -n1
+)"
+if [[ -z "${content_disposition_line}" ]] || [[ ! "${content_disposition_line}" =~ filename=\"Wochenausblick_[0-9]{4}-[0-9]{2}-[0-9]{2}\.ics\" ]]; then
+  echo "invalid ICS content-disposition: ${content_disposition_line:-<missing>}"
+  echo "--- response headers ---"
+  cat "${headers_file}"
+  exit 1
+fi
 
 grep -q $'\r' "${body_file}" || {
   echo "ICS is missing CRLF bytes"
