@@ -23,10 +23,15 @@ const normalizeSourcesUsed = (value: unknown): string[] => {
   if (!Array.isArray(value)) {
     return [];
   }
-  return value
+  const cleaned = value
     .filter((item): item is string => typeof item === "string")
     .map((item) => item.trim())
     .filter((item) => item.length > 0);
+  const unique = new Set<string>();
+  for (const item of cleaned) {
+    unique.add(item);
+  }
+  return [...unique];
 };
 
 export const normalizeWeeklyResponse = (input: WeeklyResponse): NormalizedWeeklyResponse => {

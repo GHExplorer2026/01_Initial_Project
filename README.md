@@ -135,6 +135,7 @@ Date: `2026-02-15`
 | P-083 | 2026-02-15 | UI QA | Contract hardening | Added UI contract assertion that meta/debug state stays outside strict `<pre>` before generation | Completed | `tests/page.ui.contract.test.ts` | Codex |
 | P-084 | 2026-02-15 | UI QA | Generate-flow hardening | Added pure weekly-response normalizer and UI tests for malformed/missing meta handling without strict-output drift | Completed | `src/app/weeklyResponse.ts`, `tests/weeklyResponse.ui.test.ts`, `src/app/page.tsx` | Codex |
 | P-085 | 2026-02-15 | UI QA | Persistence hardening | Extracted deterministic `regions` query builder preserving unrelated params and covered empty/non-empty serialization paths | Completed | `src/app/scopeState.ts`, `tests/scopeState.ui.test.ts`, `src/app/page.tsx` | Codex |
+| P-086 | 2026-02-15 | UI QA | Metadata hardening | Dedupe-normalized `sourcesUsed` in UI response parser and re-verified full deterministic gate suite (`121/121`) | Completed | `src/app/weeklyResponse.ts`, `tests/weeklyResponse.ui.test.ts`, `npm run verify` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |

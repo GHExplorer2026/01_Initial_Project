@@ -36,7 +36,7 @@ describe("weekly response normalizer", () => {
       renderedText: 123,
       meta: {
         sourceMode: "unknown",
-        sourcesUsed: [" investing ", "", 42, "tradingview"]
+        sourcesUsed: [" investing ", "", 42, "tradingview", "investing"]
       }
     });
 
