@@ -14,11 +14,37 @@ function Test-AppReady {
   )
 
   try {
-    $response = Invoke-WebRequest -Uri $Url -Method Head -TimeoutSec 2 -UseBasicParsing
+    $response = Invoke-WebRequest -Uri $Url -Method Get -TimeoutSec 2 -UseBasicParsing
     return ($response.StatusCode -ge 200 -and $response.StatusCode -lt 500)
   } catch {
     return $false
   }
+}
+
+function Open-DefaultBrowser {
+  param(
+    [string]$Url
+  )
+
+  try {
+    Start-Process -FilePath $Url -ErrorAction Stop | Out-Null
+    return $true
+  } catch {
+  }
+
+  try {
+    Start-Process -FilePath "cmd.exe" -ArgumentList @("/c", "start", "", $Url) -WindowStyle Hidden -ErrorAction Stop | Out-Null
+    return $true
+  } catch {
+  }
+
+  try {
+    Start-Process -FilePath "explorer.exe" -ArgumentList @($Url) -ErrorAction Stop | Out-Null
+    return $true
+  } catch {
+  }
+
+  return $false
 }
 
 if (-not (Get-Command wsl.exe -ErrorAction SilentlyContinue)) {
@@ -35,8 +61,11 @@ if ([string]::IsNullOrWhiteSpace($repoWslPath)) {
 
 $appUrl = "http://$Host`:$Port/"
 if (Test-AppReady -Url $appUrl) {
-  Start-Process $appUrl
-  Write-Host "App already running. Opened in default browser: $appUrl"
+  if (Open-DefaultBrowser -Url $appUrl) {
+    Write-Host "App already running. Opened in default browser: $appUrl"
+  } else {
+    Write-Warning "App is running, but browser launch failed. Open manually: $appUrl"
+  }
   exit 0
 }
 
@@ -59,5 +88,8 @@ if (-not $ready) {
   throw "App did not become ready within $StartupTimeoutSec seconds. Check the opened WSL terminal for errors."
 }
 
-Start-Process $appUrl
-Write-Host "App started in '$SourceMode' mode and opened in default browser: $appUrl"
+if (Open-DefaultBrowser -Url $appUrl) {
+  Write-Host "App started in '$SourceMode' mode and opened in default browser: $appUrl"
+} else {
+  Write-Warning "App started in '$SourceMode' mode, but browser launch failed. Open manually: $appUrl"
+}

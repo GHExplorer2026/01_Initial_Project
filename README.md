@@ -288,3 +288,4 @@ Date: `2026-02-15`
   - Nutzt WSL + Repo-Root-Pfadkonvertierung (`wslpath`).
   - Startet `npm run dev:live` (SOURCE_MODE=live) im separaten WSL-Fenster.
   - Öffnet Browser erst nach erfolgreichem Readiness-Check.
+  - Fallback-Reihenfolge für Browserstart: `Start-Process URL` -> `cmd /c start` -> `explorer.exe`.
