@@ -74,3 +74,17 @@ Policy:
    - `import "./.next/types/routes.d.ts";`
 2. If local tooling flips to `.next/dev/types/...`, reset before commit:
    - `git checkout -- next-env.d.ts`
+
+## 5) Production startup mismatch with standalone builds
+
+Symptom:
+- App builds with `output: "standalone"` but production startup uses `next start`.
+
+Mitigation:
+1. Use standalone runtime startup:
+   - `npm run build`
+   - `npm run start`
+2. Current `npm start` is aligned to:
+   - `node .next/standalone/server.js`
+3. Optional diagnostic fallback:
+   - `npm run start:next`

@@ -25,13 +25,17 @@ Deliver a SPEC-safe operational hardening increment (`v0.1.3`) on top of release
 ## Workstreams
 
 ## W1 Build vs Runtime Execution Hardening
-Status: Planned
+Status: Completed
 
 1. Validate that runtime execution paths use standalone output (`node .next/standalone/server.js`) consistently in automation.
 2. Document required network split clearly:
    - Build: npm registry access
    - Runtime: source endpoints (Investing/TradingView/approved tertiary)
 3. Keep production/runtime stages free from `npm install`.
+   Progress:
+   - Updated `package.json` runtime script to standalone server:
+     - `start`: `node .next/standalone/server.js`
+   - Kept `start:next` only as legacy fallback for diagnostics.
 
 ### Acceptance
 1. CI and docs reflect the same runtime startup command.
