@@ -1,7 +1,7 @@
 # QA_STATUS.md
 
 ## Current Branch
-- Branch: `main` (post `v0.1.1` release)
+- Branch: `main` (post `v0.1.2` release)
 - Baseline: synced with `origin/main`
 
 ## Latest Deterministic Gate Run
@@ -13,7 +13,7 @@
   - `lint`: pass
   - `typecheck`: pass
   - `build`: pass
-  - Current passing tests: `92`
+  - Current passing tests: `105`
 - Environment:
   - Node `v20.20.0`
   - npm `10.8.2`
@@ -44,7 +44,7 @@
   - `status=success`
   - `install=success`, `verify=success`, `smoke=success`
 - Next phase planned:
-  - `v0.1.2` UX/UI implementation planning documented in `docs/V0_1_2_PLAN.md`.
+  - `v0.1.3` operational hardening planning documented in `docs/V0_1_3_PLAN.md`.
 - `v0.1.2` UI implementation baseline added:
   - deterministic scope-state helpers in `src/app/scopeState.ts`
   - UI state/strict-output isolation refactor in `src/app/page.tsx`

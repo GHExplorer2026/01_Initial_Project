@@ -2,7 +2,7 @@
 
 ## 1. Project Context
 - Project: `01_Initial_Project`
-- Current objective: execute `v0.1.2` UX/UI implementation phase on top of released deterministic backend baseline.
+- Current objective: execute `v0.1.3` operational hardening phase on top of released `v0.1.2`.
 - Single source of truth for implementation governance: this `README.md`.
 
 ## 2. Current Snapshot
@@ -20,6 +20,7 @@ Date: `2026-02-15`
 | Release `v0.1.1` | Completed | 100% | 2026-02-15 | tag `v0.1.1`, `docs/RELEASES.md`, `docs/V0_1_1_EVIDENCE.md` |
 | `v0.1.2` planning baseline | Completed | 100% | 2026-02-15 | `docs/V0_1_2_PLAN.md` |
 | Release `v0.1.2` | Completed | 100% | 2026-02-15 | tag `v0.1.2`, `docs/RELEASES.md`, `docs/V0_1_2_EVIDENCE.md` |
+| `v0.1.3` planning baseline | In Progress | 30% | 2026-02-15 | `docs/V0_1_3_PLAN.md` |
 
 ## 3. Active Skill Landscape
 
@@ -92,6 +93,7 @@ Date: `2026-02-15`
 | P-048 | 2026-02-15 | v0.1.2 | Node20 gate proof | Completed full Node-20 `verify:release` locally with `TMPDIR=/tmp` workaround; all checks green (`105/105`) | Completed | `docs/V0_1_2_EVIDENCE.md` | Codex |
 | P-049 | 2026-02-15 | v0.1.2 | Gate closure | Synced latest release-gate marker and closed `v0.1.2` gate evidence (`run_id=22034113407`) | Completed | `docs/release-gate-last-success.json`, `docs/V0_1_2_EVIDENCE.md` | Codex |
 | P-050 | 2026-02-15 | v0.1.2 | Release publish | Published `v0.1.2` tag and finalized release records | Completed | tag `v0.1.2`, `docs/RELEASES.md`, `docs/V0_1_2_RELEASE_DRAFT.md` | Codex |
+| P-051 | 2026-02-15 | v0.1.3 | Planning | Started `v0.1.3` operational hardening plan (scope, risks, workstreams, DoD) | Completed | `docs/V0_1_3_PLAN.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -107,6 +109,9 @@ Date: `2026-02-15`
 | U-205 | Implement ICS download UX flow | Medium | Completed | None | 2026-02-15 | Codex |
 | U-206 | Add UI interaction/a11y tests (fixture-first) | High | Completed | None | 2026-02-15 | Codex |
 | U-207 | Run release gates + finalize `v0.1.2` evidence docs | High | Completed | None | 2026-02-15 | Codex/User |
+| V-301 | Align build/runtime execution docs and scripts for `v0.1.3` | High | In Progress | None | 2026-02-16 | Codex |
+| V-302 | Expand SPEC-safe fallback and query-contract test coverage for `v0.1.3` | High | Open | None | 2026-02-16 | Codex |
+| V-303 | Finalize `v0.1.3` release evidence and gate pass | High | Open | None | 2026-02-16 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |
@@ -132,12 +137,15 @@ Date: `2026-02-15`
 ## 9. Key Documents
 - Rules: `RULES.md`
 - Plan: `docs/IMPLEMENTATION_PLAN.md`
-- Current Plan: `docs/V0_1_2_PLAN.md`
-- Current Release Draft: `docs/V0_1_2_RELEASE_DRAFT.md`
-- Current Release Evidence: `docs/V0_1_2_EVIDENCE.md`
-- Previous Plan: `docs/V0_1_1_PLAN.md`
-- Previous Release Draft: `docs/V0_1_1_RELEASE_DRAFT.md`
-- Previous Release Evidence: `docs/V0_1_1_EVIDENCE.md`
+- Current Plan: `docs/V0_1_3_PLAN.md`
+- Current Release Draft: `docs/V0_1_3_RELEASE_DRAFT.md` (planned)
+- Current Release Evidence: `docs/V0_1_3_EVIDENCE.md` (planned)
+- Previous Plan: `docs/V0_1_2_PLAN.md`
+- Previous Release Draft: `docs/V0_1_2_RELEASE_DRAFT.md`
+- Previous Release Evidence: `docs/V0_1_2_EVIDENCE.md`
+- Older Plan: `docs/V0_1_1_PLAN.md`
+- Older Release Draft: `docs/V0_1_1_RELEASE_DRAFT.md`
+- Older Release Evidence: `docs/V0_1_1_EVIDENCE.md`
 - Release Gate Marker: `docs/release-gate-last-success.json`
 - Architecture: `ARCHITECTURE.md`
 - QA Status: `docs/QA_STATUS.md`

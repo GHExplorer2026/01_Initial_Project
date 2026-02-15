@@ -3,6 +3,14 @@
 ## Goal
 Deliver the UX/UI implementation phase (`v0.1.2`) on top of `v0.1.1` without changing canonical output contracts.
 
+## Release Status
+1. `v0.1.2` is published.
+2. Release tag: `v0.1.2` on commit `662a368`.
+3. Latest release gate evidence:
+   - `run_id=22034113407`
+   - `status=success`
+   - `install=success`, `verify=success`, `smoke=success`
+
 ## Guardrails (Non-Negotiable)
 1. No changes to `RULES.md` canonical strings or strict formatting contracts.
 2. Strict output block remains byte-stable and isolated (`no links/sources/debug`).
@@ -142,7 +150,7 @@ Status: Completed
 ### Acceptance
 1. All CI gates green.
 2. Release evidence documented with run URL and marker status.
-3. Tagging readiness confirmed.
+3. Tag published and documented in release records.
 
 ## Risk Register (`v0.1.2`)
 1. Risk: UI adds non-canonical text into strict block.
