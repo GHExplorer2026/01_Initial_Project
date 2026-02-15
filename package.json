@@ -16,9 +16,12 @@
     "unit:ci": "node -e \"require('fs').mkdirSync('artifacts',{recursive:true})\" && vitest run --reporter=default --reporter=junit --outputFile.junit=artifacts/vitest-unit.xml",
     "snapshot": "vitest run",
     "snapshot:ci": "node -e \"require('fs').mkdirSync('artifacts',{recursive:true})\" && vitest run --reporter=default --reporter=junit --outputFile.junit=artifacts/vitest-snapshot.xml",
+    "fix:next-env": "bash scripts/normalize_next_env.sh",
+    "check:next-env": "bash scripts/check_next_env.sh",
+    "setup:hooks": "bash scripts/setup_git_hooks.sh",
     "check:release-gate": "scripts/check_release_gate.sh",
     "preverify": "node -e \"const [maj,min]=process.versions.node.split('.').map(Number); if(maj<20||(maj===20&&min<9)){console.error('Node >=20.9.0 required for verify. Current: '+process.versions.node); process.exit(1);}\"",
-    "verify": "npm run unit && npm run snapshot && npm run lint && npm run typecheck && npm run build",
+    "verify": "npm run unit && npm run snapshot && npm run lint && npm run typecheck && npm run build && npm run check:next-env",
     "verify:release": "npm run verify"
   },
   "dependencies": {

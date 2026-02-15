@@ -62,3 +62,6 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Check next-env canonical path
+        run: npm run check:next-env

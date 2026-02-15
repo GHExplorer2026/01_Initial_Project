@@ -129,6 +129,7 @@ Date: `2026-02-15`
 | P-077 | 2026-02-15 | v0.1.6 | Gate rerun | Completed `V-604` by re-running full deterministic gates post-hardening (`115/115`) | Completed | `npm run verify:release`, `docs/V0_1_6_EVIDENCE.md` | Codex |
 | P-078 | 2026-02-15 | v0.1.6 | Gate closure | Validated release-candidate marker (`run_id=22035813418`) and closed `V-605` | Completed | `docs/release-gate-last-success.json`, `docs/V0_1_6_EVIDENCE.md` | Codex |
 | P-079 | 2026-02-15 | v0.1.6 | Release publish | Published `v0.1.6` tag and finalized release records | Completed | tag `v0.1.6`, `docs/RELEASES.md`, `docs/V0_1_6_RELEASE_DRAFT.md` | Codex |
+| P-080 | 2026-02-15 | Tooling | Hardening | Added deterministic `next-env.d.ts` drift guard (`check/fix` scripts, CI check, optional pre-commit hook) without runtime logic changes | Completed | `scripts/check_next_env.sh`, `scripts/normalize_next_env.sh`, `.github/workflows/*.yml`, `npm run verify:release` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -226,3 +227,7 @@ Date: `2026-02-15`
   - `node >= 20.9.0` (see `.nvmrc` / `.node-version`)
 - Full local quality gate:
   - `npm run verify`
+- `next-env.d.ts` drift guard:
+  - `npm run check:next-env`
+  - `npm run fix:next-env`
+  - optional local auto-fix hook: `npm run setup:hooks`

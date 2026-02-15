@@ -70,6 +70,10 @@
   - `V-603` completed (release-gate marker mismatch runbook hardening)
   - `V-604` completed (full deterministic gate rerun, `115/115` tests)
   - `V-605` completed (release marker validated + release docs finalized + tag published)
+- Post-release tooling hardening:
+  - `next-env.d.ts` drift guard added (`npm run check:next-env`, `npm run fix:next-env`)
+  - optional git hook setup via `npm run setup:hooks`
+  - CI gates now enforce canonical `next-env.d.ts` import path
 - Final release-gate evidence for `v0.1.6`:
   - `run_id=22035813418`
   - `status=success`

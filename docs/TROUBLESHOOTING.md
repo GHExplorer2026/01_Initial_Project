@@ -72,7 +72,13 @@ Symptom:
 Policy:
 1. Keep repository baseline aligned to:
    - `import "./.next/types/routes.d.ts";`
-2. If local tooling flips to `.next/dev/types/...`, reset before commit:
+2. Detect drift explicitly:
+   - `npm run check:next-env`
+3. Normalize automatically when drift appears:
+   - `npm run fix:next-env`
+4. Optional hardening for local commits:
+   - `npm run setup:hooks` (enables `.githooks/pre-commit` auto-normalization)
+5. If needed, manual reset remains valid:
    - `git checkout -- next-env.d.ts`
 
 ## 5) Production startup mismatch with standalone builds
