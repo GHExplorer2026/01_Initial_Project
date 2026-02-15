@@ -1,7 +1,7 @@
 # QA_STATUS.md
 
 ## Current Branch
-- Branch: `main` (post `v0.1.5` release)
+- Branch: `main` (post `v0.1.6` release)
 - Baseline: synced with `origin/main`
 
 ## Latest Deterministic Gate Run
@@ -69,6 +69,12 @@
   - `V-602` completed (canonical fallback note-line contract hardening in tests)
   - `V-603` completed (release-gate marker mismatch runbook hardening)
   - `V-604` completed (full deterministic gate rerun, `115/115` tests)
+  - `V-605` completed (release marker validated + release docs finalized + tag published)
+- Final release-gate evidence for `v0.1.6`:
+  - `run_id=22035813418`
+  - `status=success`
+  - `install=success`, `verify=success`, `smoke=success`
+- Release finalized on `main` with tag `v0.1.6`.
 - `v0.1.2` UI implementation baseline added:
   - deterministic scope-state helpers in `src/app/scopeState.ts`
   - UI state/strict-output isolation refactor in `src/app/page.tsx`

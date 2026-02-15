@@ -160,20 +160,27 @@
 - `docs/V0_1_5_EVIDENCE.md`
 - `docs/release-gate-last-success.json`
 
-## Next Planned: v0.1.6
+## v0.1.6 (2026-02-15)
 
-### Planned Scope
-- SPEC-safe contract-proofing hardening on top of `v0.1.5`.
-- Deterministic release-operability and gate-diagnostics hardening.
-- No drift in strict output or ICS contracts.
+### Scope
+- Completed SPEC-safe contract-proofing hardening on top of `v0.1.5`.
+- Hardened deterministic fallback note-line test coverage.
+- Hardened release-operability runbook for marker mismatch diagnosis.
 
-### Guardrails
-- No drift in strict output canonical strings.
-- No drift in ICS mandatory profile (`CATEGORIES:Wirtschafts-Event`, deterministic UID/DTSTAMP, CRLF/folding, VTIMEZONE).
-- No change to source priority/governance contracts.
-- `regions` remains primary API contract.
+### Quality Evidence
+- Local Node-20 verify gate:
+  - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
+  - result: `115/115` tests passed + lint/typecheck/build pass
+- Release Gate:
+  - `run_id=22035813418`
+  - `status=success`
+  - `install=success`, `verify=success`, `smoke=success`
+  - `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22035813418`
+- Published tag:
+  - `v0.1.6` (annotated tag on commit `a2848c5`)
 
-### Planning References
+### References
 - `docs/V0_1_6_PLAN.md`
 - `docs/V0_1_6_RELEASE_DRAFT.md`
 - `docs/V0_1_6_EVIDENCE.md`
+- `docs/release-gate-last-success.json`

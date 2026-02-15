@@ -4,8 +4,8 @@
 Deliver the `v0.1.6` hardening increment on top of released `v0.1.5`, focused on deterministic contract-proofing and release-operability hardening without any SPEC drift.
 
 ## Release Status
-1. `v0.1.6` is in planning.
-2. Baseline release remains `v0.1.5`.
+1. `v0.1.6` is released.
+2. Release tag: `v0.1.6` on commit `a2848c5`.
 3. Entry criteria:
    - `main` synced with latest release-gate marker.
    - `npm run check:release-gate` valid for current `HEAD`.
@@ -81,11 +81,18 @@ Status: Completed
 2. No regression in release-gate marker semantics.
 
 ## W4 Release Scaffolding and Closure (`v0.1.6`)
-Status: Planned
+Status: Completed
 
 1. Create/update `docs/V0_1_6_RELEASE_DRAFT.md`.
 2. Create/update `docs/V0_1_6_EVIDENCE.md`.
 3. Close release with green verify + release-gate and publish tag.
+   Progress:
+   - Release gate marker validated on release-candidate SHA:
+     - `run_id=22035813418`
+     - `status=success` (`install/verify/smoke`)
+   - Published release tag:
+     - `v0.1.6` on `a2848c5`
+   - Finalized release records in governance docs.
 
 ### Acceptance
 1. Release docs are complete and evidence-backed.
@@ -114,7 +121,7 @@ Status: Planned
 2. `V-602`: Completed.
 3. `V-603`: Completed.
 4. `V-604`: Completed.
-5. `V-605`: Open.
+5. `V-605`: Completed.
 
 ## Execution Order
 1. W1 baseline sync and validation.

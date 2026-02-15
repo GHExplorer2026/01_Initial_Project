@@ -2,7 +2,7 @@
 
 ## 1. Project Context
 - Project: `01_Initial_Project`
-- Current objective: execute `v0.1.6` hardening plan on top of released `v0.1.5`.
+- Current objective: maintain released `v0.1.6` baseline and prepare the next planning increment.
 - Single source of truth for implementation governance: this `README.md`.
 
 ## 2. Current Snapshot
@@ -27,6 +27,7 @@ Date: `2026-02-15`
 | `v0.1.5` planning baseline | Completed | 100% | 2026-02-15 | `docs/V0_1_5_PLAN.md`, `docs/V0_1_5_RELEASE_DRAFT.md`, `docs/V0_1_5_EVIDENCE.md` |
 | Release `v0.1.5` | Completed | 100% | 2026-02-15 | tag `v0.1.5`, `docs/RELEASES.md`, `docs/V0_1_5_EVIDENCE.md` |
 | `v0.1.6` planning baseline | Completed | 100% | 2026-02-15 | `docs/V0_1_6_PLAN.md`, `docs/V0_1_6_RELEASE_DRAFT.md`, `docs/V0_1_6_EVIDENCE.md` |
+| Release `v0.1.6` | Completed | 100% | 2026-02-15 | tag `v0.1.6`, `docs/RELEASES.md`, `docs/V0_1_6_EVIDENCE.md` |
 
 ## 3. Active Skill Landscape
 
@@ -126,6 +127,8 @@ Date: `2026-02-15`
 | P-075 | 2026-02-15 | v0.1.6 | Contract-proofing | Completed `V-602` by hardening canonical fallback note-line tests without snapshot drift | Completed | `tests/rendererFallbacks.test.ts`, `docs/V0_1_6_PLAN.md` | Codex |
 | P-076 | 2026-02-15 | v0.1.6 | Operability | Completed `V-603` with release-gate marker mismatch runbook hardening | Completed | `docs/TROUBLESHOOTING.md`, `docs/V0_1_6_PLAN.md` | Codex |
 | P-077 | 2026-02-15 | v0.1.6 | Gate rerun | Completed `V-604` by re-running full deterministic gates post-hardening (`115/115`) | Completed | `npm run verify:release`, `docs/V0_1_6_EVIDENCE.md` | Codex |
+| P-078 | 2026-02-15 | v0.1.6 | Gate closure | Validated release-candidate marker (`run_id=22035813418`) and closed `V-605` | Completed | `docs/release-gate-last-success.json`, `docs/V0_1_6_EVIDENCE.md` | Codex |
+| P-079 | 2026-02-15 | v0.1.6 | Release publish | Published `v0.1.6` tag and finalized release records | Completed | tag `v0.1.6`, `docs/RELEASES.md`, `docs/V0_1_6_RELEASE_DRAFT.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -157,7 +160,7 @@ Date: `2026-02-15`
 | V-602 | Expand SPEC-safe contract-proofing tests | High | Completed | None | 2026-02-16 | Codex |
 | V-603 | Harden release-operability diagnostics and runbook references | High | Completed | None | 2026-02-16 | Codex |
 | V-604 | Re-run full deterministic gates after hardening | High | Completed | None | 2026-02-16 | Codex/User |
-| V-605 | Finalize `v0.1.6` release evidence and publish tag | High | Open | None | 2026-02-16 | Codex/User |
+| V-605 | Finalize `v0.1.6` release evidence and publish tag | High | Completed | None | 2026-02-16 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |
