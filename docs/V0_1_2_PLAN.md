@@ -124,7 +124,7 @@ Status: Completed
 3. No regressions in strict output/ICS tests.
 
 ## W6 Release Preparation (`v0.1.2`)
-Status: In Progress
+Status: Completed
 
 1. Update docs (`README.md`, `docs/QA_STATUS.md`, `docs/RELEASES.md`) with UI phase evidence.
 2. Run release gates:
@@ -135,6 +135,9 @@ Status: In Progress
    - Added release prep templates:
      - `docs/V0_1_2_RELEASE_DRAFT.md`
      - `docs/V0_1_2_EVIDENCE.md`
+   - Completed release gates:
+     - Node-20 verify pass (`105/105`)
+     - Release Gate success marker (`run_id=22034113407`)
 
 ### Acceptance
 1. All CI gates green.

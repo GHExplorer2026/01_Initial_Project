@@ -89,6 +89,7 @@ Date: `2026-02-15`
 | P-046 | 2026-02-15 | v0.1.2 | Release prep | Created `v0.1.2` release draft and evidence templates for gate closure and publish flow | Completed | `docs/V0_1_2_RELEASE_DRAFT.md`, `docs/V0_1_2_EVIDENCE.md` | Codex |
 | P-047 | 2026-02-15 | v0.1.2 | Request helpers | Extracted UI request endpoint builders and added deterministic tests for `regions`-primary query contract | Completed | `src/app/uiRequests.ts`, `tests/uiRequests.test.ts`, `src/app/page.tsx` | Codex |
 | P-048 | 2026-02-15 | v0.1.2 | Node20 gate proof | Completed full Node-20 `verify:release` locally with `TMPDIR=/tmp` workaround; all checks green (`105/105`) | Completed | `docs/V0_1_2_EVIDENCE.md` | Codex |
+| P-049 | 2026-02-15 | v0.1.2 | Gate closure | Synced latest release-gate marker and closed `v0.1.2` gate evidence (`run_id=22034113407`) | Completed | `docs/release-gate-last-success.json`, `docs/V0_1_2_EVIDENCE.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -103,7 +104,7 @@ Date: `2026-02-15`
 | U-204 | Implement weekly generate flow + strict `<pre>` output isolation | High | Completed | None | 2026-02-15 | Codex |
 | U-205 | Implement ICS download UX flow | Medium | Completed | None | 2026-02-15 | Codex |
 | U-206 | Add UI interaction/a11y tests (fixture-first) | High | Completed | None | 2026-02-15 | Codex |
-| U-207 | Run release gates + finalize `v0.1.2` evidence docs | High | In Progress | Local branch currently behind new release-gate marker commit by 1 and DNS is flapping during pull/fetch retries | 2026-02-16 | Codex/User |
+| U-207 | Run release gates + finalize `v0.1.2` evidence docs | High | Completed | None | 2026-02-15 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |

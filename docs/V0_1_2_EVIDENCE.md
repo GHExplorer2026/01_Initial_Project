@@ -26,16 +26,17 @@ Track concrete evidence for closing `v0.1.2` release gates.
 - Ref:
   - `main`
 - Result:
-  - `IN PROGRESS`
+  - `PASS`
+  - `install=success`, `verify=success`, `smoke=success`
 - Run URL:
-  - latest confirmed success marker currently points to previous `v0.1.2` step:
-    - `https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22033965912`
+  - `https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22034113407`
 - Success marker file:
   - `docs/release-gate-last-success.json`
 - Validation command:
   - `npm run check:release-gate`
 - Current local state:
-  - branch is behind `origin/main` by 1 marker commit, but pull/fetch is intermittently blocked by DNS flaps.
+  - marker commit synced locally (`a294aa2`)
+  - marker `sha` equals validated release-doc commit `1791e70d823fb44919a14401d3e25fd65fdff761`
 
 ### 3) UI Contract Evidence
 - Added tests:
@@ -48,4 +49,4 @@ Track concrete evidence for closing `v0.1.2` release gates.
 - Planned tag:
   - `v0.1.2`
 - Status:
-  - `IN PROGRESS`
+  - `READY` (all gates closed)

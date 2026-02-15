@@ -58,4 +58,8 @@
   - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
   - result: pass (`105/105` tests, lint/typecheck/build green)
 - Default shell (`node 18`) still hits Vitest ESM startup issues; use Node `>=20.9.0` path override (plus `TMPDIR=/tmp`) or CI for full suite runs.
+- Latest release-gate marker is green and synced for current release-doc commit:
+  - `run_id=22034113407`
+  - `status=success`
+  - `install=success`, `verify=success`, `smoke=success`
 - `next-env.d.ts` drift handling is documented in `docs/TROUBLESHOOTING.md`.

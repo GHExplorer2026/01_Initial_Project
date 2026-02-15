@@ -13,7 +13,7 @@
 2. Release Gate workflow on `main`:
    - `status=success`
    - `install=success`, `verify=success`, `smoke=success`
-   - status: `PENDING` for latest `v0.1.2` commits
+   - status: `DONE` (`run_id=22034113407`, `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22034113407`)
 3. Invariant checks:
    - strict output strings unchanged
    - TOP suffix unchanged (` - **TOP-EVENT**`)
@@ -35,7 +35,7 @@
 4. Append final release entry in `docs/RELEASES.md`.
 
 ## Current Status
-- `IN PROGRESS` (awaiting latest release-gate marker sync for current `main` head)
+- `READY FOR TAG`
 
 ## Evidence Template
 - `docs/V0_1_2_EVIDENCE.md`
