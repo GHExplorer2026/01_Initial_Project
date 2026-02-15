@@ -69,6 +69,15 @@ describe("GET /api/weekly", () => {
     expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({ regions: ["USA", "EZ"] });
   });
 
+  it("normalizes deprecated countries alias with lowercase and whitespace", async () => {
+    mockedGenerateWeeklyOutlook.mockResolvedValue(buildWeeklyOutput());
+
+    const response = await GET(new Request("http://localhost/api/weekly?countries= usd, eur "));
+
+    expect(response.status).toBe(200);
+    expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({ regions: ["USA", "EZ"] });
+  });
+
   it("accepts deprecated countries alias when regions parameter is empty", async () => {
     mockedGenerateWeeklyOutlook.mockResolvedValue(buildWeeklyOutput());
 

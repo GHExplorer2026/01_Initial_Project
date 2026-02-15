@@ -109,3 +109,16 @@
 - `docs/V0_1_3_RELEASE_DRAFT.md`
 - `docs/V0_1_3_EVIDENCE.md`
 - `docs/release-gate-last-success.json`
+
+## Next Planned: v0.1.4
+
+### Focus
+- Baseline verification and release-gate refresh after `v0.1.3` release.
+- Runbook hardening for deterministic operations under intermittent DNS/network issues.
+- Additional SPEC-safe fallback/contract coverage with fixture-first tests.
+ - Current gate status: `READY FOR TAG` (baseline marker `run_id=22034716811`).
+
+### Planning Reference
+- `docs/V0_1_4_PLAN.md`
+- `docs/V0_1_4_RELEASE_DRAFT.md`
+- `docs/V0_1_4_EVIDENCE.md`

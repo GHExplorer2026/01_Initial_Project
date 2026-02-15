@@ -13,7 +13,7 @@
   - `lint`: pass
   - `typecheck`: pass
   - `build`: pass
-  - Current passing tests: `109`
+  - Current passing tests: `111`
 - Environment:
   - Node `v20.20.0`
   - npm `10.8.2`
@@ -40,11 +40,12 @@
 - Release finalized on `main` with tag `v0.1.0`; `origin/fix/source-mode-meta` was deleted after merge.
 - Release finalized on `main` with tag `v0.1.1`.
 - Final release-gate evidence:
-  - `run_id=22034682380`
+  - `run_id=22034716811`
   - `status=success`
   - `install=success`, `verify=success`, `smoke=success`
 - Next phase planned:
-  - `v0.1.4` planning pending.
+  - `v0.1.4` planning initialized in `docs/V0_1_4_PLAN.md`.
+  - release scaffolding initialized in `docs/V0_1_4_RELEASE_DRAFT.md` and `docs/V0_1_4_EVIDENCE.md`.
 - `v0.1.2` UI implementation baseline added:
   - deterministic scope-state helpers in `src/app/scopeState.ts`
   - UI state/strict-output isolation refactor in `src/app/page.tsx`
@@ -59,7 +60,7 @@
   - result: pass (`109/109` tests, lint/typecheck/build green)
 - Default shell (`node 18`) still hits Vitest ESM startup issues; use Node `>=20.9.0` path override (plus `TMPDIR=/tmp`) or CI for full suite runs.
 - Latest release-gate marker is green and synced for current release-doc commit:
-  - `run_id=22034682380`
+  - `run_id=22034716811`
   - `status=success`
   - `install=success`, `verify=success`, `smoke=success`
 - Release finalized on `main` with tag `v0.1.3`.
