@@ -11,14 +11,7 @@ import {
   toggleRegionSelection
 } from "@/app/scopeState";
 import { buildIcsEndpoint, buildWeeklyEndpoint } from "@/app/uiRequests";
-
-type WeeklyResponse = {
-  renderedText: string;
-  meta?: {
-    sourceMode?: "fixtures" | "live";
-    sourcesUsed?: string[];
-  };
-};
+import { normalizeWeeklyResponse, type WeeklyResponse } from "@/app/weeklyResponse";
 
 export default function Page() {
   const [selected, setSelected] = useState<RegionCode[]>(allRegionsSelection);
@@ -71,9 +64,10 @@ export default function Page() {
         throw new Error(`API ${response.status}`);
       }
       const data = (await response.json()) as WeeklyResponse;
-      setRenderedText(data.renderedText ?? "");
-      setSourceMode(data.meta?.sourceMode ?? null);
-      setSourcesUsed(Array.isArray(data.meta?.sourcesUsed) ? data.meta?.sourcesUsed : []);
+      const normalized = normalizeWeeklyResponse(data);
+      setRenderedText(normalized.renderedText);
+      setSourceMode(normalized.sourceMode);
+      setSourcesUsed(normalized.sourcesUsed);
       setHasGenerated(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unknown error");
