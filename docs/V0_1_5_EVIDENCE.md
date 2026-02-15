@@ -10,7 +10,7 @@ Track concrete evidence for closing `v0.1.5` release gates.
   - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
 - Result:
   - `PASS`
-  - tests: `113 / 113` passed
+  - tests: `115 / 115` passed
   - `unit`: pass
   - `snapshot`: pass
   - `lint`: pass
@@ -30,6 +30,7 @@ Track concrete evidence for closing `v0.1.5` release gates.
   - `docs/release-gate-last-success.json`
 - Validation command:
   - `npm run check:release-gate`
+  - diagnostics now include `run_id`, step outcomes, and decoded smoke tails on mismatch.
 
 ### 3) SPEC Invariant Evidence
 - Strict output snapshots:

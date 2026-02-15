@@ -1,5 +1,17 @@
-import { describe, expect, it } from "vitest";
-import { decodeHtml, readFixtureEvents, stripHtml, toBerlinDateTime } from "@/server/sources/common";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import {
+  decodeHtml,
+  fetchWithTimeout,
+  readFixtureEvents,
+  resolveSourceFetchTimeoutMs,
+  stripHtml,
+  toBerlinDateTime
+} from "@/server/sources/common";
+
+afterEach(() => {
+  vi.restoreAllMocks();
+  vi.unstubAllEnvs();
+});
 
 describe("source common utilities", () => {
   it("filters fixture events by week and allowed regions", async () => {
@@ -33,5 +45,31 @@ describe("source common utilities", () => {
     expect(result.events).toEqual([]);
     expect(typeof result.error).toBe("string");
     expect(result.error?.length).toBeGreaterThan(0);
+  });
+
+  it("resolves source fetch timeout from env with safe defaults", () => {
+    expect(resolveSourceFetchTimeoutMs()).toBe(15_000);
+
+    vi.stubEnv("SOURCE_FETCH_TIMEOUT_MS", "3210.8");
+    expect(resolveSourceFetchTimeoutMs()).toBe(3210);
+
+    vi.stubEnv("SOURCE_FETCH_TIMEOUT_MS", "-1");
+    expect(resolveSourceFetchTimeoutMs()).toBe(15_000);
+
+    vi.stubEnv("SOURCE_FETCH_TIMEOUT_MS", "abc");
+    expect(resolveSourceFetchTimeoutMs()).toBe(15_000);
+  });
+
+  it("uses fetch timeout wrapper and maps abort errors deterministically", async () => {
+    const successSpy = vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response("{}", { status: 200, headers: { "Content-Type": "application/json" } })
+    );
+    await fetchWithTimeout("https://example.test/source");
+    const [, init] = successSpy.mock.calls[0];
+    expect(init?.signal).toBeInstanceOf(AbortSignal);
+
+    vi.stubEnv("SOURCE_FETCH_TIMEOUT_MS", "42");
+    vi.spyOn(globalThis, "fetch").mockRejectedValueOnce(new DOMException("aborted", "AbortError"));
+    await expect(fetchWithTimeout("https://example.test/source")).rejects.toThrow("source request timeout after 42ms");
   });
 });

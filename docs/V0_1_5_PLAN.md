@@ -66,22 +66,36 @@ Status: Completed
 3. Added tests cover identified failure surfaces.
 
 ## W3 Deterministic Coverage Expansion
-Status: Planned
+Status: Completed
 
 1. Add fixture tests for weekend/holiday/error boundary permutations.
 2. Extend API contract tests for `regions`/`countries` normalization edge cases.
 3. Keep snapshots byte-stable.
+   Progress:
+   - Added deterministic source utility tests for timeout configuration parsing and abort-error mapping:
+     - `tests/sourceCommon.test.ts`
+   - Added source-adapter regression tests for timeout error propagation and TradingView epoch timestamp parsing:
+     - `tests/sourceAdapters.test.ts`
+   - Re-ran full verify gate after coverage expansion:
+     - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
+     - `115/115` tests pass
 
 ### Acceptance
 1. Snapshot tests unchanged except intentional approved updates.
 2. All new tests pass in offline fixture mode.
 
 ## W4 Release-Gate Diagnostics Hardening
-Status: Planned
+Status: Completed
 
 1. Improve release-gate troubleshooting breadcrumbs for install/verify/smoke phases.
 2. Ensure deterministic marker interpretation remains unambiguous.
 3. Keep marker update flow race-safe.
+   Progress:
+   - Enhanced `scripts/check_release_gate.sh` diagnostics to output:
+     - `run_id`
+     - per-step outcomes (`install`/`verify`/`smoke`)
+     - decoded smoke tail excerpts on failure
+   - Preserved deterministic validity rule (`status=success` and SHA matching current release candidate semantics).
 
 ### Acceptance
 1. Failures can be attributed to install/verify/smoke in one pass.
@@ -119,8 +133,8 @@ Status: Planned
 ## Current Task Status
 1. `V-501`: Completed.
 2. `V-502`: Completed.
-3. `V-503`: Open.
-4. `V-504`: Open.
+3. `V-503`: Completed.
+4. `V-504`: Completed.
 5. `V-505`: Open.
 
 ## Execution Order

@@ -114,6 +114,8 @@ Date: `2026-02-15`
 | P-065 | 2026-02-15 | v0.1.5 | Release scaffold | Added `v0.1.5` release draft and evidence templates for deterministic gate closure | Completed | `docs/V0_1_5_RELEASE_DRAFT.md`, `docs/V0_1_5_EVIDENCE.md` | Codex |
 | P-066 | 2026-02-15 | v0.1.5 | Baseline gate | Completed `V-501` baseline sync + Node-20 verify + release-gate marker validation (`run_id=22035278347`) | Completed | `docs/V0_1_5_PLAN.md`, `docs/V0_1_5_EVIDENCE.md` | Codex |
 | P-067 | 2026-02-15 | v0.1.5 | Adapter resilience | Completed `V-502` with deterministic live-fetch timeout handling and TradingView epoch timestamp parsing + tests | Completed | `src/server/sources/common.ts`, `src/server/sources/investing.ts`, `src/server/sources/tradingview.ts`, `tests/sourceAdapters.test.ts` | Codex |
+| P-068 | 2026-02-15 | v0.1.5 | Coverage expansion | Completed `V-503` with deterministic timeout utility tests and source-adapter regression matrix expansion (`115/115`) | Completed | `tests/sourceCommon.test.ts`, `tests/sourceAdapters.test.ts`, `docs/V0_1_5_PLAN.md` | Codex |
+| P-069 | 2026-02-15 | v0.1.5 | Gate diagnostics | Completed `V-504` by hardening release-gate diagnostics (run_id, step outcomes, decoded smoke tails) in marker checks | Completed | `scripts/check_release_gate.sh`, `docs/V0_1_5_PLAN.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -138,8 +140,8 @@ Date: `2026-02-15`
 | V-404 | Finalize `v0.1.4` release evidence and gate pass | High | Completed | None | 2026-02-16 | Codex/User |
 | V-501 | Re-run baseline verify and release-gate checks for `v0.1.5` start | High | Completed | None | 2026-02-16 | Codex/User |
 | V-502 | Implement SPEC-safe live adapter resilience hardening | High | Completed | None | 2026-02-16 | Codex |
-| V-503 | Expand deterministic fixture and API contract coverage for `v0.1.5` | High | Open | None | 2026-02-16 | Codex |
-| V-504 | Harden release-gate diagnostics and marker traceability | High | Open | None | 2026-02-16 | Codex |
+| V-503 | Expand deterministic fixture and API contract coverage for `v0.1.5` | High | Completed | None | 2026-02-16 | Codex |
+| V-504 | Harden release-gate diagnostics and marker traceability | High | Completed | None | 2026-02-16 | Codex |
 | V-505 | Finalize `v0.1.5` release evidence and publish tag | High | Open | None | 2026-02-16 | Codex/User |
 
 ## 6. Risks

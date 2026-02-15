@@ -13,7 +13,7 @@
   - `lint`: pass
   - `typecheck`: pass
   - `build`: pass
-  - Current passing tests: `113`
+  - Current passing tests: `115`
 - Environment:
   - Node `v20.20.0`
   - npm `10.8.2`
@@ -51,6 +51,8 @@
 - `v0.1.5` baseline and adapter hardening progress:
   - `V-501` completed (`verify:release` + marker validation)
   - `V-502` completed (live fetch timeout handling + TradingView epoch timestamp parsing tests)
+  - `V-503` completed (source timeout utility and adapter regression coverage expansion)
+  - `V-504` completed (release-gate marker diagnostics now include run/step/smoke-tail details)
 - `v0.1.2` UI implementation baseline added:
   - deterministic scope-state helpers in `src/app/scopeState.ts`
   - UI state/strict-output isolation refactor in `src/app/page.tsx`
