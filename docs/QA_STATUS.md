@@ -64,6 +64,11 @@
   - `docs/V0_1_6_PLAN.md`
   - `docs/V0_1_6_RELEASE_DRAFT.md`
   - `docs/V0_1_6_EVIDENCE.md`
+- `v0.1.6` progress:
+  - `V-601` completed (`verify:release` + marker validation, `run_id=22035703265`)
+  - `V-602` completed (canonical fallback note-line contract hardening in tests)
+  - `V-603` completed (release-gate marker mismatch runbook hardening)
+  - `V-604` completed (full deterministic gate rerun, `115/115` tests)
 - `v0.1.2` UI implementation baseline added:
   - deterministic scope-state helpers in `src/app/scopeState.ts`
   - UI state/strict-output isolation refactor in `src/app/page.tsx`

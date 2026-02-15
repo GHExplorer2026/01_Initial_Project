@@ -32,22 +32,33 @@ Deliver the `v0.1.6` hardening increment on top of released `v0.1.5`, focused on
 ## Workstreams
 
 ## W1 Baseline Synchronization and Gate Validation
-Status: Planned
+Status: Completed
 
 1. Sync `main` and validate release marker alignment.
 2. Re-run full deterministic verify gate in Node 20 baseline.
 3. Record baseline evidence for `v0.1.6` start.
+   Progress:
+   - Synced `main` and validated marker:
+     - `npm run check:release-gate` -> pass
+     - `run_id=22035703265`
+   - Re-ran deterministic verify gate in Node 20:
+     - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
+     - `115/115` tests pass
 
 ### Acceptance
 1. `npm run verify:release` is green.
 2. `npm run check:release-gate` is green for current baseline.
 
 ## W2 Contract-Proofing Expansion (SPEC-safe)
-Status: Planned
+Status: Completed
 
 1. Expand deterministic tests for fallback/note-line invariants and scope edge cases.
 2. Strengthen ICS contract assertions (mandatory category, deterministic DTSTAMP/UID behavior under fixtures).
 3. Preserve snapshot byte stability.
+   Progress:
+   - Hardened fallback note-line contract tests for exact canonical line placement:
+     - `tests/rendererFallbacks.test.ts`
+   - Preserved snapshot stability and strict/ICS contract behavior under full verify gate.
 
 ### Acceptance
 1. No strict-output drift.
@@ -55,11 +66,15 @@ Status: Planned
 3. New tests are deterministic and CI-safe.
 
 ## W3 Release Operability Hardening
-Status: Planned
+Status: Completed
 
 1. Improve operator-facing release-gate diagnostics/playbook references.
 2. Keep marker validation behavior deterministic and race-safe.
 3. Ensure failure triage remains single-pass (`install`/`verify`/`smoke`).
+   Progress:
+   - Extended troubleshooting runbook with a dedicated release-gate marker mismatch section:
+     - `docs/TROUBLESHOOTING.md`
+   - Documented deterministic operator flow for marker lag and diagnostics interpretation.
 
 ### Acceptance
 1. Gate failures are attributable in one run.
@@ -95,10 +110,10 @@ Status: Planned
 5. `V-605` Finalize `v0.1.6` evidence and release publish.
 
 ## Current Task Status
-1. `V-601`: Open.
-2. `V-602`: Open.
-3. `V-603`: Open.
-4. `V-604`: Open.
+1. `V-601`: Completed.
+2. `V-602`: Completed.
+3. `V-603`: Completed.
+4. `V-604`: Completed.
 5. `V-605`: Open.
 
 ## Execution Order

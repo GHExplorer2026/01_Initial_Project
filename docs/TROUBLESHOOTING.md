@@ -88,3 +88,22 @@ Mitigation:
    - `node .next/standalone/server.js`
 3. Optional diagnostic fallback:
    - `npm run start:next`
+
+## 6) Release gate marker mismatch after new commits
+
+Symptom:
+- `npm run check:release-gate` fails although workflow run shows success.
+- output shows marker `sha` behind current `HEAD`.
+
+Mitigation:
+1. Sync local branch and marker:
+   - `git fetch origin main --prune`
+   - `git pull --ff-only`
+2. Re-check marker:
+   - `PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run check:release-gate`
+3. If still mismatched, wait for marker commit propagation and retry.
+4. Use diagnostics from `check:release-gate` output:
+   - `run_id`
+   - `steps=install:...,verify:...,smoke:...`
+   - decoded `smoke_check_tail` and `smoke_log_tail` on failure
+5. Treat CI marker as source of truth; do not bypass with manual status assumptions.

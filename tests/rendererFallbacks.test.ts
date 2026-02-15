@@ -20,7 +20,11 @@ describe("renderStrictWeeklyText fallback notes", () => {
       { holidayTriggered: false, isWeekend: true, verificationFailed: false },
       true
     );
-    expect(out).toContain(NOTE_WEEKEND_OR_HOLIDAY);
+    const lines = out.split("\n");
+    expect(lines).toHaveLength(3);
+    expect(lines[0]).toBe("📊 WOCHENAUSBLICK 14.02.2026 – 14.02.2026 Februar 2026");
+    expect(lines[1]).toBe("### Samstag, 14. Februar");
+    expect(lines[2]).toBe(NOTE_WEEKEND_OR_HOLIDAY);
   });
 
   it("renders holiday note exactly", () => {
@@ -29,7 +33,11 @@ describe("renderStrictWeeklyText fallback notes", () => {
       { holidayTriggered: true, isWeekend: false, verificationFailed: false },
       true
     );
-    expect(out).toContain(NOTE_HOLIDAY);
+    const lines = out.split("\n");
+    expect(lines).toHaveLength(3);
+    expect(lines[0]).toBe("📊 WOCHENAUSBLICK 03.07.2026 – 03.07.2026 Juli 2026");
+    expect(lines[1]).toBe("### Freitag, 03. Juli");
+    expect(lines[2]).toBe(NOTE_HOLIDAY);
   });
 
   it("renders no-verified note when data is unreliable", () => {
@@ -38,7 +46,11 @@ describe("renderStrictWeeklyText fallback notes", () => {
       { holidayTriggered: false, isWeekend: false, verificationFailed: true },
       false
     );
-    expect(out).toContain(NOTE_NO_VERIFIED);
+    const lines = out.split("\n");
+    expect(lines).toHaveLength(3);
+    expect(lines[0]).toBe("📊 WOCHENAUSBLICK 10.02.2026 – 10.02.2026 Februar 2026");
+    expect(lines[1]).toBe("### Dienstag, 10. Februar");
+    expect(lines[2]).toBe(NOTE_NO_VERIFIED);
   });
 
   it("prioritizes weekend/holiday note when both flags are true", () => {
