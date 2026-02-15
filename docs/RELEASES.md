@@ -59,14 +59,28 @@
 - `docs/V0_1_1_EVIDENCE.md`
 - `docs/release-gate-last-success.json`
 
-## Next Planned: v0.1.2
+## v0.1.2 (2026-02-15)
 
-### Focus
-- UX/UI implementation phase (scope selector, strict output rendering flow, ICS download flow).
-- Preserve strict output and ICS invariants exactly as defined in `RULES.md`.
-- Keep deterministic fixture-first testing and CI gate behavior.
+### Scope
+- Implemented UX/UI flow for scope selection, generation, and ICS download.
+- Added deterministic scope-state/request helpers for `regions`-primary behavior.
+- Added UI contract tests and strengthened accessibility semantics.
+- Preserved strict output and ICS product contracts without rule drift.
 
-### Planning Reference
+### Quality Evidence
+- Local Node-20 verify gate:
+  - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
+  - result: `105/105 tests` passed + lint/typecheck/build pass
+- Release Gate:
+  - `run_id=22034113407`
+  - `status=success`
+  - `install=success`, `verify=success`, `smoke=success`
+  - `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22034113407`
+- Published tag:
+  - `v0.1.2` (annotated tag on commit `662a368`)
+
+### References
 - `docs/V0_1_2_PLAN.md`
 - `docs/V0_1_2_RELEASE_DRAFT.md`
 - `docs/V0_1_2_EVIDENCE.md`
+- `docs/release-gate-last-success.json`

@@ -49,4 +49,8 @@ Track concrete evidence for closing `v0.1.2` release gates.
 - Planned tag:
   - `v0.1.2`
 - Status:
-  - `READY` (all gates closed)
+  - `PUBLISHED`
+- Tag details:
+  - `tag`: `v0.1.2`
+  - `target`: `662a368`
+  - `push`: `origin/v0.1.2`
