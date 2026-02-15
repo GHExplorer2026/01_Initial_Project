@@ -1,7 +1,7 @@
 param(
   [ValidateSet("live", "fixtures")]
   [string]$SourceMode = "live",
-  [string]$Host = "127.0.0.1",
+  [string]$AppHost = "127.0.0.1",
   [int]$Port = 3000,
   [int]$StartupTimeoutSec = 90
 )
@@ -59,7 +59,7 @@ if ([string]::IsNullOrWhiteSpace($repoWslPath)) {
   throw "Could not resolve repository path for WSL."
 }
 
-$appUrl = "http://$Host`:$Port/"
+$appUrl = "http://$AppHost`:$Port/"
 if (Test-AppReady -Url $appUrl) {
   if (Open-DefaultBrowser -Url $appUrl) {
     Write-Host "App already running. Opened in default browser: $appUrl"
