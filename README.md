@@ -6,7 +6,7 @@
 - Single source of truth for implementation governance: this `README.md`.
 
 ## 2. Current Snapshot
-Date: `2026-02-14`
+Date: `2026-02-15`
 
 | Area | Status | Completion | Last Updated | Evidence |
 |---|---|---:|---|---|
@@ -17,6 +17,7 @@ Date: `2026-02-14`
 | Core/API baseline implementation | Completed | 100% | 2026-02-14 | `src/core/*`, `src/server/*`, `src/app/api/*` |
 | Deterministic test harness | Completed | 100% | 2026-02-14 | `tests/*`, `tests/fixtures/golden/*` |
 | CI quality gates incl. snapshot | Completed | 100% | 2026-02-14 | `.github/workflows/*.yml`, `package.json` |
+| Release `v0.1.1` | Completed | 100% | 2026-02-15 | tag `v0.1.1`, `docs/RELEASES.md`, `docs/V0_1_1_EVIDENCE.md` |
 
 ## 3. Active Skill Landscape
 
@@ -79,6 +80,7 @@ Date: `2026-02-14`
 | P-038 | 2026-02-14 | v0.1.1 | Smoke permission fix | Execute smoke script via `bash` in Release Gate to avoid executable-bit drift across environments | Completed | `.github/workflows/release-gate.yml` | Codex |
 | P-039 | 2026-02-14 | v0.1.1 | Smoke ICS rule fix | Smoke check now validates `CATEGORIES:Wirtschafts-Event` per existing VEVENT instead of failing on event-empty calendars | Completed | `scripts/smoke_api.sh` | Codex |
 | P-040 | 2026-02-15 | v0.1.1 | Gate check fix | `check:release-gate` now accepts successful run SHA on `HEAD^` when `HEAD` is the marker commit | Completed | `scripts/check_release_gate.sh`, `docs/V0_1_1_EVIDENCE.md` | Codex |
+| P-041 | 2026-02-15 | v0.1.1 | Release publish | Finalized release documentation and published tag `v0.1.1` on `origin` | Completed | `docs/RELEASES.md`, `docs/V0_1_1_EVIDENCE.md`, tag `v0.1.1` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |

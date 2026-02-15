@@ -46,10 +46,12 @@
 - Local Node-20 verify gate:
   - `npm run verify:release` green (`92/92 tests`, lint/typecheck/build pass)
 - Release Gate:
-  - `run_id=22033409824`
+  - `run_id=22033462131`
   - `status=success`
   - `install=success`, `verify=success`, `smoke=success`
-  - `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22033409824`
+  - `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22033462131`
+- Published tag:
+  - `v0.1.1` (annotated tag on commit `cc9f5ba`)
 
 ### References
 - `docs/V0_1_1_PLAN.md`

@@ -42,7 +42,11 @@
 4. Append final release entry in `docs/RELEASES.md`.
 
 ## Current Status
-- `READY FOR TAG`
+- `RELEASED`
+- Published tag:
+  - `v0.1.1` on commit `cc9f5badb4e0d9617b08a6f1fec87344f6a7e3e5`
+- Final gate run:
+  - `https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22033462131`
 
 ## Evidence Template
 - `docs/V0_1_1_EVIDENCE.md`

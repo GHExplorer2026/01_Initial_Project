@@ -1,7 +1,7 @@
 # QA_STATUS.md
 
 ## Current Branch
-- Branch: `main` (post-merge from `fix/source-mode-meta`)
+- Branch: `main` (post `v0.1.1` release)
 - Baseline: synced with `origin/main`
 
 ## Latest Deterministic Gate Run
@@ -38,4 +38,9 @@
   - weekend week-window resolution in orchestrator
   - empty `regions` parameter with deprecated `countries` alias fallback
 - Release finalized on `main` with tag `v0.1.0`; `origin/fix/source-mode-meta` was deleted after merge.
+- Release finalized on `main` with tag `v0.1.1`.
+- Final release-gate evidence:
+  - `run_id=22033462131`
+  - `status=success`
+  - `install=success`, `verify=success`, `smoke=success`
 - `next-env.d.ts` drift handling is documented in `docs/TROUBLESHOOTING.md`.
