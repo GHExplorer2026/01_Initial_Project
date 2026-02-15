@@ -73,18 +73,23 @@ Status: Completed
 3. Added tests are deterministic and CI-safe.
 
 ## W3 Release Evidence and Operability Hygiene
-Status: Planned
+Status: Completed
 
 1. Keep release-draft and evidence docs aligned with actual gate behavior.
 2. Ensure marker diagnostics remain actionable from a single command (`npm run check:release-gate`).
 3. Preserve deterministic troubleshooting flow for marker lag/race conditions.
+   Progress:
+   - Refreshed release evidence and draft alignment to current deterministic verify baseline (`130/130`).
+   - Revalidated release-gate marker after UI hardening:
+     - `run_id=22038517413`
+     - `status=success` (`install/verify/smoke`)
 
 ### Acceptance
 1. Release documentation is actionable and current.
 2. Gate failures remain attributable (`install`/`verify`/`smoke`).
 
 ## W4 Release Closure (`v0.1.7`)
-Status: Planned
+Status: In Progress
 
 1. Finalize `docs/V0_1_7_RELEASE_DRAFT.md`.
 2. Finalize `docs/V0_1_7_EVIDENCE.md`.
@@ -116,7 +121,7 @@ Status: Planned
 1. `V-701`: Completed.
 2. `V-702`: Completed.
 3. `V-703`: Completed.
-4. `V-704`: Planned.
+4. `V-704`: Completed.
 5. `V-705`: Planned.
 
 ## Execution Order

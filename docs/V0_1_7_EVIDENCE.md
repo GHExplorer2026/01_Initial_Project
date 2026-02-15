@@ -25,9 +25,9 @@ Track concrete evidence for closing `v0.1.7` release gates.
 - Result:
   - `PASS`
 - Run URL:
-  - `https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22038326822`
+  - `https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22038517413`
 - Run ID:
-  - `22038326822`
+  - `22038517413`
 - Success marker file:
   - `docs/release-gate-last-success.json`
 - Validation command:

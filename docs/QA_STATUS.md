@@ -93,6 +93,9 @@
 - `v0.1.7` UI edge coverage completed:
   - `V-703` completed (stable non-API UI error normalization + regression tests)
   - deterministic verify gate remains green (`130/130` tests)
+- `v0.1.7` gate rerun completed:
+  - `V-704` completed (`verify:release` green and release-gate marker valid)
+  - `run_id=22038517413`
 - `v0.1.2` UI implementation baseline added:
   - deterministic scope-state helpers in `src/app/scopeState.ts`
   - UI state/strict-output isolation refactor in `src/app/page.tsx`

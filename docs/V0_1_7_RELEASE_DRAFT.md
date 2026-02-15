@@ -8,20 +8,20 @@
 ## Required Final Gates (Before Tag)
 1. Local/CI quality gate:
    - `npm run verify:release`
-   - status: `DONE` (`129/129` tests passed in Node-20 run)
+   - status: `DONE` (`130/130` tests passed in Node-20 run)
 2. Release Gate workflow on `main`:
    - `status=success`
    - `install=success`, `verify=success`, `smoke=success`
-   - status: `DONE` (`run_id=22038326822`, `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22038326822`)
+   - status: `DONE` (`run_id=22038517413`, `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22038517413`)
 3. Invariant checks:
    - strict output strings unchanged
    - TOP suffix unchanged (` - **TOP-EVENT**`)
    - ICS category rule unchanged (`CATEGORIES:Wirtschafts-Event` per VEVENT)
-   - status: `TODO`
+   - status: `DONE`
 4. Scope contract checks:
    - `regions` remains primary
    - `countries` alias behavior unchanged
-   - status: `TODO`
+   - status: `DONE`
 
 ## Planned Release Notes Snippet
 `v0.1.7` hardens deterministic UI execution readiness and release evidence flow while preserving strict output and ICS contracts.
@@ -35,9 +35,9 @@
 4. Append final release entry in `docs/RELEASES.md`.
 
 ## Current Status
-- `PLANNED`
+- `READY_FOR_TAG`
 - Publish target:
-  - `v0.1.7` on `main` after all gates are green.
+  - `v0.1.7` on `main` (all pre-tag gates are green).
 
 ## Evidence Template
 - `docs/V0_1_7_EVIDENCE.md`

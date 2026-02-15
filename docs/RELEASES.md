@@ -5,6 +5,7 @@
 ### Status
 - Planning baseline initialized.
 - Baseline gate validated (`run_id=22038326822`).
+- Hardened gate rerun validated (`run_id=22038517413`).
 - Release not published.
 
 ### Planning Artifacts
