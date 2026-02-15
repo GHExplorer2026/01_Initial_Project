@@ -130,3 +130,44 @@ Formatregeln:
 - Startdatum/Enddatum: `DD.MM.YYYY`
 - Monat/Wochentag: deutsch ausgeschrieben
 - Mo–Fr Tagesheader immer vorhanden
+
+## R-19 Sprint Cadence (execution default)
+1. Standard-Sprintdauer ist `1 Woche` (Mo–Fr) für schnelle Inspect/Adapt-Zyklen.
+2. Jeder Sprint hat genau diese Phasen mit Timebox:
+   - Planning + Backlog Refinement: max. `60 Minuten`
+   - Daily Execution Sync: max. `15 Minuten` je Arbeitstag
+   - Sprint Review: max. `45 Minuten`
+   - Retrospective: max. `45 Minuten`
+3. Ein neuer Sprint startet direkt nach Abschluss des vorherigen Sprints.
+
+## R-20 Definition of Ready (DoR, verpflichtend)
+Ein Arbeitspaket darf nur in einen Sprint, wenn alle Punkte erfüllt sind:
+1. Scope ist auf konkrete Dateien/Module begrenzt.
+2. Betroffene Produktregeln (`R-*`) sind explizit referenziert.
+3. Akzeptanzkriterien sind testbar formuliert (mindestens ein konkreter Testfall).
+4. Security-Impact ist klassifiziert (`none`, `low`, `high`).
+5. Rollback-Strategie ist benannt (Revert/Hotfix-Pfad).
+
+## R-21 Definition of Done (DoD, verpflichtend)
+Ein Arbeitspaket ist nur fertig, wenn alle Punkte erfüllt sind:
+1. Targeted Tests für den geänderten Bereich sind grün.
+2. Vollständige Determinism-Gates sind grün (`verify:release` in Node `>=20.9.0` Umgebung).
+3. Release-Gate-Marker ist für den aktuellen Stand valide (`HEAD` oder Marker-Commit unmittelbar danach).
+4. Doku/Evidence sind aktualisiert (mindestens Status + betroffene Tests/Fixes).
+5. Kein ungeklärter Workspace-Drift verbleibt.
+
+## R-22 Security Mitigation Gates
+1. Keine Secrets/Tokens/Credentials im Repository.
+2. Jede Dependency-Änderung braucht:
+   - begründete Notiz im Commit/PR und
+   - verifizierten CI-Lauf mit allen Gates.
+3. Neue externe Datenquelle/Endpoint nur mit ToS-/Lizenzprüfung und dokumentierter Governance.
+4. Security-relevante Findings mit hoher Kritikalität blockieren Release bis Fix oder dokumentierter, befristeter Ausnahme.
+
+## R-23 Quality & Cycle-Efficiency Mitigations
+1. WIP-Limit: pro Entwickler gleichzeitig maximal `1` aktives Feature-Slice.
+2. Slice-Limit: ein Slice sollte in `<= 1 Arbeitstag` integrierbar sein; sonst Split verpflichtend.
+3. Maximal `2` reine Planning-Zyklen hintereinander ohne Code-/Test-Delta; danach Execution verpflichtend.
+4. Jede Retrospektive erzeugt mindestens:
+   - eine Automatisierungsmaßnahme gegen den größten Reibungsverlust und
+   - einen messbaren Quality-Gate-Check für den nächsten Sprint.

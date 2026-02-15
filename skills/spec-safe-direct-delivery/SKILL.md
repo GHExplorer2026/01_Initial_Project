@@ -20,6 +20,38 @@ Use this skill when the user asks for a faster path to completion while preservi
 6. Ensure release-gate marker catches up to `HEAD` before declaring closure.
 7. Default to this cadence across projects unless a repository defines stricter release rules.
 
+## Sprint Phase Blueprint (fast, low-risk)
+
+1. Planning (timeboxed, max 60 min):
+   - Define Sprint Goal.
+   - Select only DoR-ready slices.
+   - Cap active slices to one per developer.
+2. Execution (daily):
+   - Build smallest testable slice.
+   - Keep strict contract compatibility at all times.
+   - Run targeted tests before context-switch.
+3. Integration:
+   - Run one full deterministic gate per slice-end.
+   - Push immediately after green gate.
+4. Review + Retro:
+   - Demonstrate user-visible outcome against acceptance criteria.
+   - Record one automation mitigation and one quality mitigation for next cycle.
+
+## Mandatory Mitigations (DoR/DoD aligned)
+
+Before implementation (DoR):
+1. Map changes to exact `R-*` rules.
+2. Define at least one regression test to add/update.
+3. Classify security impact (`none|low|high`).
+4. Define rollback path (commit revert or hotfix branch).
+
+Before closure (DoD):
+1. Targeted tests green.
+2. Full deterministic gate green (`verify`/`verify:release`).
+3. Release-gate marker validated for current head progression.
+4. No unresolved workspace drift in generated files.
+5. Evidence docs updated.
+
 ## Execution Cycle
 
 1. Pick one narrow, SPEC-safe slice.
@@ -38,6 +70,8 @@ Use this skill when the user asks for a faster path to completion while preservi
 3. No ICS contract drift.
 4. No live-network dependency in CI tests.
 5. Keep `regions` as primary query contract.
+6. No security shortcuts for speed (no secret commits, no bypass of required gates).
+7. Do not postpone regression tests for later slices.
 
 ## Failure Handling
 
@@ -60,6 +94,10 @@ Use this skill when the user asks for a faster path to completion while preservi
   - full verify
   - commit + push
   - release-gate closure check loop
+
+## Why This Works
+
+This flow mirrors Scrum's short inspect/adapt cycle while hard-binding quality and security gates into each slice, so cycle time improves without letting hidden debt accumulate.
 
 ## Reference
 
