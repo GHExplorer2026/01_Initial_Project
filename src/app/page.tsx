@@ -13,6 +13,7 @@ import {
 import { buildIcsEndpoint, buildWeeklyEndpoint } from "@/app/uiRequests";
 import { normalizeWeeklyResponse, type WeeklyResponse } from "@/app/weeklyResponse";
 import { deriveUiActionState, toUiErrorMessage } from "@/app/uiState";
+import { safeGetStorageValue, safeSetStorageValue } from "@/app/storageSafe";
 
 export default function Page() {
   const [selected, setSelected] = useState<RegionCode[]>(allRegionsSelection);
@@ -25,7 +26,7 @@ export default function Page() {
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    const fromStorage = localStorage.getItem(STORAGE_KEY);
+    const fromStorage = safeGetStorageValue(localStorage, STORAGE_KEY);
     const initial = resolveInitialRegionSelection(window.location.search, fromStorage);
     setSelected(initial);
     setHydrated(true);
@@ -39,7 +40,7 @@ export default function Page() {
     const nextSearch = buildSearchWithRegions(window.location.search, values);
     const nextUrl = nextSearch ? `${window.location.pathname}?${nextSearch}` : window.location.pathname;
     window.history.replaceState(null, "", nextUrl);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(values));
+    safeSetStorageValue(localStorage, STORAGE_KEY, JSON.stringify(values));
   }, [hydrated, selected]);
 
   const selectedSet = useMemo(() => new Set(selected), [selected]);

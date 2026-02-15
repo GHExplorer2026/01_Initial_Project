@@ -147,6 +147,7 @@ Date: `2026-02-15`
 | P-094 | 2026-02-15 | Release Gate | Canonical line invariants | Hardened smoke weekly validation with allowed Hinweis whitelist and exact ` - **TOP-EVENT**` suffix enforcement | Completed | `scripts/smoke_api.sh`, `docs/UI_EXECUTION_CHECKLIST.md` | Codex |
 | P-095 | 2026-02-15 | Release Gate | ICS header invariants | Hardened smoke ICS validation with required attachment filename pattern `Wochenausblick_YYYY-MM-DD.ics` | Completed | `scripts/smoke_api.sh`, `docs/UI_EXECUTION_CHECKLIST.md` | Codex |
 | P-096 | 2026-02-15 | Release Gate | Strict format invariants | Hardened smoke weekly validation with header-date regex and event-line pattern checks | Completed | `scripts/smoke_api.sh`, `docs/UI_EXECUTION_CHECKLIST.md` | Codex |
+| P-097 | 2026-02-15 | UI Resilience | Storage safety | Added safe localStorage wrappers with deterministic fallback semantics and integrated them into UI state boot/persist flow (`129/129`) | Completed | `src/app/storageSafe.ts`, `src/app/page.tsx`, `tests/storageSafe.ui.test.ts`, `npm run verify` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
