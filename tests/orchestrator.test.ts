@@ -235,6 +235,51 @@ describe("generateWeeklyOutlook", () => {
     expect(result.events.some((event) => event.region === "EZ" && event.timeHHMM === "11:00")).toBe(true);
   });
 
+  it("enforces selected region scope for strict output and ics payload", async () => {
+    process.env.SOURCE_MODE = "live";
+    const investingHtml = `
+      <tr id="eventRowId_1" data-event-datetime="2026/02/09 13:30:00">
+        <td class="left flagCur noWrap">flag USD</td>
+        <td class="left event"><a>CPI (YoY)</a></td>
+      </tr>
+    `;
+
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      if (url.includes("investing.com")) {
+        return new Response(JSON.stringify({ data: investingHtml }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+
+      if (url.includes("tradingview.com")) {
+        return new Response(
+          JSON.stringify({
+            status: "ok",
+            result: [{ title: "Housing Starts", currency: "CAD", date: "2026-02-09T13:15:00.000Z" }]
+          }),
+          { status: 200, headers: { "Content-Type": "application/json" } }
+        );
+      }
+
+      throw new Error(`Unexpected live fetch URL: ${url}`);
+    });
+
+    const result = await generateWeeklyOutlook({
+      regions: ["CA"],
+      now: new Date("2026-02-10T10:00:00Z")
+    });
+
+    expect(fetchSpy).toHaveBeenCalledTimes(2);
+    expect(result.events.length).toBeGreaterThan(0);
+    expect(result.events.every((event) => event.region === "CA")).toBe(true);
+    expect(result.renderedText).toContain("Canada");
+    expect(result.renderedText).not.toContain("USA CPI");
+    expect(result.icsPayload).toContain("SUMMARY:Canada ");
+    expect(result.icsPayload).not.toContain("SUMMARY:USA ");
+  });
+
   it("renders holiday fallback note on holiday workdays when no events remain after filtering", async () => {
     delete process.env.SOURCE_MODE;
 

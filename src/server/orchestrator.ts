@@ -80,8 +80,10 @@ export const generateWeeklyOutlook = async ({ regions, now }: GenerateParams): P
 
   const merged = mergeByPriority([...primaryNormalized, ...secondaryNormalized, ...tertiaryNormalized]);
   const deduped = dedupeEvents(merged);
+  const selectedRegions = new Set(regions);
+  const scopeFiltered = deduped.filter((event) => selectedRegions.has(event.region));
 
-  const { filteredEvents, dayStatus } = applyHolidayFilter(deduped, week.days, regions);
+  const { filteredEvents, dayStatus } = applyHolidayFilter(scopeFiltered, week.days, regions);
   const grouped = groupForRendering(filteredEvents);
 
   const dataReliable = investing.ok || tradingview.ok;
