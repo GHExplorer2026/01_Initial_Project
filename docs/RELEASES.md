@@ -33,26 +33,26 @@
 - `docs/PR_BODY.md`
 - `docs/MERGE_STEPS.md`
 
-## Next Planned: v0.1.1
+## v0.1.1 (2026-02-15)
 
-### Focus
-- Parser/fixture hardening and deterministic reliability improvements only.
-- No product-scope expansion and no canonical output contract changes.
-
-### Planning Reference
-- `docs/V0_1_1_PLAN.md`
-- `docs/V0_1_1_RELEASE_DRAFT.md`
-
-## v0.1.1 (draft)
-
-### Completed in Draft
+### Scope
 - Parser hardening for Investing row-shape drift.
 - Parser hardening for TradingView normalization drift.
 - Fixture-first parser drift files committed under `tests/fixtures/sources/`.
 - Deterministic orchestrator coverage for partial live-source failures.
 - CI diagnostics improved with JUnit artifacts and troubleshooting guidance.
 
-### Pending Final Gates
-- Green `Release Gate` workflow run evidence on current `main`.
-- Archived workflow artifacts (`release-gate-test-reports`, `release-gate-app.log`).
-- Tag + final release entry publication (`v0.1.1`).
+### Quality Evidence
+- Local Node-20 verify gate:
+  - `npm run verify:release` green (`92/92 tests`, lint/typecheck/build pass)
+- Release Gate:
+  - `run_id=22033409824`
+  - `status=success`
+  - `install=success`, `verify=success`, `smoke=success`
+  - `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22033409824`
+
+### References
+- `docs/V0_1_1_PLAN.md`
+- `docs/V0_1_1_RELEASE_DRAFT.md`
+- `docs/V0_1_1_EVIDENCE.md`
+- `docs/release-gate-last-success.json`

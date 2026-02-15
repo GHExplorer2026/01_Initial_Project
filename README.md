@@ -78,6 +78,7 @@ Date: `2026-02-14`
 | P-037 | 2026-02-14 | v0.1.1 | Marker race fix | Marker commit is now gated to current `origin/main` HEAD to prevent stale-run overwrites and commit conflicts | Completed | `.github/workflows/release-gate.yml` | Codex |
 | P-038 | 2026-02-14 | v0.1.1 | Smoke permission fix | Execute smoke script via `bash` in Release Gate to avoid executable-bit drift across environments | Completed | `.github/workflows/release-gate.yml` | Codex |
 | P-039 | 2026-02-14 | v0.1.1 | Smoke ICS rule fix | Smoke check now validates `CATEGORIES:Wirtschafts-Event` per existing VEVENT instead of failing on event-empty calendars | Completed | `scripts/smoke_api.sh` | Codex |
+| P-040 | 2026-02-15 | v0.1.1 | Gate check fix | `check:release-gate` now accepts successful run SHA on `HEAD^` when `HEAD` is the marker commit | Completed | `scripts/check_release_gate.sh`, `docs/V0_1_1_EVIDENCE.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -85,7 +86,7 @@ Date: `2026-02-14`
 | T-101 | Start `v0.1.1` parser/fixture hardening stream | High | Completed | None | 2026-02-14 | Codex |
 | T-102 | Add deterministic metadata/error taxonomy tests for fallback behavior | High | Completed | None | 2026-02-14 | Codex |
 | T-103 | Final Node-20 verify for `v0.1.1` and release tag | High | Completed | None | 2026-02-14 | Codex/User |
-| T-104 | Run GitHub `Release Gate` workflow on `main` and archive artifacts | High | In Progress | Pending marker success for current `HEAD` (`npm run check:release-gate`) and manual artifact URL capture | 2026-02-15 | Codex/User |
+| T-104 | Run GitHub `Release Gate` workflow on `main` and archive artifacts | High | Completed | None | 2026-02-15 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |

@@ -19,9 +19,9 @@
    - artifact bundle must be present
    - local deterministic marker check:
      - `npm run check:release-gate`
-     - pass requires `status=success` and marker `sha == HEAD`
+     - pass requires `status=success` and marker `sha == HEAD` (or `HEAD^` if `HEAD` is marker commit)
    - status:
-     - `BLOCKED FROM AGENT` (run URL/artifacts cannot be read via API DNS in current shell)
+     - `DONE` (`run_id=22033409824`, `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22033409824`)
 3. Invariant checks:
    - strict output note strings unchanged
    - TOP suffix exact ` - **TOP-EVENT**`
@@ -40,6 +40,9 @@
 3. Push tag:
    - `git push origin v0.1.1`
 4. Append final release entry in `docs/RELEASES.md`.
+
+## Current Status
+- `READY FOR TAG`
 
 ## Evidence Template
 - `docs/V0_1_1_EVIDENCE.md`

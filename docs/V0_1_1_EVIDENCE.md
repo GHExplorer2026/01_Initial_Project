@@ -22,16 +22,17 @@ Track concrete evidence for closing `v0.1.1` release gates (`T-103`, `T-104`).
 - Ref:
   - `main`
 - Result:
-  - `TRIGGERED` (auto on push to `main`)
-  - `PENDING VERIFICATION`
-  - `BLOCKED FROM AGENT` (cannot resolve `api.github.com` to read run metadata)
+  - `PASS`
+  - `install=success`, `verify=success`, `smoke=success`
 - Run URL:
-  - `PENDING`
+  - `https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22033409824`
 - Artifacts:
   - `release-gate-test-reports`
   - `release-gate-app.log`
-- Trigger note:
-  - This evidence update commit triggers a new `Release Gate` run automatically.
+- Marker commit:
+  - `756bdf4` (`chore(ci): record release gate marker [skip release-gate]`)
+- Run SHA:
+  - `574a8d406f52991983f55fc187a7abf35be9f814`
 - Success marker file (auto-committed by workflow on pass):
   - `docs/release-gate-last-success.json`
 - Marker diagnostics:
@@ -41,7 +42,8 @@ Track concrete evidence for closing `v0.1.1` release gates (`T-103`, `T-104`).
 - Deterministic local validator:
   - `npm run check:release-gate`
   - Pass criterion: marker has `status=success` and `sha` equals current `HEAD`.
- - Manual fallback:
+  - Marker-commit allowance: if current `HEAD` is `chore(ci): record release gate marker [skip release-gate]`, then `sha == HEAD^` is also valid.
+- Manual fallback:
   - open `https://github.com/GHExplorer2026/01_Initial_Project/actions/workflows/release-gate.yml`
   - copy latest successful run URL and paste it here
 
@@ -49,10 +51,14 @@ Track concrete evidence for closing `v0.1.1` release gates (`T-103`, `T-104`).
 - Script:
   - `scripts/smoke_api.sh http://127.0.0.1:3000 USA,EZ`
 - Result:
-  - `PENDING`
+  - `PASS` (via Release Gate run `22033409824`)
+  - Marker evidence: `smoke_check_tail_b64` decodes to
+    - `[smoke] weekly ok`
+    - `[smoke] ics ok`
+    - `[smoke] done`
 
 ### 4) Release Action
 - Planned tag:
   - `v0.1.1`
 - Status:
-  - `PENDING` (blocked by gate evidence item 2)
+  - `READY` (all gates closed)
