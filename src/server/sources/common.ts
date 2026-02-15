@@ -69,3 +69,36 @@ export const toBerlinDateTime = (input: Date): { date: string; time: string } =>
     time: `${get("hour")}:${get("minute")}`
   };
 };
+
+const DEFAULT_SOURCE_FETCH_TIMEOUT_MS = 15_000;
+
+export const resolveSourceFetchTimeoutMs = (): number => {
+  const raw = process.env.SOURCE_FETCH_TIMEOUT_MS;
+  if (!raw) {
+    return DEFAULT_SOURCE_FETCH_TIMEOUT_MS;
+  }
+
+  const parsed = Number(raw);
+  if (!Number.isFinite(parsed) || parsed < 1) {
+    return DEFAULT_SOURCE_FETCH_TIMEOUT_MS;
+  }
+
+  return Math.trunc(parsed);
+};
+
+export const fetchWithTimeout = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
+  const controller = new AbortController();
+  const timeoutMs = resolveSourceFetchTimeoutMs();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    return await fetch(input, { ...init, signal: controller.signal });
+  } catch (error) {
+    if (error instanceof DOMException && error.name === "AbortError") {
+      throw new Error(`source request timeout after ${timeoutMs}ms`);
+    }
+    throw error;
+  } finally {
+    clearTimeout(timer);
+  }
+};

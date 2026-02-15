@@ -10,6 +10,7 @@ const sourceFixture = (name: string): string =>
 
 afterEach(() => {
   vi.restoreAllMocks();
+  vi.unstubAllEnvs();
 });
 
 describe("source adapters", () => {
@@ -165,6 +166,50 @@ describe("source adapters", () => {
     const thrown = await fetchTradingViewLiveEvents("2026-02-09", "2026-02-13", ["USA"]);
     expect(thrown.ok).toBe(false);
     expect(thrown.error).toBe("timeout");
+  });
+
+  it("maps abort errors to deterministic timeout messages", async () => {
+    vi.stubEnv("SOURCE_FETCH_TIMEOUT_MS", "3210");
+    vi.spyOn(globalThis, "fetch").mockRejectedValueOnce(new DOMException("The operation was aborted", "AbortError"));
+
+    const result = await fetchInvestingLiveEvents("2026-02-09", "2026-02-13", ["USA"]);
+
+    expect(result.ok).toBe(false);
+    expect(result.error).toBe("source request timeout after 3210ms");
+  });
+
+  it("accepts tradingview epoch timestamps in seconds and milliseconds", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response(
+        JSON.stringify({
+          status: "ok",
+          result: [
+            { title: "GDP (QoQ)", currency: "eur", date: 1770816600 },
+            { title: "Retail Sales", currency: "USD", date: 1770816600000 }
+          ]
+        }),
+        { status: 200, headers: { "Content-Type": "application/json" } }
+      )
+    );
+
+    const result = await fetchTradingViewLiveEvents("2026-02-09", "2026-02-13", ["USA", "EZ"]);
+
+    expect(result.ok).toBe(true);
+    expect(result.events).toHaveLength(2);
+    expect(result.events[0]).toMatchObject({
+      source: "tradingview",
+      currency: "EUR",
+      title: "GDP (QoQ)",
+      date: "2026-02-11",
+      time: "14:30"
+    });
+    expect(result.events[1]).toMatchObject({
+      source: "tradingview",
+      currency: "USD",
+      title: "Retail Sales",
+      date: "2026-02-11",
+      time: "14:30"
+    });
   });
 
   it("uses fixture and disabled-live behavior for tertiary adapters", async () => {

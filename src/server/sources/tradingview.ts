@@ -1,5 +1,5 @@
 import { CURRENCY_TO_REGION, type CurrencyCode, type RegionCode, type RawSourceEvent } from "@/core/types";
-import { readFixtureEvents, toBerlinDateTime } from "@/server/sources/common";
+import { fetchWithTimeout, readFixtureEvents, toBerlinDateTime } from "@/server/sources/common";
 import type { SourceFetchResult } from "@/server/sources/types";
 
 const TRADINGVIEW_ECONOMIC_EVENTS = "https://economic-calendar.tradingview.com/events";
@@ -8,7 +8,7 @@ const ALLOWED_CURRENCIES = new Set(Object.keys(CURRENCY_TO_REGION));
 type TradingViewEvent = {
   title?: string;
   currency?: string;
-  date?: string;
+  date?: string | number;
 };
 
 const buildQuery = (weekStart: string, weekEnd: string): URLSearchParams => {
@@ -16,6 +16,32 @@ const buildQuery = (weekStart: string, weekEnd: string): URLSearchParams => {
   params.set("from", `${weekStart}T00:00:00.000Z`);
   params.set("to", `${weekEnd}T23:59:59.999Z`);
   return params;
+};
+
+const parseTradingViewDate = (value: string | number): Date | null => {
+  if (typeof value === "number") {
+    const epochMs = value < 1_000_000_000_000 ? value * 1000 : value;
+    const asDate = new Date(epochMs);
+    return Number.isNaN(asDate.getTime()) ? null : asDate;
+  }
+
+  const normalized = value.trim();
+  if (!normalized) {
+    return null;
+  }
+
+  if (/^\d+$/.test(normalized)) {
+    const numeric = Number(normalized);
+    if (!Number.isFinite(numeric)) {
+      return null;
+    }
+    const epochMs = numeric < 1_000_000_000_000 ? numeric * 1000 : numeric;
+    const asDate = new Date(epochMs);
+    return Number.isNaN(asDate.getTime()) ? null : asDate;
+  }
+
+  const asDate = new Date(normalized);
+  return Number.isNaN(asDate.getTime()) ? null : asDate;
 };
 
 const parseTradingViewEvent = (event: TradingViewEvent): RawSourceEvent | null => {
@@ -26,8 +52,8 @@ const parseTradingViewEvent = (event: TradingViewEvent): RawSourceEvent | null =
     return null;
   }
 
-  const asUtc = new Date(event.date);
-  if (Number.isNaN(asUtc.getTime())) {
+  const asUtc = parseTradingViewDate(event.date);
+  if (!asUtc) {
     return null;
   }
 
@@ -57,7 +83,7 @@ export const fetchTradingViewLiveEvents = async (
   void _regions;
 
   try {
-    const response = await fetch(`${TRADINGVIEW_ECONOMIC_EVENTS}?${buildQuery(weekStart, weekEnd).toString()}`, {
+    const response = await fetchWithTimeout(`${TRADINGVIEW_ECONOMIC_EVENTS}?${buildQuery(weekStart, weekEnd).toString()}`, {
       headers: {
         "User-Agent": "Mozilla/5.0",
         Referer: "https://www.tradingview.com/economic-calendar/",

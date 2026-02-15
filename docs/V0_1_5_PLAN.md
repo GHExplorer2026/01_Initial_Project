@@ -32,22 +32,33 @@ Deliver the `v0.1.5` hardening increment on top of released `v0.1.4`, focused on
 ## Workstreams
 
 ## W1 Baseline Synchronization and Gate Validation
-Status: Planned
+Status: Completed
 
 1. Sync `main` and validate release marker alignment.
 2. Re-run full deterministic verify gate in Node 20 baseline.
 3. Record baseline evidence for `v0.1.5` start.
+   Progress:
+   - Synced `main` and validated marker:
+     - `npm run check:release-gate` -> pass
+     - `run_id=22035278347`
+   - Re-ran deterministic verify gate in Node 20:
+     - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify:release`
+     - `111/111` tests pass
 
 ### Acceptance
 1. `npm run verify:release` is green.
 2. `npm run check:release-gate` is green for current baseline.
 
 ## W2 Live-Mode Adapter Hardening (SPEC-safe)
-Status: Planned
+Status: Completed
 
 1. Review live adapter failure surfaces (fetch failures, parse variance, missing-time handling).
 2. Tighten adapter behavior without changing normalization contracts.
 3. Keep live-mode error behavior bound to canonical fallback notes.
+   Progress:
+   - Added deterministic timeout handling for live-source fetches via `SOURCE_FETCH_TIMEOUT_MS` with safe default.
+   - Added TradingView live parser support for epoch timestamps (seconds and milliseconds), preserving region/currency/time contracts.
+   - Added adapter-level regression tests for timeout mapping and timestamp parsing.
 
 ### Acceptance
 1. No strict output drift.
@@ -104,6 +115,13 @@ Status: Planned
 3. `V-503` Expand deterministic fixture/contract test matrix.
 4. `V-504` Harden release-gate diagnostics and marker traceability.
 5. `V-505` Finalize `v0.1.5` evidence and release publish.
+
+## Current Task Status
+1. `V-501`: Completed.
+2. `V-502`: Completed.
+3. `V-503`: Open.
+4. `V-504`: Open.
+5. `V-505`: Open.
 
 ## Execution Order
 1. W1 baseline sync and validation.

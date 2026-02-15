@@ -1,5 +1,5 @@
 import { CURRENCY_TO_REGION, type CurrencyCode, type RegionCode, type RawSourceEvent } from "@/core/types";
-import { readFixtureEvents, stripHtml, toBerlinDateTime } from "@/server/sources/common";
+import { fetchWithTimeout, readFixtureEvents, stripHtml, toBerlinDateTime } from "@/server/sources/common";
 import type { SourceFetchResult } from "@/server/sources/types";
 
 const INVESTING_CALENDAR_SERVICE = "https://www.investing.com/economic-calendar/Service/getCalendarFilteredData";
@@ -89,7 +89,7 @@ export const fetchInvestingLiveEvents = async (
   regions: RegionCode[]
 ): Promise<SourceFetchResult> => {
   try {
-    const response = await fetch(INVESTING_CALENDAR_SERVICE, {
+    const response = await fetchWithTimeout(INVESTING_CALENDAR_SERVICE, {
       method: "POST",
       headers: {
         "User-Agent": "Mozilla/5.0",
