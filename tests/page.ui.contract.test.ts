@@ -18,6 +18,21 @@ describe("page ui contract", () => {
     expect(preMatch?.[1] ?? "").toBe("");
   });
 
+  it("keeps meta/debug state outside strict output before first generation", () => {
+    const html = renderToStaticMarkup(createElement(Page));
+
+    expect(html).not.toContain("<strong>Mode:</strong>");
+    expect(html).not.toContain("<strong>Quellen:</strong>");
+
+    const preMatch = html.match(/<pre[^>]*class="strict-output"[^>]*>([\s\S]*?)<\/pre>/);
+    expect(preMatch).not.toBeNull();
+    const preContent = preMatch?.[1] ?? "";
+    expect(preContent).not.toContain("Mode:");
+    expect(preContent).not.toContain("Quellen:");
+    expect(preContent).not.toContain("sourceMode");
+    expect(preContent).not.toContain("sourcesUsed");
+  });
+
   it("renders scope controls with accessible fieldset and deterministic region ids", () => {
     const html = renderToStaticMarkup(createElement(Page));
 

@@ -132,6 +132,7 @@ Date: `2026-02-15`
 | P-080 | 2026-02-15 | Tooling | Hardening | Added deterministic `next-env.d.ts` drift guard (`check/fix` scripts, CI check, optional pre-commit hook) without runtime logic changes | Completed | `scripts/check_next_env.sh`, `scripts/normalize_next_env.sh`, `.github/workflows/*.yml`, `npm run verify:release` | Codex |
 | P-081 | 2026-02-15 | UI Execution | Documentation | Added deterministic UI execution checklist/report artifacts for repeatable runtime validation and evidence capture | Completed | `docs/UI_EXECUTION_CHECKLIST.md`, `docs/UI_EXECUTION_REPORT.md` | Codex |
 | P-082 | 2026-02-15 | UI Execution | Evidence | Executed fixtures-mode runtime checks and full Node-20 deterministic verify; documented EACCES temp-path workaround (`TMPDIR=/tmp`) | Completed | `docs/UI_EXECUTION_REPORT.md`, `npm run verify` | Codex |
+| P-083 | 2026-02-15 | UI QA | Contract hardening | Added UI contract assertion that meta/debug state stays outside strict `<pre>` before generation | Completed | `tests/page.ui.contract.test.ts` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
