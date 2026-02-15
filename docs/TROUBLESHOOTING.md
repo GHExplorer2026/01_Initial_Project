@@ -54,9 +54,15 @@ Symptom:
 - `Could not resolve hostname github.com`
 
 Mitigation:
-1. Retry push after DNS recovery:
-   - `git push origin fix/source-mode-meta`
-2. If local DNS is unstable, run push from a terminal/session with working network.
+1. Confirm DNS resolution:
+   - `getent hosts github.com api.github.com registry.npmjs.org`
+2. Force IPv4 preference for Node/npm-related network calls:
+   - `export NODE_OPTIONS=--dns-result-order=ipv4first`
+3. Retry git operations:
+   - `git fetch origin main --prune`
+   - `git pull --ff-only`
+   - `git push origin main`
+4. If DNS is still unstable, execute release/build actions in CI and treat CI as source of truth.
 
 ## 4) `next-env.d.ts` toggles between `.next/types` and `.next/dev/types`
 

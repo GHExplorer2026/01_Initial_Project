@@ -94,6 +94,7 @@ Date: `2026-02-15`
 | P-049 | 2026-02-15 | v0.1.2 | Gate closure | Synced latest release-gate marker and closed `v0.1.2` gate evidence (`run_id=22034113407`) | Completed | `docs/release-gate-last-success.json`, `docs/V0_1_2_EVIDENCE.md` | Codex |
 | P-050 | 2026-02-15 | v0.1.2 | Release publish | Published `v0.1.2` tag and finalized release records | Completed | tag `v0.1.2`, `docs/RELEASES.md`, `docs/V0_1_2_RELEASE_DRAFT.md` | Codex |
 | P-051 | 2026-02-15 | v0.1.3 | Planning | Started `v0.1.3` operational hardening plan (scope, risks, workstreams, DoD) | Completed | `docs/V0_1_3_PLAN.md` | Codex |
+| P-052 | 2026-02-15 | v0.1.3 | Release scaffold | Added release draft/evidence templates and next-release references | Completed | `docs/V0_1_3_RELEASE_DRAFT.md`, `docs/V0_1_3_EVIDENCE.md`, `docs/RELEASES.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -138,8 +139,8 @@ Date: `2026-02-15`
 - Rules: `RULES.md`
 - Plan: `docs/IMPLEMENTATION_PLAN.md`
 - Current Plan: `docs/V0_1_3_PLAN.md`
-- Current Release Draft: `docs/V0_1_3_RELEASE_DRAFT.md` (planned)
-- Current Release Evidence: `docs/V0_1_3_EVIDENCE.md` (planned)
+- Current Release Draft: `docs/V0_1_3_RELEASE_DRAFT.md`
+- Current Release Evidence: `docs/V0_1_3_EVIDENCE.md`
 - Previous Plan: `docs/V0_1_2_PLAN.md`
 - Previous Release Draft: `docs/V0_1_2_RELEASE_DRAFT.md`
 - Previous Release Evidence: `docs/V0_1_2_EVIDENCE.md`

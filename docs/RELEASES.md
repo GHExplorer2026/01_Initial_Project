@@ -84,3 +84,15 @@
 - `docs/V0_1_2_RELEASE_DRAFT.md`
 - `docs/V0_1_2_EVIDENCE.md`
 - `docs/release-gate-last-success.json`
+
+## Next Planned: v0.1.3
+
+### Focus
+- Operational hardening and release-gate stability improvements only.
+- Build/runtime split validation and runbook consolidation.
+- Additional SPEC-safe fixture coverage for fallback and query-contract paths.
+
+### Planning Reference
+- `docs/V0_1_3_PLAN.md`
+- `docs/V0_1_3_RELEASE_DRAFT.md`
+- `docs/V0_1_3_EVIDENCE.md`

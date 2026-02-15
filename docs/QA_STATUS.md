@@ -45,6 +45,7 @@
   - `install=success`, `verify=success`, `smoke=success`
 - Next phase planned:
   - `v0.1.3` operational hardening planning documented in `docs/V0_1_3_PLAN.md`.
+  - release templates initialized in `docs/V0_1_3_RELEASE_DRAFT.md` and `docs/V0_1_3_EVIDENCE.md`.
 - `v0.1.2` UI implementation baseline added:
   - deterministic scope-state helpers in `src/app/scopeState.ts`
   - UI state/strict-output isolation refactor in `src/app/page.tsx`

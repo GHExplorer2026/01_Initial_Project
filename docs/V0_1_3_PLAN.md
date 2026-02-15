@@ -79,6 +79,22 @@ Status: Planned
 2. Deterministic test additions for high-risk operational paths.
 3. Updated release evidence docs on completion (`docs/V0_1_3_RELEASE_DRAFT.md`, `docs/V0_1_3_EVIDENCE.md`).
 
+## Risk Register (`v0.1.3`)
+1. Risk: DNS instability blocks local fetch/push/install operations.
+   - Impact: High
+   - Mitigation: CI-as-source-of-truth + explicit DNS troubleshooting runbook + retries.
+2. Risk: release-gate marker drift causes false negative local validation.
+   - Impact: Medium
+   - Mitigation: marker validation flow documentation and deterministic SHA checks.
+3. Risk: operational scripts regress strict output/ICS invariants indirectly.
+   - Impact: High
+   - Mitigation: keep invariant snapshot gates mandatory and unchanged.
+
+## Task Backlog
+1. `V-301` Align build/runtime execution docs and scripts.
+2. `V-302` Expand SPEC-safe fallback and query-contract tests.
+3. `V-303` Run final release gates and archive v0.1.3 evidence.
+
 ## Execution Order
 1. W1 build/runtime hardening alignment.
 2. W2 release gate stability improvements.
