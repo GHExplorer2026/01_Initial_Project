@@ -31,6 +31,7 @@ export type CategoryAF = "A" | "B" | "C" | "D" | "E" | "F";
 export type EventSource = "investing" | "tradingview" | `tertiary:${string}`;
 export type EventTimeKind = "exact" | "all_day";
 export type EventImportance = "low" | "medium" | "high" | "unknown";
+export type IcsImportanceFilter = "high" | "medium";
 
 export type EventMetricValue = {
   value: string;

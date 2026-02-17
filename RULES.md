@@ -216,3 +216,22 @@ Ein Arbeitspaket ist nur fertig, wenn alle Punkte erfüllt sind:
 ## R-30 Project Gate Rule
 1. Größere Vertragsänderungen (Rendering, ICS, Source Governance) brauchen einen dokumentierten Gate-Plan vor Umsetzung.
 2. Umsetzung darf erst starten, wenn Gate explizit freigegeben ist.
+
+## R-31 Strict Output Visibility Toggle Contract
+1. Der Strict-Output-Block ist im UI per Toggle steuerbar.
+2. Default ist `off` (ausgeblendet).
+3. Toggle `off` blendet nur die Anzeige aus; Datenbasis und API-Response bleiben unverändert.
+4. Toggle `on` zeigt den canonical Strict-Output-Block unverändert.
+
+## R-32 TOP-EVENT and Importance Equivalence
+1. `importance=high` bedeutet zwingend TOP-EVENT.
+2. TOP-EVENT bedeutet zwingend `importance=high`.
+3. Inkonsistente Zustände zwischen TOP-Suffix und Importance-Darstellung sind unzulässig.
+
+## R-33 ICS Importance Export Filter Contract
+1. Der ICS-Endpoint akzeptiert optional `icsImportance=high,medium`.
+2. Ohne `icsImportance` werden alle bereits scope-gefilterten Events exportiert.
+3. Mit `icsImportance=high` werden nur `high`-Events exportiert.
+4. Mit `icsImportance=medium` werden nur `medium`-Events exportiert.
+5. Mit `icsImportance=high,medium` werden beide Klassen exportiert (OR-Logik).
+6. Filterung erfolgt nach Scope-Filterung (`regions`) und darf Scope nie erweitern.

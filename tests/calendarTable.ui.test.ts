@@ -56,4 +56,24 @@ describe("calendar table view model", () => {
     expect(table[1].rows).toEqual([]);
     expect(table[1].note).toBe("Hinweis: Keine verifizierten Events gefunden.");
   });
+
+  it("treats high importance as TOP-EVENT in event label and stars", () => {
+    const days: WeeklyDay[] = [{ dateBerlinISO: "2026-02-16", dayHeader: "### Montag, 16. Februar" }];
+    const events: WeeklyEvent[] = [
+      {
+        region: "USA",
+        currency: "USD",
+        titleRaw: "Retail Sales",
+        dateBerlinISO: "2026-02-16",
+        timeKind: "exact",
+        timeHHMM: "14:30",
+        importance: "high",
+        isTopEvent: false
+      }
+    ];
+
+    const table = buildCalendarTableDays(days, events);
+    expect(table[0].rows[0].event).toBe("Retail Sales - **TOP-EVENT**");
+    expect(table[0].rows[0].importance).toBe("★★★");
+  });
 });

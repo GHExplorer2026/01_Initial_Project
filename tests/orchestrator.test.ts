@@ -280,6 +280,80 @@ describe("generateWeeklyOutlook", () => {
     expect(result.icsPayload).not.toContain("SUMMARY:USA ");
   });
 
+  it("applies ICS importance filters with OR semantics without changing strict output", async () => {
+    process.env.SOURCE_MODE = "live";
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      if (url.includes("investing.com")) {
+        return new Response(JSON.stringify({ data: "" }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+
+      if (url.includes("tradingview.com")) {
+        return new Response(
+          JSON.stringify({
+            status: "ok",
+            result: [
+              { title: "Retail Sales", currency: "USD", date: "2026-02-09T13:30:00.000Z", importance: 3 },
+              { title: "Unemployment Rate", currency: "EUR", date: "2026-02-10T10:00:00.000Z", importance: 2 },
+              { title: "Housing Starts", currency: "CAD", date: "2026-02-11T13:30:00.000Z", importance: 1 }
+            ]
+          }),
+          { status: 200, headers: { "Content-Type": "application/json" } }
+        );
+      }
+
+      throw new Error(`Unexpected live fetch URL: ${url}`);
+    });
+
+    const all = await generateWeeklyOutlook({
+      regions: ["USA", "EZ", "CA"],
+      now: new Date("2026-02-10T10:00:00Z")
+    });
+    const highOnly = await generateWeeklyOutlook({
+      regions: ["USA", "EZ", "CA"],
+      icsImportance: ["high"],
+      now: new Date("2026-02-10T10:00:00Z")
+    });
+    const mediumOnly = await generateWeeklyOutlook({
+      regions: ["USA", "EZ", "CA"],
+      icsImportance: ["medium"],
+      now: new Date("2026-02-10T10:00:00Z")
+    });
+    const highAndMedium = await generateWeeklyOutlook({
+      regions: ["USA", "EZ", "CA"],
+      icsImportance: ["high", "medium"],
+      now: new Date("2026-02-10T10:00:00Z")
+    });
+
+    expect(fetchSpy).toHaveBeenCalledTimes(8);
+
+    expect(all.events).toHaveLength(3);
+    expect(all.events.some((event) => event.titleRaw === "Retail Sales" && event.isTopEvent && event.importance === "high")).toBe(true);
+    expect(all.renderedText).toContain("Housing Starts");
+    expect(highOnly.renderedText).toBe(all.renderedText);
+    expect(mediumOnly.renderedText).toBe(all.renderedText);
+    expect(highAndMedium.renderedText).toBe(all.renderedText);
+
+    expect(all.icsPayload.match(/BEGIN:VEVENT/g)?.length ?? 0).toBe(3);
+    expect(highOnly.icsPayload.match(/BEGIN:VEVENT/g)?.length ?? 0).toBe(1);
+    expect(highOnly.icsPayload).toContain("SUMMARY:USA Retail Sales");
+    expect(highOnly.icsPayload).not.toContain("SUMMARY:Euro Zone Unemployment Rate");
+    expect(highOnly.icsPayload).not.toContain("SUMMARY:Canada Housing Starts");
+
+    expect(mediumOnly.icsPayload.match(/BEGIN:VEVENT/g)?.length ?? 0).toBe(1);
+    expect(mediumOnly.icsPayload).toContain("SUMMARY:Euro Zone Unemployment Rate");
+    expect(mediumOnly.icsPayload).not.toContain("SUMMARY:USA Retail Sales");
+    expect(mediumOnly.icsPayload).not.toContain("SUMMARY:Canada Housing Starts");
+
+    expect(highAndMedium.icsPayload.match(/BEGIN:VEVENT/g)?.length ?? 0).toBe(2);
+    expect(highAndMedium.icsPayload).toContain("SUMMARY:USA Retail Sales");
+    expect(highAndMedium.icsPayload).toContain("SUMMARY:Euro Zone Unemployment Rate");
+    expect(highAndMedium.icsPayload).not.toContain("SUMMARY:Canada Housing Starts");
+  });
+
   it("keeps all-day events in strict output and emits VALUE=DATE in ics", async () => {
     process.env.SOURCE_MODE = "live";
     const investingHtml = `

@@ -1,0 +1,4 @@
+interface:
+  display_name: "UI Update Next Iteration Planning Gate"
+  short_description: "Produce a decision-complete UI update plan before coding"
+  default_prompt: "Create a deterministic project-gate implementation plan for the next UI update sprint with strict-output toggle, TOP-EVENT/importance consistency, and ICS export filtering rules."

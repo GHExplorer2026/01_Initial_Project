@@ -17,6 +17,14 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
    - dual view active (economic-calendar table + canonical strict output)
    - `All Day` events supported in strict output and ICS (`VALUE=DATE`)
    - ICS includes deterministic metrics lines in `DESCRIPTION`
+5. Next iteration planning gate package prepared:
+   - `skills/ui-update-next-iteration-planning-gate/*`
+   - `docs/V0_1_8_PLAN.md`
+   - `docs/V0_1_8_EVIDENCE.md`
+6. `v0.1.8` execution slice implemented:
+   - Strict Output visibility toggle (`default off`)
+   - TOP-EVENT and `importance=high` deterministic equivalence
+   - ICS export filters (`icsImportance=high,medium`, OR semantics)
 
 ## Entry Checklist (must pass before next slice)
 1. `git status -sb` shows clean workspace.
@@ -33,9 +41,9 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 4. Evidence docs updated (`README.md`, `docs/QA_STATUS.md`, relevant run/evidence files).
 
 ## Immediate Next-Scope Queue
-1. `N-901`: run live-data evidence cycle for table metrics completeness (per-region sample week).
-2. `N-902`: add fixture drift cases for all-day holiday rows and mixed timed/all-day duplicates.
-3. `N-903`: finalize release evidence and gate closure for UI Update contract patch.
+1. `N-1003`: Confirm release-gate marker for pushed `v0.1.8` HEAD.
+2. `N-1004`: Capture live-browser evidence for toggle + ICS filter combinations.
+3. `N-1005`: Prepare next bounded slice only after `N-1003` closure.
 
 ## References
 - `RULES.md`
@@ -43,3 +51,6 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 - `docs/UI_EXECUTION_REPORT.md`
 - `docs/release-gate-last-success.json`
 - `skills/spec-safe-direct-delivery/SKILL.md`
+- `skills/ui-update-next-iteration-planning-gate/SKILL.md`
+- `docs/V0_1_8_PLAN.md`
+- `docs/V0_1_8_EVIDENCE.md`

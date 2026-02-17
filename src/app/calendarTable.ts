@@ -27,6 +27,14 @@ const dateFormatter = new Intl.DateTimeFormat("de-DE", {
 
 const metricOrDash = (value: string | undefined): string => value ?? "—";
 
+const normalizeTopImportance = (event: WeeklyEvent): { isTopEvent: boolean; importance: WeeklyEvent["importance"] } => {
+  const isTopEvent = event.isTopEvent || event.importance === "high";
+  return {
+    isTopEvent,
+    importance: isTopEvent ? "high" : event.importance
+  };
+};
+
 const importanceToDisplay = (value: WeeklyEvent["importance"]): string => {
   if (value === "high") {
     return "★★★";
@@ -73,15 +81,18 @@ const sortEvents = (events: WeeklyEvent[]): WeeklyEvent[] =>
     return a.titleRaw.localeCompare(b.titleRaw, "de-DE");
   });
 
-const toRow = (event: WeeklyEvent): CalendarTableRow => ({
-  dateTime: formatDateTime(event),
-  currency: event.currency,
-  event: `${event.titleRaw}${event.isTopEvent ? TOP_EVENT_SUFFIX : ""}`,
-  importance: importanceToDisplay(event.importance),
-  actual: metricOrDash(event.actual),
-  forecast: metricOrDash(event.forecast),
-  previous: metricOrDash(event.previous)
-});
+const toRow = (event: WeeklyEvent): CalendarTableRow => {
+  const normalized = normalizeTopImportance(event);
+  return {
+    dateTime: formatDateTime(event),
+    currency: event.currency,
+    event: `${event.titleRaw}${normalized.isTopEvent ? TOP_EVENT_SUFFIX : ""}`,
+    importance: importanceToDisplay(normalized.importance),
+    actual: metricOrDash(event.actual),
+    forecast: metricOrDash(event.forecast),
+    previous: metricOrDash(event.previous)
+  };
+};
 
 export const buildCalendarTableDays = (days: WeeklyDay[], events: WeeklyEvent[]): CalendarTableDay[] => {
   const rowsByDay = new Map<string, CalendarTableRow[]>();

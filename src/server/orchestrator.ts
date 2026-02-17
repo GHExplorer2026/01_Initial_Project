@@ -5,7 +5,7 @@ import { generateIcs } from "@/core/icsSerializer";
 import { mergeByPriority } from "@/core/merge";
 import { normalizeEvents } from "@/core/normalize";
 import { renderStrictWeeklyText } from "@/core/rendererStrictDe";
-import type { EconomicEvent, RawSourceEvent, RegionCode, WeeklyOutput } from "@/core/types";
+import type { EconomicEvent, IcsImportanceFilter, RawSourceEvent, RegionCode, WeeklyOutput } from "@/core/types";
 import { resolveWeekInBerlin } from "@/core/weekResolver";
 import { resolveSourceMode } from "@/server/sourceMode";
 import { fetchInvestingFixtureEvents, fetchInvestingLiveEvents } from "@/server/sources/investing";
@@ -61,10 +61,30 @@ const berlinOffsetForDay = (ymd: string): string => {
 
 export type GenerateParams = {
   regions: RegionCode[];
+  icsImportance?: IcsImportanceFilter[];
   now?: Date;
 };
 
-export const generateWeeklyOutlook = async ({ regions, now }: GenerateParams): Promise<WeeklyOutput> => {
+const normalizeTopImportance = (event: EconomicEvent): EconomicEvent => {
+  const isTop = event.isTopEvent || event.importance === "high";
+  return {
+    ...event,
+    isTopEvent: isTop,
+    importance: isTop ? "high" : event.importance
+  };
+};
+
+const applyIcsImportanceFilter = (events: EconomicEvent[], filters: readonly IcsImportanceFilter[]): EconomicEvent[] => {
+  if (filters.length === 0) {
+    return events;
+  }
+  const allow = new Set(filters);
+  return events.filter(
+    (event) => (event.importance === "high" || event.importance === "medium") && allow.has(event.importance)
+  );
+};
+
+export const generateWeeklyOutlook = async ({ regions, icsImportance = [], now }: GenerateParams): Promise<WeeklyOutput> => {
   const week = resolveWeekInBerlin(now ?? new Date());
   const sourceMode = resolveSourceMode();
   const fetchInvesting = sourceMode === "live" ? fetchInvestingLiveEvents : fetchInvestingFixtureEvents;
@@ -94,15 +114,16 @@ export const generateWeeklyOutlook = async ({ regions, now }: GenerateParams): P
   const merged = mergeByPriority([...primaryNormalized, ...secondaryNormalized, ...tertiaryNormalized]);
   const deduped = dedupeEvents(merged);
   const selectedRegions = new Set(regions);
-  const scopeFiltered = deduped.filter((event) => selectedRegions.has(event.region));
+  const scopeFiltered = deduped.filter((event) => selectedRegions.has(event.region)).map(normalizeTopImportance);
 
   const { filteredEvents, dayStatus } = applyHolidayFilter(scopeFiltered, week.days, regions);
   const grouped = groupForRendering(filteredEvents);
+  const icsEvents = applyIcsImportanceFilter(filteredEvents, icsImportance);
 
   const dataReliable = investing.ok || tradingview.ok;
 
   const rendered = renderStrictWeeklyText(week, grouped, dayStatus, dataReliable);
-  const icsPayload = generateIcs(filteredEvents, week.weekStart, PARSER_VERSION);
+  const icsPayload = generateIcs(icsEvents, week.weekStart, PARSER_VERSION);
 
   const sourcesUsed: string[] = ["investing", "tradingview"];
   if (needTertiary) {

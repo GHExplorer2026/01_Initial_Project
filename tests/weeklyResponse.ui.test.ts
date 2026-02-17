@@ -92,11 +92,33 @@ describe("weekly response normalizer", () => {
       currency: "CAD",
       timeKind: "exact",
       timeHHMM: "14:30",
-      importance: "medium",
+      importance: "high",
       actual: "2.1%",
       forecast: "2.0%",
       previous: "1.9%"
     });
+    expect(normalized.events[0].isTopEvent).toBe(true);
     expect(normalized.days).toEqual([{ dateBerlinISO: "2026-02-16", dayHeader: "### Montag, 16. Februar", note: "Hinweis" }]);
+  });
+
+  it("normalizes high importance events to TOP-EVENT in UI model", () => {
+    const normalized = normalizeWeeklyResponse({
+      events: [
+        {
+          region: "USA",
+          currency: "USD",
+          titleRaw: "Retail Sales",
+          dateBerlinISO: "2026-02-16",
+          timeKind: "exact",
+          timeHHMM: "14:30",
+          importance: "high",
+          isTopEvent: false
+        }
+      ]
+    });
+
+    expect(normalized.events).toHaveLength(1);
+    expect(normalized.events[0].importance).toBe("high");
+    expect(normalized.events[0].isTopEvent).toBe(true);
   });
 });

@@ -6,17 +6,14 @@ import Page from "@/app/page";
 import { REGION_OPTIONS } from "@/app/scopeState";
 
 describe("page ui contract", () => {
-  it("renders strict output block isolated from non-strict hint text", () => {
+  it("keeps strict output hidden by default until toggle is enabled", () => {
     const html = renderToStaticMarkup(createElement(Page));
 
     expect(html).toContain("Economic Calendar");
     expect(html).toContain("Strict Output");
-    expect(html).toContain('aria-label="Strict output block"');
-    expect(html).toContain("Noch kein Output generiert.");
-
-    const preMatch = html.match(/<pre[^>]*class="strict-output"[^>]*>([\s\S]*?)<\/pre>/);
-    expect(preMatch).not.toBeNull();
-    expect(preMatch?.[1] ?? "").toBe("");
+    expect(html).toContain("Strict Output anzeigen");
+    expect(html).toContain("Strict Output ist ausgeblendet.");
+    expect(html).not.toContain('aria-label="Strict output block"');
   });
 
   it("keeps meta/debug state outside strict output before first generation", () => {
@@ -25,13 +22,7 @@ describe("page ui contract", () => {
     expect(html).not.toContain("<strong>Mode:</strong>");
     expect(html).not.toContain("<strong>Quellen:</strong>");
 
-    const preMatch = html.match(/<pre[^>]*class="strict-output"[^>]*>([\s\S]*?)<\/pre>/);
-    expect(preMatch).not.toBeNull();
-    const preContent = preMatch?.[1] ?? "";
-    expect(preContent).not.toContain("Mode:");
-    expect(preContent).not.toContain("Quellen:");
-    expect(preContent).not.toContain("sourceMode");
-    expect(preContent).not.toContain("sourcesUsed");
+    expect(html).not.toContain('aria-label="Strict output block"');
   });
 
   it("renders scope controls with accessible fieldset and deterministic region ids", () => {
@@ -48,5 +39,14 @@ describe("page ui contract", () => {
       expect(html).toContain(`for="${id}"`);
       expect(html).toContain(option.label);
     }
+  });
+
+  it("renders ICS export filter controls for high and medium importance", () => {
+    const html = renderToStaticMarkup(createElement(Page));
+
+    expect(html).toContain("TOP-EVENT / 3 Sterne");
+    expect(html).toContain("2 Sterne");
+    expect(html).toContain('id="ics-filter-high"');
+    expect(html).toContain('id="ics-filter-medium"');
   });
 });

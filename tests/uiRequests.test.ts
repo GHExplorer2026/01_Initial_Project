@@ -11,6 +11,16 @@ describe("ui request helpers", () => {
     expect(buildIcsEndpoint(["NZ", "AU", "USA"])).toBe("/api/weekly.ics?regions=USA%2CAU%2CNZ");
   });
 
+  it("serializes optional ICS importance filters in deterministic order", () => {
+    expect(buildIcsEndpoint(["USA", "EZ"], ["medium", "high"])).toBe(
+      "/api/weekly.ics?regions=USA%2CEZ&icsImportance=high%2Cmedium"
+    );
+  });
+
+  it("omits ICS importance query when no filter is selected", () => {
+    expect(buildIcsEndpoint(["USA"], [])).toBe("/api/weekly.ics?regions=USA");
+  });
+
   it("keeps regions as the only query contract key", () => {
     const weekly = buildWeeklyEndpoint(["USA", "EZ"]);
     const ics = buildIcsEndpoint(["USA", "EZ"]);

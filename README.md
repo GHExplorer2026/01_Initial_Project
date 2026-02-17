@@ -32,6 +32,8 @@ Date: `2026-02-15`
 | Release `v0.1.7` | Completed | 100% | 2026-02-15 | tag `v0.1.7`, `docs/RELEASES.md`, `docs/V0_1_7_EVIDENCE.md` |
 | Post-`v0.1.7` maintenance closure | Completed | 100% | 2026-02-15 | `docs/QA_STATUS.md`, `docs/UI_EXECUTION_REPORT.md`, `docs/NEXT_SPRINT_HANDOFF.md` |
 | UI Update sprint (Date+Time table + All-Day + ICS metrics) | Completed | 100% | 2026-02-17 | `src/app/page.tsx`, `src/core/icsSerializer.ts`, `RULES.md`, `docs/IMPLEMENTATION_PLAN.md` |
+| `v0.1.8` planning gate package (no-code phase) | Completed | 100% | 2026-02-17 | `skills/ui-update-next-iteration-planning-gate/*`, `docs/V0_1_8_PLAN.md`, `docs/V0_1_8_EVIDENCE.md` |
+| `v0.1.8` execution slice (strict toggle + ICS importance filter) | Completed | 100% | 2026-02-17 | `src/app/page.tsx`, `src/app/api/weekly.ics/route.ts`, `src/server/orchestrator.ts`, `RULES.md`, `docs/V0_1_8_EVIDENCE.md` |
 
 ## 3. Active Skill Landscape
 
@@ -52,6 +54,7 @@ Date: `2026-02-15`
 - `skills/deterministic-qa-harness`
 - `skills/spec-safe-direct-delivery`
 - `skills/economic-calendar-table-contract`
+- `skills/ui-update-next-iteration-planning-gate`
 
 ## 4. Progress Log
 | ID | Date | Area | Type | Description | Result | Verification | Owner |
@@ -176,6 +179,8 @@ Date: `2026-02-15`
 | P-118 | 2026-02-17 | ICS | Feature | Added deterministic metrics `DESCRIPTION` lines and all-day `VALUE=DATE` serialization while preserving RFC5545/Outlook constraints | Completed | `src/core/icsSerializer.ts`, `tests/icsSerializer.test.ts`, `tests/fixtures/golden/ics_single_event.ics` | Codex |
 | P-119 | 2026-02-17 | Sources | Feature | Extended source parsing for `All Day`, `importance`, `actual/forecast/previous` and removed Investing `timeFilter=timeOnly` restriction | Completed | `src/server/sources/investing.ts`, `src/server/sources/tradingview.ts`, `tests/sourceAdapters.test.ts` | Codex |
 | P-120 | 2026-02-17 | Governance | Contract patch | Applied RULES/Plan/Skills updates for UI Update sprint, incl. no-hallucination metrics and all-day governance | Completed | `RULES.md`, `docs/IMPLEMENTATION_PLAN.md`, `skills/*` | Codex |
+| P-121 | 2026-02-17 | Planning | Gate package | Added next-iteration planning-gate skill, generated `v0.1.8` plan, and recorded planning evidence (no code phase) | Completed | `skills/ui-update-next-iteration-planning-gate/*`, `docs/V0_1_8_PLAN.md`, `docs/V0_1_8_EVIDENCE.md` | Codex |
+| P-122 | 2026-02-17 | UI/API | Feature slice | Implemented strict-output visibility toggle (`default off`), deterministic TOP/importance equivalence, and ICS importance export filtering with targeted + full verify gates | Completed | `src/app/page.tsx`, `src/app/uiRequests.ts`, `src/app/api/weekly.ics/route.ts`, `src/server/orchestrator.ts`, `tests/*`, `docs/V0_1_8_EVIDENCE.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -216,6 +221,9 @@ Date: `2026-02-15`
 | N-801 | Kick off next active scope with explicit Sprint Goal + bounded backlog (<=1-week slice set) | High | Open | None | 2026-02-16 | Codex/User |
 | N-802 | Define first execution slice and regression tests before coding (DoR gate) | High | Open | None | 2026-02-16 | Codex/User |
 | N-803 | Close first next-scope slice with full verify + release-gate marker + evidence update (DoD gate) | High | Open | None | 2026-02-16 | Codex/User |
+| N-1001 | Approve `v0.1.8` planning gate package before code phase | High | Completed | None | 2026-02-17 | Codex/User |
+| N-1002 | Implement strict-toggle + TOP/importance consistency + ICS importance filters after `GO` | High | Completed | None | 2026-02-17 | Codex |
+| N-1003 | Run targeted tests, then full `verify:release` and release-gate marker validation for next iteration | High | In Progress | Release-gate run for pushed HEAD pending | 2026-02-17 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |

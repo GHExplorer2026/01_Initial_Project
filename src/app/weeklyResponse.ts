@@ -106,6 +106,9 @@ const normalizeEvents = (value: unknown): WeeklyEvent[] => {
     const forecast = normalizeMetric((record.forecast as { value?: unknown } | undefined)?.value);
     const previous = normalizeMetric((record.previous as { value?: unknown } | undefined)?.value);
 
+    const normalizedImportance = normalizeImportance(record.importance);
+    const normalizedIsTop = record.isTopEvent === true || normalizedImportance === "high";
+
     out.push({
       region,
       currency: currency.trim(),
@@ -113,11 +116,11 @@ const normalizeEvents = (value: unknown): WeeklyEvent[] => {
       dateBerlinISO: dateBerlinISO.trim(),
       timeKind,
       timeHHMM: typeof record.timeHHMM === "string" ? record.timeHHMM.trim() : undefined,
-      importance: normalizeImportance(record.importance),
+      importance: normalizedIsTop ? "high" : normalizedImportance,
       actual,
       forecast,
       previous,
-      isTopEvent: record.isTopEvent === true
+      isTopEvent: normalizedIsTop
     });
   }
 

@@ -19,6 +19,9 @@ import { safeGetStorageValue, safeSetStorageValue } from "@/app/storageSafe";
 export default function Page() {
   const [selected, setSelected] = useState<RegionCode[]>(allRegionsSelection);
   const [renderedText, setRenderedText] = useState<string>("");
+  const [showStrictOutput, setShowStrictOutput] = useState(false);
+  const [icsExportFilterHigh, setIcsExportFilterHigh] = useState(false);
+  const [icsExportFilterMedium, setIcsExportFilterMedium] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>("");
   const [sourceMode, setSourceMode] = useState<"fixtures" | "live" | null>(null);
@@ -84,7 +87,11 @@ export default function Page() {
     if (selected.length === 0) {
       return;
     }
-    window.location.href = buildIcsEndpoint(selected);
+    const filters = [
+      ...(icsExportFilterHigh ? (["high"] as const) : []),
+      ...(icsExportFilterMedium ? (["medium"] as const) : [])
+    ];
+    window.location.href = buildIcsEndpoint(selected, filters);
   };
 
   return (
@@ -128,6 +135,31 @@ export default function Page() {
 
       <section className="panel">
         <h2>Aktionen</h2>
+        <fieldset>
+          <legend className="sr-only">ICS Export Filter</legend>
+          <div className="actions-inline">
+            <label className="check-item" htmlFor="ics-filter-high">
+              <input
+                id="ics-filter-high"
+                type="checkbox"
+                checked={icsExportFilterHigh}
+                onChange={(event) => setIcsExportFilterHigh(event.currentTarget.checked)}
+                aria-label="TOP-EVENT / 3 Sterne"
+              />
+              <span>TOP-EVENT / 3 Sterne</span>
+            </label>
+            <label className="check-item" htmlFor="ics-filter-medium">
+              <input
+                id="ics-filter-medium"
+                type="checkbox"
+                checked={icsExportFilterMedium}
+                onChange={(event) => setIcsExportFilterMedium(event.currentTarget.checked)}
+                aria-label="2 Sterne"
+              />
+              <span>2 Sterne</span>
+            </label>
+          </div>
+        </fieldset>
         <div className="actions-inline">
           <button onClick={onGenerate} type="button" disabled={!uiActions.canGenerate}>
             {uiActions.generateLabel}
@@ -200,10 +232,25 @@ export default function Page() {
 
       <section className="panel">
         <h2>Strict Output</h2>
-        {!hasGenerated ? <p className="sub">Noch kein Output generiert.</p> : null}
-        <pre className="strict-output" aria-label="Strict output block">
-          {renderedText}
-        </pre>
+        <div className="actions-inline">
+          <label className="check-item" htmlFor="show-strict-output">
+            <input
+              id="show-strict-output"
+              type="checkbox"
+              checked={showStrictOutput}
+              onChange={(event) => setShowStrictOutput(event.currentTarget.checked)}
+              aria-label="Strict Output anzeigen"
+            />
+            <span>Strict Output anzeigen</span>
+          </label>
+        </div>
+        {!showStrictOutput ? <p className="sub">Strict Output ist ausgeblendet.</p> : null}
+        {showStrictOutput && !hasGenerated ? <p className="sub">Noch kein Output generiert.</p> : null}
+        {showStrictOutput ? (
+          <pre className="strict-output" aria-label="Strict output block">
+            {renderedText}
+          </pre>
+        ) : null}
       </section>
     </main>
   );

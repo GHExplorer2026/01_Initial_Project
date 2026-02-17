@@ -42,6 +42,30 @@ describe("GET /api/weekly.ics", () => {
     expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({ regions: ["USA", "EZ"] });
   });
 
+  it("passes parsed ICS importance filters to orchestrator", async () => {
+    mockedGenerateWeeklyOutlook.mockResolvedValue(buildWeeklyOutput());
+
+    const response = await GET(new Request("http://localhost/api/weekly.ics?regions=USA,EZ&icsImportance=medium,high"));
+
+    expect(response.status).toBe(200);
+    expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({
+      regions: ["USA", "EZ"],
+      icsImportance: ["high", "medium"]
+    });
+  });
+
+  it("ignores invalid ICS importance tokens and keeps valid ones", async () => {
+    mockedGenerateWeeklyOutlook.mockResolvedValue(buildWeeklyOutput());
+
+    const response = await GET(new Request("http://localhost/api/weekly.ics?regions=USA,EZ&icsImportance=foo,medium"));
+
+    expect(response.status).toBe(200);
+    expect(mockedGenerateWeeklyOutlook).toHaveBeenCalledWith({
+      regions: ["USA", "EZ"],
+      icsImportance: ["medium"]
+    });
+  });
+
   it("prioritizes regions over deprecated countries when both resolve equally", async () => {
     mockedGenerateWeeklyOutlook.mockResolvedValue(buildWeeklyOutput());
 
