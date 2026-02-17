@@ -51,9 +51,9 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 4. Evidence docs updated (`README.md`, `docs/QA_STATUS.md`, relevant run/evidence files).
 
 ## Immediate Next-Scope Queue
-1. `W-1105`: Implement provider-side widget-feed integration tests and freeze E2 evidence (`docs/WIDGET_E2_FEED_INTEGRATION_PLAN.md`).
-2. `W-1106`: Implement desktop UI vertical slice (bar + ticker + settings) against frozen contracts.
-3. `W-1107`: Finalize widget-project CI baseline execution (`lint/typecheck/unit/contract/build`).
+1. `W-1106`: Implement desktop UI vertical slice (bar + ticker + settings) against frozen contracts.
+2. `W-1107`: Finalize widget-project CI baseline execution (`lint/typecheck/unit/contract/build`).
+3. `W-1108`: Execute widget E2->E3 transition check with evidence refresh.
 
 ## References
 - `RULES.md`

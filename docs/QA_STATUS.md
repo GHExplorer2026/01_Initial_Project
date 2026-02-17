@@ -64,6 +64,7 @@
   4. Current evidence docs are updated (`docs/UI_EXECUTION_REPORT.md`, `docs/release-gate-last-success.json`).
   5. Windows Desktop Widget Option-C planning docs and contracts are prepared for execution handoff.
   6. Widget Style Guide alignment is documented and mapped to contracts.
+  7. Widget E2 feed-integration slice is implemented with deterministic route-contract tests.
 
 ## References
 - `README.md`

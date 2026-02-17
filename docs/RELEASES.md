@@ -11,6 +11,7 @@
 - Added widget execution checklist to bridge planning contracts to implementation gates.
 - Added widget project-boundary baseline for separated UI runtime and CI gates.
 - Added E2 feed-integration plan and evidence template for deterministic gate closure.
+- Added widget-feed API endpoint and E2 route-contract tests.
 
 ### Quality Evidence
 - Planning artifacts are decision-complete and traceable in repository docs.
@@ -27,6 +28,9 @@
 - `docs/WIDGET_PROJECT_BOUNDARY.md`
 - `docs/WIDGET_E2_FEED_INTEGRATION_PLAN.md`
 - `docs/WIDGET_E2_EVIDENCE.md`
+- `src/app/api/widget-feed/route.ts`
+- `src/server/widgetFeed.ts`
+- `tests/api.widget-feed.route.test.ts`
 - `skills/windows-widget-planning-gate/*`
 - `skills/widget-*`
 

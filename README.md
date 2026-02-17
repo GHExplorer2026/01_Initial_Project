@@ -195,6 +195,7 @@ Date: `2026-02-17`
 | P-126 | 2026-02-17 | Planning | Widget execution readiness | Added execution checklist and advanced handoff queue from contract freeze to implementation-ready gates | Completed | `docs/WIDGET_EXECUTION_CHECKLIST.md`, `docs/NEXT_SPRINT_HANDOFF.md` | Codex |
 | P-127 | 2026-02-17 | Planning | Widget boundary baseline | Added explicit project-boundary and CI-baseline contract for separated desktop widget project | Completed | `docs/WIDGET_PROJECT_BOUNDARY.md`, `docs/NEXT_SPRINT_HANDOFF.md` | Codex |
 | P-128 | 2026-02-17 | Planning | Widget E2 integration prep | Added provider-side feed integration test plan and evidence template for deterministic E2 gate closure | Completed | `docs/WIDGET_E2_FEED_INTEGRATION_PLAN.md`, `docs/WIDGET_E2_EVIDENCE.md`, `docs/NEXT_SPRINT_HANDOFF.md` | Codex |
+| P-129 | 2026-02-17 | API/QA | Widget feed E2 slice | Implemented `GET /api/widget-feed` and added provider-side contract route tests with deterministic E2 evidence | Completed | `src/app/api/widget-feed/route.ts`, `src/server/widgetFeed.ts`, `tests/api.widget-feed.route.test.ts`, `docs/WIDGET_E2_EVIDENCE.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -242,9 +243,10 @@ Date: `2026-02-17`
 | W-1102 | Define widget project separation and release gates | High | Completed | None | 2026-02-18 | Codex/User |
 | W-1103 | Start widget vertical slice after contract approval | High | Completed | None | 2026-02-19 | Codex/User |
 | W-1104 | Initialize separated widget project boundary and CI baseline | High | Completed | None | 2026-02-19 | Codex/User |
-| W-1105 | Implement provider-side widget-feed integration tests and freeze E2 evidence | High | Open | Requires W-1104 | 2026-02-19 | Codex/User |
+| W-1105 | Implement provider-side widget-feed integration tests and freeze E2 evidence | High | Completed | Requires W-1104 | 2026-02-19 | Codex/User |
 | W-1106 | Implement widget UI vertical slice against frozen contracts | High | Open | Requires W-1104/W-1105 | 2026-02-20 | Codex/User |
 | W-1107 | Finalize widget-project CI baseline execution gates | High | Open | Requires W-1104 | 2026-02-20 | Codex/User |
+| W-1108 | Execute widget E2->E3 transition check and refresh evidence package | High | Open | Requires W-1106/W-1107 | 2026-02-20 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |
