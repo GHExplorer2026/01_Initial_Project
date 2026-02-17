@@ -254,7 +254,7 @@ Date: `2026-02-17`
 | W-1108 | Execute widget E2->E3 transition check and refresh evidence package | High | Completed | Requires W-1106/W-1107 | 2026-02-20 | Codex/User |
 | W-1109 | Start separated desktop runtime scaffold with frozen contracts | High | Completed | Requires W-1107/W-1108 | 2026-02-21 | Codex/User |
 | W-1110 | Wire release-gate evidence package to separated desktop runtime repo | High | Completed | Requires W-1109 | 2026-02-21 | Codex/User |
-| W-1111 | Execute first end-to-end desktop runtime smoke with fixture feed | High | Open | Requires W-1109/W-1110 | 2026-02-21 | Codex/User |
+| W-1111 | Execute first end-to-end desktop runtime smoke with fixture feed | High | Blocked | Agent shell EPERM on local port bind (`127.0.0.1:3000`) | 2026-02-21 | Codex/User |
 | W-1112 | Add runtime settings-persistence migration check | High | Open | Requires W-1111 | 2026-02-22 | Codex/User |
 | W-1113 | Add runtime error/empty state UX checks against fixture feed | High | Open | Requires W-1111 | 2026-02-22 | Codex/User |
 
@@ -297,6 +297,7 @@ Date: `2026-02-17`
 - Current Widget E2 Evidence: `docs/WIDGET_E2_EVIDENCE.md`
 - Current Widget E3 Evidence: `docs/WIDGET_E3_EVIDENCE.md`
 - Current Widget E2-E3 Transition: `docs/WIDGET_E2_E3_TRANSITION.md`
+- Current Widget E2E Smoke Blocker Note: `docs/WIDGET_E2E_SMOKE_BLOCKER.md`
 - Previous Plan: `docs/V0_1_7_PLAN.md`
 - Previous Release Draft: `docs/V0_1_7_RELEASE_DRAFT.md`
 - Previous Release Evidence: `docs/V0_1_7_EVIDENCE.md`

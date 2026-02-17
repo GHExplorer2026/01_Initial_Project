@@ -70,6 +70,7 @@
   10. E2->E3 transition evidence is documented and approved for next step.
   11. Separated desktop runtime scaffold exists (`widget-runtime/`) with gate docs.
   12. Runtime release-gate evidence template is defined for separated project handoff.
+  13. Runtime smoke execution is currently blocked in agent shell due local port-bind `EPERM`.
 
 ## References
 - `README.md`
@@ -88,3 +89,4 @@
 - `docs/WIDGET_E2_EVIDENCE.md`
 - `docs/WIDGET_E3_EVIDENCE.md`
 - `docs/WIDGET_E2_E3_TRANSITION.md`
+- `docs/WIDGET_E2E_SMOKE_BLOCKER.md`

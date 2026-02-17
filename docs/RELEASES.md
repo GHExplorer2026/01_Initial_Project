@@ -17,6 +17,7 @@
 - Added consolidated E2->E3 transition evidence for desktop runtime handoff.
 - Added initial separated runtime scaffold docs under `widget-runtime/`.
 - Added release-gate evidence template for separated runtime repository handoff.
+- Added runtime smoke script and blocker note for agent-shell port-bind limitation.
 
 ### Quality Evidence
 - Planning artifacts are decision-complete and traceable in repository docs.
@@ -47,6 +48,8 @@
 - `widget-runtime/docs/SCOPING.md`
 - `widget-runtime/docs/EXECUTION_GATE.md`
 - `widget-runtime/docs/RELEASE_GATE_EVIDENCE.md`
+- `scripts/smoke_widget_runtime.sh`
+- `docs/WIDGET_E2E_SMOKE_BLOCKER.md`
 - `skills/windows-widget-planning-gate/*`
 - `skills/widget-*`
 
