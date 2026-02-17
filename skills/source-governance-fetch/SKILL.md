@@ -23,6 +23,11 @@ Define and enforce source hierarchy, fallback triggers, and compliance restricti
 - Tertiary data cannot overwrite primary data outside defined trigger cases.
 - Reuters adapter remains disabled without legal entitlement.
 - Keep rate-limit and Terms-of-Service constraints explicit per source.
+- Metrics provenance is field-level (`importance`, `actual`, `forecast`, `previous`):
+  - backfill only when higher-priority field is empty
+  - never overwrite existing Investing field values
+- No hallucinated metrics: missing values must stay missing.
+- `All Day` is a supported time token and must not be downgraded to missing time.
 
 ## Deliverables
 

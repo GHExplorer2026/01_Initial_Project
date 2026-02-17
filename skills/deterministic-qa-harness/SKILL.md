@@ -39,6 +39,9 @@ Rules:
 - Keep strict-output and ICS golden artifacts aligned with exact canonical strings.
 - Validate source-scope filters in both strict text and ICS outputs.
 - Keep security checks tied to QA gates: dependency and source-governance changes require full CI evidence.
+- Add table-contract tests for `Date + Time` grouping and missing-token behavior (`—`).
+- Add all-day tests across parser, renderer, and ICS (`VALUE=DATE`) paths.
+- Assert `DESCRIPTION` metrics lines in every VEVENT with deterministic `n/a` fallback.
 
 ## Deliverables
 

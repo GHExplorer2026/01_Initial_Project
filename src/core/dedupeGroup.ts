@@ -1,6 +1,9 @@
 import { REGION_ORDER, type EconomicEvent, type GroupedRenderEvent, type RegionCode } from "@/core/types";
 
-const dedupeKey = (event: EconomicEvent): string => `${event.region}|${event.datetimeBerlinISO}|${event.titleNormalized}`;
+const dedupeKey = (event: EconomicEvent): string => {
+  const timePart = event.timeKind === "exact" ? event.timeHHMM ?? "" : "ALL_DAY";
+  return `${event.region}|${event.dateBerlinISO}|${timePart}|${event.titleNormalized}`;
+};
 
 const dayFromIso = (datetimeBerlinISO: string): string => datetimeBerlinISO.slice(0, 10);
 
@@ -26,12 +29,13 @@ export const groupForRendering = (events: EconomicEvent[]): GroupedRenderEvent[]
   const grouped = new Map<string, GroupedRenderEvent>();
 
   for (const event of events) {
-    const key = `${event.region}|${event.datetimeBerlinISO}`;
+    const key = `${event.region}|${event.dateBerlinISO}|${event.timeKind}|${event.timeHHMM ?? ""}`;
     const existing = grouped.get(key);
     if (!existing) {
       grouped.set(key, {
         region: event.region,
         day: dayFromIso(event.datetimeBerlinISO),
+        timeKind: event.timeKind,
         timeHHMM: event.timeHHMM,
         title: event.titleRaw,
         isTopEvent: event.isTopEvent,
@@ -47,7 +51,18 @@ export const groupForRendering = (events: EconomicEvent[]): GroupedRenderEvent[]
   }
 
   return [...grouped.values()].sort((a, b) => {
-    const dt = a.datetimeBerlinISO.localeCompare(b.datetimeBerlinISO);
+    const dayDelta = a.day.localeCompare(b.day);
+    if (dayDelta !== 0) {
+      return dayDelta;
+    }
+    const aRank = a.timeKind === "all_day" ? 0 : 1;
+    const bRank = b.timeKind === "all_day" ? 0 : 1;
+    if (aRank !== bRank) {
+      return aRank - bRank;
+    }
+    const aTime = a.timeHHMM ?? "";
+    const bTime = b.timeHHMM ?? "";
+    const dt = aTime.localeCompare(bTime);
     if (dt !== 0) {
       return dt;
     }

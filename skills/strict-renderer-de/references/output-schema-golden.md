@@ -1,29 +1,32 @@
 # Output Schema Golden
 
 ## Global Structure
-- Header line
+- Header line (`📊 WOCHENAUSBLICK <start> – <end>`)
 - Five day sections (`### <weekday>, <date>`)
 - Each section contains either event lines or one fixed note line
 
 ## Example Skeleton
 ```
-## Wochenausblick (Europe/Berlin)
+📊 WOCHENAUSBLICK 10.02.2026 – 14.02.2026
 
 ### Montag, 10. Februar
-08:00 EZ Verbraucherpreisindex (CPI) - **TOP-EVENT**
+08:00 Uhr: Euro Zone Verbraucherpreisindex (CPI) - **TOP-EVENT**
 
 ### Dienstag, 11. Februar
-Hinweis: Keine relevanten Termine.
+All Day: USA Bank Holiday
+
+### Mittwoch, 12. Februar
+Hinweis: Keine verifizierten Events gefunden.
 ```
 
 ## Fixed Note Lines
-- `Hinweis: Wochenende.`
-- `Hinweis: Feiertag.`
-- `Hinweis: Keine relevanten Termine.`
-- `Hinweis: Datenlage unsicher.`
+- `Hinweis: Keine Handelstermine – Wochenende oder Feiertag.`
+- `Hinweis: Keine Handelstermine – Feiertag.`
+- `Hinweis: Keine verifizierten Events gefunden.`
 
 ## Line Format
-`HH:MM <country> <title>[ - **TOP-EVENT**]`
+- Timed: `HH:MM Uhr: <country> <title>[ - **TOP-EVENT**]`
+- All-day: `All Day: <country> <title>[ - **TOP-EVENT**]`
 
 ## Constraints
 - No trailing spaces.

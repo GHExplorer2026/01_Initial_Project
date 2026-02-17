@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import type { RegionCode } from "@/core/types";
 import {
   REGION_OPTIONS,
@@ -11,6 +11,7 @@ import {
   toggleRegionSelection
 } from "@/app/scopeState";
 import { buildIcsEndpoint, buildWeeklyEndpoint } from "@/app/uiRequests";
+import { buildCalendarTableDays } from "@/app/calendarTable";
 import { normalizeWeeklyResponse, type WeeklyResponse } from "@/app/weeklyResponse";
 import { deriveUiActionState, toUiErrorMessage } from "@/app/uiState";
 import { safeGetStorageValue, safeSetStorageValue } from "@/app/storageSafe";
@@ -22,6 +23,7 @@ export default function Page() {
   const [error, setError] = useState<string>("");
   const [sourceMode, setSourceMode] = useState<"fixtures" | "live" | null>(null);
   const [sourcesUsed, setSourcesUsed] = useState<string[]>([]);
+  const [tableDays, setTableDays] = useState<ReturnType<typeof buildCalendarTableDays>>([]);
   const [hasGenerated, setHasGenerated] = useState(false);
   const [hydrated, setHydrated] = useState(false);
 
@@ -69,6 +71,7 @@ export default function Page() {
       setRenderedText(normalized.renderedText);
       setSourceMode(normalized.sourceMode);
       setSourcesUsed(normalized.sourcesUsed);
+      setTableDays(buildCalendarTableDays(normalized.days, normalized.events));
       setHasGenerated(true);
     } catch (err) {
       setError(toUiErrorMessage(err));
@@ -144,6 +147,54 @@ export default function Page() {
           <p className="error" role="alert">
             Fehler: {error}
           </p>
+        ) : null}
+      </section>
+
+      <section className="panel">
+        <h2>Economic Calendar</h2>
+        {!hasGenerated ? <p className="sub">Noch keine Tabelle generiert.</p> : null}
+        {hasGenerated ? (
+          <div className="calendar-table-wrap" aria-label="Economic calendar table">
+            <table className="calendar-table">
+              <thead>
+                <tr>
+                  <th>Date + Time</th>
+                  <th>Currency</th>
+                  <th>Event</th>
+                  <th>Importance</th>
+                  <th>Actual</th>
+                  <th>Forecast</th>
+                  <th>Previous</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tableDays.map((day) => (
+                  <Fragment key={day.dateBerlinISO}>
+                    <tr className="calendar-day-row">
+                      <td colSpan={7}>{day.dayHeader}</td>
+                    </tr>
+                    {day.rows.length === 0 ? (
+                      <tr className="calendar-note-row">
+                        <td colSpan={7}>{day.note ?? "Hinweis: Keine verifizierten Events gefunden."}</td>
+                      </tr>
+                    ) : (
+                      day.rows.map((row, index) => (
+                        <tr key={`${day.dateBerlinISO}-${index}`}>
+                          <td>{row.dateTime}</td>
+                          <td>{row.currency}</td>
+                          <td>{row.event}</td>
+                          <td>{row.importance}</td>
+                          <td>{row.actual}</td>
+                          <td>{row.forecast}</td>
+                          <td>{row.previous}</td>
+                        </tr>
+                      ))
+                    )}
+                  </Fragment>
+                ))}
+              </tbody>
+            </table>
+          </div>
         ) : null}
       </section>
 

@@ -20,7 +20,9 @@ Apply deterministic conflict resolution and stable grouping to produce renderer-
 ## Merge Rules
 
 - Source priority: Investing, then TradingView, then tertiary.
-- Conflicts in title/time use highest-priority valid record.
+- Prefer `exact` over `all_day` when both describe the same event key.
+- Conflicts in title/time use highest-priority valid record after time-kind preference.
+- Metrics fields are merged field-by-field with priority backfill (no overwrite of existing higher-priority values).
 - Grouped line joins titles with ` / ` in stable lexical order.
 - Keep chronological ordering after grouping.
 

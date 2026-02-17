@@ -16,7 +16,7 @@ Coordinate all pipeline stages in fixed order and enforce deterministic output b
 3. Load holiday constraints before source merge.
 4. Ingest source data through governed fetch policy.
 5. Run normalization, filtering, classification, conflict resolution, and grouping.
-6. Generate strict DE text output and ICS output.
+6. Generate strict DE text output (including canonical `All Day` lines) and ICS output.
 7. Emit API payload plus metadata (`parserVersion`, generation timestamp).
 
 ## Orchestration Rules
@@ -25,6 +25,9 @@ Coordinate all pipeline stages in fixed order and enforce deterministic output b
 - Use pure data handoff between stages (no UI coupling).
 - Reject partial output if required stages fail without fallback policy.
 - Keep deterministic metadata with every run.
+- Keep `regions` scope identical across strict output, table view payload, and ICS payload.
+- Treat `all_day` as a first-class time kind; use exact time when available.
+- Keep strict header contract: date range only (`DD.MM.YYYY – DD.MM.YYYY`).
 
 ## Deliverables
 

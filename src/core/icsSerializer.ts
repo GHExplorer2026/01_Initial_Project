@@ -80,6 +80,8 @@ const formatLocalDateTime = (ymd: string, hhmm: string): string => {
   return `${year}${month}${day}T${hh}${mm}00`;
 };
 
+const formatLocalDate = (ymd: string): string => ymd.replace(/-/g, "");
+
 const addMinutes = (ymd: string, hhmm: string, minutes: number): { ymd: string; hhmm: string } => {
   const [year, month, day] = ymd.split("-").map(Number);
   const [hh, mm] = hhmm.split(":").map(Number);
@@ -121,6 +123,34 @@ const uidForEvent = (event: EconomicEvent, weekStart: string, parserVersion: str
   return `${crypto.createHash("sha256").update(payload).digest("hex").slice(0, 32)}@macro-events`;
 };
 
+const escapeText = (value: string): string =>
+  value
+    .replace(/\\/g, "\\\\")
+    .replace(/\n/g, "\\n")
+    .replace(/;/g, "\\;")
+    .replace(/,/g, "\\,");
+
+const addOneDay = (ymd: string): string => {
+  const [year, month, day] = ymd.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
+  date.setUTCDate(date.getUTCDate() + 1);
+  const y = date.getUTCFullYear();
+  const m = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const d = String(date.getUTCDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+};
+
+const metricValue = (value: EconomicEvent["actual"] | EconomicEvent["forecast"] | EconomicEvent["previous"]): string =>
+  value?.value ?? "n/a";
+
+const buildDescription = (event: EconomicEvent): string =>
+  [
+    `Importance: ${event.importance ?? "unknown"}`,
+    `Actual: ${metricValue(event.actual)}`,
+    `Forecast: ${metricValue(event.forecast)}`,
+    `Previous: ${metricValue(event.previous)}`
+  ].join("\n");
+
 export const deterministicDtstampForWeek = (weekStart: string): string => {
   const utc = berlinLocalToUtc(weekStart, 0, 0);
   return formatUtcStamp(utc);
@@ -147,18 +177,27 @@ export const generateIcs = (events: EconomicEvent[], weekStart: string, parserVe
   ];
 
   for (const event of sorted) {
-    const day = event.datetimeBerlinISO.slice(0, 10);
-    const start = formatLocalDateTime(day, event.timeHHMM);
-    const endParts = addMinutes(day, event.timeHHMM, 15);
-    const end = formatLocalDateTime(endParts.ymd, endParts.hhmm);
+    const day = event.dateBerlinISO;
+    const startField =
+      event.timeKind === "all_day"
+        ? `DTSTART;VALUE=DATE:${formatLocalDate(day)}`
+        : `DTSTART;TZID=Europe/Berlin:${formatLocalDateTime(day, event.timeHHMM ?? "00:00")}`;
+    const endField =
+      event.timeKind === "all_day"
+        ? `DTEND;VALUE=DATE:${formatLocalDate(addOneDay(day))}`
+        : (() => {
+            const endParts = addMinutes(day, event.timeHHMM ?? "00:00", 15);
+            return `DTEND;TZID=Europe/Berlin:${formatLocalDateTime(endParts.ymd, endParts.hhmm)}`;
+          })();
 
     const vevent = [
       "BEGIN:VEVENT",
       `UID:${uidForEvent(event, weekStart, parserVersion)}`,
       `DTSTAMP:${dtstamp}`,
-      `DTSTART;TZID=Europe/Berlin:${start}`,
-      `DTEND;TZID=Europe/Berlin:${end}`,
-      `SUMMARY:${REGION_LABELS[event.region]} ${event.titleRaw}`,
+      startField,
+      endField,
+      `SUMMARY:${escapeText(`${REGION_LABELS[event.region]} ${event.titleRaw}`)}`,
+      `DESCRIPTION:${escapeText(buildDescription(event))}`,
       "CATEGORIES:Wirtschafts-Event",
       "END:VEVENT"
     ];

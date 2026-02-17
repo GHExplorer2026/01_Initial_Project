@@ -12,7 +12,29 @@ const scoreSource = (source: string): number => {
   return SOURCE_PRIORITY[source] ?? 0;
 };
 
-const eventKey = (event: EconomicEvent): string => `${event.region}|${event.datetimeBerlinISO.slice(0, 10)}|${event.titleNormalized}`;
+const eventKey = (event: EconomicEvent): string => `${event.region}|${event.dateBerlinISO}|${event.titleNormalized}`;
+const timeKindRank = (event: EconomicEvent): number => (event.timeKind === "exact" ? 1 : 0);
+
+const mergeMetrics = (primary: EconomicEvent, candidates: EconomicEvent[]): EconomicEvent => {
+  const merged: EconomicEvent = { ...primary };
+
+  for (const candidate of candidates) {
+    if (!merged.actual && candidate.actual) {
+      merged.actual = candidate.actual;
+    }
+    if (!merged.forecast && candidate.forecast) {
+      merged.forecast = candidate.forecast;
+    }
+    if (!merged.previous && candidate.previous) {
+      merged.previous = candidate.previous;
+    }
+    if (merged.importance === "unknown" && candidate.importance !== "unknown") {
+      merged.importance = candidate.importance;
+    }
+  }
+
+  return merged;
+};
 
 export const mergeByPriority = (events: EconomicEvent[]): EconomicEvent[] => {
   const grouped = new Map<string, EconomicEvent[]>();
@@ -27,6 +49,10 @@ export const mergeByPriority = (events: EconomicEvent[]): EconomicEvent[] => {
   const merged: EconomicEvent[] = [];
   for (const [, group] of grouped.entries()) {
     const sorted = [...group].sort((a, b) => {
+      const exactDelta = timeKindRank(b) - timeKindRank(a);
+      if (exactDelta !== 0) {
+        return exactDelta;
+      }
       const sourceDelta = scoreSource(b.source) - scoreSource(a.source);
       if (sourceDelta !== 0) {
         return sourceDelta;
@@ -37,7 +63,7 @@ export const mergeByPriority = (events: EconomicEvent[]): EconomicEvent[] => {
       }
       return b.titleNormalized.length - a.titleNormalized.length;
     });
-    merged.push(sorted[0]);
+    merged.push(mergeMetrics(sorted[0], sorted.slice(1)));
   }
 
   return merged;

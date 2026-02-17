@@ -15,14 +15,19 @@ Produce Outlook-compatible ICS with strict interoperability defaults and mandato
 2. Emit `VTIMEZONE` for `Europe/Berlin`.
 3. Build one `VEVENT` per normalized event.
 4. Set deterministic `UID` and UTC `DTSTAMP`.
-5. Add mandatory `CATEGORIES:Wirtschafts-Event` per event.
-6. Serialize with CRLF and RFC folding.
+5. Encode timed events with `DTSTART/DTEND;TZID=Europe/Berlin`.
+6. Encode all-day events with `DTSTART;VALUE=DATE` + `DTEND;VALUE=DATE` (exclusive end).
+7. Add deterministic `DESCRIPTION` metrics lines (`Importance`, `Actual`, `Forecast`, `Previous`).
+8. Add mandatory `CATEGORIES:Wirtschafts-Event` per event.
+9. Serialize with CRLF and RFC folding.
 
 ## ICS Rules
 
 - Every `VEVENT` must include the required category line.
 - Use local event start/end in `Europe/Berlin`.
-- Default duration is 15 minutes if end time absent.
+- Default timed duration is 15 minutes if end time absent.
+- All-day semantics must follow RFC5545 `VALUE=DATE` exclusive-end rule.
+- Missing metrics in `DESCRIPTION` use `n/a`.
 - Keep output deterministic with stable UID hashing input.
 
 ## Deliverables

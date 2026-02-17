@@ -10,9 +10,14 @@
 ## VEVENT Required Fields
 - `UID:<deterministic-hash>`
 - `DTSTAMP:<UTC timestamp>`
-- `DTSTART;TZID=Europe/Berlin:<YYYYMMDDTHHMM00>`
-- `DTEND;TZID=Europe/Berlin:<YYYYMMDDTHHMM00>`
+- Timed event:
+  - `DTSTART;TZID=Europe/Berlin:<YYYYMMDDTHHMM00>`
+  - `DTEND;TZID=Europe/Berlin:<YYYYMMDDTHHMM00>`
+- All-day event:
+  - `DTSTART;VALUE=DATE:<YYYYMMDD>`
+  - `DTEND;VALUE=DATE:<YYYYMMDD>` (exclusive end)
 - `SUMMARY:<render title>`
+- `DESCRIPTION:Importance: ...\nActual: ...\nForecast: ...\nPrevious: ...`
 - `CATEGORIES:Wirtschafts-Event`
 
 ## Serialization Requirements
@@ -26,5 +31,6 @@ Hash input tuple:
 
 ## Validation Checks
 - Each VEVENT has category line.
+- Each VEVENT has the metrics `DESCRIPTION` lines.
 - Calendar parsers can import file without structural errors.
 - Snapshot output is stable for identical fixtures.

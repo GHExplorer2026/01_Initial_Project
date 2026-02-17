@@ -56,7 +56,7 @@ describe("source adapters", () => {
     const body = options?.body as URLSearchParams;
     expect(body.get("dateFrom")).toBe("2026-02-09");
     expect(body.get("dateTo")).toBe("2026-02-13");
-    expect(body.get("timeFilter")).toBe("timeOnly");
+    expect(body.get("timeFilter")).toBeNull();
     expect(body.getAll("country[]")).toEqual(["5", "72"]);
   });
 
@@ -86,6 +86,42 @@ describe("source adapters", () => {
       title: "ISM Manufacturing PMI",
       date: "2026-02-10",
       time: "12:30"
+    });
+  });
+
+  it("parses investing all-day rows and metrics columns", async () => {
+    const html = `
+      <tr id="eventRowId_4" data-event-datetime="2026/02/10 00:00:00">
+        <td class="left time">All Day</td>
+        <td class="left flagCur noWrap">x USD</td>
+        <td class="left event"><a>Bank Holiday</a></td>
+        <td class="left sentiment"><i></i><i></i><i></i></td>
+        <td class="left act">2.1%</td>
+        <td class="left fore">2.0%</td>
+        <td class="left prev">1.9%</td>
+      </tr>
+    `;
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({ data: html }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" }
+      })
+    );
+
+    const result = await fetchInvestingLiveEvents("2026-02-09", "2026-02-13", ["USA"]);
+
+    expect(result.ok).toBe(true);
+    expect(result.events).toHaveLength(1);
+    expect(result.events[0]).toMatchObject({
+      source: "investing",
+      currency: "USD",
+      title: "Bank Holiday",
+      time: "All Day",
+      timeKind: "all_day",
+      importance: "high",
+      actual: "2.1%",
+      forecast: "2.0%",
+      previous: "1.9%"
     });
   });
 

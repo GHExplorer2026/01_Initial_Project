@@ -31,6 +31,7 @@ Date: `2026-02-15`
 | `v0.1.7` planning baseline | Completed | 100% | 2026-02-15 | `docs/V0_1_7_PLAN.md`, `docs/V0_1_7_RELEASE_DRAFT.md`, `docs/V0_1_7_EVIDENCE.md` |
 | Release `v0.1.7` | Completed | 100% | 2026-02-15 | tag `v0.1.7`, `docs/RELEASES.md`, `docs/V0_1_7_EVIDENCE.md` |
 | Post-`v0.1.7` maintenance closure | Completed | 100% | 2026-02-15 | `docs/QA_STATUS.md`, `docs/UI_EXECUTION_REPORT.md`, `docs/NEXT_SPRINT_HANDOFF.md` |
+| UI Update sprint (Date+Time table + All-Day + ICS metrics) | Completed | 100% | 2026-02-17 | `src/app/page.tsx`, `src/core/icsSerializer.ts`, `RULES.md`, `docs/IMPLEMENTATION_PLAN.md` |
 
 ## 3. Active Skill Landscape
 
@@ -50,6 +51,7 @@ Date: `2026-02-15`
 - `skills/frontend-style-glass-dark`
 - `skills/deterministic-qa-harness`
 - `skills/spec-safe-direct-delivery`
+- `skills/economic-calendar-table-contract`
 
 ## 4. Progress Log
 | ID | Date | Area | Type | Description | Result | Verification | Owner |
@@ -169,6 +171,11 @@ Date: `2026-02-15`
 | P-113 | 2026-02-15 | Windows Ops | Bug fix | Fixed PowerShell variable collision (`Host` -> `AppHost`) in launcher | Completed | `scripts/windows/start_app_desktop.ps1` | Codex |
 | P-114 | 2026-02-15 | Windows Ops | Bug fix | Fixed WSL path conversion with resilient fallback mapping (`/mnt/<drive>/...`) | Completed | `scripts/windows/start_app_desktop.ps1` | Codex |
 | P-115 | 2026-02-15 | Documentation | Consolidation | Closed docs to a clean sprint handoff baseline for next scope | Completed | `docs/QA_STATUS.md`, `docs/UI_EXECUTION_REPORT.md`, `docs/NEXT_SPRINT_HANDOFF.md`, `README.md` | Codex |
+| P-116 | 2026-02-17 | UI | Feature | Added dual-view economic calendar table with fixed columns and weekday grouping (`Date + Time | Currency | Event | Importance | Actual | Forecast | Previous`) | Completed | `src/app/page.tsx`, `src/app/calendarTable.ts`, `tests/calendarTable.ui.test.ts` | Codex |
+| P-117 | 2026-02-17 | Strict Output | Contract update | Updated strict header to date-range-only format and added canonical `All Day:` event line support | Completed | `src/core/rendererStrictDe.ts`, `tests/rendererStrictDe.test.ts`, `tests/fixtures/golden/*.txt` | Codex |
+| P-118 | 2026-02-17 | ICS | Feature | Added deterministic metrics `DESCRIPTION` lines and all-day `VALUE=DATE` serialization while preserving RFC5545/Outlook constraints | Completed | `src/core/icsSerializer.ts`, `tests/icsSerializer.test.ts`, `tests/fixtures/golden/ics_single_event.ics` | Codex |
+| P-119 | 2026-02-17 | Sources | Feature | Extended source parsing for `All Day`, `importance`, `actual/forecast/previous` and removed Investing `timeFilter=timeOnly` restriction | Completed | `src/server/sources/investing.ts`, `src/server/sources/tradingview.ts`, `tests/sourceAdapters.test.ts` | Codex |
+| P-120 | 2026-02-17 | Governance | Contract patch | Applied RULES/Plan/Skills updates for UI Update sprint, incl. no-hallucination metrics and all-day governance | Completed | `RULES.md`, `docs/IMPLEMENTATION_PLAN.md`, `skills/*` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |

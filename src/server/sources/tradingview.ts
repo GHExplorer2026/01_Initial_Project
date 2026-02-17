@@ -9,6 +9,12 @@ type TradingViewEvent = {
   title?: string;
   currency?: string;
   date?: string | number;
+  time?: string;
+  isAllDay?: boolean;
+  importance?: string | number;
+  actual?: string | number | null;
+  forecast?: string | number | null;
+  previous?: string | number | null;
 };
 
 const buildQuery = (weekStart: string, weekEnd: string): URLSearchParams => {
@@ -58,13 +64,55 @@ const parseTradingViewEvent = (event: TradingViewEvent): RawSourceEvent | null =
   }
 
   const berlin = toBerlinDateTime(asUtc);
+  const allDayToken = event.time?.trim() ?? "";
+  const isAllDay = event.isAllDay === true || /^all\s*day$/i.test(allDayToken);
+  const metricToString = (value: string | number | null | undefined): string | undefined => {
+    if (value === null || value === undefined) {
+      return undefined;
+    }
+    const normalized = String(value).trim();
+    if (!normalized || normalized === "-" || normalized === "—" || normalized.toLowerCase() === "n/a") {
+      return undefined;
+    }
+    return normalized;
+  };
+  const toImportance = (value: string | number | undefined): RawSourceEvent["importance"] => {
+    if (typeof value === "number") {
+      if (value >= 3) {
+        return "high";
+      }
+      if (value === 2) {
+        return "medium";
+      }
+      if (value === 1) {
+        return "low";
+      }
+      return "unknown";
+    }
+    const normalized = value?.trim().toLowerCase() ?? "";
+    if (normalized.includes("high")) {
+      return "high";
+    }
+    if (normalized.includes("med")) {
+      return "medium";
+    }
+    if (normalized.includes("low")) {
+      return "low";
+    }
+    return "unknown";
+  };
 
   return {
     source: "tradingview",
     currency: currency as CurrencyCode,
     title,
     date: berlin.date,
-    time: berlin.time,
+    time: isAllDay ? "All Day" : berlin.time,
+    timeKind: isAllDay ? "all_day" : "exact",
+    importance: toImportance(event.importance),
+    actual: metricToString(event.actual),
+    forecast: metricToString(event.forecast),
+    previous: metricToString(event.previous),
     fetchedAtISO: new Date().toISOString()
   };
 };

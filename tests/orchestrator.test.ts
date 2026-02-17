@@ -280,6 +280,53 @@ describe("generateWeeklyOutlook", () => {
     expect(result.icsPayload).not.toContain("SUMMARY:USA ");
   });
 
+  it("keeps all-day events in strict output and emits VALUE=DATE in ics", async () => {
+    process.env.SOURCE_MODE = "live";
+    const investingHtml = `
+      <tr id="eventRowId_1" data-event-datetime="2026/02/09 00:00:00">
+        <td class="left time">All Day</td>
+        <td class="left flagCur noWrap">flag USD</td>
+        <td class="left event"><a>Bank Holiday</a></td>
+      </tr>
+    `;
+
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      if (url.includes("investing.com")) {
+        return new Response(JSON.stringify({ data: investingHtml }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+
+      if (url.includes("tradingview.com")) {
+        return new Response(JSON.stringify({ status: "ok", result: [] }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+
+      throw new Error(`Unexpected live fetch URL: ${url}`);
+    });
+
+    const result = await generateWeeklyOutlook({
+      regions: ["USA"],
+      now: new Date("2026-02-10T10:00:00Z")
+    });
+
+    expect(fetchSpy).toHaveBeenCalledTimes(2);
+    expect(result.meta.sourcesUsed).toEqual(["investing", "tradingview"]);
+    expect(result.events).toHaveLength(1);
+    expect(result.events[0]).toMatchObject({
+      region: "USA",
+      timeKind: "all_day",
+      hasExactTime: false
+    });
+    expect(result.renderedText).toContain("All Day: USA Bank Holiday");
+    expect(result.icsPayload).toContain("DTSTART;VALUE=DATE:20260209");
+    expect(result.icsPayload).toContain("DTEND;VALUE=DATE:20260210");
+  });
+
   it("renders holiday fallback note on holiday workdays when no events remain after filtering", async () => {
     delete process.env.SOURCE_MODE;
 
@@ -318,6 +365,6 @@ describe("generateWeeklyOutlook", () => {
     expect(result.days).toHaveLength(5);
     expect(result.days[0].dayHeader).toBe("### Montag, 16. Februar");
     expect(result.days[4].dayHeader).toBe("### Freitag, 20. Februar");
-    expect(result.renderedText.startsWith("📊 WOCHENAUSBLICK 16.02.2026 – 20.02.2026 Februar 2026")).toBe(true);
+    expect(result.renderedText.startsWith("📊 WOCHENAUSBLICK 16.02.2026 – 20.02.2026")).toBe(true);
   });
 });

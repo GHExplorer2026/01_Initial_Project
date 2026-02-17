@@ -20,6 +20,12 @@ Allow tertiary fetch only when at least one condition is true:
 - Do not add tertiary records as unconstrained extra events.
 - Do not replace valid primary data with lower-priority sources.
 - Do not consume unapproved or scraping-restricted providers.
+- Do not infer missing `Actual/Forecast/Previous` values.
+
+## Metrics Field Backfill
+- Apply priority per field (`importance`, `actual`, `forecast`, `previous`), not only per event row.
+- Backfill from lower-priority source only when the higher-priority field is empty.
+- Keep `All Day` as a valid time-kind token; do not treat it as missing-time trigger by itself.
 
 ## Compliance Checks
 - Store source name and fetch timestamp.

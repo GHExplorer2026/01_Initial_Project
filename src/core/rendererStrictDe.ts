@@ -17,12 +17,6 @@ const dayHeaderFormatter = new Intl.DateTimeFormat("de-DE", {
   month: "long"
 });
 
-const monthYearFormatter = new Intl.DateTimeFormat("de-DE", {
-  timeZone: "Europe/Berlin",
-  month: "long",
-  year: "numeric"
-});
-
 const capitalize = (value: string): string => `${value.charAt(0).toUpperCase()}${value.slice(1)}`;
 
 const formatDateRange = (date: Date): string => dateFormatter.format(date);
@@ -50,10 +44,9 @@ export const renderStrictWeeklyText = (
 ): { renderedText: string; days: RenderDay[] } => {
   const weekStartDate = toDate(week.weekStart);
   const weekEndDate = toDate(week.weekEnd);
-  const monthYear = monthYearFormatter.format(weekStartDate);
 
   const lines: string[] = [];
-  lines.push(`📊 WOCHENAUSBLICK ${formatDateRange(weekStartDate)} – ${formatDateRange(weekEndDate)} ${monthYear}`);
+  lines.push(`📊 WOCHENAUSBLICK ${formatDateRange(weekStartDate)} – ${formatDateRange(weekEndDate)}`);
 
   const days: RenderDay[] = [];
 
@@ -63,7 +56,11 @@ export const renderStrictWeeklyText = (
 
     const dayLines = groupedEvents
       .filter((event) => event.day === day)
-      .map((event) => `${event.timeHHMM} Uhr: ${REGION_LABELS[event.region]} ${event.title}${event.isTopEvent ? TOP_EVENT_SUFFIX : ""}`);
+      .map((event) =>
+        event.timeKind === "all_day"
+          ? `All Day: ${REGION_LABELS[event.region]} ${event.title}${event.isTopEvent ? TOP_EVENT_SUFFIX : ""}`
+          : `${event.timeHHMM} Uhr: ${REGION_LABELS[event.region]} ${event.title}${event.isTopEvent ? TOP_EVENT_SUFFIX : ""}`
+      );
 
     if (dayLines.length === 0) {
       const status = dayStatus[day] ?? {
@@ -73,12 +70,12 @@ export const renderStrictWeeklyText = (
       };
       const note = !dataReliable ? NOTE_NO_VERIFIED : pickNote(status);
       lines.push(note);
-      days.push({ dayHeader: header, note });
+      days.push({ dateBerlinISO: day, dayHeader: header, note });
       continue;
     }
 
     lines.push(...dayLines);
-    days.push({ dayHeader: header, lines: dayLines });
+    days.push({ dateBerlinISO: day, dayHeader: header, lines: dayLines });
   }
 
   return {

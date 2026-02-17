@@ -15,14 +15,17 @@ Generate exact output blocks for Monday to Friday with strict formatting guarant
 2. Build day headers for target week in German locale.
 3. Render per-day lines in strict schema order.
 4. Emit fixed fallback note when day has no renderable events.
-5. Append exact TOP-EVENT suffix where required.
+5. Render timed lines with `HH:MM Uhr:` and all-day lines with `All Day:`.
+6. Append exact TOP-EVENT suffix where required.
 
 ## Rendering Rules
 
 - Output includes no source links and no explanatory text.
 - Day block order is always Monday to Friday.
 - Empty day note text must match golden schema exactly.
-- TOP-EVENT suffix must be exactly `- **TOP-EVENT**`.
+- Header format is `📊 WOCHENAUSBLICK DD.MM.YYYY – DD.MM.YYYY` (no month/year suffix).
+- TOP-EVENT suffix must be exactly ` - **TOP-EVENT**`.
+- All-day line prefix must be exactly `All Day:`.
 
 ## Deliverables
 

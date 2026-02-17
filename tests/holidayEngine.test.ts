@@ -9,10 +9,13 @@ const baseEvent = (overrides: Partial<EconomicEvent>): EconomicEvent => ({
   titleRaw: "CPI (YoY)",
   titleNormalized: "cpi (yoy)",
   categoryAF: "B",
+  dateBerlinISO: "2026-07-03",
   datetimeBerlinISO: "2026-07-03T14:30:00",
+  timeKind: "exact",
   timeHHMM: "14:30",
   hasExactTime: true,
   isTopEvent: true,
+  importance: "high",
   provenance: {
     fetchedAtISO: "2026-07-01T08:00:00Z",
     parserVersion: "v1.0.0"

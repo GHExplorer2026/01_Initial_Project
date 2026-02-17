@@ -13,7 +13,7 @@ const baseRaw = (overrides: Partial<RawSourceEvent>): RawSourceEvent => ({
 });
 
 describe("normalizeEvents", () => {
-  it("keeps only exact-time events and excludes all-day, tentative and missing time", () => {
+  it("keeps exact-time and all-day events, and excludes tentative/missing/invalid time", () => {
     const raw: RawSourceEvent[] = [
       baseRaw({ title: "CPI (YoY)", time: "14:30" }),
       baseRaw({ title: "GDP (QoQ)", time: "All Day" }),
@@ -22,9 +22,12 @@ describe("normalizeEvents", () => {
     ];
 
     const normalized = normalizeEvents(raw, "v1.0.0");
-    expect(normalized).toHaveLength(1);
+    expect(normalized).toHaveLength(2);
     expect(normalized[0].timeHHMM).toBe("14:30");
     expect(normalized[0].hasExactTime).toBe(true);
+    expect(normalized[1].timeKind).toBe("all_day");
+    expect(normalized[1].timeHHMM).toBeUndefined();
+    expect(normalized[1].hasExactTime).toBe(false);
   });
 
   it("accepts boundary exact times and excludes invalid 24:00", () => {

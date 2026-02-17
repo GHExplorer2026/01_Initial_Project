@@ -9,6 +9,7 @@ describe("page ui contract", () => {
   it("renders strict output block isolated from non-strict hint text", () => {
     const html = renderToStaticMarkup(createElement(Page));
 
+    expect(html).toContain("Economic Calendar");
     expect(html).toContain("Strict Output");
     expect(html).toContain('aria-label="Strict output block"');
     expect(html).toContain("Noch kein Output generiert.");

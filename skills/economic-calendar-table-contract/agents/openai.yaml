@@ -1,0 +1,4 @@
+interface:
+  display_name: "Economic Calendar Table Contract"
+  short_description: "Enforce deterministic Date+Time table rendering contract"
+  default_prompt: "Implement or review the economic calendar table contract with fixed columns, weekday grouping, all-day support, and strict-output isolation."

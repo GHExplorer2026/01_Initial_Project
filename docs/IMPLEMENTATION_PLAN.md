@@ -69,11 +69,17 @@ type EconomicEvent = {
   currency: "USD" | "EUR" | "GBP" | "JPY" | "CHF" | "CAD" | "AUD" | "NZD";
   titleRaw: string;
   titleNormalized: string;
-  categoryAF: "A" | "B" | "C" | "D" | "E" | "F";
+  categoryAF?: "A" | "B" | "C" | "D" | "E" | "F";
+  dateBerlinISO: string; // YYYY-MM-DD
   datetimeBerlinISO: string;
-  timeHHMM: string;
+  timeKind: "exact" | "all_day";
+  timeHHMM?: string; // exact only
   hasExactTime: boolean;
   isTopEvent: boolean;
+  importance: "low" | "medium" | "high" | "unknown";
+  actual?: { value: string; source: string; asOfISO: string };
+  forecast?: { value: string; source: string; asOfISO: string };
+  previous?: { value: string; source: string; asOfISO: string };
   provenance: {
     fetchedAtISO: string;
     parserVersion: string;
@@ -85,6 +91,7 @@ type EconomicEvent = {
 ## 6.2 RenderDay
 ```ts
 type RenderDay = {
+  dateBerlinISO: string;
   dayHeader: string;
   lines?: string[];
   note?: string; // exakt aus erlaubtem Hinweis-Katalog
@@ -143,18 +150,22 @@ Tertiary darf Investing nie überschreiben.
 Nur A–F-konforme Events. Unklare Fälle raus.
 
 ## 8.3 Time Filtering
-Drop: all-day, tentative, missing time. Nur verifizierte exakte Zeit.
+Drop: tentative, missing/unklare Zeit.  
+Allow:
+- `exact` (HH:MM, Europe/Berlin)
+- `all_day` (deterministisch als eigener Zeittyp)
 
 ## 9. Strict Rendering Contract
 
 ## 9.1 Canonical Header
-`📊 WOCHENAUSBLICK [Startdatum] – [Enddatum] [Monat] [Jahr]`
+`📊 WOCHENAUSBLICK [Startdatum] – [Enddatum]`
 
 ## 9.2 Canonical Day Header
 `### [Wochentag], [TT]. [Monat]`
 
 ## 9.3 Canonical Event Line
 `[HH:MM] Uhr: [Land/Region] [Event Titel][ - **TOP-EVENT**]`
+`All Day: [Land/Region] [Event Titel][ - **TOP-EVENT**]`
 
 ## 9.4 Canonical Hinweiszeilen
 - `Hinweis: Keine Handelstermine – Wochenende oder Feiertag.`
@@ -189,9 +200,9 @@ Wenn Werktag nach allen Filtern leer: verifizierte-Events-Hinweis.
 ## 11.2 VEVENT Pflichtfelder
 - UID (deterministisch)
 - DTSTAMP (deterministisch)
-- DTSTART;TZID=Europe/Berlin
-- DTEND;TZID=Europe/Berlin
+- DTSTART/DTEND (timed: `TZID=Europe/Berlin`, all-day: `VALUE=DATE`)
 - SUMMARY
+- DESCRIPTION mit deterministischen Metrics-Linien (`Importance`, `Actual`, `Forecast`, `Previous`)
 - CATEGORIES:Wirtschafts-Event (pflichtig in jedem VEVENT)
 
 ## 11.3 Deterministic DTSTAMP
@@ -204,6 +215,10 @@ Hash aus `weekStart + region + datetime + titleNormalized + parserVersion`.
 ## 11.5 Serialization
 CRLF, line folding, stabile property order.
 
+## 11.6 All-Day Semantics
+- `DTSTART;VALUE=DATE:YYYYMMDD`
+- `DTEND;VALUE=DATE:YYYYMMDD` (Folgetag, exclusive end)
+
 ## 12. UI Flow (Schritt 1–3)
 
 ## 12.1 Schritt 1: Scope wählen
@@ -213,7 +228,10 @@ CRLF, line folding, stabile property order.
 
 ## 12.2 Schritt 2: Wochenausblick generieren
 - Trigger auf `/api/weekly`
-- Strict output in `<pre>` anzeigen (copyable)
+- Economic-Calendar-Tabelle anzeigen:
+  `Date + Time | Currency | Event | Importance | Actual | Forecast | Previous`
+- Weekday-Gruppierung pro Tag beibehalten
+- Strict output in `<pre>` zusätzlich anzeigen (copyable, canonical)
 - Optional UI-Badges außerhalb strict block
 
 ## 12.3 Schritt 3: ICS herunterladen
@@ -266,14 +284,17 @@ CRLF, line folding, stabile property order.
 
 ## 14.6 Rendering
 - canonical header/day/event lines exact
+- canonical all-day line exact: `All Day: ...`
 - TOP suffix exact: ` - **TOP-EVENT**`
 - exact note lines
 
 ## 14.7 ICS
 - every VEVENT has `CATEGORIES:Wirtschafts-Event`
+- every VEVENT has `DESCRIPTION` metrics lines
 - deterministic DTSTAMP
 - VTIMEZONE present
 - CRLF + folding validation
+- all-day VALUE=DATE validation
 
 ## 14.8 API Contract
 - `regions` primary

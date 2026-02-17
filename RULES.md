@@ -92,9 +92,10 @@ Pro Tag gilt genau eine der Regeln:
    `Hinweis: Keine verifizierten Events gefunden.`
 
 ## R-14 Zeitregeln
-1. Nur exakte Uhrzeit zulässig.
-2. Exkludiere `All Day`, `Tentative`, fehlende Zeit.
-3. Ausgabezeitformat: `HH:MM Uhr` (24h, Europe/Berlin).
+1. Timed Events sind nur mit exakter Uhrzeit zulässig (`HH:MM`).
+2. `All Day` ist als eigener Zeittyp zulässig und muss als `All Day` erhalten bleiben.
+3. Exkludiere `Tentative` und fehlende Zeitangaben.
+4. Ausgabezeitformat für timed Events: `HH:MM Uhr` (24h, Europe/Berlin).
 
 ## R-15 Sortierung / Grouping / Dedupe
 1. Pro Tag chronologisch sortieren.
@@ -110,25 +111,32 @@ Verboten im Strict-Output: Links, Quellenangaben, Debug, Zusatzprosa.
 1. Endpoint liefert `text/calendar; charset=utf-8` + `Content-Disposition: attachment`.
 2. RFC5545-konform mit CRLF und Line Folding.
 3. `VTIMEZONE` für Europe/Berlin ist Pflicht.
-4. `DTSTART/DTEND` mit `TZID=Europe/Berlin`.
-5. UID deterministisch aus:
+4. Timed VEVENTs: `DTSTART/DTEND` mit `TZID=Europe/Berlin`.
+5. All-Day VEVENTs: `DTSTART;VALUE=DATE` und `DTEND;VALUE=DATE` (exclusive end, Folgetag).
+6. Jeder VEVENT enthält zusätzlich `DESCRIPTION` mit deterministischen Metrics-Zeilen:
+   - `Importance: <value|n/a>`
+   - `Actual: <value|n/a>`
+   - `Forecast: <value|n/a>`
+   - `Previous: <value|n/a>`
+7. UID deterministisch aus:
    `weekStart + region + datetime + titleNormalized + parserVersion`
-6. `DTSTAMP` deterministisch aus:
+8. `DTSTAMP` deterministisch aus:
    `weekStartBerlin 00:00 -> UTC`.
-7. Jeder VEVENT enthält exakt:
+9. Jeder VEVENT enthält exakt:
    `CATEGORIES:Wirtschafts-Event`
    (nicht optional, nicht test-only).
 
 ## R-18 Canonical Strict Output Format
 Exakte Struktur:
 
-📊 WOCHENAUSBLICK [Startdatum] – [Enddatum] [Monat] [Jahr]
+📊 WOCHENAUSBLICK [Startdatum] – [Enddatum]
 ### [Wochentag], [TT]. [Monat]
 [HH:MM] Uhr: [Land/Region] [Event Titel][ - **TOP-EVENT**]
+All Day: [Land/Region] [Event Titel][ - **TOP-EVENT**]
 
 Formatregeln:
 - Startdatum/Enddatum: `DD.MM.YYYY`
-- Monat/Wochentag: deutsch ausgeschrieben
+- Wochentag/Monat in Tagesheadern: deutsch ausgeschrieben
 - Mo–Fr Tagesheader immer vorhanden
 
 ## R-19 Sprint Cadence (execution default)
@@ -171,3 +179,40 @@ Ein Arbeitspaket ist nur fertig, wenn alle Punkte erfüllt sind:
 4. Jede Retrospektive erzeugt mindestens:
    - eine Automatisierungsmaßnahme gegen den größten Reibungsverlust und
    - einen messbaren Quality-Gate-Check für den nächsten Sprint.
+
+## R-24 UI Dual-View Contract
+1. Der canonical Strict-Output-Block bleibt verpflichtend und eigenständig.
+2. Zusätzlich ist eine Economic-Calendar-Tabelle zulässig.
+3. Beide Views müssen dieselbe gefilterte Eventmenge (`regions`) zeigen.
+
+## R-25 Economic Metrics Provenance
+1. Metrics-Felder (`Importance`, `Actual`, `Forecast`, `Previous`) folgen strikt:
+   `Investing > TradingView > Tertiary`.
+2. Feldweiser Backfill ist erlaubt, wenn das höher priorisierte Feld leer ist.
+3. Tertiary darf vorhandene Investing-Werte nie überschreiben.
+
+## R-26 No-Hallucination Metrics Rule
+1. Fehlende Metrics bleiben fehlend.
+2. Keine Schätzung, kein Inferencing, kein LLM-Guessing im Core.
+
+## R-27 Missing Token Contract
+1. UI-Tabelle nutzt `—` für fehlende Metrics.
+2. ICS `DESCRIPTION` nutzt `n/a` für fehlende Metrics.
+
+## R-28 Economic Calendar Table Contract
+1. Tabellenheader ist exakt:
+   `Date + Time | Currency | Event | Importance | Actual | Forecast | Previous`.
+2. `Date + Time` Format:
+   - timed: `DD.MM.YYYY, HH:MM`
+   - all-day: `DD.MM.YYYY, All Day`
+3. Weekday-Gruppierung pro Tag bleibt sichtbar.
+
+## R-29 All-Day Event Contract
+1. Wenn Quelle `All Day` liefert, bleibt Event als `all_day` erhalten.
+2. Bei vorhandener exakter Uhrzeit ist `exact` zu verwenden.
+3. Strict Output rendert All-Day Zeilen mit Prefix `All Day:`.
+4. ICS rendert All-Day VEVENTs mit `VALUE=DATE`.
+
+## R-30 Project Gate Rule
+1. Größere Vertragsänderungen (Rendering, ICS, Source Governance) brauchen einen dokumentierten Gate-Plan vor Umsetzung.
+2. Umsetzung darf erst starten, wenn Gate explizit freigegeben ist.

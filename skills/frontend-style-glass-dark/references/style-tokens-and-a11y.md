@@ -25,3 +25,9 @@
 - Ensure visible focus ring on all interactive controls.
 - Support keyboard navigation for checkboxes and action buttons.
 - Preserve reduced-motion compatibility for animated elements.
+
+## Economic Calendar Table Contract
+- Keep fixed table headers:
+  `Date + Time | Currency | Event | Importance | Actual | Forecast | Previous`.
+- Keep weekday group rows visually distinct from event rows.
+- Use `—` token for missing metrics in UI cells.

@@ -59,7 +59,7 @@ if (!firstLine.startsWith("📊 WOCHENAUSBLICK ")) {
   console.error("strict header missing or malformed");
   process.exit(1);
 }
-if (!/^📊 WOCHENAUSBLICK \d{2}\.\d{2}\.\d{4} – \d{2}\.\d{2}\.\d{4} .+ \d{4}$/.test(firstLine)) {
+if (!/^📊 WOCHENAUSBLICK \d{2}\.\d{2}\.\d{4} – \d{2}\.\d{2}\.\d{4}$/.test(firstLine)) {
   console.error(`strict header date format invalid: ${firstLine}`);
   process.exit(1);
 }
@@ -81,11 +81,11 @@ for (const line of lines) {
     !line.startsWith("### ") &&
     !line.startsWith("Hinweis: ")
   ) {
-    if (!/^\d{2}:\d{2} Uhr: .+$/.test(line)) {
+    if (!/^(?:\d{2}:\d{2} Uhr:|All Day:) .+$/.test(line)) {
       console.error(`invalid event line format: ${line}`);
       process.exit(1);
     }
-    const afterPrefix = line.replace(/^\d{2}:\d{2} Uhr: /, "");
+    const afterPrefix = line.replace(/^(?:\d{2}:\d{2} Uhr:|All Day:) /, "");
     const hasAllowedLabel = allowedLabels.some((label) => afterPrefix.startsWith(`${label} `));
     if (!hasAllowedLabel) {
       console.error(`event line violates selected regions scope: ${line}`);
@@ -167,6 +167,14 @@ vevent_count="$(grep -c '^BEGIN:VEVENT$' "${normalized_ics_file}" || true)"
 category_count="$(grep -c '^CATEGORIES:Wirtschafts-Event$' "${normalized_ics_file}" || true)"
 if [[ "${vevent_count}" -gt 0 ]] && [[ "${category_count}" -ne "${vevent_count}" ]]; then
   echo "missing required category in one or more VEVENTs (vevents=${vevent_count}, categories=${category_count})"
+  sed -n '1,120p' "${normalized_ics_file}"
+  rm -f "${normalized_ics_file}"
+  exit 1
+fi
+
+description_count="$(grep -c '^DESCRIPTION:Importance: ' "${normalized_ics_file}" || true)"
+if [[ "${vevent_count}" -gt 0 ]] && [[ "${description_count}" -ne "${vevent_count}" ]]; then
+  echo "missing metrics DESCRIPTION in one or more VEVENTs (vevents=${vevent_count}, descriptions=${description_count})"
   sed -n '1,120p' "${normalized_ics_file}"
   rm -f "${normalized_ics_file}"
   exit 1

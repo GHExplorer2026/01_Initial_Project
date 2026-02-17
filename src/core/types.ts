@@ -29,6 +29,14 @@ export type CurrencyCode = keyof typeof CURRENCY_TO_REGION;
 export type CategoryAF = "A" | "B" | "C" | "D" | "E" | "F";
 
 export type EventSource = "investing" | "tradingview" | `tertiary:${string}`;
+export type EventTimeKind = "exact" | "all_day";
+export type EventImportance = "low" | "medium" | "high" | "unknown";
+
+export type EventMetricValue = {
+  value: string;
+  source: EventSource;
+  asOfISO: string;
+};
 
 export type RawSourceEvent = {
   source: EventSource;
@@ -37,6 +45,11 @@ export type RawSourceEvent = {
   title: string;
   date: string;
   time: string;
+  timeKind?: EventTimeKind;
+  importance?: EventImportance;
+  actual?: string;
+  forecast?: string;
+  previous?: string;
   fetchedAtISO: string;
   sourceUrlHash?: string;
 };
@@ -47,11 +60,17 @@ export type EconomicEvent = {
   currency: CurrencyCode;
   titleRaw: string;
   titleNormalized: string;
-  categoryAF: CategoryAF;
+  categoryAF?: CategoryAF;
+  dateBerlinISO: string;
   datetimeBerlinISO: string;
-  timeHHMM: string;
+  timeKind: EventTimeKind;
+  timeHHMM?: string;
   hasExactTime: boolean;
   isTopEvent: boolean;
+  importance: EventImportance;
+  actual?: EventMetricValue;
+  forecast?: EventMetricValue;
+  previous?: EventMetricValue;
   provenance: {
     fetchedAtISO: string;
     parserVersion: string;
@@ -62,13 +81,15 @@ export type EconomicEvent = {
 export type GroupedRenderEvent = {
   region: RegionCode;
   day: string;
-  timeHHMM: string;
+  timeKind: EventTimeKind;
+  timeHHMM?: string;
   title: string;
   isTopEvent: boolean;
   datetimeBerlinISO: string;
 };
 
 export type RenderDay = {
+  dateBerlinISO: string;
   dayHeader: string;
   lines?: string[];
   note?: string;

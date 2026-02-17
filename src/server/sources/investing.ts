@@ -22,7 +22,6 @@ const toBody = (weekStart: string, weekEnd: string, regions: RegionCode[]): URLS
     params.append("country[]", String(INVESTING_COUNTRY_ID[region]));
   }
   params.set("timeZone", "55");
-  params.set("timeFilter", "timeOnly");
   params.set("dateFrom", weekStart);
   params.set("dateTo", weekEnd);
   params.set("currentTab", "custom");
@@ -39,6 +38,47 @@ const parseInvestingDateTime = (value: string): { date: string; time: string } |
   return toBerlinDateTime(asUtc);
 };
 
+const toImportance = (rowHtml: string): RawSourceEvent["importance"] => {
+  const sentimentCell = rowHtml.match(/<td\b[^>]*class=(["'])[^"']*\bsentiment\b[^"']*\1[^>]*>([\s\S]*?)<\/td>/i)?.[2] ?? "";
+  if (!sentimentCell) {
+    return "unknown";
+  }
+  const iconCount = [...sentimentCell.matchAll(/<i\b[^>]*>/gi)].length;
+  if (iconCount >= 3) {
+    return "high";
+  }
+  if (iconCount === 2) {
+    return "medium";
+  }
+  if (iconCount === 1) {
+    return "low";
+  }
+  return "unknown";
+};
+
+const normalizeMetricValue = (value: string | undefined): string | undefined => {
+  if (!value) {
+    return undefined;
+  }
+  const normalized = value.trim();
+  if (!normalized || normalized === "-" || normalized === "—" || normalized.toLowerCase() === "n/a") {
+    return undefined;
+  }
+  return normalized;
+};
+
+const extractTimeCell = (rowHtml: string): string => {
+  const timeCell = rowHtml.match(/<td\b[^>]*class=(["'])[^"']*\btime\b[^"']*\1[^>]*>([\s\S]*?)<\/td>/i)?.[2] ?? "";
+  const token = stripHtml(timeCell);
+  if (/^all\s*day$/i.test(token)) {
+    return "All Day";
+  }
+  if (/^([01]\d|2[0-3]):([0-5]\d)$/.test(token)) {
+    return token;
+  }
+  return "";
+};
+
 const parseRows = (html: string): RawSourceEvent[] => {
   const rows = [...html.matchAll(/<tr\b[^>]*\bid=(["'])eventRowId_[^"']+\1[^>]*>[\s\S]*?<\/tr>/gi)];
   const out: RawSourceEvent[] = [];
@@ -49,6 +89,9 @@ const parseRows = (html: string): RawSourceEvent[] => {
     const currency = currencyCell ? stripHtml(currencyCell).toUpperCase().match(/\b([A-Z]{3})\b/)?.[1] : undefined;
     const eventCell = row.match(/<td\b[^>]*class=(["'])[^"']*\bevent\b[^"']*\1[^>]*>([\s\S]*?)<\/td>/i)?.[2];
     const titleRaw = eventCell?.match(/<a\b[^>]*>([\s\S]*?)<\/a>/i)?.[1] ?? eventCell;
+    const actualRaw = row.match(/<td\b[^>]*class=(["'])[^"']*\bact\b[^"']*\1[^>]*>([\s\S]*?)<\/td>/i)?.[2];
+    const forecastRaw = row.match(/<td\b[^>]*class=(["'])[^"']*\bfore\b[^"']*\1[^>]*>([\s\S]*?)<\/td>/i)?.[2];
+    const previousRaw = row.match(/<td\b[^>]*class=(["'])[^"']*\bprev\b[^"']*\1[^>]*>([\s\S]*?)<\/td>/i)?.[2];
 
     if (!rawDateTime || !currency || !titleRaw || !ALLOWED_CURRENCIES.has(currency as CurrencyCode)) {
       continue;
@@ -64,12 +107,20 @@ const parseRows = (html: string): RawSourceEvent[] => {
       continue;
     }
 
+    const parsedTime = extractTimeCell(row);
+    const time = parsedTime || berlin.time;
+
     out.push({
       source: "investing",
       currency: currency as CurrencyCode,
       title,
       date: berlin.date,
-      time: berlin.time,
+      time,
+      timeKind: time === "All Day" ? "all_day" : "exact",
+      importance: toImportance(row),
+      actual: normalizeMetricValue(actualRaw ? stripHtml(actualRaw) : undefined),
+      forecast: normalizeMetricValue(forecastRaw ? stripHtml(forecastRaw) : undefined),
+      previous: normalizeMetricValue(previousRaw ? stripHtml(previousRaw) : undefined),
       fetchedAtISO: new Date().toISOString()
     });
   }

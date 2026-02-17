@@ -14,8 +14,9 @@ Define non-negotiable visual and interaction rules for the one-page macro events
 1. Apply global dark theme tokens and gradients.
 2. Implement glassmorphism cards with blur, border, and depth.
 3. Use typography pairing (`Inter` UI and monospace output block).
-4. Add meaningful hover/focus/loading interactions.
-5. Validate WCAG contrast and full keyboard navigation.
+4. Add economic-calendar table view with deterministic headers and row grouping.
+5. Add meaningful hover/focus/loading interactions.
+6. Validate WCAG contrast and full keyboard navigation.
 
 ## Style Rules
 
@@ -23,6 +24,9 @@ Define non-negotiable visual and interaction rules for the one-page macro events
 - Use accent cyan and muted purple sparingly.
 - Reserve red or orange highlights for top-event emphasis only.
 - Keep output block monospace and copy-friendly.
+- Keep dual-view UX: table-first display + untouched canonical strict-output block.
+- Table header is fixed: `Date + Time | Currency | Event | Importance | Actual | Forecast | Previous`.
+- Table day-grouping must stay aligned with strict-output weekday blocks.
 
 ## Deliverables
 

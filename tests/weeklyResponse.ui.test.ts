@@ -14,6 +14,8 @@ describe("weekly response normalizer", () => {
 
     expect(normalized).toEqual({
       renderedText: "strict",
+      events: [],
+      days: [],
       sourceMode: "fixtures",
       sourcesUsed: ["investing", "tradingview"]
     });
@@ -26,6 +28,8 @@ describe("weekly response normalizer", () => {
 
     expect(normalized).toEqual({
       renderedText: "strict",
+      events: [],
+      days: [],
       sourceMode: null,
       sourcesUsed: []
     });
@@ -42,6 +46,8 @@ describe("weekly response normalizer", () => {
 
     expect(normalized).toEqual({
       renderedText: "",
+      events: [],
+      days: [],
       sourceMode: null,
       sourcesUsed: ["investing", "tradingview"]
     });
@@ -57,5 +63,40 @@ describe("weekly response normalizer", () => {
     });
 
     expect(normalized.sourcesUsed).toEqual(["investing", "tertiary:bls", "tradingview"]);
+  });
+
+  it("normalizes events/day records for table rendering", () => {
+    const normalized = normalizeWeeklyResponse({
+      renderedText: "strict",
+      events: [
+        {
+          region: "CA",
+          currency: "CAD",
+          titleRaw: "CPI",
+          dateBerlinISO: "2026-02-16",
+          timeKind: "exact",
+          timeHHMM: "14:30",
+          importance: "medium",
+          actual: { value: "2.1%" },
+          forecast: { value: "2.0%" },
+          previous: { value: "1.9%" },
+          isTopEvent: true
+        }
+      ],
+      days: [{ dateBerlinISO: "2026-02-16", dayHeader: "### Montag, 16. Februar", note: "Hinweis" }]
+    });
+
+    expect(normalized.events).toHaveLength(1);
+    expect(normalized.events[0]).toMatchObject({
+      region: "CA",
+      currency: "CAD",
+      timeKind: "exact",
+      timeHHMM: "14:30",
+      importance: "medium",
+      actual: "2.1%",
+      forecast: "2.0%",
+      previous: "1.9%"
+    });
+    expect(normalized.days).toEqual([{ dateBerlinISO: "2026-02-16", dayHeader: "### Montag, 16. Februar", note: "Hinweis" }]);
   });
 });

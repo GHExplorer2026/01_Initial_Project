@@ -3,13 +3,14 @@
 ## Unit Tests
 - Week resolver (weekday/weekend boundary, DST transitions)
 - Country scope validation
-- Normalization and exact-time filtering
+- Normalization and time-kind filtering (`exact` + `all_day`)
 - Classification A-F (positive and negative matches)
 - Conflict resolver and dedupe/grouping
+- Calendar table view-model (`Date + Time` formatting, weekday grouping, missing tokens)
 
 ## Snapshot Tests
 - Strict DE rendered weekly text
-- ICS serialization output (including category and CRLF/folding)
+- ICS serialization output (including category, metrics description, and CRLF/folding)
 
 ## Contract Tests
 - `/api/weekly` response schema and required metadata fields
@@ -26,3 +27,4 @@
 - Tertiary trigger path active
 - Holiday day with no events
 - Uncertain data note emission
+- All-day event path in strict output and ICS (`VALUE=DATE`)

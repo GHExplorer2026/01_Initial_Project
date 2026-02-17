@@ -122,6 +122,44 @@ input:focus-visible {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
+.calendar-table-wrap {
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background: rgba(4, 8, 16, 0.9);
+}
+
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 860px;
+}
+
+.calendar-table th,
+.calendar-table td {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  vertical-align: top;
+}
+
+.calendar-table th {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+}
+
+.calendar-day-row td {
+  background: rgba(34, 211, 238, 0.08);
+  font-weight: 600;
+}
+
+.calendar-note-row td {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
 .error {
   color: #fca5a5;
   margin: 0;

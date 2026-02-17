@@ -22,7 +22,7 @@ describe("renderStrictWeeklyText fallback notes", () => {
     );
     const lines = out.split("\n");
     expect(lines).toHaveLength(3);
-    expect(lines[0]).toBe("📊 WOCHENAUSBLICK 14.02.2026 – 14.02.2026 Februar 2026");
+    expect(lines[0]).toBe("📊 WOCHENAUSBLICK 14.02.2026 – 14.02.2026");
     expect(lines[1]).toBe("### Samstag, 14. Februar");
     expect(lines[2]).toBe(NOTE_WEEKEND_OR_HOLIDAY);
   });
@@ -35,7 +35,7 @@ describe("renderStrictWeeklyText fallback notes", () => {
     );
     const lines = out.split("\n");
     expect(lines).toHaveLength(3);
-    expect(lines[0]).toBe("📊 WOCHENAUSBLICK 03.07.2026 – 03.07.2026 Juli 2026");
+    expect(lines[0]).toBe("📊 WOCHENAUSBLICK 03.07.2026 – 03.07.2026");
     expect(lines[1]).toBe("### Freitag, 03. Juli");
     expect(lines[2]).toBe(NOTE_HOLIDAY);
   });
@@ -48,7 +48,7 @@ describe("renderStrictWeeklyText fallback notes", () => {
     );
     const lines = out.split("\n");
     expect(lines).toHaveLength(3);
-    expect(lines[0]).toBe("📊 WOCHENAUSBLICK 10.02.2026 – 10.02.2026 Februar 2026");
+    expect(lines[0]).toBe("📊 WOCHENAUSBLICK 10.02.2026 – 10.02.2026");
     expect(lines[1]).toBe("### Dienstag, 10. Februar");
     expect(lines[2]).toBe(NOTE_NO_VERIFIED);
   });

@@ -3,7 +3,7 @@
 ## Purpose
 Provide a clean, deterministic handoff baseline so the next scope can start immediately without setup churn.
 
-## Baseline State (2026-02-15)
+## Baseline State (2026-02-17)
 1. Product release baseline: `v0.1.7` finalized.
 2. Post-release fixes applied:
    - ICS summary includes region label.
@@ -12,6 +12,11 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
    - Windows desktop one-click launcher for live mode is operational.
 3. Governance hardening applied:
    - DoR/DoD/security/cycle mitigation rules are now explicit in `RULES.md`.
+4. UI Update contract slice implemented:
+   - strict header uses date range only (`DD.MM.YYYY – DD.MM.YYYY`)
+   - dual view active (economic-calendar table + canonical strict output)
+   - `All Day` events supported in strict output and ICS (`VALUE=DATE`)
+   - ICS includes deterministic metrics lines in `DESCRIPTION`
 
 ## Entry Checklist (must pass before next slice)
 1. `git status -sb` shows clean workspace.
@@ -28,9 +33,9 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 4. Evidence docs updated (`README.md`, `docs/QA_STATUS.md`, relevant run/evidence files).
 
 ## Immediate Next-Scope Queue
-1. `N-801`: define Sprint Goal and bound initial slice set (`<= 1 week`, WIP=1).
-2. `N-802`: select first implementation slice and lock acceptance tests.
-3. `N-803`: deliver first slice with full DoD closure and evidence update.
+1. `N-901`: run live-data evidence cycle for table metrics completeness (per-region sample week).
+2. `N-902`: add fixture drift cases for all-day holiday rows and mixed timed/all-day duplicates.
+3. `N-903`: finalize release evidence and gate closure for UI Update contract patch.
 
 ## References
 - `RULES.md`

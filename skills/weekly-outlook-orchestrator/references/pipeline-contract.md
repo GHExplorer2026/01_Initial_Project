@@ -8,7 +8,7 @@
 5. `fetchSecondaryTradingView`
 6. `fetchTertiaryApproved` (conditional)
 7. `normalizeTimezoneBerlin`
-8. `filterExactTimeAndScope`
+8. `filterTimeKindAndScope` (`exact` + `all_day`, exclude tentative/missing)
 9. `classifyAF`
 10. `resolveConflictsByPriority`
 11. `dedupeAndGroup`
@@ -18,7 +18,7 @@
 15. `emitApiPayloadAndTelemetry`
 
 ## Required Inputs
-- `countries`: allowed set only (`USD, EUR, GBP, JPY, CHF, CAD, AUD, NZD`)
+- `regions`: allowed set only (`USA, EZ, UK, JP, CH, CA, AU, NZ`)
 - `requestTimeISO`
 - `parserVersion`
 
@@ -26,7 +26,7 @@
 - `renderedText: string`
 - `events: EconomicEvent[]`
 - `days: RenderDay[]`
-- `meta: { parserVersion: string, generatedAtISO: string }`
+- `meta: { parserVersion: string, generatedAtISO: string, sourceMode: string, sourcesUsed: string[] }`
 - `icsPayload: string` (for ICS endpoint)
 
 ## Failure Policy

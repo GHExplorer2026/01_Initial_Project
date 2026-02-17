@@ -12,18 +12,19 @@ import { fetchInvestingFixtureEvents, fetchInvestingLiveEvents } from "@/server/
 import { fetchTradingViewFixtureEvents, fetchTradingViewLiveEvents } from "@/server/sources/tradingview";
 import { fetchApprovedTertiaryFixtureEvents, fetchApprovedTertiaryLiveEvents } from "@/server/sources/tertiary/approved";
 
-const conflictKey = (event: EconomicEvent): string => `${event.region}|${event.datetimeBerlinISO.slice(0, 10)}|${event.titleNormalized}`;
+const conflictKey = (event: EconomicEvent): string => `${event.region}|${event.dateBerlinISO}|${event.titleNormalized}`;
+const conflictTimeToken = (event: EconomicEvent): string => (event.timeKind === "all_day" ? "ALL_DAY" : event.timeHHMM ?? "00:00");
 
 const detectTimeConflict = (primary: EconomicEvent[], secondary: EconomicEvent[]): boolean => {
   const p = new Map<string, string>();
   for (const event of primary) {
-    p.set(conflictKey(event), event.timeHHMM);
+    p.set(conflictKey(event), conflictTimeToken(event));
   }
 
   for (const event of secondary) {
     const key = conflictKey(event);
     const primaryTime = p.get(key);
-    if (primaryTime && primaryTime !== event.timeHHMM) {
+    if (primaryTime && primaryTime !== conflictTimeToken(event)) {
       return true;
     }
   }
@@ -31,9 +32,21 @@ const detectTimeConflict = (primary: EconomicEvent[], secondary: EconomicEvent[]
   return false;
 };
 
-const parseableExactTime = (event: RawSourceEvent): boolean => /^([01]\d|2[0-3]):([0-5]\d)$/.test(event.time.trim());
+const parseableSupportedTime = (event: RawSourceEvent): boolean => {
+  const time = event.time.trim();
+  if (!time) {
+    return false;
+  }
+  if (/^all\s*day$/i.test(time)) {
+    return true;
+  }
+  if (/^tentative$/i.test(time)) {
+    return false;
+  }
+  return /^([01]\d|2[0-3]):([0-5]\d)$/.test(time);
+};
 
-const detectMissingTimeSignals = (events: RawSourceEvent[]): boolean => events.some((event) => !parseableExactTime(event));
+const detectMissingTimeSignals = (events: RawSourceEvent[]): boolean => events.some((event) => !parseableSupportedTime(event));
 
 const berlinOffsetForDay = (ymd: string): string => {
   const probe = new Date(`${ymd}T12:00:00Z`);

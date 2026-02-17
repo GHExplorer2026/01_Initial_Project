@@ -12,10 +12,13 @@ const sampleEvents: EconomicEvent[] = [
     titleRaw: "CPI (YoY)",
     titleNormalized: "cpi (yoy)",
     categoryAF: "B",
+    dateBerlinISO: "2026-02-09",
     datetimeBerlinISO: "2026-02-09T14:30:00",
+    timeKind: "exact",
     timeHHMM: "14:30",
     hasExactTime: true,
     isTopEvent: true,
+    importance: "high",
     provenance: {
       fetchedAtISO: "2026-02-08T08:00:00Z",
       parserVersion: "v1.0.0"
@@ -39,6 +42,7 @@ describe("icsSerializer", () => {
     expect(ics).toContain("DTSTAMP:20260208T230000Z");
     expect(ics).toContain("BEGIN:VTIMEZONE");
     expect(ics).toContain("SUMMARY:USA CPI (YoY)");
+    expect(ics).toContain("DESCRIPTION:Importance: high\\nActual: n/a\\nForecast: n/a\\nPrevious: n/a");
 
     const vevents = ics.split("BEGIN:VEVENT").slice(1).map((chunk) => `BEGIN:VEVENT${chunk}`);
     expect(vevents.length).toBeGreaterThan(0);
@@ -81,6 +85,7 @@ describe("icsSerializer", () => {
     for (const event of vevents) {
       expect(event).toContain("\r\nCATEGORIES:Wirtschafts-Event\r\n");
       expect(event).toContain("\r\nDTSTAMP:20260208T230000Z\r\n");
+      expect(event).toContain("\r\nDESCRIPTION:Importance: ");
       expect(event).toMatch(/\r\nSUMMARY:(USA|Euro Zone) /);
       expect(event).toMatch(
         /BEGIN:VEVENT\r\nUID:[^\r\n]+\r\nDTSTAMP:[^\r\n]+\r\nDTSTART;TZID=Europe\/Berlin:[^\r\n]+\r\nDTEND;TZID=Europe\/Berlin:[^\r\n]+\r\nSUMMARY:/
@@ -124,5 +129,21 @@ describe("icsSerializer", () => {
     const ics = generateIcs([nearMidnight], "2026-02-09", "v1.0.0");
     expect(ics).toContain("DTSTART;TZID=Europe/Berlin:20260209T235500");
     expect(ics).toContain("DTEND;TZID=Europe/Berlin:20260210T001000");
+  });
+
+  it("emits VALUE=DATE DTSTART/DTEND for all-day events", () => {
+    const allDayEvent: EconomicEvent = {
+      ...sampleEvents[0],
+      dateBerlinISO: "2026-02-09",
+      datetimeBerlinISO: "2026-02-09T00:00:00",
+      timeKind: "all_day",
+      timeHHMM: undefined,
+      hasExactTime: false,
+      importance: "unknown"
+    };
+
+    const ics = generateIcs([allDayEvent], "2026-02-09", "v1.0.0");
+    expect(ics).toContain("DTSTART;VALUE=DATE:20260209");
+    expect(ics).toContain("DTEND;VALUE=DATE:20260210");
   });
 });
