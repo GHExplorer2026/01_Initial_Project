@@ -1,13 +1,18 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { REGION_OPTIONS } from "@/app/scopeState";
+import { safeGetStorageValue, safeSetStorageValue } from "@/app/storageSafe";
 import {
   CURRENCIES,
   DEFAULT_WIDGET_SETTINGS,
   IMPORTANCE_LEVELS,
   buildWidgetFeedEndpoint,
+  deriveWidgetLaneState,
+  parseStoredWidgetSettings,
+  serializeWidgetSettings,
   toTickerItems,
+  WIDGET_SETTINGS_STORAGE_KEY,
   type WidgetFeedResponse,
   type WidgetSettings
 } from "@/app/widgetPreviewClient";
@@ -29,8 +34,28 @@ export default function WidgetPreviewPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [feed, setFeed] = useState<WidgetFeedResponse | null>(null);
+  const [hydrated, setHydrated] = useState(false);
 
   const tickerItems = useMemo(() => (feed ? toTickerItems(feed.events) : []), [feed]);
+  const laneState = deriveWidgetLaneState({
+    loading,
+    error,
+    hasFeed: feed !== null,
+    eventCount: tickerItems.length
+  });
+
+  useEffect(() => {
+    const raw = safeGetStorageValue(localStorage, WIDGET_SETTINGS_STORAGE_KEY);
+    setSettings(parseStoredWidgetSettings(raw));
+    setHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated) {
+      return;
+    }
+    safeSetStorageValue(localStorage, WIDGET_SETTINGS_STORAGE_KEY, serializeWidgetSettings(settings));
+  }, [hydrated, settings]);
 
   const setPartial = (partial: Partial<WidgetSettings>) => {
     setSettings((prev) => ({ ...prev, ...partial }));
@@ -265,16 +290,16 @@ export default function WidgetPreviewPage() {
           ) : null}
         </div>
 
-        {error ? (
+        {laneState === "error" ? (
           <p className="error" role="alert">
             {error}
           </p>
         ) : null}
+        {laneState === "idle" ? <p className="sub">Noch kein Feed geladen.</p> : null}
+        {laneState === "loading" ? <p className="sub">Feed wird geladen...</p> : null}
+        {laneState === "empty" ? <p className="sub">Keine Events im aktuellen Filter</p> : null}
 
-        {!feed && !error ? <p className="sub">Noch kein Feed geladen.</p> : null}
-        {feed && tickerItems.length === 0 ? <p className="sub">Keine Events im aktuellen Filter</p> : null}
-
-        {feed && tickerItems.length > 0 ? (
+        {laneState === "ready" ? (
           <div className="widget-ticker-lane" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
             <div className={`${speedClass(settings.tickerSpeed)}${paused ? " paused" : ""}`}>
               {tickerItems.map((item) => (

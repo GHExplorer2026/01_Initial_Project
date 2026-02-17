@@ -23,6 +23,9 @@ export type WidgetSettings = {
   timezoneMode: "windows" | "berlin_fallback";
 };
 
+export const WIDGET_SETTINGS_STORAGE_KEY = "widget.preview.settings";
+export const WIDGET_SETTINGS_VERSION = 1;
+
 export type WidgetFeedEvent = {
   eventId: string;
   datetimeUTC: string;
@@ -68,6 +71,11 @@ export const DEFAULT_WIDGET_SETTINGS: WidgetSettings = {
   timezoneMode: "windows"
 };
 
+type StoredWidgetSettingsEnvelope = {
+  version: number;
+  settings: unknown;
+};
+
 const unique = <T extends string>(values: readonly T[]): T[] => {
   const out: T[] = [];
   for (const v of values) {
@@ -77,6 +85,97 @@ const unique = <T extends string>(values: readonly T[]): T[] => {
   }
   return out;
 };
+
+const toYmd = (value: unknown): string | undefined => {
+  if (typeof value !== "string") {
+    return undefined;
+  }
+  const normalized = value.trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(normalized)) {
+    return normalized;
+  }
+  return undefined;
+};
+
+const toBoolean = (value: unknown, fallback: boolean): boolean => (typeof value === "boolean" ? value : fallback);
+
+const toNumberRange = (value: unknown, fallback: number, min: number, max: number): number => {
+  if (typeof value !== "number" || Number.isNaN(value)) {
+    return fallback;
+  }
+  const clamped = Math.max(min, Math.min(max, value));
+  return Math.round(clamped);
+};
+
+const normalizeSubset = <T extends string>(input: unknown, allowed: readonly T[], fallback: readonly T[]): T[] => {
+  if (!Array.isArray(input)) {
+    return [...fallback];
+  }
+  const allowedSet = new Set(allowed);
+  const picked = input
+    .filter((value): value is T => typeof value === "string" && allowedSet.has(value as T))
+    .filter((value, index, all) => all.indexOf(value) === index);
+
+  return picked.length > 0 ? picked : [...fallback];
+};
+
+export const normalizeWidgetSettings = (input: unknown): WidgetSettings => {
+  if (!input || typeof input !== "object") {
+    return { ...DEFAULT_WIDGET_SETTINGS };
+  }
+
+  const raw = input as Partial<WidgetSettings>;
+  const datePreset = DATE_PRESETS.includes(raw.datePreset as DatePreset) ? (raw.datePreset as DatePreset) : "today";
+  const countries = normalizeSubset(raw.countries, DEFAULT_WIDGET_SETTINGS.countries, DEFAULT_WIDGET_SETTINGS.countries);
+  const currencies = normalizeSubset(raw.currencies, CURRENCIES, DEFAULT_WIDGET_SETTINGS.currencies);
+  const importanceLevels = normalizeSubset(raw.importanceLevels, IMPORTANCE_LEVELS, DEFAULT_WIDGET_SETTINGS.importanceLevels);
+  const tickerSpeed = raw.tickerSpeed === "slow" || raw.tickerSpeed === "normal" || raw.tickerSpeed === "fast" ? raw.tickerSpeed : "normal";
+  const timezoneMode = raw.timezoneMode === "windows" || raw.timezoneMode === "berlin_fallback" ? raw.timezoneMode : "windows";
+  const customFrom = datePreset === "custom" ? toYmd(raw.customFrom) : undefined;
+  const customTo = datePreset === "custom" ? toYmd(raw.customTo) : undefined;
+
+  return {
+    datePreset,
+    customFrom,
+    customTo,
+    countries,
+    currencies,
+    importanceLevels,
+    toggleBarEnabled: toBoolean(raw.toggleBarEnabled, DEFAULT_WIDGET_SETTINGS.toggleBarEnabled),
+    alwaysOnTop: toBoolean(raw.alwaysOnTop, DEFAULT_WIDGET_SETTINGS.alwaysOnTop),
+    transparency: toNumberRange(raw.transparency, DEFAULT_WIDGET_SETTINGS.transparency, 0, 100),
+    tickerSpeed,
+    timezoneMode
+  };
+};
+
+export const parseStoredWidgetSettings = (raw: string | null): WidgetSettings => {
+  if (!raw) {
+    return { ...DEFAULT_WIDGET_SETTINGS };
+  }
+
+  try {
+    const parsed = JSON.parse(raw) as unknown;
+    if (parsed && typeof parsed === "object" && "version" in parsed && "settings" in parsed) {
+      const envelope = parsed as StoredWidgetSettingsEnvelope;
+      if (envelope.version === WIDGET_SETTINGS_VERSION) {
+        return normalizeWidgetSettings(envelope.settings);
+      }
+      return normalizeWidgetSettings(envelope.settings);
+    }
+
+    // Legacy payload support (pre-envelope)
+    return normalizeWidgetSettings(parsed);
+  } catch {
+    return { ...DEFAULT_WIDGET_SETTINGS };
+  }
+};
+
+export const serializeWidgetSettings = (settings: WidgetSettings): string =>
+  JSON.stringify({
+    version: WIDGET_SETTINGS_VERSION,
+    settings: normalizeWidgetSettings(settings)
+  });
 
 export const buildWidgetFeedEndpoint = (settings: WidgetSettings): string => {
   const params = new URLSearchParams();
@@ -143,3 +242,26 @@ export const toTickerItems = (events: readonly WidgetFeedEvent[]): TickerItem[] 
       text: `${dateTime} ${event.region} ${event.titleRaw} ${metrics}`
     };
   });
+
+export type WidgetLaneState = "idle" | "loading" | "error" | "empty" | "ready";
+
+export const deriveWidgetLaneState = (params: {
+  loading: boolean;
+  error: string;
+  hasFeed: boolean;
+  eventCount: number;
+}): WidgetLaneState => {
+  if (params.loading) {
+    return "loading";
+  }
+  if (params.error.trim().length > 0) {
+    return "error";
+  }
+  if (!params.hasFeed) {
+    return "idle";
+  }
+  if (params.eventCount === 0) {
+    return "empty";
+  }
+  return "ready";
+};

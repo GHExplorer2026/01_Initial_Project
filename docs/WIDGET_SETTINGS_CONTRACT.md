@@ -5,6 +5,7 @@
 - Scope: lokale Widget Einstellungen
 - Persistenz: lokale Datei, versioniert, migrationsfähig
 - UI Style Profile Reference: `docs/WIDGET_STYLE_GUIDE.md` (v1.1)
+- Storage Key (preview implementation): `widget.preview.settings`
 
 ## Required Fields
 - `datePreset: "yesterday" | "today" | "tomorrow" | "this_week" | "next_week" | "custom"`
@@ -51,3 +52,16 @@
 ## Migration
 - Jede neue Version erhält eine explizite Migrationstabelle.
 - Unbekannte Versionen werden in `safe mode` normalisiert.
+
+## Persisted Envelope (v1)
+```json
+{
+  "version": 1,
+  "settings": { "...": "..." }
+}
+```
+
+Rules:
+1. Legacy payload ohne Envelope wird weiterhin akzeptiert und nach v1 normalisiert.
+2. Ungültige oder fehlende Felder werden auf Contract-Defaults zurückgesetzt.
+3. `customFrom/customTo` werden nur bei `datePreset=custom` persistiert.

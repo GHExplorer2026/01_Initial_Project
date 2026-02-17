@@ -51,9 +51,9 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 4. Evidence docs updated (`README.md`, `docs/QA_STATUS.md`, relevant run/evidence files).
 
 ## Immediate Next-Scope Queue
-1. `W-1111`: Execute first end-to-end desktop runtime smoke with fixture feed (currently blocked in agent shell).
-2. `W-1112`: Add first runtime-level settings persistence migration check.
-3. `W-1113`: Add first runtime error/empty state UX checks against fixture feed.
+1. `W-1111`: Execute first end-to-end desktop runtime smoke with fixture feed (currently blocked in agent shell; rerun in user terminal).
+2. `W-1114`: Attach smoke evidence after local rerun and close blocker.
+3. `W-1115`: Start first separated runtime implementation slice with frozen contracts.
 
 ## References
 - `RULES.md`
@@ -78,6 +78,7 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 - `docs/WIDGET_E3_EVIDENCE.md`
 - `docs/WIDGET_E2_E3_TRANSITION.md`
 - `docs/WIDGET_E2E_SMOKE_BLOCKER.md`
+- `docs/WIDGET_E4_PERSISTENCE_UX_EVIDENCE.md`
 - `widget-runtime/README.md`
 - `widget-runtime/docs/SCOPING.md`
 - `widget-runtime/docs/EXECUTION_GATE.md`

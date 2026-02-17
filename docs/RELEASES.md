@@ -18,6 +18,7 @@
 - Added initial separated runtime scaffold docs under `widget-runtime/`.
 - Added release-gate evidence template for separated runtime repository handoff.
 - Added runtime smoke script and blocker note for agent-shell port-bind limitation.
+- Added runtime settings persistence migration and lane-state UX hardening in widget-preview slice.
 
 ### Quality Evidence
 - Planning artifacts are decision-complete and traceable in repository docs.
@@ -50,6 +51,10 @@
 - `widget-runtime/docs/RELEASE_GATE_EVIDENCE.md`
 - `scripts/smoke_widget_runtime.sh`
 - `docs/WIDGET_E2E_SMOKE_BLOCKER.md`
+- `docs/WIDGET_E4_PERSISTENCE_UX_EVIDENCE.md`
+- `src/app/widgetPreviewClient.ts`
+- `src/app/widget-preview/page.tsx`
+- `tests/widgetPreviewClient.test.ts`
 - `skills/windows-widget-planning-gate/*`
 - `skills/widget-*`
 

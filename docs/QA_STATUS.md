@@ -71,6 +71,7 @@
   11. Separated desktop runtime scaffold exists (`widget-runtime/`) with gate docs.
   12. Runtime release-gate evidence template is defined for separated project handoff.
   13. Runtime smoke execution is currently blocked in agent shell due local port-bind `EPERM`.
+  14. Runtime settings migration and lane-state UX checks are implemented and test-verified in widget-preview slice.
 
 ## References
 - `README.md`
@@ -90,3 +91,4 @@
 - `docs/WIDGET_E3_EVIDENCE.md`
 - `docs/WIDGET_E2_E3_TRANSITION.md`
 - `docs/WIDGET_E2E_SMOKE_BLOCKER.md`
+- `docs/WIDGET_E4_PERSISTENCE_UX_EVIDENCE.md`
