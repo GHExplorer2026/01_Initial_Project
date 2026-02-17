@@ -14,7 +14,11 @@ root_html="$(curl -fsS "${root_url}")"
 echo "${root_html}" | grep -q 'Country Scope' || { echo "missing ui heading: Country Scope"; exit 1; }
 echo "${root_html}" | grep -q 'Wochenausblick generieren' || { echo "missing generate button label"; exit 1; }
 echo "${root_html}" | grep -q '\.ICS herunterladen' || { echo "missing ics button label"; exit 1; }
-echo "${root_html}" | grep -q 'aria-label="Strict output block"' || { echo "missing strict output block aria label"; exit 1; }
+echo "${root_html}" | grep -q 'Strict Output anzeigen' || { echo "missing strict output toggle label"; exit 1; }
+if ! echo "${root_html}" | grep -q 'Strict Output ist ausgeblendet.' && ! echo "${root_html}" | grep -q 'aria-label="Strict output block"'; then
+  echo "missing strict output default-hidden hint or strict output block"
+  exit 1
+fi
 echo "[smoke] ui ok"
 
 echo "[smoke] weekly: ${weekly_url}"
