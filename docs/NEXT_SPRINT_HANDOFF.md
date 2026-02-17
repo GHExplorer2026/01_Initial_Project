@@ -51,10 +51,9 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 4. Evidence docs updated (`README.md`, `docs/QA_STATUS.md`, relevant run/evidence files).
 
 ## Immediate Next-Scope Queue
-1. `W-1103`: Start widget vertical slice (ticker shell + fixture feed) after contract approval.
-2. `W-1104`: Initialize separated desktop widget project boundary (repo/monorepo) and CI baseline.
-3. `W-1105`: Implement provider-side widget-feed integration tests and freeze E2 evidence.
-4. `W-1106`: Implement desktop UI vertical slice (bar + ticker + settings) against frozen contracts.
+1. `W-1105`: Implement provider-side widget-feed integration tests and freeze E2 evidence.
+2. `W-1106`: Implement desktop UI vertical slice (bar + ticker + settings) against frozen contracts.
+3. `W-1107`: Finalize widget-project CI baseline execution (`lint/typecheck/unit/contract/build`).
 
 ## References
 - `RULES.md`
@@ -73,3 +72,4 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 - `docs/WIDGET_STYLE_GUIDE.md`
 - `docs/WIDGET_STYLE_GUIDE_ALIGNMENT.md`
 - `docs/WIDGET_EXECUTION_CHECKLIST.md`
+- `docs/WIDGET_PROJECT_BOUNDARY.md`

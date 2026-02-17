@@ -9,6 +9,7 @@
 - Added modular widget skills for planning, contracts, UI, timezone QA, security, and release gating.
 - Added Widget Style Guide import and contract alignment decisions.
 - Added widget execution checklist to bridge planning contracts to implementation gates.
+- Added widget project-boundary baseline for separated UI runtime and CI gates.
 
 ### Quality Evidence
 - Planning artifacts are decision-complete and traceable in repository docs.
@@ -22,6 +23,7 @@
 - `docs/WIDGET_STYLE_GUIDE.md`
 - `docs/WIDGET_STYLE_GUIDE_ALIGNMENT.md`
 - `docs/WIDGET_EXECUTION_CHECKLIST.md`
+- `docs/WIDGET_PROJECT_BOUNDARY.md`
 - `skills/windows-widget-planning-gate/*`
 - `skills/widget-*`
 

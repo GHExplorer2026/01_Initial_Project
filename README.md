@@ -193,6 +193,7 @@ Date: `2026-02-17`
 | P-124 | 2026-02-17 | Planning | Option-C widget plan | Added Windows desktop widget Option-C strategy, feed/settings contracts, split delivery playbook, and modular widget skills | Completed | `docs/WIDGET_IMPLEMENTATION_PLAN.md`, `docs/WIDGET_FEED_CONTRACT.md`, `docs/WIDGET_SETTINGS_CONTRACT.md`, `docs/WIDGET_SPLIT_DELIVERY_PLAYBOOK.md`, `skills/widget-*` | Codex |
 | P-125 | 2026-02-17 | Planning | Widget style alignment | Imported widget style guide and aligned contracts/skills with adopted UI rules and consumer query profile | Completed | `docs/WIDGET_STYLE_GUIDE.md`, `docs/WIDGET_STYLE_GUIDE_ALIGNMENT.md`, `docs/WIDGET_FEED_CONTRACT.md`, `docs/WIDGET_SETTINGS_CONTRACT.md`, `docs/WIDGET_IMPLEMENTATION_PLAN.md`, `skills/widget-*` | Codex |
 | P-126 | 2026-02-17 | Planning | Widget execution readiness | Added execution checklist and advanced handoff queue from contract freeze to implementation-ready gates | Completed | `docs/WIDGET_EXECUTION_CHECKLIST.md`, `docs/NEXT_SPRINT_HANDOFF.md` | Codex |
+| P-127 | 2026-02-17 | Planning | Widget boundary baseline | Added explicit project-boundary and CI-baseline contract for separated desktop widget project | Completed | `docs/WIDGET_PROJECT_BOUNDARY.md`, `docs/NEXT_SPRINT_HANDOFF.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -238,10 +239,11 @@ Date: `2026-02-17`
 | N-1003 | Run targeted tests, then full `verify:release` and release-gate marker validation for next iteration | High | Completed | None | 2026-02-17 | Codex/User |
 | W-1101 | Freeze widget feed and settings contracts (`v1.1` / `v1`) | High | Completed | None | 2026-02-18 | Codex/User |
 | W-1102 | Define widget project separation and release gates | High | Completed | None | 2026-02-18 | Codex/User |
-| W-1103 | Start widget vertical slice after contract approval | High | Open | None | 2026-02-19 | Codex/User |
-| W-1104 | Initialize separated widget project boundary and CI baseline | High | Open | None | 2026-02-19 | Codex/User |
+| W-1103 | Start widget vertical slice after contract approval | High | Completed | None | 2026-02-19 | Codex/User |
+| W-1104 | Initialize separated widget project boundary and CI baseline | High | Completed | None | 2026-02-19 | Codex/User |
 | W-1105 | Implement provider-side widget-feed integration tests and freeze E2 evidence | High | Open | Requires W-1104 | 2026-02-19 | Codex/User |
 | W-1106 | Implement widget UI vertical slice against frozen contracts | High | Open | Requires W-1104/W-1105 | 2026-02-20 | Codex/User |
+| W-1107 | Finalize widget-project CI baseline execution gates | High | Open | Requires W-1104 | 2026-02-20 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |
@@ -277,6 +279,7 @@ Date: `2026-02-17`
 - Current Widget Style Guide: `docs/WIDGET_STYLE_GUIDE.md`
 - Current Widget Style Alignment: `docs/WIDGET_STYLE_GUIDE_ALIGNMENT.md`
 - Current Widget Execution Checklist: `docs/WIDGET_EXECUTION_CHECKLIST.md`
+- Current Widget Project Boundary: `docs/WIDGET_PROJECT_BOUNDARY.md`
 - Previous Plan: `docs/V0_1_7_PLAN.md`
 - Previous Release Draft: `docs/V0_1_7_RELEASE_DRAFT.md`
 - Previous Release Evidence: `docs/V0_1_7_EVIDENCE.md`
