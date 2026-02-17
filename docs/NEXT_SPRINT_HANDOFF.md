@@ -51,9 +51,9 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 4. Evidence docs updated (`README.md`, `docs/QA_STATUS.md`, relevant run/evidence files).
 
 ## Immediate Next-Scope Queue
-1. `W-1107`: Finalize widget-project CI baseline execution (`lint/typecheck/unit/contract/build`).
-2. `W-1108`: Execute widget E2->E3 transition check with evidence refresh.
-3. `W-1109`: Start separated desktop runtime scaffold using frozen contracts as source of truth.
+1. `W-1108`: Execute widget E2->E3 transition check with evidence refresh.
+2. `W-1109`: Start separated desktop runtime scaffold using frozen contracts as source of truth.
+3. `W-1110`: Wire widget-project release gate evidence package to separated runtime repository.
 
 ## References
 - `RULES.md`

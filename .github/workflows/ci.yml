@@ -47,6 +47,9 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      - name: Widget feed contract tests
+        run: npm run contract:widget-feed
+
       - name: Unit tests
         run: npm run unit:ci
 

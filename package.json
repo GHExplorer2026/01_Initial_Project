@@ -14,6 +14,7 @@
     "start:next": "next start",
     "lint": "ESLINT_USE_FLAT_CONFIG=true eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
+    "contract:widget-feed": "vitest run tests/api.widget-feed.route.test.ts tests/widgetPreviewClient.test.ts",
     "unit": "vitest run",
     "unit:ci": "node -e \"require('fs').mkdirSync('artifacts',{recursive:true})\" && vitest run --reporter=default --reporter=junit --outputFile.junit=artifacts/vitest-unit.xml",
     "snapshot": "vitest run",

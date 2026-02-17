@@ -66,6 +66,7 @@
   6. Widget Style Guide alignment is documented and mapped to contracts.
   7. Widget E2 feed-integration slice is implemented with deterministic route-contract tests.
   8. Widget E3 UI preview slice is implemented with targeted deterministic tests.
+  9. Widget feed contract suite is explicit in CI baseline gates.
 
 ## References
 - `README.md`
