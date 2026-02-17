@@ -1,67 +1,66 @@
 # WIDGET_SETTINGS_CONTRACT.md
 
 ## Contract
-- Version: `1`
-- Scope: lokale Widget Einstellungen
-- Persistenz: lokale Datei, versioniert, migrationsfähig
-- UI Style Profile Reference: `docs/WIDGET_STYLE_GUIDE.md` (v1.1)
-- Storage Key (preview implementation): `widget.preview.settings`
+- Version: `2`
+- Scope: lokale Widget Einstellungen (Native Runtime)
+- Persistenz: lokale Datei, versioniert, migrationsfaehig
+- UI Style Profile Reference: `docs/WIDGET_STYLE_GUIDE.md` (v1.2)
 
 ## Required Fields
+- `baseUrl: string`
 - `datePreset: "yesterday" | "today" | "tomorrow" | "this_week" | "next_week" | "custom"`
 - `customFrom?: string`
 - `customTo?: string`
-- `countries: string[]`
-- `currencies: string[]`
+- `regions: string[]`
 - `importanceLevels: Array<"unknown" | "low" | "medium" | "high">`
-- `toggleBarEnabled: boolean`
 - `alwaysOnTop: boolean`
-- `transparency: number` (0..100)
-- `tickerSpeed: "slow" | "normal" | "fast"`
-- `timezoneMode: "windows" | "berlin_fallback"`
+- `transparency: number` (35..100)
+- `fontSizePx: number` (14..40)
+- `refreshSeconds: number` (15..300)
 
 ## Allowed Sets
-- `countries`: `USA | EZ | UK | JP | CH | CA | AU | NZ`
+- `regions`: `USA | EZ | UK | JP | CH | CA | AU | NZ`
 - `importanceLevels`: `unknown | low | medium | high`
 - `datePreset`: `yesterday | today | tomorrow | this_week | next_week | custom`
 
 ## Defaults
+- `baseUrl`: `http://127.0.0.1:3000`
 - `datePreset`: `today`
-- `countries`: alle erlaubten Regionen
-- `currencies`: alle erlaubten Währungen
+- `regions`: `USA,EZ`
 - `importanceLevels`: alle
-- `toggleBarEnabled`: `true`
 - `alwaysOnTop`: `false`
-- `transparency`: `90`
-- `tickerSpeed`: `normal`
-- `timezoneMode`: `windows`
+- `transparency`: `100`
+- `fontSizePx`: `22`
+- `refreshSeconds`: `45`
 
 ## Rules
 1. Wenn `datePreset != custom`, dann `customFrom/customTo` ignorieren.
-2. Wenn `datePreset=custom`, müssen beide Felder valide sein.
-3. Vergangenheit ohne `yesterday` nicht anzeigen.
-4. Ungültige Felder werden auf Default normalisiert und geloggt.
-5. `toggleBarEnabled=false` wechselt in Handle Mode mit reaktivierbarem UI-Einstieg.
-6. `timezoneMode=windows` ist primär; `berlin_fallback` nur bei Resolver-Fehler.
+2. Wenn `datePreset=custom`, muessen beide Felder valide sein.
+3. Mindestens eine Region muss aktiv sein.
+4. Vergangenheit ohne `yesterday` nicht anzeigen.
+5. Ungueltige Felder werden auf Default normalisiert.
+6. Zeitzone wird aus Windows System aufgeloest, mit Berlin Fallback, nicht als persistiertes Settings-Feld.
 
-## Runtime-only UI Toggles (nicht persistiert in v1)
-- Theme Toggle (Dark/Light) ist optional, aber nicht Teil des Settings Contract v1.
-- Ticker Play/Pause oder Hover-Pause sind Runtime-States und werden nicht persistiert.
-- Weitere Runtime Toggles benötigen für Persistenz ein explizites Contract-Upgrade (`v2+`).
+## Removed In v2
+- `currencies`
+- `toggleBarEnabled`
+- `tickerSpeed`
+- `timezoneMode`
 
-## Migration
-- Jede neue Version erhält eine explizite Migrationstabelle.
-- Unbekannte Versionen werden in `safe mode` normalisiert.
+## Migration v1 -> v2
+1. `countries` wird auf `regions` gemappt.
+2. Entfallene Felder (`currencies`, `toggleBarEnabled`, `tickerSpeed`, `timezoneMode`) werden verworfen.
+3. Fehlende neue Felder werden auf v2 Defaults gesetzt.
 
-## Persisted Envelope (v1)
+## Persisted Envelope
 ```json
 {
-  "version": 1,
+  "version": 2,
   "settings": { "...": "..." }
 }
 ```
 
 Rules:
-1. Legacy payload ohne Envelope wird weiterhin akzeptiert und nach v1 normalisiert.
-2. Ungültige oder fehlende Felder werden auf Contract-Defaults zurückgesetzt.
+1. Legacy payload ohne Envelope wird weiterhin akzeptiert und nach v2 normalisiert.
+2. Ungueltige oder fehlende Felder werden auf Contract-Defaults zurueckgesetzt.
 3. `customFrom/customTo` werden nur bei `datePreset=custom` persistiert.
