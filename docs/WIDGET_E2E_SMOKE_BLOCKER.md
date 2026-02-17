@@ -19,4 +19,5 @@ Damit ist der lokale Runtime-Smoke in dieser Ausführungsumgebung blockiert.
 2. In zweiter Shell: `bash scripts/smoke_widget_runtime.sh http://127.0.0.1:3000`
 
 ## Status
-- `W-1111`: `Blocked` (Umgebungsbedingte Port-Bind-Sperre im Agent-Shell-Kontext).
+- Agent-Shell-Kontext: `Blocked` (Port-Bind-Sperre bleibt umgebungsspezifisch bestehen).
+- Delivery-Status: `Resolved via user terminal smoke` (siehe `docs/WIDGET_E2E_SMOKE_EVIDENCE.md`).

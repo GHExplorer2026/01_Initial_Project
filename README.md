@@ -202,6 +202,7 @@ Date: `2026-02-17`
 | P-133 | 2026-02-17 | Scaffold | Separated runtime start | Created `widget-runtime/` scaffold docs to start Option-C desktop runtime in isolated project space | Completed | `widget-runtime/README.md`, `widget-runtime/docs/SCOPING.md`, `widget-runtime/docs/EXECUTION_GATE.md` | Codex |
 | P-134 | 2026-02-17 | Scaffold | Runtime release evidence wire-up | Added release-gate evidence template for separated runtime project handoff | Completed | `widget-runtime/docs/RELEASE_GATE_EVIDENCE.md`, `docs/NEXT_SPRINT_HANDOFF.md` | Codex |
 | P-135 | 2026-02-17 | UI/QA | Widget persistence+state hardening | Added versioned settings persistence/migration and deterministic lane state handling with targeted tests | Completed | `src/app/widgetPreviewClient.ts`, `src/app/widget-preview/page.tsx`, `tests/widgetPreviewClient.test.ts`, `docs/WIDGET_E4_PERSISTENCE_UX_EVIDENCE.md` | Codex |
+| P-136 | 2026-02-17 | QA | Widget runtime smoke closure | Captured successful user-terminal runtime smoke evidence and closed W-1111 blocker for delivery | Completed | `docs/WIDGET_E2E_SMOKE_EVIDENCE.md`, `docs/WIDGET_E2E_SMOKE_BLOCKER.md` | Codex/User |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -255,10 +256,11 @@ Date: `2026-02-17`
 | W-1108 | Execute widget E2->E3 transition check and refresh evidence package | High | Completed | Requires W-1106/W-1107 | 2026-02-20 | Codex/User |
 | W-1109 | Start separated desktop runtime scaffold with frozen contracts | High | Completed | Requires W-1107/W-1108 | 2026-02-21 | Codex/User |
 | W-1110 | Wire release-gate evidence package to separated desktop runtime repo | High | Completed | Requires W-1109 | 2026-02-21 | Codex/User |
-| W-1111 | Execute first end-to-end desktop runtime smoke with fixture feed | High | Blocked | Agent shell EPERM on local port bind (`127.0.0.1:3000`) | 2026-02-21 | Codex/User |
+| W-1111 | Execute first end-to-end desktop runtime smoke with fixture feed | High | Completed | Executed successfully in user terminal (WSL) | 2026-02-21 | Codex/User |
 | W-1112 | Add runtime settings-persistence migration check | High | Completed | Implemented in widget-preview slice despite W-1111 blocker | 2026-02-22 | Codex/User |
 | W-1113 | Add runtime error/empty state UX checks against fixture feed | High | Completed | Implemented in widget-preview slice despite W-1111 blocker | 2026-02-22 | Codex/User |
-| W-1114 | Re-run W-1111 smoke in user terminal and attach evidence | High | Open | Requires local port-bind-capable environment | 2026-02-22 | Codex/User |
+| W-1114 | Re-run W-1111 smoke in user terminal and attach evidence | High | Completed | Evidence attached from successful WSL smoke run | 2026-02-22 | Codex/User |
+| W-1115 | Start first separated runtime implementation slice with frozen contracts | High | Open | None | 2026-02-22 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |
@@ -300,6 +302,7 @@ Date: `2026-02-17`
 - Current Widget E3 Evidence: `docs/WIDGET_E3_EVIDENCE.md`
 - Current Widget E2-E3 Transition: `docs/WIDGET_E2_E3_TRANSITION.md`
 - Current Widget E2E Smoke Blocker Note: `docs/WIDGET_E2E_SMOKE_BLOCKER.md`
+- Current Widget E2E Smoke Evidence: `docs/WIDGET_E2E_SMOKE_EVIDENCE.md`
 - Current Widget E4 Persistence+UX Evidence: `docs/WIDGET_E4_PERSISTENCE_UX_EVIDENCE.md`
 - Previous Plan: `docs/V0_1_7_PLAN.md`
 - Previous Release Draft: `docs/V0_1_7_RELEASE_DRAFT.md`
