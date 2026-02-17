@@ -34,6 +34,7 @@ Date: `2026-02-17`
 | UI Update sprint (Date+Time table + All-Day + ICS metrics) | Completed | 100% | 2026-02-17 | `src/app/page.tsx`, `src/core/icsSerializer.ts`, `RULES.md`, `docs/IMPLEMENTATION_PLAN.md` |
 | `v0.1.8` planning gate package (no-code phase) | Completed | 100% | 2026-02-17 | `skills/ui-update-next-iteration-planning-gate/*`, `docs/V0_1_8_PLAN.md`, `docs/V0_1_8_EVIDENCE.md` |
 | `v0.1.8` execution slice (strict toggle + ICS importance filter) | Completed | 100% | 2026-02-17 | `src/app/page.tsx`, `src/app/api/weekly.ics/route.ts`, `src/server/orchestrator.ts`, `RULES.md`, `docs/V0_1_8_EVIDENCE.md` |
+| Windows Widget Option-C planning package | Completed | 100% | 2026-02-17 | `docs/WIDGET_IMPLEMENTATION_PLAN.md`, `docs/WIDGET_FEED_CONTRACT.md`, `docs/WIDGET_SETTINGS_CONTRACT.md`, `skills/widget-*` |
 
 ## 3. Active Skill Landscape
 
@@ -55,6 +56,13 @@ Date: `2026-02-17`
 - `skills/spec-safe-direct-delivery`
 - `skills/economic-calendar-table-contract`
 - `skills/ui-update-next-iteration-planning-gate`
+- `skills/windows-widget-planning-gate`
+- `skills/widget-feed-contract`
+- `skills/widget-settings-contract`
+- `skills/widget-ticker-ui-contract`
+- `skills/widget-timezone-dst-qa`
+- `skills/widget-security-compliance`
+- `skills/widget-release-gate`
 
 ## 4. Progress Log
 | ID | Date | Area | Type | Description | Result | Verification | Owner |
@@ -182,6 +190,7 @@ Date: `2026-02-17`
 | P-121 | 2026-02-17 | Planning | Gate package | Added next-iteration planning-gate skill, generated `v0.1.8` plan, and recorded planning evidence (no code phase) | Completed | `skills/ui-update-next-iteration-planning-gate/*`, `docs/V0_1_8_PLAN.md`, `docs/V0_1_8_EVIDENCE.md` | Codex |
 | P-122 | 2026-02-17 | UI/API | Feature slice | Implemented strict-output visibility toggle (`default off`), deterministic TOP/importance equivalence, and ICS importance export filtering with targeted + full verify gates | Completed | `src/app/page.tsx`, `src/app/uiRequests.ts`, `src/app/api/weekly.ics/route.ts`, `src/server/orchestrator.ts`, `tests/*`, `docs/V0_1_8_EVIDENCE.md` | Codex |
 | P-123 | 2026-02-17 | CI | Gate closure | Fixed smoke UI assertion for strict-toggle default and closed release gate for `v0.1.8` head | Completed | `scripts/smoke_api.sh`, `docs/release-gate-last-success.json`, `docs/V0_1_8_EVIDENCE.md` | Codex |
+| P-124 | 2026-02-17 | Planning | Option-C widget plan | Added Windows desktop widget Option-C strategy, feed/settings contracts, split delivery playbook, and modular widget skills | Completed | `docs/WIDGET_IMPLEMENTATION_PLAN.md`, `docs/WIDGET_FEED_CONTRACT.md`, `docs/WIDGET_SETTINGS_CONTRACT.md`, `docs/WIDGET_SPLIT_DELIVERY_PLAYBOOK.md`, `skills/widget-*` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -225,6 +234,9 @@ Date: `2026-02-17`
 | N-1001 | Approve `v0.1.8` planning gate package before code phase | High | Completed | None | 2026-02-17 | Codex/User |
 | N-1002 | Implement strict-toggle + TOP/importance consistency + ICS importance filters after `GO` | High | Completed | None | 2026-02-17 | Codex |
 | N-1003 | Run targeted tests, then full `verify:release` and release-gate marker validation for next iteration | High | Completed | None | 2026-02-17 | Codex/User |
+| W-1101 | Freeze widget feed and settings contracts (`v1.1` / `v1`) | High | Open | None | 2026-02-18 | Codex/User |
+| W-1102 | Define widget project separation and release gates | High | Open | None | 2026-02-18 | Codex/User |
+| W-1103 | Start widget vertical slice after contract approval | High | Open | Requires W-1101/W-1102 | 2026-02-19 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |
@@ -253,6 +265,10 @@ Date: `2026-02-17`
 - Current Plan: `docs/V0_1_8_PLAN.md`
 - Current Release Draft: `docs/V0_1_8_RELEASE_DRAFT.md`
 - Current Release Evidence: `docs/V0_1_8_EVIDENCE.md`
+- Current Widget Plan: `docs/WIDGET_IMPLEMENTATION_PLAN.md`
+- Current Widget Feed Contract: `docs/WIDGET_FEED_CONTRACT.md`
+- Current Widget Settings Contract: `docs/WIDGET_SETTINGS_CONTRACT.md`
+- Current Widget Split Playbook: `docs/WIDGET_SPLIT_DELIVERY_PLAYBOOK.md`
 - Previous Plan: `docs/V0_1_7_PLAN.md`
 - Previous Release Draft: `docs/V0_1_7_RELEASE_DRAFT.md`
 - Previous Release Evidence: `docs/V0_1_7_EVIDENCE.md`

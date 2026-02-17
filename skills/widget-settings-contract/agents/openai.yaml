@@ -1,0 +1,4 @@
+interface:
+  display_name: "Widget Settings Contract"
+  short_description: "Maintain settings schema, defaults, and migration path"
+  default_prompt: "Update settings contract with deterministic defaults and migration-safe field evolution."

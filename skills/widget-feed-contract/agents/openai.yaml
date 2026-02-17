@@ -1,0 +1,4 @@
+interface:
+  display_name: "Widget Feed Contract"
+  short_description: "Version and validate widget feed schema and semantics"
+  default_prompt: "Review and update feed contract v1.1 with deterministic sorting, filters, and top-event consistency."

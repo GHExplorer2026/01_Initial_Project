@@ -1,0 +1,4 @@
+interface:
+  display_name: "Windows Widget Planning Gate"
+  short_description: "Plan and gate the desktop widget scope before coding"
+  default_prompt: "Create a decision-complete Option C plan with contracts, gates, risks, and assumptions for the Windows desktop widget."

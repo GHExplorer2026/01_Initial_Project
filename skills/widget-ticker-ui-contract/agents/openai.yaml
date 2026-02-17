@@ -1,0 +1,4 @@
+interface:
+  display_name: "Widget Ticker UI Contract"
+  short_description: "Specify deterministic ticker rendering and visual rules"
+  default_prompt: "Define ticker row format, bold top-event rules, and metric display behavior for desktop widget UI."

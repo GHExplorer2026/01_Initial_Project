@@ -61,7 +61,8 @@
   1. Rules and governance are current (`RULES.md` + skills mitigation updates).
   2. Runtime startup paths are stable (CLI and Windows desktop launcher).
   3. Deterministic gates and release-gate workflow are operational.
-4. Current evidence docs are updated (`docs/UI_EXECUTION_REPORT.md`, `docs/release-gate-last-success.json`).
+  4. Current evidence docs are updated (`docs/UI_EXECUTION_REPORT.md`, `docs/release-gate-last-success.json`).
+  5. Windows Desktop Widget Option-C planning docs and contracts are prepared for execution handoff.
 
 ## References
 - `README.md`
@@ -69,3 +70,6 @@
 - `docs/UI_EXECUTION_REPORT.md`
 - `docs/TROUBLESHOOTING.md`
 - `docs/release-gate-last-success.json`
+- `docs/WIDGET_IMPLEMENTATION_PLAN.md`
+- `docs/WIDGET_FEED_CONTRACT.md`
+- `docs/WIDGET_SETTINGS_CONTRACT.md`

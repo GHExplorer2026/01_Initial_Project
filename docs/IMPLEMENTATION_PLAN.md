@@ -334,3 +334,40 @@ Snapshot updates nur via explizitem Maintainer-Flow.
 - `src/server/orchestrator.ts`
 - `tests/fixtures/*`
 - `tests/*.test.ts`
+
+## 18. Windows Desktop Widget Strategy (Option C)
+
+## 18.1 Ziel
+- Neues Desktop Projekt für Widget UI, getrennt vom Web Frontend.
+- Bestehendes Projekt bleibt Feed Provider und Source-Governance Layer.
+- Kein direkter Source Fetch im Widget.
+
+## 18.2 Scope-Erweiterung
+- Widget Settings Pflichtfelder:
+  - Date Presets: `Yesterday`, `Today`, `Tomorrow`, `This Week`, `Next Week`, `Custom Dates`
+  - `Country`, `Currency`, `Importance`, `toggleBar`
+- Ticker Rendering:
+  - Event plus `Actual`, `Forecast`, `Previous`
+  - All Day Events zulässig
+  - 3-Sterne Events (`importance=high`) visuell fett
+- Vergangenheitsregel:
+  - Vergangene Events sind ausgeblendet
+  - Ausnahme: `Yesterday` ist explizit aktiv
+
+## 18.3 Contract-Artefakte
+- Feed Contract: `docs/WIDGET_FEED_CONTRACT.md`
+- Settings Contract: `docs/WIDGET_SETTINGS_CONTRACT.md`
+- Delivery Playbook: `docs/WIDGET_SPLIT_DELIVERY_PLAYBOOK.md`
+- Vollständiger Widget Plan: `docs/WIDGET_IMPLEMENTATION_PLAN.md`
+
+## 18.4 Verantwortungsgrenzen
+- Feed Provider (bestehendes Projekt):
+  - Datenbeschaffung, Governance, Priorisierung, Normalisierung, deterministische Feed-Ausgabe
+- Widget Consumer (neues Desktop Projekt):
+  - Fensterverhalten, Ticker UI, Settings, lokale Darstellung, Polling, Cache
+
+## 18.5 Qualitäts- und Compliance-Anker
+- UTC intern, lokale Anzeige via Windows Zeitzone, DST-Matrix verpflichtend.
+- Keine Klartext-Secrets, nur Env oder OS Secret Store.
+- Keine fragilen Scrapes im Widget.
+- Jeder Gate Output muss reproduzierbar und prüfbar sein.

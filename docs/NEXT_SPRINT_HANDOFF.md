@@ -28,6 +28,11 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 7. `v0.1.8` release candidate documentation finalized:
    - `docs/V0_1_8_RELEASE_DRAFT.md`
    - `docs/V0_1_8_EVIDENCE.md`
+8. Windows Desktop Widget Option-C planning package finalized:
+   - `docs/WIDGET_IMPLEMENTATION_PLAN.md`
+   - `docs/WIDGET_FEED_CONTRACT.md`
+   - `docs/WIDGET_SETTINGS_CONTRACT.md`
+   - `docs/WIDGET_SPLIT_DELIVERY_PLAYBOOK.md`
 
 ## Entry Checklist (must pass before next slice)
 1. `git status -sb` shows clean workspace.
@@ -44,9 +49,9 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 4. Evidence docs updated (`README.md`, `docs/QA_STATUS.md`, relevant run/evidence files).
 
 ## Immediate Next-Scope Queue
-1. `N-1003`: Confirm release-gate marker for pushed `v0.1.8` HEAD.
-2. `N-1004`: Capture live-browser evidence for toggle + ICS filter combinations.
-3. `N-1005`: Prepare next bounded slice only after `N-1003` closure.
+1. `W-1101`: Freeze widget feed and settings contracts (`v1.1` / `v1`) and lock acceptance tests.
+2. `W-1102`: Initialize separated desktop widget project boundary and release gate checklist.
+3. `W-1103`: Start widget vertical slice (ticker shell + fixture feed) after contract approval.
 
 ## References
 - `RULES.md`
@@ -58,3 +63,7 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 - `docs/V0_1_8_PLAN.md`
 - `docs/V0_1_8_EVIDENCE.md`
 - `docs/V0_1_8_RELEASE_DRAFT.md`
+- `docs/WIDGET_IMPLEMENTATION_PLAN.md`
+- `docs/WIDGET_FEED_CONTRACT.md`
+- `docs/WIDGET_SETTINGS_CONTRACT.md`
+- `docs/WIDGET_SPLIT_DELIVERY_PLAYBOOK.md`

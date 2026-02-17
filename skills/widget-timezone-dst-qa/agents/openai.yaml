@@ -1,0 +1,4 @@
+interface:
+  display_name: "Widget Timezone DST QA"
+  short_description: "Validate UTC-local rendering and DST edge cases"
+  default_prompt: "Create and execute DST-focused validation scenarios for widget date presets and local rendering."

@@ -1,5 +1,25 @@
 # RELEASES.md
 
+## post-v0.1.8 planning package (2026-02-17, no new tag)
+
+### Scope
+- Added Windows Desktop Widget Option-C implementation plan and delivery strategy.
+- Added versioned widget contracts for feed and settings.
+- Added split-delivery playbook for separated desktop UI project execution.
+- Added modular widget skills for planning, contracts, UI, timezone QA, security, and release gating.
+
+### Quality Evidence
+- Planning artifacts are decision-complete and traceable in repository docs.
+- Existing release gate remains green for current `main` baseline (`run_id=22108356856`).
+
+### References
+- `docs/WIDGET_IMPLEMENTATION_PLAN.md`
+- `docs/WIDGET_FEED_CONTRACT.md`
+- `docs/WIDGET_SETTINGS_CONTRACT.md`
+- `docs/WIDGET_SPLIT_DELIVERY_PLAYBOOK.md`
+- `skills/windows-widget-planning-gate/*`
+- `skills/widget-*`
+
 ## v0.1.8 candidate (2026-02-17, tag pending)
 
 ### Scope

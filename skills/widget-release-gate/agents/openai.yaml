@@ -1,0 +1,4 @@
+interface:
+  display_name: "Widget Release Gate"
+  short_description: "Run reproducible RC gate checks with evidence and rollback readiness"
+  default_prompt: "Validate widget release candidate against deterministic quality, security, compliance, and rollback gates."

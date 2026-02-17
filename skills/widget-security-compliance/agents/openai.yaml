@@ -1,0 +1,4 @@
+interface:
+  display_name: "Widget Security Compliance"
+  short_description: "Apply security and licensing guardrails to widget delivery"
+  default_prompt: "Review widget plan against secret-handling, source-policy, and logging compliance requirements."
