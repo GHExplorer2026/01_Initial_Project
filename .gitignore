@@ -13,3 +13,4 @@ coverage
 *.docx
 *.pdf
 tsconfig.tsbuildinfo
+widget-runtime/artifacts/

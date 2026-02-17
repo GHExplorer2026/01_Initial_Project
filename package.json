@@ -16,6 +16,7 @@
     "typecheck": "tsc --noEmit",
     "contract:widget-feed": "vitest run tests/api.widget-feed.route.test.ts tests/widgetPreviewClient.test.ts",
     "check:widget-runtime-freeze": "bash scripts/check_widget_runtime_contract_freeze.sh",
+    "gate:widget-runtime": "bash scripts/run_widget_runtime_gate.sh",
     "unit": "vitest run",
     "unit:ci": "node -e \"require('fs').mkdirSync('artifacts',{recursive:true})\" && vitest run --reporter=default --reporter=junit --outputFile.junit=artifacts/vitest-unit.xml",
     "snapshot": "vitest run",

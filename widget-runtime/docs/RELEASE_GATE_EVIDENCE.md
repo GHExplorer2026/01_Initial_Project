@@ -4,22 +4,23 @@
 Standardisiertes Evidence-Paket für Release-Gates im getrennten Desktop-Runtime-Projekt.
 
 ## Pflichtartefakte
-1. `gate-metadata.json`
+1. `widget-runtime/artifacts/gate-metadata.json`
    - run_id
    - commit_sha
    - branch
    - started_at_utc
    - finished_at_utc
-2. `checks-summary.json`
+2. `widget-runtime/artifacts/checks-summary.json`
    - check:widget-runtime-freeze
    - lint
    - typecheck
    - unit
    - contract
    - build
-3. `test-report.xml` (oder gleichwertiger Report)
-4. `smoke-log.txt`
-5. `rollback-note.md`
+3. `widget-runtime/artifacts/contract.log`
+4. `widget-runtime/artifacts/typecheck.log`
+5. `widget-runtime/artifacts/freeze.log`
+6. `rollback-note.md`
 
 ## Gate-Entscheidung
 - `status`: `success | failure`

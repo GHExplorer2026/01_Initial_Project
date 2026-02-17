@@ -21,6 +21,7 @@
 - Added runtime settings persistence migration and lane-state UX hardening in widget-preview slice.
 - Added successful user-terminal (WSL) runtime smoke evidence and closed delivery blocker.
 - Added runtime contract-freeze manifest and deterministic freeze check for separated runtime slice start.
+- Added runtime gate runner with deterministic artifact outputs under `widget-runtime/artifacts/`.
 
 ### Quality Evidence
 - Planning artifacts are decision-complete and traceable in repository docs.
@@ -58,6 +59,8 @@
 - `docs/WIDGET_E2E_SMOKE_EVIDENCE.md`
 - `docs/WIDGET_E4_PERSISTENCE_UX_EVIDENCE.md`
 - `docs/WIDGET_W1115_EVIDENCE.md`
+- `docs/WIDGET_W1116_EVIDENCE.md`
+- `scripts/run_widget_runtime_gate.sh`
 - `src/app/widgetPreviewClient.ts`
 - `src/app/widget-preview/page.tsx`
 - `tests/widgetPreviewClient.test.ts`

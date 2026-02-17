@@ -73,6 +73,7 @@
   13. Runtime smoke is validated via user-terminal execution (WSL), despite agent-shell port-bind limitation.
   14. Runtime settings migration and lane-state UX checks are implemented and test-verified in widget-preview slice.
   15. Runtime contract freeze manifest and deterministic freeze check are in place for separated slice start.
+  16. Runtime gate runner emits deterministic artifact bundle (`gate-metadata.json`, `checks-summary.json`, logs).
 
 ## References
 - `README.md`
@@ -95,3 +96,4 @@
 - `docs/WIDGET_E2E_SMOKE_EVIDENCE.md`
 - `docs/WIDGET_E4_PERSISTENCE_UX_EVIDENCE.md`
 - `docs/WIDGET_W1115_EVIDENCE.md`
+- `docs/WIDGET_W1116_EVIDENCE.md`
