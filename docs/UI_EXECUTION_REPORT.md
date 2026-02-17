@@ -74,3 +74,24 @@
   - Strict output and ICS mandatory contracts remain intact.
   - No RULES/spec drift introduced.
   - Windows desktop start path is operational and validated by live user run.
+
+## Addendum v0.1.8 (2026-02-17)
+
+### Scope delta
+1. Strict Output Anzeige ist jetzt per Toggle steuerbar.
+   - Default ist ausgeblendet.
+   - Der canonical Strict-Textinhalt bleibt unverändert.
+2. TOP-EVENT und `importance=high` werden deterministisch bidirektional normalisiert.
+3. ICS-Export unterstützt Pre-Filter:
+   - `high` (TOP-EVENT / 3 Sterne)
+   - `medium` (2 Sterne)
+   - OR-Logik, ohne Filter = alle.
+
+### Verification delta
+1. Local verify gate:
+   - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify`
+   - Result: PASS (`145/145` Tests, lint/typecheck/build/check:next-env grün)
+2. Release Gate:
+   - `run_id=22108356856`
+   - `status=success` (`install=success`, `verify=success`, `smoke=success`)
+   - `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22108356856`
