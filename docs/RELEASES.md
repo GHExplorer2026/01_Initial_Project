@@ -16,6 +16,7 @@
 - Added explicit widget-feed contract CI gate for baseline execution closure.
 - Added consolidated E2->E3 transition evidence for desktop runtime handoff.
 - Added initial separated runtime scaffold docs under `widget-runtime/`.
+- Added release-gate evidence template for separated runtime repository handoff.
 
 ### Quality Evidence
 - Planning artifacts are decision-complete and traceable in repository docs.
@@ -45,6 +46,7 @@
 - `widget-runtime/README.md`
 - `widget-runtime/docs/SCOPING.md`
 - `widget-runtime/docs/EXECUTION_GATE.md`
+- `widget-runtime/docs/RELEASE_GATE_EVIDENCE.md`
 - `skills/windows-widget-planning-gate/*`
 - `skills/widget-*`
 

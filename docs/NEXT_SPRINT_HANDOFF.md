@@ -51,9 +51,9 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 4. Evidence docs updated (`README.md`, `docs/QA_STATUS.md`, relevant run/evidence files).
 
 ## Immediate Next-Scope Queue
-1. `W-1110`: Wire widget-project release gate evidence package to separated runtime repository.
-2. `W-1111`: Execute first end-to-end desktop runtime smoke with fixture feed.
-3. `W-1112`: Add first runtime-level settings persistence migration check.
+1. `W-1111`: Execute first end-to-end desktop runtime smoke with fixture feed.
+2. `W-1112`: Add first runtime-level settings persistence migration check.
+3. `W-1113`: Add first runtime error/empty state UX checks against fixture feed.
 
 ## References
 - `RULES.md`
@@ -80,3 +80,4 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 - `widget-runtime/README.md`
 - `widget-runtime/docs/SCOPING.md`
 - `widget-runtime/docs/EXECUTION_GATE.md`
+- `widget-runtime/docs/RELEASE_GATE_EVIDENCE.md`

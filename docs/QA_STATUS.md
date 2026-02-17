@@ -69,6 +69,7 @@
   9. Widget feed contract suite is explicit in CI baseline gates.
   10. E2->E3 transition evidence is documented and approved for next step.
   11. Separated desktop runtime scaffold exists (`widget-runtime/`) with gate docs.
+  12. Runtime release-gate evidence template is defined for separated project handoff.
 
 ## References
 - `README.md`
