@@ -15,6 +15,7 @@
 - Added widget E3 preview UI slice and targeted UI-client contract tests.
 - Added explicit widget-feed contract CI gate for baseline execution closure.
 - Added consolidated E2->E3 transition evidence for desktop runtime handoff.
+- Added initial separated runtime scaffold docs under `widget-runtime/`.
 
 ### Quality Evidence
 - Planning artifacts are decision-complete and traceable in repository docs.
@@ -41,6 +42,9 @@
 - `.github/workflows/ci.yml`
 - `package.json`
 - `docs/WIDGET_E2_E3_TRANSITION.md`
+- `widget-runtime/README.md`
+- `widget-runtime/docs/SCOPING.md`
+- `widget-runtime/docs/EXECUTION_GATE.md`
 - `skills/windows-widget-planning-gate/*`
 - `skills/widget-*`
 

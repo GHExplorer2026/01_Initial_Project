@@ -68,6 +68,7 @@
   8. Widget E3 UI preview slice is implemented with targeted deterministic tests.
   9. Widget feed contract suite is explicit in CI baseline gates.
   10. E2->E3 transition evidence is documented and approved for next step.
+  11. Separated desktop runtime scaffold exists (`widget-runtime/`) with gate docs.
 
 ## References
 - `README.md`

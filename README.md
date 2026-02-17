@@ -199,6 +199,7 @@ Date: `2026-02-17`
 | P-130 | 2026-02-17 | UI | Widget E3 slice | Added widget-preview vertical slice (bar, ticker lane, settings basics, handle mode) with targeted contract tests | Completed | `src/app/widget-preview/page.tsx`, `src/app/widgetPreviewClient.ts`, `tests/widgetPreviewClient.test.ts`, `docs/WIDGET_E3_EVIDENCE.md` | Codex |
 | P-131 | 2026-02-17 | CI | Widget baseline gates | Added explicit widget-feed contract test script and CI gate step for execution baseline closure | Completed | `package.json`, `.github/workflows/ci.yml` | Codex |
 | P-132 | 2026-02-17 | QA | Widget E2-E3 transition | Added consolidated transition evidence and released next-step handoff to desktop runtime scaffold | Completed | `docs/WIDGET_E2_E3_TRANSITION.md`, `docs/NEXT_SPRINT_HANDOFF.md` | Codex |
+| P-133 | 2026-02-17 | Scaffold | Separated runtime start | Created `widget-runtime/` scaffold docs to start Option-C desktop runtime in isolated project space | Completed | `widget-runtime/README.md`, `widget-runtime/docs/SCOPING.md`, `widget-runtime/docs/EXECUTION_GATE.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -250,9 +251,10 @@ Date: `2026-02-17`
 | W-1106 | Implement widget UI vertical slice against frozen contracts | High | Completed | Requires W-1104/W-1105 | 2026-02-20 | Codex/User |
 | W-1107 | Finalize widget-project CI baseline execution gates | High | Completed | Requires W-1104 | 2026-02-20 | Codex/User |
 | W-1108 | Execute widget E2->E3 transition check and refresh evidence package | High | Completed | Requires W-1106/W-1107 | 2026-02-20 | Codex/User |
-| W-1109 | Start separated desktop runtime scaffold with frozen contracts | High | Open | Requires W-1107/W-1108 | 2026-02-21 | Codex/User |
+| W-1109 | Start separated desktop runtime scaffold with frozen contracts | High | Completed | Requires W-1107/W-1108 | 2026-02-21 | Codex/User |
 | W-1110 | Wire release-gate evidence package to separated desktop runtime repo | High | Open | Requires W-1109 | 2026-02-21 | Codex/User |
 | W-1111 | Execute first end-to-end desktop runtime smoke with fixture feed | High | Open | Requires W-1109/W-1110 | 2026-02-21 | Codex/User |
+| W-1112 | Add runtime settings-persistence migration check | High | Open | Requires W-1111 | 2026-02-22 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |
