@@ -10,6 +10,7 @@
 - Added Widget Style Guide import and contract alignment decisions.
 - Added widget execution checklist to bridge planning contracts to implementation gates.
 - Added widget project-boundary baseline for separated UI runtime and CI gates.
+- Added E2 feed-integration plan and evidence template for deterministic gate closure.
 
 ### Quality Evidence
 - Planning artifacts are decision-complete and traceable in repository docs.
@@ -24,6 +25,8 @@
 - `docs/WIDGET_STYLE_GUIDE_ALIGNMENT.md`
 - `docs/WIDGET_EXECUTION_CHECKLIST.md`
 - `docs/WIDGET_PROJECT_BOUNDARY.md`
+- `docs/WIDGET_E2_FEED_INTEGRATION_PLAN.md`
+- `docs/WIDGET_E2_EVIDENCE.md`
 - `skills/windows-widget-planning-gate/*`
 - `skills/widget-*`
 

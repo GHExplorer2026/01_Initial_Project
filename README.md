@@ -194,6 +194,7 @@ Date: `2026-02-17`
 | P-125 | 2026-02-17 | Planning | Widget style alignment | Imported widget style guide and aligned contracts/skills with adopted UI rules and consumer query profile | Completed | `docs/WIDGET_STYLE_GUIDE.md`, `docs/WIDGET_STYLE_GUIDE_ALIGNMENT.md`, `docs/WIDGET_FEED_CONTRACT.md`, `docs/WIDGET_SETTINGS_CONTRACT.md`, `docs/WIDGET_IMPLEMENTATION_PLAN.md`, `skills/widget-*` | Codex |
 | P-126 | 2026-02-17 | Planning | Widget execution readiness | Added execution checklist and advanced handoff queue from contract freeze to implementation-ready gates | Completed | `docs/WIDGET_EXECUTION_CHECKLIST.md`, `docs/NEXT_SPRINT_HANDOFF.md` | Codex |
 | P-127 | 2026-02-17 | Planning | Widget boundary baseline | Added explicit project-boundary and CI-baseline contract for separated desktop widget project | Completed | `docs/WIDGET_PROJECT_BOUNDARY.md`, `docs/NEXT_SPRINT_HANDOFF.md` | Codex |
+| P-128 | 2026-02-17 | Planning | Widget E2 integration prep | Added provider-side feed integration test plan and evidence template for deterministic E2 gate closure | Completed | `docs/WIDGET_E2_FEED_INTEGRATION_PLAN.md`, `docs/WIDGET_E2_EVIDENCE.md`, `docs/NEXT_SPRINT_HANDOFF.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -280,6 +281,8 @@ Date: `2026-02-17`
 - Current Widget Style Alignment: `docs/WIDGET_STYLE_GUIDE_ALIGNMENT.md`
 - Current Widget Execution Checklist: `docs/WIDGET_EXECUTION_CHECKLIST.md`
 - Current Widget Project Boundary: `docs/WIDGET_PROJECT_BOUNDARY.md`
+- Current Widget E2 Feed Integration Plan: `docs/WIDGET_E2_FEED_INTEGRATION_PLAN.md`
+- Current Widget E2 Evidence: `docs/WIDGET_E2_EVIDENCE.md`
 - Previous Plan: `docs/V0_1_7_PLAN.md`
 - Previous Release Draft: `docs/V0_1_7_RELEASE_DRAFT.md`
 - Previous Release Evidence: `docs/V0_1_7_EVIDENCE.md`
