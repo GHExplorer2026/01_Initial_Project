@@ -6,7 +6,7 @@
 - Single source of truth for implementation governance: this `README.md`.
 
 ## 2. Current Snapshot
-Date: `2026-02-15`
+Date: `2026-02-17`
 
 | Area | Status | Completion | Last Updated | Evidence |
 |---|---|---:|---|---|
@@ -250,15 +250,15 @@ Date: `2026-02-15`
 ## 9. Key Documents
 - Rules: `RULES.md`
 - Plan: `docs/IMPLEMENTATION_PLAN.md`
-- Current Plan: `docs/V0_1_7_PLAN.md`
-- Current Release Draft: `docs/V0_1_7_RELEASE_DRAFT.md`
-- Current Release Evidence: `docs/V0_1_7_EVIDENCE.md`
-- Previous Plan: `docs/V0_1_6_PLAN.md`
-- Previous Release Draft: `docs/V0_1_6_RELEASE_DRAFT.md`
-- Previous Release Evidence: `docs/V0_1_6_EVIDENCE.md`
-- Older Plan: `docs/V0_1_5_PLAN.md`
-- Older Release Draft: `docs/V0_1_5_RELEASE_DRAFT.md`
-- Older Release Evidence: `docs/V0_1_5_EVIDENCE.md`
+- Current Plan: `docs/V0_1_8_PLAN.md`
+- Current Release Draft: `docs/V0_1_8_RELEASE_DRAFT.md`
+- Current Release Evidence: `docs/V0_1_8_EVIDENCE.md`
+- Previous Plan: `docs/V0_1_7_PLAN.md`
+- Previous Release Draft: `docs/V0_1_7_RELEASE_DRAFT.md`
+- Previous Release Evidence: `docs/V0_1_7_EVIDENCE.md`
+- Older Plan: `docs/V0_1_6_PLAN.md`
+- Older Release Draft: `docs/V0_1_6_RELEASE_DRAFT.md`
+- Older Release Evidence: `docs/V0_1_6_EVIDENCE.md`
 - Release Gate Marker: `docs/release-gate-last-success.json`
 - Architecture: `ARCHITECTURE.md`
 - QA Status: `docs/QA_STATUS.md`

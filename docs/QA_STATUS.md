@@ -1,10 +1,10 @@
 # QA_STATUS.md
 
-## Consolidated Baseline (2026-02-15)
+## Consolidated Baseline (2026-02-17)
 - Branch: `main`
 - Repository state target: clean + synced with `origin/main`
-- Product baseline: released `v0.1.7` plus post-release hardening fixes
-- Current test baseline: `131` passing tests in Node `v20.20.0` environment
+- Product baseline: `v0.1.8` implementation slice completed on top of `v0.1.7`
+- Current test baseline: `145` passing tests in Node `v20.20.0` environment
 
 ## Current Quality Gate Profile
 - Deterministic local gate command:
@@ -17,6 +17,9 @@
   - `build`: pass
 - Release gate command:
   - `PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run check:release-gate`
+- Last confirmed release-gate run:
+  - `run_id=22108356856`
+  - `status=success` (`install=success`, `verify=success`, `smoke=success`)
 
 ## SPEC-Critical Coverage (active)
 1. Strict DE output formatting (header/day/event line, canonical Hinweiszeilen, exact TOP suffix).
@@ -26,6 +29,9 @@
 5. Deterministic merge/dedupe/grouping behavior.
 6. ICS contract invariants (CRLF/folding/VTIMEZONE/deterministic UID+DTSTAMP/category per VEVENT).
 7. API route contracts for `/api/weekly` and `/api/weekly.ics`.
+8. UI strict-output visibility toggle contract (`default off`, data contract unchanged).
+9. TOP-EVENT and `importance=high` bidirectional consistency.
+10. ICS importance pre-export filtering (`high` / `medium`, OR semantics).
 
 ## Post-Release Hardening Included
 1. Outlook ICS subject parity:
@@ -38,6 +44,10 @@
    - dev wrappers normalize `next-env.d.ts` on exit.
 5. Windows operator path:
    - desktop one-click launcher for live mode validated in user run.
+6. v0.1.8 UI/API slice:
+   - strict-output toggle in UI (`default off`)
+   - deterministic TOP/importance equivalence normalization
+   - ICS export filtering via `icsImportance` query contract
 
 ## Environment and Ops Constraints
 - Local full verification must run on Node `>=20.9.0`.
@@ -51,7 +61,7 @@
   1. Rules and governance are current (`RULES.md` + skills mitigation updates).
   2. Runtime startup paths are stable (CLI and Windows desktop launcher).
   3. Deterministic gates and release-gate workflow are operational.
-  4. Current evidence docs are updated (`docs/UI_EXECUTION_REPORT.md`, `docs/release-gate-last-success.json`).
+4. Current evidence docs are updated (`docs/UI_EXECUTION_REPORT.md`, `docs/release-gate-last-success.json`).
 
 ## References
 - `README.md`

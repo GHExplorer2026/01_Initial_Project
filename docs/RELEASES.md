@@ -1,5 +1,29 @@
 # RELEASES.md
 
+## v0.1.8 candidate (2026-02-17, tag pending)
+
+### Scope
+- Added UI strict-output visibility toggle with default `off`.
+- Added deterministic TOP/importance equivalence normalization (`TOP-EVENT <=> importance=high`).
+- Added ICS pre-export importance filters (`icsImportance=high,medium`) with OR semantics and no-filter => all.
+- Updated CI smoke UI assertions to align with strict-output toggle default-hidden contract.
+
+### Quality Evidence
+- Local Node-20 verify gate:
+  - `TMPDIR=/tmp PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run verify`
+  - result: `145/145` tests passed + lint/typecheck/build/check:next-env pass
+- Release Gate:
+  - `run_id=22108356856`
+  - `status=success`
+  - `install=success`, `verify=success`, `smoke=success`
+  - `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22108356856`
+
+### References
+- `docs/V0_1_8_PLAN.md`
+- `docs/V0_1_8_RELEASE_DRAFT.md`
+- `docs/V0_1_8_EVIDENCE.md`
+- `docs/release-gate-last-success.json`
+
 ## post-v0.1.7 maintenance (2026-02-15, no new tag)
 
 ### Scope

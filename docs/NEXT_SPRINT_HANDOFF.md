@@ -25,6 +25,9 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
    - Strict Output visibility toggle (`default off`)
    - TOP-EVENT and `importance=high` deterministic equivalence
    - ICS export filters (`icsImportance=high,medium`, OR semantics)
+7. `v0.1.8` release candidate documentation finalized:
+   - `docs/V0_1_8_RELEASE_DRAFT.md`
+   - `docs/V0_1_8_EVIDENCE.md`
 
 ## Entry Checklist (must pass before next slice)
 1. `git status -sb` shows clean workspace.
@@ -54,3 +57,4 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 - `skills/ui-update-next-iteration-planning-gate/SKILL.md`
 - `docs/V0_1_8_PLAN.md`
 - `docs/V0_1_8_EVIDENCE.md`
+- `docs/V0_1_8_RELEASE_DRAFT.md`
