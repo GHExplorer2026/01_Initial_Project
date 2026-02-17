@@ -65,6 +65,7 @@
   5. Windows Desktop Widget Option-C planning docs and contracts are prepared for execution handoff.
   6. Widget Style Guide alignment is documented and mapped to contracts.
   7. Widget E2 feed-integration slice is implemented with deterministic route-contract tests.
+  8. Widget E3 UI preview slice is implemented with targeted deterministic tests.
 
 ## References
 - `README.md`
@@ -81,3 +82,4 @@
 - `docs/WIDGET_PROJECT_BOUNDARY.md`
 - `docs/WIDGET_E2_FEED_INTEGRATION_PLAN.md`
 - `docs/WIDGET_E2_EVIDENCE.md`
+- `docs/WIDGET_E3_EVIDENCE.md`
