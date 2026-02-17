@@ -24,6 +24,7 @@
 - Added runtime gate runner with deterministic artifact outputs under `widget-runtime/artifacts/`.
 - Added first separated runtime RC dry-run evidence with explicit Full-RC blockers.
 - Promoted runtime gate from dry-run to full E5 profile with evidence checks for security/compliance and rollback.
+- Executed first full E5 runtime gate run with `status=success` and `go_no_go=GO`.
 
 ### Quality Evidence
 - Planning artifacts are decision-complete and traceable in repository docs.
@@ -64,6 +65,7 @@
 - `docs/WIDGET_W1116_EVIDENCE.md`
 - `docs/WIDGET_W1117_RC_DRY_RUN_EVIDENCE.md`
 - `docs/WIDGET_W1118_FULL_PROFILE_EVIDENCE.md`
+- `docs/WIDGET_W1119_E5_GATE_EVIDENCE.md`
 - `scripts/run_widget_runtime_gate.sh`
 - `scripts/check_widget_runtime_rc_evidence.sh`
 - `widget-runtime/docs/SECURITY_COMPLIANCE_EVIDENCE.md`

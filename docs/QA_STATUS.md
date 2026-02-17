@@ -76,6 +76,7 @@
   16. Runtime gate runner emits deterministic artifact bundle (`gate-metadata.json`, `checks-summary.json`, logs).
   17. First runtime RC dry run completed (`PASS` dry-run profile) with explicit Full-RC blockers logged.
   18. Runtime gate is promoted to full E5 profile (`lint`, `unit`, `build`, `security_compliance`, `rollback`).
+  19. Full E5 runtime gate run passed with GO decision and no blocking findings.
 
 ## References
 - `README.md`
@@ -101,5 +102,6 @@
 - `docs/WIDGET_W1116_EVIDENCE.md`
 - `docs/WIDGET_W1117_RC_DRY_RUN_EVIDENCE.md`
 - `docs/WIDGET_W1118_FULL_PROFILE_EVIDENCE.md`
+- `docs/WIDGET_W1119_E5_GATE_EVIDENCE.md`
 - `widget-runtime/docs/SECURITY_COMPLIANCE_EVIDENCE.md`
 - `widget-runtime/docs/ROLLBACK_DRILL_EVIDENCE.md`
