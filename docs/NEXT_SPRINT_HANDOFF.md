@@ -54,7 +54,8 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 1. `W-1115`: Completed. Runtime slice started with frozen contract manifest + deterministic freeze check.
 2. `W-1116`: Completed. Runtime gate runner now emits deterministic artifacts under `widget-runtime/artifacts/`.
 3. `W-1117`: Completed. First separated runtime RC dry run executed (`PASS` dry-run profile, `NO_GO` for full E5 profile).
-4. `W-1118`: Promote runtime gate from dry-run profile to full E5 profile (`lint`, `unit`, `build`, security/compliance, rollback evidence).
+4. `W-1118`: Completed. Runtime gate promoted to full E5 profile with security/compliance and rollback evidence checks.
+5. `W-1119`: Execute full E5 runtime gate run and record GO/NO_GO decision.
 
 ## References
 - `RULES.md`
@@ -84,8 +85,11 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 - `docs/WIDGET_W1115_EVIDENCE.md`
 - `docs/WIDGET_W1116_EVIDENCE.md`
 - `docs/WIDGET_W1117_RC_DRY_RUN_EVIDENCE.md`
+- `docs/WIDGET_W1118_FULL_PROFILE_EVIDENCE.md`
 - `widget-runtime/README.md`
 - `widget-runtime/contracts/contract-freeze.sha256`
 - `widget-runtime/docs/SCOPING.md`
 - `widget-runtime/docs/EXECUTION_GATE.md`
 - `widget-runtime/docs/RELEASE_GATE_EVIDENCE.md`
+- `widget-runtime/docs/SECURITY_COMPLIANCE_EVIDENCE.md`
+- `widget-runtime/docs/ROLLBACK_DRILL_EVIDENCE.md`

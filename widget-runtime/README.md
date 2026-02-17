@@ -24,4 +24,4 @@ Getrennter Runtime-Bereich für das Windows Desktop Widget (Option C).
 - Runtime slice must not proceed if the freeze check is red.
 
 ## Nächster Schritt
-- Full-RC Gate Profil (E5) vervollständigen: `lint`, `unit`, `build`, Security/Compliance Evidence, Rollback-Probe.
+- Execute Full-RC runtime gate (default): `npm run gate:widget-runtime`

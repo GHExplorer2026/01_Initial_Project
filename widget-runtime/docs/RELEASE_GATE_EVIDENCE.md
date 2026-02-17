@@ -14,19 +14,30 @@ Standardisiertes Evidence-Paket für Release-Gates im getrennten Desktop-Runtime
    - `check_widget_runtime_freeze`
    - `contract`
    - `typecheck`
+   - `lint`
+   - `unit`
+   - `build`
+   - `security_compliance`
+   - `rollback`
    - `status`
 3. `widget-runtime/artifacts/contract.log`
 4. `widget-runtime/artifacts/typecheck.log`
 5. `widget-runtime/artifacts/freeze.log`
-6. `rollback-note.md`
+6. `widget-runtime/artifacts/lint.log`
+7. `widget-runtime/artifacts/unit.log`
+8. `widget-runtime/artifacts/build.log`
+9. `widget-runtime/artifacts/security-compliance.log`
+10. `widget-runtime/artifacts/rollback.log`
+11. `widget-runtime/docs/SECURITY_COMPLIANCE_EVIDENCE.md`
+12. `widget-runtime/docs/ROLLBACK_DRILL_EVIDENCE.md`
 
 ## Profile
-1. Dry-Run Profile (aktuell verdrahtet):
+1. Dry-Run Profile:
    - `check_widget_runtime_freeze`
    - `contract`
    - `typecheck`
-2. Full-RC Profile (Gate E5 Zielprofil):
-   - Dry-Run Profile plus `lint`, `unit`, `build`, Security/Compliance Checks, Rollback-Probe.
+2. Full-RC Profile (Gate E5 Zielprofil, default):
+   - Dry-Run Profile plus `lint`, `unit`, `build`, `security_compliance`, `rollback`.
 
 ## Gate-Entscheidung
 - `status`: `success | failure`
