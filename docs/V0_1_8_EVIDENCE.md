@@ -75,4 +75,12 @@ Record evidence for `v0.1.8` from planning gate through execution closure.
 
 ## Decision
 `v0.1.8` implementation slice is complete and verification-green locally in Node 20 baseline.
-Next closure step is CI/release-gate confirmation for pushed `main` HEAD.
+
+## Release-Gate Closure
+- Status: `PASS`
+- Validation command:
+  - `PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH" npm run check:release-gate`
+- Run details:
+  - `run_id=22108297122`
+  - `steps=install:success,verify:success,smoke:success`
+  - `run_url=https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22108297122`

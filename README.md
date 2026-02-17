@@ -181,6 +181,7 @@ Date: `2026-02-15`
 | P-120 | 2026-02-17 | Governance | Contract patch | Applied RULES/Plan/Skills updates for UI Update sprint, incl. no-hallucination metrics and all-day governance | Completed | `RULES.md`, `docs/IMPLEMENTATION_PLAN.md`, `skills/*` | Codex |
 | P-121 | 2026-02-17 | Planning | Gate package | Added next-iteration planning-gate skill, generated `v0.1.8` plan, and recorded planning evidence (no code phase) | Completed | `skills/ui-update-next-iteration-planning-gate/*`, `docs/V0_1_8_PLAN.md`, `docs/V0_1_8_EVIDENCE.md` | Codex |
 | P-122 | 2026-02-17 | UI/API | Feature slice | Implemented strict-output visibility toggle (`default off`), deterministic TOP/importance equivalence, and ICS importance export filtering with targeted + full verify gates | Completed | `src/app/page.tsx`, `src/app/uiRequests.ts`, `src/app/api/weekly.ics/route.ts`, `src/server/orchestrator.ts`, `tests/*`, `docs/V0_1_8_EVIDENCE.md` | Codex |
+| P-123 | 2026-02-17 | CI | Gate closure | Fixed smoke UI assertion for strict-toggle default and closed release gate for `v0.1.8` head | Completed | `scripts/smoke_api.sh`, `docs/release-gate-last-success.json`, `docs/V0_1_8_EVIDENCE.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -223,7 +224,7 @@ Date: `2026-02-15`
 | N-803 | Close first next-scope slice with full verify + release-gate marker + evidence update (DoD gate) | High | Open | None | 2026-02-16 | Codex/User |
 | N-1001 | Approve `v0.1.8` planning gate package before code phase | High | Completed | None | 2026-02-17 | Codex/User |
 | N-1002 | Implement strict-toggle + TOP/importance consistency + ICS importance filters after `GO` | High | Completed | None | 2026-02-17 | Codex |
-| N-1003 | Run targeted tests, then full `verify:release` and release-gate marker validation for next iteration | High | In Progress | Release-gate run for pushed HEAD pending | 2026-02-17 | Codex/User |
+| N-1003 | Run targeted tests, then full `verify:release` and release-gate marker validation for next iteration | High | Completed | None | 2026-02-17 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |
