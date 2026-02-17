@@ -51,9 +51,9 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 4. Evidence docs updated (`README.md`, `docs/QA_STATUS.md`, relevant run/evidence files).
 
 ## Immediate Next-Scope Queue
-1. `W-1108`: Execute widget E2->E3 transition check with evidence refresh.
-2. `W-1109`: Start separated desktop runtime scaffold using frozen contracts as source of truth.
-3. `W-1110`: Wire widget-project release gate evidence package to separated runtime repository.
+1. `W-1109`: Start separated desktop runtime scaffold using frozen contracts as source of truth.
+2. `W-1110`: Wire widget-project release gate evidence package to separated runtime repository.
+3. `W-1111`: Execute first end-to-end desktop runtime smoke with fixture feed.
 
 ## References
 - `RULES.md`
@@ -76,3 +76,4 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 - `docs/WIDGET_E2_FEED_INTEGRATION_PLAN.md`
 - `docs/WIDGET_E2_EVIDENCE.md`
 - `docs/WIDGET_E3_EVIDENCE.md`
+- `docs/WIDGET_E2_E3_TRANSITION.md`

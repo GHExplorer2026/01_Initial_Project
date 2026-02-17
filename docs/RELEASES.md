@@ -14,6 +14,7 @@
 - Added widget-feed API endpoint and E2 route-contract tests.
 - Added widget E3 preview UI slice and targeted UI-client contract tests.
 - Added explicit widget-feed contract CI gate for baseline execution closure.
+- Added consolidated E2->E3 transition evidence for desktop runtime handoff.
 
 ### Quality Evidence
 - Planning artifacts are decision-complete and traceable in repository docs.
@@ -39,6 +40,7 @@
 - `docs/WIDGET_E3_EVIDENCE.md`
 - `.github/workflows/ci.yml`
 - `package.json`
+- `docs/WIDGET_E2_E3_TRANSITION.md`
 - `skills/windows-widget-planning-gate/*`
 - `skills/widget-*`
 

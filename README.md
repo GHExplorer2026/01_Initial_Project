@@ -198,6 +198,7 @@ Date: `2026-02-17`
 | P-129 | 2026-02-17 | API/QA | Widget feed E2 slice | Implemented `GET /api/widget-feed` and added provider-side contract route tests with deterministic E2 evidence | Completed | `src/app/api/widget-feed/route.ts`, `src/server/widgetFeed.ts`, `tests/api.widget-feed.route.test.ts`, `docs/WIDGET_E2_EVIDENCE.md` | Codex |
 | P-130 | 2026-02-17 | UI | Widget E3 slice | Added widget-preview vertical slice (bar, ticker lane, settings basics, handle mode) with targeted contract tests | Completed | `src/app/widget-preview/page.tsx`, `src/app/widgetPreviewClient.ts`, `tests/widgetPreviewClient.test.ts`, `docs/WIDGET_E3_EVIDENCE.md` | Codex |
 | P-131 | 2026-02-17 | CI | Widget baseline gates | Added explicit widget-feed contract test script and CI gate step for execution baseline closure | Completed | `package.json`, `.github/workflows/ci.yml` | Codex |
+| P-132 | 2026-02-17 | QA | Widget E2-E3 transition | Added consolidated transition evidence and released next-step handoff to desktop runtime scaffold | Completed | `docs/WIDGET_E2_E3_TRANSITION.md`, `docs/NEXT_SPRINT_HANDOFF.md` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -248,9 +249,10 @@ Date: `2026-02-17`
 | W-1105 | Implement provider-side widget-feed integration tests and freeze E2 evidence | High | Completed | Requires W-1104 | 2026-02-19 | Codex/User |
 | W-1106 | Implement widget UI vertical slice against frozen contracts | High | Completed | Requires W-1104/W-1105 | 2026-02-20 | Codex/User |
 | W-1107 | Finalize widget-project CI baseline execution gates | High | Completed | Requires W-1104 | 2026-02-20 | Codex/User |
-| W-1108 | Execute widget E2->E3 transition check and refresh evidence package | High | Open | Requires W-1106/W-1107 | 2026-02-20 | Codex/User |
+| W-1108 | Execute widget E2->E3 transition check and refresh evidence package | High | Completed | Requires W-1106/W-1107 | 2026-02-20 | Codex/User |
 | W-1109 | Start separated desktop runtime scaffold with frozen contracts | High | Open | Requires W-1107/W-1108 | 2026-02-21 | Codex/User |
 | W-1110 | Wire release-gate evidence package to separated desktop runtime repo | High | Open | Requires W-1109 | 2026-02-21 | Codex/User |
+| W-1111 | Execute first end-to-end desktop runtime smoke with fixture feed | High | Open | Requires W-1109/W-1110 | 2026-02-21 | Codex/User |
 
 ## 6. Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Status |
@@ -290,6 +292,7 @@ Date: `2026-02-17`
 - Current Widget E2 Feed Integration Plan: `docs/WIDGET_E2_FEED_INTEGRATION_PLAN.md`
 - Current Widget E2 Evidence: `docs/WIDGET_E2_EVIDENCE.md`
 - Current Widget E3 Evidence: `docs/WIDGET_E3_EVIDENCE.md`
+- Current Widget E2-E3 Transition: `docs/WIDGET_E2_E3_TRANSITION.md`
 - Previous Plan: `docs/V0_1_7_PLAN.md`
 - Previous Release Draft: `docs/V0_1_7_RELEASE_DRAFT.md`
 - Previous Release Evidence: `docs/V0_1_7_EVIDENCE.md`

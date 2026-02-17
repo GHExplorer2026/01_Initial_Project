@@ -67,6 +67,7 @@
   7. Widget E2 feed-integration slice is implemented with deterministic route-contract tests.
   8. Widget E3 UI preview slice is implemented with targeted deterministic tests.
   9. Widget feed contract suite is explicit in CI baseline gates.
+  10. E2->E3 transition evidence is documented and approved for next step.
 
 ## References
 - `README.md`
@@ -84,3 +85,4 @@
 - `docs/WIDGET_E2_FEED_INTEGRATION_PLAN.md`
 - `docs/WIDGET_E2_EVIDENCE.md`
 - `docs/WIDGET_E3_EVIDENCE.md`
+- `docs/WIDGET_E2_E3_TRANSITION.md`
