@@ -22,6 +22,7 @@
 - Added successful user-terminal (WSL) runtime smoke evidence and closed delivery blocker.
 - Added runtime contract-freeze manifest and deterministic freeze check for separated runtime slice start.
 - Added runtime gate runner with deterministic artifact outputs under `widget-runtime/artifacts/`.
+- Added first separated runtime RC dry-run evidence with explicit Full-RC blockers.
 
 ### Quality Evidence
 - Planning artifacts are decision-complete and traceable in repository docs.
@@ -60,6 +61,7 @@
 - `docs/WIDGET_E4_PERSISTENCE_UX_EVIDENCE.md`
 - `docs/WIDGET_W1115_EVIDENCE.md`
 - `docs/WIDGET_W1116_EVIDENCE.md`
+- `docs/WIDGET_W1117_RC_DRY_RUN_EVIDENCE.md`
 - `scripts/run_widget_runtime_gate.sh`
 - `src/app/widgetPreviewClient.ts`
 - `src/app/widget-preview/page.tsx`

@@ -74,6 +74,7 @@
   14. Runtime settings migration and lane-state UX checks are implemented and test-verified in widget-preview slice.
   15. Runtime contract freeze manifest and deterministic freeze check are in place for separated slice start.
   16. Runtime gate runner emits deterministic artifact bundle (`gate-metadata.json`, `checks-summary.json`, logs).
+  17. First runtime RC dry run completed (`PASS` dry-run profile) with explicit Full-RC blockers logged.
 
 ## References
 - `README.md`
@@ -97,3 +98,4 @@
 - `docs/WIDGET_E4_PERSISTENCE_UX_EVIDENCE.md`
 - `docs/WIDGET_W1115_EVIDENCE.md`
 - `docs/WIDGET_W1116_EVIDENCE.md`
+- `docs/WIDGET_W1117_RC_DRY_RUN_EVIDENCE.md`
