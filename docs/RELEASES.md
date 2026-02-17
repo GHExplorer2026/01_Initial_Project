@@ -20,6 +20,7 @@
 - Added runtime smoke script and blocker note for agent-shell port-bind limitation.
 - Added runtime settings persistence migration and lane-state UX hardening in widget-preview slice.
 - Added successful user-terminal (WSL) runtime smoke evidence and closed delivery blocker.
+- Added runtime contract-freeze manifest and deterministic freeze check for separated runtime slice start.
 
 ### Quality Evidence
 - Planning artifacts are decision-complete and traceable in repository docs.
@@ -47,13 +48,16 @@
 - `package.json`
 - `docs/WIDGET_E2_E3_TRANSITION.md`
 - `widget-runtime/README.md`
+- `widget-runtime/contracts/contract-freeze.sha256`
 - `widget-runtime/docs/SCOPING.md`
 - `widget-runtime/docs/EXECUTION_GATE.md`
 - `widget-runtime/docs/RELEASE_GATE_EVIDENCE.md`
+- `scripts/check_widget_runtime_contract_freeze.sh`
 - `scripts/smoke_widget_runtime.sh`
 - `docs/WIDGET_E2E_SMOKE_BLOCKER.md`
 - `docs/WIDGET_E2E_SMOKE_EVIDENCE.md`
 - `docs/WIDGET_E4_PERSISTENCE_UX_EVIDENCE.md`
+- `docs/WIDGET_W1115_EVIDENCE.md`
 - `src/app/widgetPreviewClient.ts`
 - `src/app/widget-preview/page.tsx`
 - `tests/widgetPreviewClient.test.ts`

@@ -27,4 +27,4 @@ Konsolidierter Übergangsnachweis von Gate E2 (Feed Integration) zu Gate E3 (UI 
 - Freigabe für nächsten Schritt (`W-1109`): `YES`
 
 ## Nächster Schritt
-- Start getrenntes Desktop-Runtime-Scaffold gemäß Option C, unter Beibehaltung der gefrorenen Contracts.
+- Runtime-Scaffold mit Contract-Freeze ist gestartet (`W-1115`), nächster Schritt ist `W-1116` (Gate-Artefakte verdrahten).

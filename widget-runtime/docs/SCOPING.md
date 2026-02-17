@@ -5,6 +5,7 @@
 2. Settings Schema v1.
 3. Ticker Rendering mit `All Day`, `n/a`, Top-Bold.
 4. UTC intern, lokale Anzeige via Windows Zeitzone.
+5. Contract-Freeze bleibt gruen (`npm run check:widget-runtime-freeze`).
 
 ## Nicht Ziele
 1. Kein Scraping.

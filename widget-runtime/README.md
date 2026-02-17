@@ -18,5 +18,10 @@ Getrennter Runtime-Bereich für das Windows Desktop Widget (Option C).
 - E0/E1/E2/E3/E4/E5 gemäß `docs/WIDGET_EXECUTION_CHECKLIST.md`.
 - E2->E3 Transition Evidence: `docs/WIDGET_E2_E3_TRANSITION.md`.
 
+## Contract Freeze (W-1115)
+- Frozen contract manifest: `widget-runtime/contracts/contract-freeze.sha256`
+- Verification command: `npm run check:widget-runtime-freeze`
+- Runtime slice must not proceed if the freeze check is red.
+
 ## Nächster Schritt
 - Runtime-Entrypoint und minimale Fenster-Shell im separaten Projektpfad starten.

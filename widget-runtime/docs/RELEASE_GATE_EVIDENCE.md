@@ -11,6 +11,7 @@ Standardisiertes Evidence-Paket für Release-Gates im getrennten Desktop-Runtime
    - started_at_utc
    - finished_at_utc
 2. `checks-summary.json`
+   - check:widget-runtime-freeze
    - lint
    - typecheck
    - unit
@@ -29,6 +30,7 @@ Standardisiertes Evidence-Paket für Release-Gates im getrennten Desktop-Runtime
 1. Alle Pflichtchecks sind grün.
 2. Keine offenen High-Severity Findings.
 3. Rollback-Pfad ist dokumentiert und getestet.
+4. Contract-Freeze ist fuer den aktuellen Stand gueltig.
 
 ## Referenzen
 - `widget-runtime/docs/EXECUTION_GATE.md`

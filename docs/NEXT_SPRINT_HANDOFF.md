@@ -51,7 +51,7 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 4. Evidence docs updated (`README.md`, `docs/QA_STATUS.md`, relevant run/evidence files).
 
 ## Immediate Next-Scope Queue
-1. `W-1115`: Start first separated runtime implementation slice with frozen contracts.
+1. `W-1115`: Completed. Runtime slice started with frozen contract manifest + deterministic freeze check.
 2. `W-1116`: Wire runtime-slice test artifacts to widget-runtime gate package.
 3. `W-1117`: Execute first separated runtime release-candidate gate dry run.
 
@@ -80,7 +80,9 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 - `docs/WIDGET_E2E_SMOKE_BLOCKER.md`
 - `docs/WIDGET_E2E_SMOKE_EVIDENCE.md`
 - `docs/WIDGET_E4_PERSISTENCE_UX_EVIDENCE.md`
+- `docs/WIDGET_W1115_EVIDENCE.md`
 - `widget-runtime/README.md`
+- `widget-runtime/contracts/contract-freeze.sha256`
 - `widget-runtime/docs/SCOPING.md`
 - `widget-runtime/docs/EXECUTION_GATE.md`
 - `widget-runtime/docs/RELEASE_GATE_EVIDENCE.md`

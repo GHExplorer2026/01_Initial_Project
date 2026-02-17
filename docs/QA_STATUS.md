@@ -72,6 +72,7 @@
   12. Runtime release-gate evidence template is defined for separated project handoff.
   13. Runtime smoke is validated via user-terminal execution (WSL), despite agent-shell port-bind limitation.
   14. Runtime settings migration and lane-state UX checks are implemented and test-verified in widget-preview slice.
+  15. Runtime contract freeze manifest and deterministic freeze check are in place for separated slice start.
 
 ## References
 - `README.md`
@@ -93,3 +94,4 @@
 - `docs/WIDGET_E2E_SMOKE_BLOCKER.md`
 - `docs/WIDGET_E2E_SMOKE_EVIDENCE.md`
 - `docs/WIDGET_E4_PERSISTENCE_UX_EVIDENCE.md`
+- `docs/WIDGET_W1115_EVIDENCE.md`
