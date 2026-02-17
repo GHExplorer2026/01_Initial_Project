@@ -1,17 +1,17 @@
 {
   "workflow": "Release Gate",
-  "status": "success",
+  "status": "failure",
   "step_outcomes": {
     "install": "success",
     "verify": "success",
-    "smoke": "success"
+    "smoke": "failure"
   },
-  "run_id": "22105980267",
+  "run_id": "22108181377",
   "run_attempt": "1",
-  "sha": "118b43df600210a39d9f8255b2a7aa96ab6dee86",
+  "sha": "bd1f28a16f9b94f843d9b93eadead5cc113b02cc",
   "ref": "main",
-  "recorded_at_utc": "2026-02-17T16:09:58Z",
-  "run_url": "https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22105980267",
-  "smoke_log_tail_b64": "4payIE5leHQuanMgMTYuMS42Ci0gTG9jYWw6ICAgICAgICAgaHR0cDovLzEyNy4wLjAuMTozMDAwCi0gTmV0d29yazogICAgICAgaHR0cDovLzEyNy4wLjAuMTozMDAwCgrinJMgU3RhcnRpbmcuLi4K4pyTIFJlYWR5IGluIDgxbXMK",
-  "smoke_check_tail_b64": "W3Ntb2tlXSB1aTogaHR0cDovLzEyNy4wLjAuMTozMDAwLwpbc21va2VdIHVpIG9rCltzbW9rZV0gd2Vla2x5OiBodHRwOi8vMTI3LjAuMC4xOjMwMDAvYXBpL3dlZWtseT9yZWdpb25zPVVTQSxFWgpbc21va2VdIHdlZWtseSBvawpbc21va2VdIGljczogaHR0cDovLzEyNy4wLjAuMTozMDAwL2FwaS93ZWVrbHkuaWNzP3JlZ2lvbnM9VVNBLEVaCltzbW9rZV0gaWNzIG9rCltzbW9rZV0gZG9uZQo="
+  "recorded_at_utc": "2026-02-17T17:12:53Z",
+  "run_url": "https://github.com/GHExplorer2026/01_Initial_Project/actions/runs/22108181377",
+  "smoke_log_tail_b64": "4payIE5leHQuanMgMTYuMS42Ci0gTG9jYWw6ICAgICAgICAgaHR0cDovLzEyNy4wLjAuMTozMDAwCi0gTmV0d29yazogICAgICAgaHR0cDovLzEyNy4wLjAuMTozMDAwCgrinJMgU3RhcnRpbmcuLi4K4pyTIFJlYWR5IGluIDY3bXMK",
+  "smoke_check_tail_b64": "W3Ntb2tlXSB1aTogaHR0cDovLzEyNy4wLjAuMTozMDAwLwptaXNzaW5nIHN0cmljdCBvdXRwdXQgYmxvY2sgYXJpYSBsYWJlbAo="
 }
