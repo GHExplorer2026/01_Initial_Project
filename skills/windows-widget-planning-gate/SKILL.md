@@ -18,9 +18,11 @@ Use when preparing the Windows desktop widget scope, contracts, and gates before
 - `docs/WIDGET_IMPLEMENTATION_PLAN.md`
 - `docs/WIDGET_FEED_CONTRACT.md`
 - `docs/WIDGET_SETTINGS_CONTRACT.md`
+- `docs/WIDGET_STYLE_GUIDE.md`
 - `RULES.md`
 
 ## Outputs
 - Approved implementation plan
 - Gate checklist
 - Decision log and assumptions
+- Style-guide alignment matrix (adopted / deferred / out-of-scope)

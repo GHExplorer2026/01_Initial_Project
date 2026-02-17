@@ -6,17 +6,23 @@
 - Consumer: Windows Desktop Widget
 - Transport: lokaler HTTP Feed
 - Encoding: UTF-8 JSON
+- UI Style Profile Reference: `docs/WIDGET_STYLE_GUIDE.md` (v1.1)
 
 ## Request
 - Endpoint: `GET /api/widget-feed`
-- Query:
+- Query (provider accepts):
   - `regions` primary
-  - `countries` deprecated alias
+  - `countries` deprecated alias (compatibility only)
   - `datePreset` (`yesterday|today|tomorrow|this_week|next_week|custom`)
   - `customFrom`, `customTo` bei `custom`
   - `importance` optional (`high,medium,low,unknown`)
   - `currencies` optional
-  - `countriesFilter` optional
+
+## Consumer Request Profile (widget)
+1. Widget sendet immer `regions` und nie `countries`.
+2. Widget sendet keinen `countriesFilter`-Parameter.
+3. `customFrom/customTo` werden nur bei `datePreset=custom` gesendet.
+4. `countries` bleibt nur für Provider-Kompatibilität, nicht für neue Consumer-Flows.
 
 ## Response Meta
 - `feedVersion: string`
@@ -57,6 +63,10 @@
 - Vergangene Events nur bei aktivem `datePreset=yesterday`.
 6. All Day:
 - zulässig und als `timeKind=all_day` auszugeben.
+7. Reihenfolge:
+- Widget behält nach Filterung die Feed-Reihenfolge bei und sortiert nicht neu.
+8. Rendering-Hinweis:
+- `region` ist das primäre Lane-Label, `countryLabel` ist für Tooltip/Detailansicht.
 
 ## Error Contract
 - `400` bei ungültigen Query Konflikten.

@@ -34,7 +34,7 @@ Date: `2026-02-17`
 | UI Update sprint (Date+Time table + All-Day + ICS metrics) | Completed | 100% | 2026-02-17 | `src/app/page.tsx`, `src/core/icsSerializer.ts`, `RULES.md`, `docs/IMPLEMENTATION_PLAN.md` |
 | `v0.1.8` planning gate package (no-code phase) | Completed | 100% | 2026-02-17 | `skills/ui-update-next-iteration-planning-gate/*`, `docs/V0_1_8_PLAN.md`, `docs/V0_1_8_EVIDENCE.md` |
 | `v0.1.8` execution slice (strict toggle + ICS importance filter) | Completed | 100% | 2026-02-17 | `src/app/page.tsx`, `src/app/api/weekly.ics/route.ts`, `src/server/orchestrator.ts`, `RULES.md`, `docs/V0_1_8_EVIDENCE.md` |
-| Windows Widget Option-C planning package | Completed | 100% | 2026-02-17 | `docs/WIDGET_IMPLEMENTATION_PLAN.md`, `docs/WIDGET_FEED_CONTRACT.md`, `docs/WIDGET_SETTINGS_CONTRACT.md`, `skills/widget-*` |
+| Windows Widget Option-C planning package | Completed | 100% | 2026-02-17 | `docs/WIDGET_IMPLEMENTATION_PLAN.md`, `docs/WIDGET_FEED_CONTRACT.md`, `docs/WIDGET_SETTINGS_CONTRACT.md`, `docs/WIDGET_STYLE_GUIDE.md`, `skills/widget-*` |
 
 ## 3. Active Skill Landscape
 
@@ -191,6 +191,7 @@ Date: `2026-02-17`
 | P-122 | 2026-02-17 | UI/API | Feature slice | Implemented strict-output visibility toggle (`default off`), deterministic TOP/importance equivalence, and ICS importance export filtering with targeted + full verify gates | Completed | `src/app/page.tsx`, `src/app/uiRequests.ts`, `src/app/api/weekly.ics/route.ts`, `src/server/orchestrator.ts`, `tests/*`, `docs/V0_1_8_EVIDENCE.md` | Codex |
 | P-123 | 2026-02-17 | CI | Gate closure | Fixed smoke UI assertion for strict-toggle default and closed release gate for `v0.1.8` head | Completed | `scripts/smoke_api.sh`, `docs/release-gate-last-success.json`, `docs/V0_1_8_EVIDENCE.md` | Codex |
 | P-124 | 2026-02-17 | Planning | Option-C widget plan | Added Windows desktop widget Option-C strategy, feed/settings contracts, split delivery playbook, and modular widget skills | Completed | `docs/WIDGET_IMPLEMENTATION_PLAN.md`, `docs/WIDGET_FEED_CONTRACT.md`, `docs/WIDGET_SETTINGS_CONTRACT.md`, `docs/WIDGET_SPLIT_DELIVERY_PLAYBOOK.md`, `skills/widget-*` | Codex |
+| P-125 | 2026-02-17 | Planning | Widget style alignment | Imported widget style guide and aligned contracts/skills with adopted UI rules and consumer query profile | Completed | `docs/WIDGET_STYLE_GUIDE.md`, `docs/WIDGET_STYLE_GUIDE_ALIGNMENT.md`, `docs/WIDGET_FEED_CONTRACT.md`, `docs/WIDGET_SETTINGS_CONTRACT.md`, `docs/WIDGET_IMPLEMENTATION_PLAN.md`, `skills/widget-*` | Codex |
 
 ## 5. Open Items
 | ID | Task | Priority | Status | Blocker | Target Date | Owner |
@@ -269,6 +270,8 @@ Date: `2026-02-17`
 - Current Widget Feed Contract: `docs/WIDGET_FEED_CONTRACT.md`
 - Current Widget Settings Contract: `docs/WIDGET_SETTINGS_CONTRACT.md`
 - Current Widget Split Playbook: `docs/WIDGET_SPLIT_DELIVERY_PLAYBOOK.md`
+- Current Widget Style Guide: `docs/WIDGET_STYLE_GUIDE.md`
+- Current Widget Style Alignment: `docs/WIDGET_STYLE_GUIDE_ALIGNMENT.md`
 - Previous Plan: `docs/V0_1_7_PLAN.md`
 - Previous Release Draft: `docs/V0_1_7_RELEASE_DRAFT.md`
 - Previous Release Evidence: `docs/V0_1_7_EVIDENCE.md`

@@ -33,6 +33,8 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
    - `docs/WIDGET_FEED_CONTRACT.md`
    - `docs/WIDGET_SETTINGS_CONTRACT.md`
    - `docs/WIDGET_SPLIT_DELIVERY_PLAYBOOK.md`
+   - `docs/WIDGET_STYLE_GUIDE.md`
+   - `docs/WIDGET_STYLE_GUIDE_ALIGNMENT.md`
 
 ## Entry Checklist (must pass before next slice)
 1. `git status -sb` shows clean workspace.
@@ -67,3 +69,5 @@ Provide a clean, deterministic handoff baseline so the next scope can start imme
 - `docs/WIDGET_FEED_CONTRACT.md`
 - `docs/WIDGET_SETTINGS_CONTRACT.md`
 - `docs/WIDGET_SPLIT_DELIVERY_PLAYBOOK.md`
+- `docs/WIDGET_STYLE_GUIDE.md`
+- `docs/WIDGET_STYLE_GUIDE_ALIGNMENT.md`

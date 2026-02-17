@@ -9,6 +9,7 @@ Schritt für Schritt Vorgehen für Option C mit sauberer Trennung:
 1. Feed Contract `v1.1` finalisieren.
 2. Settings Contract `v1` finalisieren.
 3. Akzeptanzkriterien für Date Filter und Past Regel fixieren.
+4. Style Guide `v1.1` gegen Contracts mappen und Übernahmen dokumentieren.
 
 ## Phase 2 Repository Setup
 1. Neues Desktop Projekt anlegen.
@@ -24,6 +25,7 @@ Schritt für Schritt Vorgehen für Option C mit sauberer Trennung:
 1. Widget Shell mit Positionierung.
 2. Ticker mit Fixture Feed.
 3. Settings Basisfelder und Persistenz.
+4. Handle Mode, Empty/Error-States und Control Cluster Mindestumfang umsetzen.
 
 ## Phase 5 Filter und Zeitlogik
 1. Date Presets implementieren.
@@ -34,6 +36,7 @@ Schritt für Schritt Vorgehen für Option C mit sauberer Trennung:
 1. Error und Offline Pfade.
 2. Last Good Cache.
 3. Performance und Render Stabilität.
+4. Accessibility Minimum (Kontrast, Keyboard, Reduce-Motion-Verhalten) verifizieren.
 
 ## Phase 7 RC und Rollback
 1. Vollständige Testmatrix.
@@ -45,3 +48,4 @@ Schritt für Schritt Vorgehen für Option C mit sauberer Trennung:
 - Contract Test Report
 - UI und Integration Test Report
 - Release Gate Evidence
+- Style-Guide Alignment Log (welche Regeln übernommen/nicht übernommen wurden)

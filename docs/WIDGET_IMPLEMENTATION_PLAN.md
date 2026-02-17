@@ -5,6 +5,7 @@
 - Bestehendes `01_Initial_Project` bleibt Feed Provider und Source Governance Layer.
 - Widget zeigt Economic Events als laufenden Ticker mit Settings-basierten Filtern.
 - Kein direkter Source Fetch im Widget.
+- UI-Verhaltensprofil folgt `docs/WIDGET_STYLE_GUIDE.md` v1.1, sofern nicht im Konflikt mit Feed/Settings Contract.
 
 ## 2. Nicht Ziele
 - Kein zweiter Scraping Stack im Widget.
@@ -44,6 +45,8 @@
 - All Day Events zulassen.
 - Top Events (`importance=high` oder 3 Sterne) visuell fett anzeigen.
 - UTC intern, lokale Anzeige via Windows Zeitzone, DST validieren.
+- DatePreset/Filter-Mapping exakt gemäß `WIDGET_SETTINGS_CONTRACT.md` und `WIDGET_FEED_CONTRACT.md`.
+- `regions` als Primary Query Parameter, kein `countries` aus dem Widget senden.
 
 ### Soll
 - Last Good Feed Cache.
@@ -64,6 +67,7 @@
 - Siehe `docs/WIDGET_SETTINGS_CONTRACT.md`.
 - Settings Version: `1`.
 - Persistenz lokal, versioniert, migrationsfähig.
+- Runtime-only Toggles (Theme, Play/Pause, Hover-Pause) sind nicht persistiert in v1.
 
 ## 7. Ticker Darstellungsvertrag
 1. Pro Event anzeigen:
@@ -77,6 +81,22 @@
 3. Top Events visuell fett.
 4. Fehlende Werte als `n/a`.
 5. Keine Schätzung oder inferierte Werte.
+6. Lane nutzt `region` als kompaktes Label; `countryLabel` nur in Tooltip/Detail.
+
+## 7.1 UI Komponentenprofil (Style Guide v1.1, übernommen)
+- `Widget Bar`: schmale Leiste, drag-fähig auf nicht-klickbaren Flächen.
+- `Ticker Lane`: kontinuierlicher Lauftext in Feed-Reihenfolge.
+- `Control Cluster`: mindestens Settings Control; optional Play/Pause.
+- `Settings Panel`: einzige Stelle für persistierte Settings.
+- `Handle Mode`: bei `toggleBarEnabled=false` bleibt ein reaktivierbarer Einstieg sichtbar.
+
+## 7.2 UI Status- und Interaktionsregeln (übernommen)
+- `Loading`: dezenter Indikator, keine blockierende Dialoglogik.
+- `Empty`: klare User-Message, z. B. "Keine Events im aktuellen Filter".
+- `Error`: kurze Message "Feed nicht erreichbar"; keine sensiblen Details.
+- `Hover`: Pause ist empfohlen.
+- `Keyboard Minimum`: Tab, Enter, Esc.
+- `A11y`: Bedeutung nie nur über Farbe, Kontrast auch bei Transparenz-Default lesbar.
 
 ## 8. Date Filter Semantik
 1. Default: `Today`.
@@ -94,12 +114,12 @@
   - Settings v1
 
 ## 10. Schritte, getrennte Vorgehensweise
-1. Contract Freeze (`WIDGET_FEED_CONTRACT.md`, `WIDGET_SETTINGS_CONTRACT.md`).
+1. Contract + Style Freeze (`WIDGET_FEED_CONTRACT.md`, `WIDGET_SETTINGS_CONTRACT.md`, `WIDGET_STYLE_GUIDE.md`).
 2. Neues Desktop Repo oder klarer Monorepo Bereich für Widget UI.
 3. Feed Provider um Widget Feed Endpoint erweitern.
 4. Date Filter und Vergangenheitsregel im Feed deterministisch umsetzen.
-5. Widget Shell (movable, optional always on top, transparency).
-6. Ticker Renderer mit Top Bold und Metrics.
+5. Widget Shell (movable, optional always on top, transparency, handle mode).
+6. Ticker Renderer mit Top Bold, Metrics und Feed-Reihenfolge.
 7. Settings Persistenz und Migration.
 8. Fehlerpfade plus Last Good Cache.
 9. Contract, Unit, Integration, UI E2E, DST Tests.

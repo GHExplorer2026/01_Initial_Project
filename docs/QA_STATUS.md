@@ -63,6 +63,7 @@
   3. Deterministic gates and release-gate workflow are operational.
   4. Current evidence docs are updated (`docs/UI_EXECUTION_REPORT.md`, `docs/release-gate-last-success.json`).
   5. Windows Desktop Widget Option-C planning docs and contracts are prepared for execution handoff.
+  6. Widget Style Guide alignment is documented and mapped to contracts.
 
 ## References
 - `README.md`
@@ -73,3 +74,5 @@
 - `docs/WIDGET_IMPLEMENTATION_PLAN.md`
 - `docs/WIDGET_FEED_CONTRACT.md`
 - `docs/WIDGET_SETTINGS_CONTRACT.md`
+- `docs/WIDGET_STYLE_GUIDE.md`
+- `docs/WIDGET_STYLE_GUIDE_ALIGNMENT.md`

@@ -13,11 +13,14 @@ Use when updating feed schema, filter parameters, and deterministic response rul
 2. `regions` stays primary scope parameter.
 3. `importance` and `isTopEvent` consistency is mandatory.
 4. No hallucinated metrics values.
+5. Widget consumer must not send deprecated `countries` alias.
+6. Widget preserves feed order after filtering.
 
 ## Inputs
 - `src/core/types.ts`
 - `src/core/scope.ts`
 - `docs/WIDGET_FEED_CONTRACT.md`
+- `docs/WIDGET_STYLE_GUIDE.md`
 
 ## Outputs
 - Updated feed contract spec

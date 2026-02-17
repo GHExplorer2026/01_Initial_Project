@@ -7,6 +7,7 @@
 - Added versioned widget contracts for feed and settings.
 - Added split-delivery playbook for separated desktop UI project execution.
 - Added modular widget skills for planning, contracts, UI, timezone QA, security, and release gating.
+- Added Widget Style Guide import and contract alignment decisions.
 
 ### Quality Evidence
 - Planning artifacts are decision-complete and traceable in repository docs.
@@ -17,6 +18,8 @@
 - `docs/WIDGET_FEED_CONTRACT.md`
 - `docs/WIDGET_SETTINGS_CONTRACT.md`
 - `docs/WIDGET_SPLIT_DELIVERY_PLAYBOOK.md`
+- `docs/WIDGET_STYLE_GUIDE.md`
+- `docs/WIDGET_STYLE_GUIDE_ALIGNMENT.md`
 - `skills/windows-widget-planning-gate/*`
 - `skills/widget-*`
 
