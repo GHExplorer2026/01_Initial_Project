@@ -18,6 +18,8 @@ const IMPORTANCE_ORDER: Record<EventImportance, number> = {
 };
 
 const DAY_MS = 24 * 60 * 60 * 1000;
+const YMD_RE = /^\d{4}-\d{2}-\d{2}$/;
+const HHMM_RE = /^([01]\d|2[0-3]):([0-5]\d)$/;
 
 const toYmd = (date: Date): string => {
   const y = date.getUTCFullYear();
@@ -103,7 +105,16 @@ const parseCurrencies = (searchParams: URLSearchParams): CurrencyCode[] => {
 };
 
 const berlinOffsetForDay = (ymd: string): string => {
+  if (!YMD_RE.test(ymd)) {
+    return "+00:00";
+  }
+
   const probe = new Date(`${ymd}T12:00:00Z`);
+  if (Number.isNaN(probe.getTime())) {
+    return "+00:00";
+  }
+
+  try {
   const parts = new Intl.DateTimeFormat("en-US", {
     timeZone: "Europe/Berlin",
     timeZoneName: "longOffset"
@@ -112,12 +123,28 @@ const berlinOffsetForDay = (ymd: string): string => {
   const tzName = parts.find((part) => part.type === "timeZoneName")?.value ?? "GMT+00:00";
   const match = tzName.match(/GMT([+-]\d{2}:\d{2})/);
   return match?.[1] ?? "+00:00";
+  } catch {
+    return "+00:00";
+  }
 };
 
-const eventUtcIso = (event: EconomicEvent): string => {
-  const baseTime = event.timeKind === "exact" ? `${event.timeHHMM ?? "00:00"}:00` : "00:00:00";
+const eventUtcIso = (event: EconomicEvent): string | null => {
+  if (!YMD_RE.test(event.dateBerlinISO)) {
+    return null;
+  }
+
+  if (event.timeKind === "exact" && !HHMM_RE.test(event.timeHHMM ?? "")) {
+    return null;
+  }
+
+  const baseTime = event.timeKind === "exact" ? `${event.timeHHMM}:00` : "00:00:00";
   const offset = berlinOffsetForDay(event.dateBerlinISO);
-  return new Date(`${event.dateBerlinISO}T${baseTime}${offset}`).toISOString();
+  const asDate = new Date(`${event.dateBerlinISO}T${baseTime}${offset}`);
+  if (Number.isNaN(asDate.getTime())) {
+    return null;
+  }
+
+  return asDate.toISOString();
 };
 
 const resolveDateRange = (preset: DatePreset, now: Date, searchParams: URLSearchParams): { from: string; to: string } => {
@@ -204,25 +231,37 @@ const filterByPresetAndNow = (
     return event.dateBerlinISO >= berlinTodayYmd;
   }
 
-  return new Date(eventUtcIso(event)).getTime() >= nowUtcMs;
+  const asUtc = eventUtcIso(event);
+  if (!asUtc) {
+    return false;
+  }
+
+  return new Date(asUtc).getTime() >= nowUtcMs;
 };
 
-const toFeedEvent = (event: EconomicEvent, parserVersion: string) => ({
-  eventId: buildEventId(event, parserVersion),
-  datetimeUTC: eventUtcIso(event),
-  timeKind: event.timeKind,
-  region: event.region,
-  countryLabel: REGION_LABELS[event.region],
-  currency: event.currency,
-  titleRaw: event.titleRaw,
-  importance: event.importance,
-  isTopEvent: event.isTopEvent,
-  actual: event.actual?.value,
-  forecast: event.forecast?.value,
-  previous: event.previous?.value,
-  source: event.source,
-  provenance: event.provenance
-});
+const toFeedEvent = (event: EconomicEvent, parserVersion: string) => {
+  const datetimeUTC = eventUtcIso(event);
+  if (!datetimeUTC) {
+    return null;
+  }
+
+  return {
+    eventId: buildEventId(event, parserVersion),
+    datetimeUTC,
+    timeKind: event.timeKind,
+    region: event.region,
+    countryLabel: REGION_LABELS[event.region],
+    currency: event.currency,
+    titleRaw: event.titleRaw,
+    importance: event.importance,
+    isTopEvent: event.isTopEvent,
+    actual: event.actual?.value,
+    forecast: event.forecast?.value,
+    previous: event.previous?.value,
+    source: event.source,
+    provenance: event.provenance
+  };
+};
 
 const sortFeedEvents = (a: ReturnType<typeof toFeedEvent>, b: ReturnType<typeof toFeedEvent>): number => {
   if (a.datetimeUTC !== b.datetimeUTC) {
@@ -264,7 +303,10 @@ export const generateWidgetFeed = async ({ regions, searchParams, now = new Date
     .filter((event) => (importanceFilter.length > 0 ? importanceFilter.includes(event.importance) : true))
     .filter((event) => (currencyFilter.length > 0 ? currencyFilter.includes(event.currency) : true));
 
-  const feedEvents = filtered.map((event) => toFeedEvent(event, parserVersion)).sort(sortFeedEvents);
+  const feedEvents = filtered
+    .map((event) => toFeedEvent(event, parserVersion))
+    .filter((event): event is NonNullable<ReturnType<typeof toFeedEvent>> => event !== null)
+    .sort(sortFeedEvents);
 
   return {
     meta: {

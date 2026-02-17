@@ -220,6 +220,35 @@ describe("GET /api/widget-feed", () => {
     expect(payload.events.map((event) => event.titleRaw)).toEqual(["High USD"]);
   });
 
+  it("skips malformed exact-time events and returns 200 for week presets", async () => {
+    mockedGenerateWeeklyOutlook.mockResolvedValue(
+      buildWeeklyOutput([
+        {
+          source: "investing",
+          region: "USA",
+          currency: "USD",
+          titleRaw: "Malformed Time",
+          titleNormalized: "malformed time",
+          categoryAF: "D",
+          dateBerlinISO: "2026-02-18",
+          datetimeBerlinISO: "2026-02-18T99:99:00",
+          timeKind: "exact",
+          timeHHMM: "99:99",
+          hasExactTime: true,
+          isTopEvent: false,
+          importance: "low",
+          provenance: { fetchedAtISO: "2026-02-10T08:00:00.000Z", parserVersion: "v1.0.0" }
+        }
+      ])
+    );
+
+    const response = await GET(new Request("http://localhost/api/widget-feed?regions=USA&datePreset=this_week"));
+    const payload = (await response.json()) as { events: Array<{ titleRaw: string }> };
+
+    expect(response.status).toBe(200);
+    expect(payload.events).toEqual([]);
+  });
+
   it("returns 400 on regions/countries conflict", async () => {
     const response = await GET(new Request("http://localhost/api/widget-feed?regions=USA&countries=EUR"));
     const payload = (await response.json()) as { error: string };
