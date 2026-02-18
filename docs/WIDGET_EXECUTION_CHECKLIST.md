@@ -67,3 +67,6 @@ Minimaler, ausführbarer Startpfad für die nächste Widget-Execution-Phase auf 
 1. Während Entwicklung nur zielgerichtete Tests auf geänderte Module.
 2. Full Suite nur an Gate E5.
 3. Fixture-first, kein Live-Netz in automatisierten Tests.
+
+## Cross-Repo Summary
+- Vollstaendige Entwicklungsdoku: `docs/WIDGET_CROSS_REPO_DELIVERY_REPORT.md`
