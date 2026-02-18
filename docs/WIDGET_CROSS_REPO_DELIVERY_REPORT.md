@@ -102,6 +102,9 @@ Es dokumentiert Architektur, gelieferte Modifikationen, Contract-Status, Gate-St
 3. Fensterbreite bleibt nach Neustart stabil erhalten.
 4. Bei Multi-Monitor-Wechsel wird Breite proportional angepasst, ohne Positionssprung.
 
+## 7.4 CI Marker Hinweis
+- Release-Gate-Marker wird ausschliesslich durch den `Release Gate` Workflow aktualisiert.
+
 ## 8. Verifikation und Betrieb
 ### 8.1 Minimal technische Checks
 - Native Repo:
