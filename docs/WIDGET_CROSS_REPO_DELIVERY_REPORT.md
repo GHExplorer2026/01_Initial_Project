@@ -119,6 +119,8 @@ Es dokumentiert Architektur, gelieferte Modifikationen, Contract-Status, Gate-St
 - `docs/WIDGET_PROJECT_BOUNDARY.md`
 - `docs/WIDGET_FEED_CONTRACT.md`
 - `docs/WIDGET_SETTINGS_CONTRACT.md`
+- `docs/WIDGET_PROVIDER_ARTIFACT_CONTRACT.md`
 - `docs/WIDGET_STYLE_GUIDE.md`
 - `docs/WIDGET_STYLE_GUIDE_ALIGNMENT.md`
 - `../02_Widget_Native_Runtime/docs/W1129_EVIDENCE.md`
+- `../02_Widget_Native_Runtime/docs/WIDGET_BOOTSTRAP_CONTRACT.md`

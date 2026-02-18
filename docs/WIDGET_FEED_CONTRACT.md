@@ -18,6 +18,13 @@
   - `importance` optional (`high,medium,low,unknown`)
   - `currencies` optional
 
+## Readiness Endpoint
+- Endpoint: `GET /api/healthz`
+- Response:
+  - `status: "ok"`
+  - `sourceMode: "fixtures" | "live"`
+  - `generatedAtUTC: string`
+
 ## Consumer Request Profile (widget)
 1. Widget sendet immer `regions` und nie `countries`.
 2. Widget sendet keinen `countriesFilter`-Parameter.

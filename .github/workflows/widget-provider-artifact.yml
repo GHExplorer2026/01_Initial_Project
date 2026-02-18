@@ -1,0 +1,56 @@
+name: Widget Provider Artifact
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build-widget-provider-artifact:
+    runs-on: ubuntu-latest
+    env:
+      NPM_CONFIG_REGISTRY: https://registry.npmjs.org/
+      NODE_OPTIONS: --dns-result-order=ipv4first
+      NPM_CONFIG_AUDIT: "false"
+      NPM_CONFIG_FUND: "false"
+      NPM_CONFIG_FETCH_RETRIES: "5"
+      NPM_CONFIG_FETCH_RETRY_MINTIMEOUT: "20000"
+      NPM_CONFIG_FETCH_RETRY_MAXTIMEOUT: "120000"
+      NPM_CONFIG_LEGACY_PEER_DEPS: "true"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.20.0"
+
+      - name: Install dependencies (retry + registry fallback)
+        run: |
+          install_with_retry() {
+            local registry="$1"
+            for attempt in 1 2 3; do
+              if npm ci --legacy-peer-deps --registry="${registry}"; then
+                return 0
+              fi
+              sleep $((attempt * 5))
+            done
+            return 1
+          }
+          install_with_retry "$NPM_CONFIG_REGISTRY" || install_with_retry "https://registry.yarnpkg.com/"
+
+      - name: Build
+        run: npm run build
+
+      - name: Package provider artifact
+        run: npm run artifact:widget-provider
+
+      - name: Upload provider artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: provider-win-x64
+          path: |
+            artifacts/provider-win-x64.zip
+            artifacts/provider-win-x64.sha256

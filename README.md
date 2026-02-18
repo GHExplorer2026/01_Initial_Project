@@ -368,7 +368,22 @@ Date: `2026-02-17`
   - Öffnet Browser erst nach erfolgreichem Readiness-Check.
   - Fallback-Reihenfolge für Browserstart: `Start-Process URL` -> `cmd /c start` -> `explorer.exe`.
 
-## 14. Next Sprint Kickoff
+## 14. Commandless Widget Provider Artifact (Option C)
+- Ziel:
+  - Native Widget Runtime kann den lokalen Provider ohne manuelle WSL/PowerShell-Commands starten.
+- Healthcheck Endpoint:
+  - `GET /api/healthz`
+  - Response: `{ status, sourceMode, generatedAtUTC }`
+- Artefakt-Build:
+  - `npm run build`
+  - `npm run artifact:widget-provider`
+- Artefakt-Outputs:
+  - `artifacts/provider-win-x64.zip`
+  - `artifacts/provider-win-x64.sha256`
+- Contract:
+  - `docs/WIDGET_PROVIDER_ARTIFACT_CONTRACT.md`
+
+## 15. Next Sprint Kickoff
 - Status:
   - `Ready`
 - Required start checks:

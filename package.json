@@ -19,6 +19,7 @@
     "check:widget-runtime-rc-evidence": "bash scripts/check_widget_runtime_rc_evidence.sh",
     "gate:widget-runtime": "WIDGET_GATE_PROFILE=full bash scripts/run_widget_runtime_gate.sh",
     "gate:widget-runtime:dry": "WIDGET_GATE_PROFILE=dry bash scripts/run_widget_runtime_gate.sh",
+    "artifact:widget-provider": "bash scripts/package_widget_provider_artifact.sh",
     "unit": "vitest run",
     "unit:ci": "node -e \"require('fs').mkdirSync('artifacts',{recursive:true})\" && vitest run --reporter=default --reporter=junit --outputFile.junit=artifacts/vitest-unit.xml",
     "snapshot": "vitest run",
