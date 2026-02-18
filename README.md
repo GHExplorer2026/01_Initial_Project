@@ -382,6 +382,10 @@ Date: `2026-02-17`
   - `artifacts/provider-win-x64.sha256`
 - Contract:
   - `docs/WIDGET_PROVIDER_ARTIFACT_CONTRACT.md`
+- Runtime Status (Native Repo `02_Widget_Native_Runtime`):
+  - commandless bootstrap aktiv
+  - autostart fallback HKCU Run aktiv
+  - restart-persistente Breite + monitorproportionale Breitenanpassung stabil
 
 ## 15. Next Sprint Kickoff
 - Status:

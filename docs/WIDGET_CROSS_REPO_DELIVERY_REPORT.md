@@ -36,6 +36,9 @@ Es dokumentiert Architektur, gelieferte Modifikationen, Contract-Status, Gate-St
   - `f322264`: stabile 3-Stufen-Schnell/langsam Logik eingefuehrt.
   - `d668c20`: Default Speed auf Stufe 1.
   - `28100ef`: Regions/Importance Toggle-Fix + sichtbares Refresh-Verhalten + Speed-Wirkung verbessert.
+  - `64be7bc`: Autostart Fallback HKCU Run bei `schtasks` Access-Denied.
+  - `7953590` bis `6a80966`: Fenstergroesse-/Multi-Monitor-Hardening.
+  - `391aafb`, `b6459e0`, `1668f16`: persistente Breite ueber Neustarts stabilisiert.
 
 ## 4. Aktueller Funktionsstand (Ist)
 ### 4.1 Ticker UI
@@ -91,6 +94,13 @@ Es dokumentiert Architektur, gelieferte Modifikationen, Contract-Status, Gate-St
 - N0 bis N5 abgeschlossen.
 - W-1129: DONE.
 - Release Evidence vorhanden in `02_Widget_Native_Runtime/docs/release/*` und `W1129_EVIDENCE.md`.
+- W-1130 bis W-1135: DONE (Commandless Start + Window Stability Hardening).
+
+## 7.3 Finaler Runtime-Status
+1. Widget startet commandless mit lokalem Provider-Bootstrap.
+2. Autostart funktioniert mit Task-Scheduler-Pfad und HKCU-Run-Fallback.
+3. Fensterbreite bleibt nach Neustart stabil erhalten.
+4. Bei Multi-Monitor-Wechsel wird Breite proportional angepasst, ohne Positionssprung.
 
 ## 8. Verifikation und Betrieb
 ### 8.1 Minimal technische Checks
