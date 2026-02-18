@@ -263,7 +263,9 @@ const toFeedEvent = (event: EconomicEvent, parserVersion: string) => {
   };
 };
 
-const sortFeedEvents = (a: ReturnType<typeof toFeedEvent>, b: ReturnType<typeof toFeedEvent>): number => {
+type WidgetFeedEvent = NonNullable<ReturnType<typeof toFeedEvent>>;
+
+const sortFeedEvents = (a: WidgetFeedEvent, b: WidgetFeedEvent): number => {
   if (a.datetimeUTC !== b.datetimeUTC) {
     return a.datetimeUTC.localeCompare(b.datetimeUTC);
   }
